@@ -1,0 +1,63 @@
+---
+interface Props {
+  settings: {
+    professional_name: string;
+    footer_name?: string;
+    tagline?: string;
+    phone?: string;
+    email?: string;
+    service_area_summary?: string;
+  };
+}
+
+const { settings } = Astro.props;
+const year = new Date().getFullYear();
+const name = settings.footer_name || settings.professional_name;
+---
+
+<footer class="site-footer">
+  <div class="footer-inner">
+    <div class="footer-brand">
+      <p class="footer-name">{name}</p>
+      {settings.tagline && <p class="footer-tagline">{settings.tagline}</p>}
+      {settings.service_area_summary && <p class="footer-area">{settings.service_area_summary}</p>}
+    </div>
+
+    <div>
+      <span class="footer-col-label">Contact</span>
+      <div class="footer-contact">
+        {settings.phone && (
+          <a
+            href={`tel:${settings.phone.replace(/[^\d+]/g, '')}`}
+            class="footer-link"
+            aria-label={`Call ${settings.phone}`}
+          >
+            {settings.phone}
+          </a>
+        )}
+        {settings.email && (
+          <a
+            href={`mailto:${settings.email}`}
+            class="footer-link"
+          >
+            {settings.email}
+          </a>
+        )}
+      </div>
+    </div>
+
+    <div>
+      <span class="footer-col-label">Navigation</span>
+      <nav class="footer-nav-links" aria-label="Footer navigation">
+        <a href="/about">About</a>
+        <a href="/services">Services</a>
+        <a href="/experience">Experience</a>
+        <a href="/contact">Contact</a>
+      </nav>
+    </div>
+  </div>
+
+  <div class="footer-bottom">
+    <p>&copy; {year} {name}. All rights reserved.</p>
+  </div>
+</footer>

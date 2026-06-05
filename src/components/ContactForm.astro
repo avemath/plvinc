@@ -1,0 +1,118 @@
+---
+import settings from '../data/settings.json';
+
+interface Props {
+  recipientEmail?: string;
+}
+
+const { recipientEmail } = Astro.props;
+const email = recipientEmail || settings.email || '';
+---
+
+<div class="contact-form-block">
+  <h2>Drop us a line!</h2>
+
+  <form
+    id="contact-form"
+    action="https://api.web3forms.com/submit"
+    method="POST"
+    novalidate
+  >
+    <input type="hidden" name="access_key"  value={settings.web3forms_key} />
+    <input type="hidden" name="subject"     value="New inquiry from website contact form" />
+    <input type="hidden" name="redirect"    value="false" />
+    {email && <input type="hidden" name="from_name" value={settings.professional_name} />}
+
+    <!-- Honeypot — leave blank -->
+    <input
+      type="text"
+      name="botcheck"
+      class="sr-only"
+      tabindex="-1"
+      autocomplete="off"
+      aria-hidden="true"
+    />
+
+    <div class="form-group">
+      <label for="contact-name">Name</label>
+      <input
+        type="text"
+        id="contact-name"
+        name="name"
+        placeholder="Your name"
+        autocomplete="name"
+      />
+    </div>
+
+    <div class="form-group">
+      <label for="contact-email">
+        Email <span class="required-mark" aria-hidden="true">*</span>
+      </label>
+      <input
+        type="email"
+        id="contact-email"
+        name="email"
+        placeholder="your@email.com"
+        required
+        autocomplete="email"
+      />
+    </div>
+
+    <div class="form-group">
+      <label for="contact-message">Message</label>
+      <textarea
+        id="contact-message"
+        name="message"
+        rows="6"
+        placeholder="Tell us about your project…"
+        required
+      ></textarea>
+    </div>
+
+    <button type="submit" class="btn btn-primary">Send Message</button>
+
+    <div id="form-success" class="form-success" role="status" aria-live="polite" hidden>
+      <p>Thank you — your message has been sent. We'll be in touch within one business day.</p>
+    </div>
+    <div id="form-error" class="form-error" role="alert" aria-live="polite" hidden>
+      <p>Something went wrong. Please try again, or reach out directly by phone or email.</p>
+    </div>
+  </form>
+</div>
+
+<script>
+  const form    = document.getElementById('contact-form') as HTMLFormElement | null;
+  const success = document.getElementById('form-success') as HTMLElement | null;
+  const error   = document.getElementById('form-error')   as HTMLElement | null;
+  const btn     = form?.querySelector<HTMLButtonElement>('button[type="submit"]');
+
+  form?.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    if (!form || !success || !error || !btn) return;
+
+    btn.disabled = true;
+    btn.textContent = 'Sending…';
+
+    try {
+      const res  = await fetch('https://api.web3forms.com/submit', {
+        method: 'POST',
+        body: new FormData(form),
+      });
+      const json = await res.json();
+
+      if (json.success) {
+        form.reset();
+        success.hidden = false;
+        error.hidden   = true;
+      } else {
+        throw new Error(json.message || 'Submission failed');
+      }
+    } catch {
+      error.hidden   = false;
+      success.hidden = true;
+    } finally {
+      btn.disabled    = false;
+      btn.textContent = 'Send Message';
+    }
+  });
+</script>

@@ -1,0 +1,87 @@
+---
+import { getCollection } from 'astro:content';
+
+interface Props {
+  settings: {
+    professional_name: string;
+    logo?: string;
+    phone?: string;
+  };
+}
+
+const { settings } = Astro.props;
+let hasPeople = false;
+try {
+  const people = await getCollection('people');
+  hasPeople = people.length > 0;
+} catch {
+  hasPeople = false;
+}
+const path = Astro.url.pathname;
+
+function isActive(href: string) {
+  if (href === '/') return path === '/';
+  return path.startsWith(href);
+}
+---
+
+<header class="site-header">
+  <nav class="nav-inner" aria-label="Main navigation">
+    <a href="/" class="nav-logo" aria-label={`${settings.professional_name} — home`}>
+      {settings.logo
+        ? <img src={settings.logo} alt={settings.professional_name} />
+        : <span class="nav-logo-text">{settings.professional_name}</span>
+      }
+    </a>
+
+    <button
+      class="nav-toggle"
+      aria-label="Toggle navigation menu"
+      aria-expanded="false"
+      aria-controls="nav-links"
+    >
+      <span></span>
+      <span></span>
+      <span></span>
+    </button>
+
+    <ul class="nav-links" id="nav-links" role="list">
+      <li><a href="/"           aria-current={isActive('/')           ? 'page' : undefined}>Home</a></li>
+      <li><a href="/about"      aria-current={isActive('/about')      ? 'page' : undefined}>About</a></li>
+      <li><a href="/services"   aria-current={isActive('/services')   ? 'page' : undefined}>Services</a></li>
+      <li><a href="/experience" aria-current={isActive('/experience') ? 'page' : undefined}>Experience</a></li>
+      {hasPeople && (
+        <li><a href="/people"   aria-current={isActive('/people')     ? 'page' : undefined}>Team</a></li>
+      )}
+      <li><a href="/contact"    aria-current={isActive('/contact')    ? 'page' : undefined}>Contact</a></li>
+    </ul>
+
+    {settings.phone && (
+      <a
+        href={`tel:${settings.phone.replace(/[^\d+]/g, '')}`}
+        class="nav-phone"
+        aria-label={`Call ${settings.phone}`}
+      >
+        {settings.phone}
+      </a>
+    )}
+  </nav>
+</header>
+
+<script>
+  const toggle = document.querySelector<HTMLButtonElement>('.nav-toggle');
+  const links  = document.querySelector<HTMLElement>('#nav-links');
+
+  toggle?.addEventListener('click', () => {
+    const isOpen = links?.classList.toggle('is-open');
+    toggle.setAttribute('aria-expanded', String(!!isOpen));
+  });
+
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && links?.classList.contains('is-open')) {
+      links.classList.remove('is-open');
+      toggle?.setAttribute('aria-expanded', 'false');
+      toggle?.focus();
+    }
+  });
+</script>

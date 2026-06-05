@@ -1,0 +1,44 @@
+---
+interface Props {
+  title: string;
+  description: string;
+  image: string;
+  siteName: string;
+  noindex?: boolean;
+}
+
+const { title, description, image, siteName, noindex = false } = Astro.props;
+
+const canonicalURL = new URL(Astro.url.pathname, Astro.site ?? 'https://example.com');
+const ogImage = image
+  ? (image.startsWith('http') ? image : new URL(image, Astro.site ?? 'https://example.com').toString())
+  : '';
+---
+
+<title>{title}</title>
+<meta name="description" content={description} />
+{noindex
+  ? <meta name="robots" content="noindex, nofollow" />
+  : <link rel="canonical" href={canonicalURL} />
+}
+
+<meta property="og:type"        content="website" />
+<meta property="og:url"         content={canonicalURL} />
+<meta property="og:title"       content={title} />
+<meta property="og:description" content={description} />
+<meta property="og:site_name"   content={siteName} />
+{ogImage && <meta property="og:image" content={ogImage} />}
+
+<meta name="twitter:card"        content={ogImage ? 'summary_large_image' : 'summary'} />
+<meta name="twitter:title"       content={title} />
+<meta name="twitter:description" content={description} />
+{ogImage && <meta name="twitter:image" content={ogImage} />}
+
+<script type="application/ld+json" set:html={JSON.stringify({
+  '@context': 'https://schema.org',
+  '@type': 'ProfessionalService',
+  name: siteName,
+  description,
+  url: canonicalURL.toString(),
+  ...(ogImage ? { image: ogImage } : {}),
+})} />
