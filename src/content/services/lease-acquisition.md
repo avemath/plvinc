@@ -1,7 +1,7 @@
 ---
 title: "Lease Acquisition & Negotiation"
 card_description: "Leasehold acquisition from initial prospect identification through executed lease — including landowner contact, negotiation, bonus and royalty calculation, and title verification."
-icon: "🤝"
+icon: "pen"
 sort_order: 2
 ---
 

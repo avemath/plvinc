@@ -1,7 +1,7 @@
 ---
 title: "Due Diligence"
 card_description: "A&D due diligence support for acquisitions, divestitures, and financings — leasehold review, title, contracts, and land obligations assessed on a deal timeline."
-icon: "🔍"
+icon: "list"
 sort_order: 3
 ---
 

@@ -1,7 +1,7 @@
 ---
 title: "Title Research & Curative"
 card_description: "Courthouse-level mineral and surface title examination, chain of title analysis, and targeted curative work to confirm ownership and clear defects before they become problems."
-icon: "⚖️"
+icon: "search"
 sort_order: 1
 ---
 

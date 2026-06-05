@@ -1,7 +1,7 @@
 ---
 title: "Mineral & Royalty Management"
 card_description: "Ongoing management of mineral and royalty interests — ownership records, division orders, suspense resolution, and reporting for portfolios of any size."
-icon: "📊"
+icon: "banknotes"
 sort_order: 4
 ---
 
