@@ -10,10 +10,12 @@ Sound land work begins with sound title. A thorough title examination is the fou
 Services include:
 
 - Courthouse research and abstracting (deed, lease, mortgage, probate, and court records)
+- Chain of title construction and mineral title history
 - Mineral and surface ownership runsheets and ownership reports
 - Division order title examination
-- Title opinion preparation and coordination with title counsel
+- Abstract and ownership report preparation; coordination with title counsel on title opinions, objections, and requirements
 - Identification and curative of title defects: gaps, missing heirs, unreleased encumbrances, improper conveyances, and heirship issues
-- Affidavit preparation and recordation support
+- Heirship affidavit preparation and procurement; recordation support
+- Severance history research (documenting when mineral and surface estates were severed)
 
 Whether you need a single-tract ownership confirmation or a multi-county title project, the goal is the same: defensible, well-documented title work you can rely on.
