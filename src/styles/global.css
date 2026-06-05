@@ -94,9 +94,9 @@ section { padding: 5rem 0; }
   margin-bottom: .6rem;
 }
 
-.section-header          { margin-bottom: 3rem; }
+.section-header          { margin-bottom: 3rem; text-align: center; }
 .section-header h2       { margin-bottom: .6rem; }
-.section-header p        { color: var(--text-muted); max-width: 600px; }
+.section-header p        { color: var(--text-muted); max-width: 600px; margin: 0 auto; }
 
 hr.divider {
   border: none;
@@ -280,7 +280,11 @@ hr.divider {
   padding: 0 1.5rem;
 }
 
-.hero-inner { max-width: 720px; }
+.hero-inner {
+  max-width: 720px;
+  margin: 0 auto;
+  text-align: center;
+}
 
 .hero h1 {
   color: var(--white);
@@ -291,7 +295,7 @@ hr.divider {
   font-size: 1.1rem;
   line-height: 1.65;
   opacity: .88;
-  margin-bottom: 2.5rem;
+  margin: 0 auto 2.5rem;
   max-width: 560px;
 }
 
@@ -320,6 +324,13 @@ hr.divider {
   text-align: center;
 }
 
+.stat-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: .4rem;
+}
+
 .stat-number {
   display: block;
   font-family: var(--font-heading);
@@ -327,7 +338,7 @@ hr.divider {
   font-weight: 700;
   color: var(--green-dark);
   line-height: 1;
-  margin-bottom: .4rem;
+  order: -1;
 }
 
 .stat-label {
@@ -420,6 +431,12 @@ hr.divider {
   grid-template-columns: 280px 1fr;
   gap: 4rem;
   align-items: start;
+}
+
+/* Used when no headshot is set — single centered column */
+.about-full {
+  max-width: 780px;
+  margin: 0 auto;
 }
 
 .about-photo {
@@ -701,11 +718,14 @@ a.contact-detail-value:hover { color: var(--green-dark); }
   background: var(--green-dark);
   color: var(--white);
   padding: 4.5rem 0 3.5rem;
+  text-align: center;
 }
 
 .service-detail-icon {
   margin-bottom: 1rem;
   color: rgba(255,255,255,.85);
+  display: flex;
+  justify-content: center;
 }
 
 .service-detail-svg {
@@ -899,8 +919,9 @@ a.contact-detail-value:hover { color: var(--green-dark); }
   padding: 4rem 0 3rem;
 }
 
+.page-header { text-align: center; }
 .page-header h1 { color: var(--white); margin-bottom: .4rem; }
-.page-header p  { opacity: .8; max-width: 560px; margin: 0; font-size: 1.05rem; }
+.page-header p  { opacity: .8; max-width: 560px; margin: 0 auto; font-size: 1.05rem; }
 
 /* ============================================================
    Breadcrumb / back link
