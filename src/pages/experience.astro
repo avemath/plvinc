@@ -1,0 +1,101 @@
+---
+import Base from '../layouts/Base.astro';
+import { renderMarkdown } from '../utils/markdown';
+import exp from '../data/pages/experience.json';
+import settings from '../data/settings.json';
+
+const hasTestimonials = exp.testimonials && exp.testimonials.length > 0;
+const introHtml       = await renderMarkdown(exp.intro);
+---
+
+<Base
+  title={`Experience — ${settings.professional_name}`}
+  description={`Regional experience across Texas, Louisiana, Mississippi, Pennsylvania, Michigan, and the Gulf Coast — title, leasing, due diligence, ROW, and renewables.`}
+>
+  <div class="page-header">
+    <div class="container">
+      <h1>Experience</h1>
+      <p>Decades of active land work across major U.S. basins and plays.</p>
+    </div>
+  </div>
+
+  <!-- Intro -->
+  <section>
+    <div class="container" style="max-width:760px">
+      <div class="experience-intro" set:html={introHtml} />
+    </div>
+  </section>
+
+  <!-- States served -->
+  {exp.states_served.length > 0 && (
+    <section style="background:var(--cream-dark); padding:4rem 0">
+      <div class="container">
+        <div class="section-header">
+          <span class="section-label">Geography</span>
+          <h2>States & Regions Served</h2>
+        </div>
+        <div class="states-grid">
+          {exp.states_served.map((s) => (
+            <div class="state-card">
+              <p class="state-name">{s.state}</p>
+              <p class="state-note">{s.note}</p>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+  )}
+
+  <!-- Project types -->
+  {exp.project_types.length > 0 && (
+    <section>
+      <div class="container">
+        <div class="section-header">
+          <span class="section-label">Scope</span>
+          <h2>Project Types</h2>
+        </div>
+        <ul class="project-types-list" role="list">
+          {exp.project_types.map((p) => (
+            <li>{p.label}</li>
+          ))}
+        </ul>
+      </div>
+    </section>
+  )}
+
+  <!-- Testimonials -->
+  {hasTestimonials && (
+    <section style="background:var(--cream-dark); padding:4rem 0">
+      <div class="container">
+        <div class="section-header">
+          <span class="section-label">From Clients</span>
+          <h2>What They Say</h2>
+        </div>
+        <div class="testimonials-grid">
+          {exp.testimonials.map((t) => (
+            <figure class="testimonial-card">
+              <blockquote>
+                <p class="testimonial-quote">{t.quote}</p>
+              </blockquote>
+              <figcaption>
+                <span class="testimonial-name">{t.attribution_name}</span>
+                {t.attribution_title && (
+                  <span class="testimonial-title">{t.attribution_title}</span>
+                )}
+              </figcaption>
+            </figure>
+          ))}
+        </div>
+      </div>
+    </section>
+  )}
+
+  <!-- CTA -->
+  <section class="cta-band">
+    <div class="container">
+      <h2>Have a Project in Your Region?</h2>
+      <p>Reach out to discuss the scope and how we can work together.</p>
+      <a href="/contact" class="btn btn-white">Get in Touch →</a>
+    </div>
+  </section>
+</Base>

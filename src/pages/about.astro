@@ -1,0 +1,87 @@
+---
+import Base from '../layouts/Base.astro';
+import { renderMarkdown } from '../utils/markdown';
+import about from '../data/pages/about.json';
+import settings from '../data/settings.json';
+
+const bioHtml      = await renderMarkdown(about.bio);
+const approachHtml = await renderMarkdown(about.approach);
+---
+
+<Base
+  title={`About — ${settings.professional_name}`}
+  description={`Learn about ${settings.professional_name} — CPL-credentialed landman with decades of experience in title research, lease acquisition, due diligence, and renewable land work.`}
+>
+  <!-- ─── Page header ─── -->
+  <div class="page-header">
+    <div class="container">
+      <h1>About</h1>
+      <p>Certified Professional Landman — experience you can rely on.</p>
+    </div>
+  </div>
+
+  <!-- ─── Bio + photo ─── -->
+  <section>
+    <div class="container">
+      <div class="about-grid">
+        <!-- Photo column -->
+        <aside>
+          {about.headshot
+            ? <img src={about.headshot} alt={`${settings.professional_name} — professional photo`} class="about-photo" />
+            : <div class="about-photo-placeholder" aria-hidden="true">👤</div>
+          }
+        </aside>
+
+        <!-- Text column -->
+        <div>
+          <div class="about-section about-bio" set:html={bioHtml} />
+
+          {about.credentials.length > 0 && (
+            <div class="about-section">
+              <h2>Credentials</h2>
+              <ul class="credentials-list" role="list">
+                {about.credentials.map((c) => (
+                  <li class="credential-item">
+                    <span class="credential-name">{c.name}</span>
+                    <span class="credential-meta">{c.issuer}{c.year ? ` · ${c.year}` : ''}</span>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          )}
+
+          {about.affiliations.length > 0 && (
+            <div class="about-section">
+              <h2>Affiliations</h2>
+              <ul class="affiliations-list" role="list">
+                {about.affiliations.map((a) => (
+                  <li>
+                    {a.url
+                      ? <a href={a.url} class="affiliation-tag" target="_blank" rel="noopener noreferrer">{a.name}</a>
+                      : <span class="affiliation-tag">{a.name}</span>
+                    }
+                  </li>
+                ))}
+              </ul>
+            </div>
+          )}
+        </div>
+      </div>
+
+      <!-- Approach block — full width below the grid -->
+      <div class="approach-section">
+        <h2>{about.approach_headline}</h2>
+        <div class="approach-body" set:html={approachHtml} />
+      </div>
+    </div>
+  </section>
+
+  <!-- ─── CTA ─── -->
+  <section class="cta-band">
+    <div class="container">
+      <h2>Let's Work Together</h2>
+      <p>Ready to discuss a project? Reach out and let's talk about scope, timeline, and fit.</p>
+      <a href="/contact" class="btn btn-white">Get in Touch →</a>
+    </div>
+  </section>
+</Base>

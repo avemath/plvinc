@@ -1,0 +1,90 @@
+---
+import Base from '../layouts/Base.astro';
+import { getCollection, render } from 'astro:content';
+import { renderMarkdown } from '../utils/markdown';
+import settings from '../data/settings.json';
+
+let people: Awaited<ReturnType<typeof getCollection<'people'>>> = [];
+try {
+  people = await getCollection('people');
+} catch {
+  people = [];
+}
+
+if (people.length === 0) {
+  return Astro.redirect('/');
+}
+
+const sorted = [...people].sort(
+  (a, b) => (a.data.sort_order ?? 0) - (b.data.sort_order ?? 0)
+);
+
+const rendered = await Promise.all(
+  sorted.map(async (person) => {
+    const { Content }        = await render(person);
+    const experienceHtml     = await renderMarkdown(person.data.experience_details);
+    return { person, Content, experienceHtml };
+  })
+);
+---
+
+<Base
+  title={`Team — ${settings.professional_name}`}
+  description={`Meet the team at ${settings.professional_name} — experienced land professionals serving clients across the Gulf Coast, Appalachian, and Mid-Continent regions.`}
+>
+  <div class="page-header">
+    <div class="container">
+      <h1>Team</h1>
+      <p>Experienced land professionals dedicated to thorough, reliable work.</p>
+    </div>
+  </div>
+
+  <section>
+    <div class="container">
+      <div class="people-grid">
+        {rendered.map(({ person, Content, experienceHtml }) => (
+          <article class="person-card">
+            {person.data.photo
+              ? <img
+                  src={person.data.photo}
+                  alt={`${person.data.name} — professional photo`}
+                  class="person-photo"
+                  loading="lazy"
+                />
+              : <div class="person-photo-placeholder" aria-hidden="true">👤</div>
+            }
+
+            <div class="person-info">
+              <h2 class="person-name">{person.data.name}</h2>
+              {person.data.role && (
+                <p class="person-role">{person.data.role}</p>
+              )}
+
+              <div class="person-bio">
+                <Content />
+              </div>
+
+              {person.data.experience_details && (
+                <div class="person-experience">
+                  <span class="person-experience-label">Background</span>
+                  <div
+                    class="person-experience-body"
+                    set:html={experienceHtml}
+                  />
+                </div>
+              )}
+            </div>
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="cta-band">
+    <div class="container">
+      <h2>Work With Us</h2>
+      <p>Ready to discuss a project? We'd love to hear from you.</p>
+      <a href="/contact" class="btn btn-white">Get in Touch →</a>
+    </div>
+  </section>
+</Base>

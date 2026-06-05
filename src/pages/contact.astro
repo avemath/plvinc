@@ -1,0 +1,75 @@
+---
+import Base from '../layouts/Base.astro';
+import ContactForm from '../components/ContactForm.astro';
+import contact from '../data/pages/contact.json';
+import settings from '../data/settings.json';
+---
+
+<Base
+  title={`Contact — ${settings.professional_name}`}
+  description="Get in touch to discuss your land project — title research, lease acquisition, due diligence, ROW, or renewable energy land work."
+>
+  <div class="page-header">
+    <div class="container">
+      <h1>Contact</h1>
+      <p>{contact.intro}</p>
+    </div>
+  </div>
+
+  <section>
+    <div class="container">
+      <div class="contact-grid">
+
+        <!-- Contact details -->
+        <div>
+          <h2>Reach Out Directly</h2>
+          <div class="contact-details">
+            {contact.phone && (
+              <div>
+                <span class="contact-detail-label">Phone</span>
+                <a
+                  href={`tel:${contact.phone.replace(/[^\d+]/g, '')}`}
+                  class="contact-detail-value"
+                  aria-label={`Call ${contact.phone}`}
+                >
+                  {contact.phone}
+                </a>
+              </div>
+            )}
+
+            {contact.email && (
+              <div>
+                <span class="contact-detail-label">Email</span>
+                <a
+                  href={`mailto:${contact.email}`}
+                  class="contact-detail-value"
+                >
+                  {contact.email}
+                </a>
+              </div>
+            )}
+
+            {contact.service_area_note && (
+              <div>
+                <span class="contact-detail-label">Service Area</span>
+                <span class="contact-detail-value">{contact.service_area_note}</span>
+              </div>
+            )}
+
+            {contact.mailing_address && (
+              <div>
+                <span class="contact-detail-label">Mailing Address</span>
+                <address class="contact-detail-value" style="font-style:normal; white-space:pre-line">
+                  {contact.mailing_address}
+                </address>
+              </div>
+            )}
+          </div>
+        </div>
+
+        <!-- Form -->
+        <ContactForm />
+      </div>
+    </div>
+  </section>
+</Base>

@@ -1,0 +1,46 @@
+---
+import Base from '../../layouts/Base.astro';
+import { getCollection, render } from 'astro:content';
+import settings from '../../data/settings.json';
+
+export async function getStaticPaths() {
+  const services = await getCollection('services');
+  return services.map((entry) => ({
+    params: { slug: entry.id },
+    props:  { entry },
+  }));
+}
+
+const { entry }      = Astro.props;
+const { Content }    = await render(entry);
+const { title, icon } = entry.data;
+---
+
+<Base
+  title={`${title} — ${settings.professional_name}`}
+  description={entry.data.card_description}
+>
+  <!-- Header -->
+  <div class="service-detail-header">
+    <div class="container">
+      {icon && <div class="service-detail-icon" aria-hidden="true">{icon}</div>}
+      <h1>{title}</h1>
+    </div>
+  </div>
+
+  <!-- Body -->
+  <section class="service-detail-body">
+    <div class="container">
+      <div class="prose">
+        <Content />
+      </div>
+
+      <div class="service-nav">
+        <a href="/services" class="back-link">
+          <span aria-hidden="true">←</span> All Services
+        </a>
+        <a href="/contact" class="btn btn-primary">Discuss This Service →</a>
+      </div>
+    </div>
+  </section>
+</Base>

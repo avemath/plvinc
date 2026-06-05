@@ -1,0 +1,98 @@
+---
+import Base from '../layouts/Base.astro';
+import ServiceCard from '../components/ServiceCard.astro';
+import { getCollection } from 'astro:content';
+import { renderMarkdown } from '../utils/markdown';
+import home from '../data/pages/home.json';
+import settings from '../data/settings.json';
+
+const services = await getCollection('services');
+const sorted   = [...services].sort((a, b) => a.data.sort_order - b.data.sort_order);
+const valueParagraphHtml = await renderMarkdown(home.value_paragraph);
+---
+
+<Base
+  title={settings.seo_title}
+  description={settings.seo_description}
+  image={settings.seo_share_image}
+>
+  <!-- ─── Hero ─── -->
+  <section class="hero" aria-label="Introduction">
+    {home.hero_image && (
+      <img
+        src={home.hero_image}
+        alt=""
+        class="hero-bg-img"
+        loading="eager"
+        aria-hidden="true"
+      />
+    )}
+    <div class="hero-content">
+      <div class="hero-inner">
+        <h1>{home.hero_headline}</h1>
+        <p class="hero-sub">{home.hero_subheadline}</p>
+        <a href="/contact" class="btn btn-white">
+          {home.hero_cta_text} <span aria-hidden="true">→</span>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ─── Value paragraph ─── -->
+  <section class="value-section">
+    <div class="container">
+      <div class="value-text prose" set:html={valueParagraphHtml} />
+    </div>
+  </section>
+
+  <!-- ─── Stats ─── -->
+  {home.stats.length > 0 && (
+    <section class="stats-bar" aria-label="At a glance">
+      <div class="container">
+        <dl class="stats-grid">
+          {home.stats.map((s) => (
+            <div>
+              <dt class="stat-label">{s.label}</dt>
+              <dd class="stat-number">{s.number}</dd>
+            </div>
+          ))}
+        </dl>
+      </div>
+    </section>
+  )}
+
+  <!-- ─── Services overview ─── -->
+  <section>
+    <div class="container">
+      <div class="section-header">
+        <span class="section-label">What We Do</span>
+        <h2>Land Services</h2>
+        <p>
+          From initial title research to executed agreements, every service is delivered
+          with the thoroughness and direct communication that complex land work demands.
+        </p>
+      </div>
+      <div class="services-grid">
+        {sorted.map((svc) => (
+          <ServiceCard
+            title={svc.data.title}
+            card_description={svc.data.card_description}
+            icon={svc.data.icon}
+            slug={svc.id}
+          />
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- ─── Closing CTA ─── -->
+  <section class="cta-band">
+    <div class="container">
+      <h2>{home.closing_headline}</h2>
+      <p>{home.closing_text}</p>
+      <a href="/contact" class="btn btn-white">
+        {home.closing_cta_text} <span aria-hidden="true">→</span>
+      </a>
+    </div>
+  </section>
+</Base>
