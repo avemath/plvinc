@@ -1,0 +1,36 @@
+{
+  "intro": "[Owner Name] has worked land projects across multiple states and basins, from East Texas prolific plays and Louisiana's emerging shale formations to Appalachian Basin development and the growing renewable energy sector. The common thread: careful, thorough land work carried out by someone who knows the territory and the stakeholders.\n\nProjects have ranged from single-tract curative work to multi-county leasing programs, A&D packages, and complex portfolio due diligence. The experience is broad, and the standards are consistent.",
+  "states_served": [
+    {
+      "state": "Texas",
+      "note": "Permian Basin, Eagle Ford Shale, Haynesville/Bossier (East Texas), East Texas Basin"
+    },
+    {
+      "state": "Louisiana",
+      "note": "Haynesville Shale, Tuscaloosa Marine Shale (TMS), Gulf Coast"
+    },
+    {
+      "state": "Mississippi",
+      "note": "Tuscaloosa Marine Shale (TMS), Gulf Coast"
+    },
+    {
+      "state": "Pennsylvania",
+      "note": "Marcellus Shale, Appalachian Basin"
+    },
+    {
+      "state": "Michigan",
+      "note": "Michigan Basin, Antrim Shale, Northern Michigan plays"
+    }
+  ],
+  "project_types": [
+    { "label": "Greenfield leasing programs" },
+    { "label": "A&D due diligence packages" },
+    { "label": "Multi-county title examination" },
+    { "label": "Division order and royalty management" },
+    { "label": "Pipeline and infrastructure right-of-way" },
+    { "label": "Solar and wind lease acquisition" },
+    { "label": "Heirship research and curative work" },
+    { "label": "Mineral and surface ownership reports" }
+  ],
+  "testimonials": []
+}
