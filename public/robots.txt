@@ -2,4 +2,4 @@ User-agent: *
 Allow: /
 Disallow: /studio/
 
-Sitemap: https://YOUR_DOMAIN.com/sitemap-index.xml
+Sitemap: https://plvinc.com/sitemap-index.xml

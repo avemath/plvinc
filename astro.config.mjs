@@ -3,7 +3,7 @@ import sitemap from '@astrojs/sitemap';
 
 export default defineConfig({
   output: 'static',
-  site: 'https://example.com',
+  site: 'https://plvinc.com',
   trailingSlash: 'never',
   integrations: [
     sitemap({
