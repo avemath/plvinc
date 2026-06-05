@@ -321,14 +321,13 @@ hr.divider {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
   gap: 2rem;
-  text-align: center;
+  list-style: none;
+  padding: 0;
+  margin: 0;
 }
 
 .stat-item {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: .4rem;
+  text-align: center;
 }
 
 .stat-number {
@@ -338,10 +337,11 @@ hr.divider {
   font-weight: 700;
   color: var(--green-dark);
   line-height: 1;
-  order: -1;
+  margin-bottom: .4rem;
 }
 
 .stat-label {
+  display: block;
   font-size: .8rem;
   font-weight: 600;
   color: var(--text-muted);
