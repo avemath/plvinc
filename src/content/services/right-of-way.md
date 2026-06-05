@@ -10,11 +10,13 @@ Pipeline and infrastructure projects require negotiating agreements with individ
 Services include:
 
 - Pipeline, utility, and access easement negotiation and acquisition
-- Surface use agreement (SUA) drafting and negotiation
-- Road use and temporary workspace agreements
+- Surface use agreement (SUA) negotiation and execution using standard forms
+- Road use, temporary workspace, and ingress/egress agreement negotiation
 - Damage settlement and restoration agreement negotiation
 - Landowner contact, relationship management, and objection resolution
 - ROW plat and exhibit review
+- Mineral-to-surface conflict identification in split-estate situations
+- Condemnation support and coordination with legal counsel when voluntary negotiation is unsuccessful
 - Permit and regulatory filing support
 
 Projects are handled with respect for landowner concerns and a focus on reaching agreements that stick — reducing renegotiation, disputes, and project delays.
