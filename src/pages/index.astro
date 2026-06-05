@@ -49,14 +49,14 @@ const valueParagraphHtml = await renderMarkdown(home.value_paragraph);
   {home.stats.length > 0 && (
     <section class="stats-bar" aria-label="At a glance">
       <div class="container">
-        <dl class="stats-grid">
+        <ul class="stats-grid" role="list">
           {home.stats.map((s) => (
-            <div>
-              <dt class="stat-label">{s.label}</dt>
-              <dd class="stat-number">{s.number}</dd>
-            </div>
+            <li class="stat-item">
+              <span class="stat-number">{s.number}</span>
+              <span class="stat-label">{s.label}</span>
+            </li>
           ))}
-        </dl>
+        </ul>
       </div>
     </section>
   )}

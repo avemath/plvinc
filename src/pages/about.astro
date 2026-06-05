@@ -23,14 +23,17 @@ const approachHtml = await renderMarkdown(about.approach);
   <!-- ─── Bio + photo ─── -->
   <section>
     <div class="container">
-      <div class="about-grid">
-        <!-- Photo column -->
-        <aside>
-          {about.headshot
-            ? <img src={about.headshot} alt={`${settings.professional_name} — professional photo`} class="about-photo" />
-            : <div class="about-photo-placeholder" aria-hidden="true">👤</div>
-          }
-        </aside>
+      <div class={about.headshot ? 'about-grid' : 'about-full'}>
+        <!-- Photo column — only rendered when a headshot is set -->
+        {about.headshot && (
+          <aside>
+            <img
+              src={about.headshot}
+              alt={`${settings.professional_name} — photo`}
+              class="about-photo"
+            />
+          </aside>
+        )}
 
         <!-- Text column -->
         <div>
