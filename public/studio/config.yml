@@ -1,0 +1,388 @@
+backend:
+  name: github
+  repo: avemath/plvinc
+  branch: main
+  base_url: https://YOUR_OAUTH_WORKER.workers.dev
+
+media_folder: public/images/uploads
+public_folder: /images/uploads
+
+site_url: https://YOUR_DOMAIN.com
+locale: en
+
+slug:
+  encoding: ascii
+  clean_accents: true
+
+collections:
+  # ──────────────────────────────────────────────────────────────
+  # SITE SETTINGS
+  # ──────────────────────────────────────────────────────────────
+  - name: settings
+    label: "⚙️ Site Settings"
+    delete: false
+    files:
+      - name: global
+        label: "Global Settings"
+        file: src/data/settings.json
+        format: json
+        fields:
+          - label: "Professional Name"
+            name: professional_name
+            widget: string
+            hint: "Your full name and credentials as shown in the browser tab and footer (e.g., Jane Smith, CPL)."
+
+          - label: "Tagline"
+            name: tagline
+            widget: string
+            hint: "A one-line description shown below your name in the footer (e.g., Certified Professional Landman)."
+
+          - label: "Logo"
+            name: logo
+            widget: image
+            required: false
+            hint: "Upload your logo. If left blank, your professional name is shown as text in the navigation."
+
+          - label: "Phone Number"
+            name: phone
+            widget: string
+            hint: "Your business phone number (e.g., (555) 555-5555). Shown in the navigation and contact page."
+
+          - label: "Email Address"
+            name: email
+            widget: string
+            hint: "Your primary business email address."
+
+          - label: "Service Area Summary"
+            name: service_area_summary
+            widget: string
+            hint: "Short geographic description shown in the navigation and footer (e.g., Gulf Coast · Appalachian · Mid-Continent)."
+
+          - label: "Footer Name / Company"
+            name: footer_name
+            widget: string
+            hint: "Name or company shown in the copyright line at the bottom of every page."
+
+          - label: "Default Page Title"
+            name: seo_title
+            widget: string
+            hint: "Browser tab title and search result headline. Aim for under 60 characters."
+
+          - label: "Default Meta Description"
+            name: seo_description
+            widget: text
+            hint: "Search result description shown under your site title. Aim for under 155 characters."
+
+          - label: "Default Share Image"
+            name: seo_share_image
+            widget: image
+            required: false
+            hint: "Image shown when someone shares your site link on social media. Recommended size: 1200 × 630 pixels."
+
+          - label: "Contact Form Access Key"
+            name: web3forms_key
+            widget: string
+            hint: "Your Web3Forms access key — required for the contact form to send emails. Get a free key at web3forms.com, then paste it here."
+
+  # ──────────────────────────────────────────────────────────────
+  # PAGES
+  # ──────────────────────────────────────────────────────────────
+  - name: pages
+    label: "📄 Pages"
+    delete: false
+    files:
+
+      - name: home
+        label: "Home Page"
+        file: src/data/pages/home.json
+        format: json
+        fields:
+          - label: "Hero Headline"
+            name: hero_headline
+            widget: string
+            hint: "The large headline visitors see first. Clear and direct works best."
+
+          - label: "Hero Subheadline"
+            name: hero_subheadline
+            widget: string
+            hint: "One or two sentences below the headline. Describes who you serve and where."
+
+          - label: "Hero Background Image"
+            name: hero_image
+            widget: image
+            required: false
+            hint: "Optional background photo for the hero section. Landscape format works best. Leave blank for a solid green background."
+
+          - label: "Hero Button Text"
+            name: hero_cta_text
+            widget: string
+            hint: "Text on the call-to-action button in the hero (e.g., Discuss Your Project)."
+
+          - label: "Value Paragraph"
+            name: value_paragraph
+            widget: markdown
+            hint: "A paragraph below the hero that explains your value and what you offer. Plain writing is best — skip the sales language."
+
+          - label: "Credibility Stats"
+            name: stats
+            widget: list
+            hint: "Numbers and labels displayed in a row across the page (e.g., '30+ Years' / 'Experience'). Add 3–5 stats."
+            fields:
+              - label: "Number or Value"
+                name: number
+                widget: string
+                hint: "e.g., 30+ or CPL"
+              - label: "Label"
+                name: label
+                widget: string
+                hint: "e.g., Years of Experience"
+
+          - label: "Closing Section Headline"
+            name: closing_headline
+            widget: string
+            hint: "Headline for the call-to-action section at the bottom of the home page."
+
+          - label: "Closing Section Text"
+            name: closing_text
+            widget: string
+            hint: "One or two sentences inviting visitors to get in touch."
+
+          - label: "Closing Button Text"
+            name: closing_cta_text
+            widget: string
+            hint: "Text on the closing call-to-action button (e.g., Get in Touch)."
+
+      - name: about
+        label: "About Page"
+        file: src/data/pages/about.json
+        format: json
+        fields:
+          - label: "Headshot / Professional Photo"
+            name: headshot
+            widget: image
+            required: false
+            hint: "Your professional photo. Square or portrait orientation works best. Leave blank to hide the photo."
+
+          - label: "Bio"
+            name: bio
+            widget: markdown
+            hint: "Your full professional biography. This is the main text on the About page."
+
+          - label: "Approach / Philosophy Headline"
+            name: approach_headline
+            widget: string
+            hint: "Headline for your working approach section (e.g., How I Work)."
+
+          - label: "Approach / Philosophy"
+            name: approach
+            widget: markdown
+            hint: "Describe your working philosophy, approach to projects, and what clients can expect."
+
+          - label: "Credentials & Certifications"
+            name: credentials
+            widget: list
+            hint: "Professional licenses, certifications, and designations. Your CPL should appear first. Add others as needed."
+            fields:
+              - label: "Credential Name"
+                name: name
+                widget: string
+                hint: "e.g., Certified Professional Landman (CPL)"
+              - label: "Issuing Organization"
+                name: issuer
+                widget: string
+                hint: "e.g., American Association of Professional Landmen (AAPL)"
+              - label: "Year Earned"
+                name: year
+                widget: string
+                hint: "e.g., 2003"
+
+          - label: "Affiliations & Memberships"
+            name: affiliations
+            widget: list
+            hint: "Professional associations and industry memberships."
+            fields:
+              - label: "Organization Name"
+                name: name
+                widget: string
+              - label: "Website (optional)"
+                name: url
+                widget: string
+                required: false
+                hint: "e.g., https://www.landman.org — leave blank if you do not want a link."
+
+      - name: experience
+        label: "Experience Page"
+        file: src/data/pages/experience.json
+        format: json
+        fields:
+          - label: "Introduction"
+            name: intro
+            widget: markdown
+            hint: "Opening paragraph(s) for the Experience page. Describe your regional background and depth of experience."
+
+          - label: "States & Regions Served"
+            name: states_served
+            widget: list
+            hint: "States and basins where you have active experience. Each entry appears as a highlighted card."
+            fields:
+              - label: "State"
+                name: state
+                widget: string
+                hint: "e.g., Texas"
+              - label: "Basins / Plays / Notes"
+                name: note
+                widget: string
+                hint: "e.g., Permian Basin, Eagle Ford, Haynesville"
+
+          - label: "Project Types"
+            name: project_types
+            widget: list
+            hint: "Types of projects you have completed. Shown as a bulleted list."
+            fields:
+              - label: "Project Type"
+                name: label
+                widget: string
+                hint: "e.g., Greenfield leasing programs"
+
+          - label: "Testimonials"
+            name: testimonials
+            widget: list
+            required: false
+            hint: "Optional client testimonials. Leave this empty if you prefer not to show them — the section will be hidden automatically."
+            fields:
+              - label: "Quote"
+                name: quote
+                widget: text
+                hint: "The client's words. Do not include quotation marks — they are added automatically."
+              - label: "Client Name"
+                name: attribution_name
+                widget: string
+                hint: "e.g., Jane Doe"
+              - label: "Client Title / Company"
+                name: attribution_title
+                widget: string
+                hint: "e.g., Land Manager, XYZ Energy"
+
+      - name: contact
+        label: "Contact Page"
+        file: src/data/pages/contact.json
+        format: json
+        fields:
+          - label: "Intro Text"
+            name: intro
+            widget: string
+            hint: "Short invitation text at the top of the contact page."
+
+          - label: "Phone"
+            name: phone
+            widget: string
+            hint: "Phone number shown on the contact page."
+
+          - label: "Email"
+            name: email
+            widget: string
+            hint: "Email address shown on the contact page."
+
+          - label: "Service Area Note"
+            name: service_area_note
+            widget: string
+            hint: "Brief note about geographic coverage shown on the contact page."
+
+          - label: "Mailing Address (optional)"
+            name: mailing_address
+            widget: text
+            required: false
+            hint: "Optional mailing address. Leave blank to omit from the page."
+
+  # ──────────────────────────────────────────────────────────────
+  # SERVICES
+  # ──────────────────────────────────────────────────────────────
+  - name: services
+    label: "🛠️ Services"
+    label_singular: "Service"
+    folder: src/content/services
+    create: true
+    slug: "{{slug}}"
+    format: frontmatter
+    extension: md
+    summary: "{{sort_order}}. {{title}}"
+    fields:
+      - label: "Service Title"
+        name: title
+        widget: string
+        hint: "The name of this service as shown on the website."
+
+      - label: "Card Description"
+        name: card_description
+        widget: string
+        hint: "Short description shown on the Services overview page — 1 to 2 sentences, ideally under 160 characters."
+
+      - label: "Full Description"
+        name: body
+        widget: markdown
+        hint: "Detailed description shown on this service's individual page. Bullet lists work well here."
+
+      - label: "Icon / Symbol"
+        name: icon
+        widget: string
+        required: false
+        hint: "Optional emoji shown next to the service title (e.g., ⚖️ or 🔍). Leave blank for none."
+
+      - label: "Display Order"
+        name: sort_order
+        widget: number
+        default: 0
+        value_type: int
+        hint: "Controls the order services appear. Lower numbers come first (1, 2, 3...)."
+
+  # ──────────────────────────────────────────────────────────────
+  # PEOPLE / TEAM
+  # ──────────────────────────────────────────────────────────────
+  - name: people
+    label: "👤 Team / People"
+    label_singular: "Person"
+    folder: src/content/people
+    create: true
+    slug: "{{name | slugify}}"
+    format: frontmatter
+    extension: md
+    summary: "{{name}}{{role | ternary(' — ', '')}}{{role}}"
+    description: "Add people here to create a Team page. The page and navigation link appear automatically once at least one person is added. Leave this section empty to hide the Team page entirely."
+    fields:
+      - label: "Full Name"
+        name: name
+        widget: string
+        required: true
+        hint: "This person's full name as it should appear on the website."
+
+      - label: "Role / Title"
+        name: role
+        widget: string
+        required: false
+        hint: "Optional professional title (e.g., Senior Landman, Project Manager). Leave blank to omit."
+
+      - label: "Photo"
+        name: photo
+        widget: image
+        required: false
+        hint: "Optional professional headshot. Square or portrait orientation works best. Leave blank to omit."
+
+      - label: "Display Order"
+        name: sort_order
+        widget: number
+        required: false
+        default: 0
+        value_type: int
+        hint: "Order in which this person appears on the Team page. Lower numbers appear first."
+
+      - label: "Bio"
+        name: body
+        widget: markdown
+        required: true
+        hint: "This person's professional biography."
+
+      - label: "Work & Experience Details"
+        name: experience_details
+        widget: markdown
+        required: false
+        hint: "Optional section for additional work history, notable projects, or areas of expertise. Leave blank to omit."
