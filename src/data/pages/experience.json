@@ -1,5 +1,5 @@
 {
-  "intro": "The professionals at Petro Land Ventures have worked land projects across multiple states and basins — from the prolific plays of East Texas and Louisiana's emerging shale formations to Appalachian Basin development and the growing renewable energy sector. The common thread: careful, thorough land work carried out by people who know the territory and the stakeholders.\n\nProjects have ranged from single-tract curative work to multi-county leasing programs, A&D packages, and complex portfolio due diligence. The experience is broad, and the standards are consistent.",
+  "intro": "The professionals at Petro Land Ventures have worked land projects across eight states and multiple basins — from the prolific plays of East Texas and Louisiana's emerging shale formations to Appalachian Basin development in Pennsylvania and Ohio, conventional and unconventional plays in Tennessee and Michigan, and renewable energy land work in Washington. The common thread: careful, thorough land work carried out by people who know the territory and the stakeholders.\n\nProjects have ranged from single-tract curative work to multi-county leasing programs, A&D packages, and complex portfolio due diligence. The experience is broad, and the standards are consistent.",
   "states_served": [
     {
       "state": "Texas",
@@ -20,6 +20,18 @@
     {
       "state": "Michigan",
       "note": "Michigan Basin, Antrim Shale, Northern Michigan plays"
+    },
+    {
+      "state": "Ohio",
+      "note": "Utica Shale, Appalachian Basin, Clinton/Medina formations"
+    },
+    {
+      "state": "Tennessee",
+      "note": "Chattanooga Shale, conventional plays, Gulf Coast extension"
+    },
+    {
+      "state": "Washington",
+      "note": "Solar and renewable energy land acquisition, right-of-way"
     }
   ],
   "project_types": [
