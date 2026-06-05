@@ -1,7 +1,7 @@
 ---
 title: "Solar & Renewable Land Acquisition"
 card_description: "Land acquisition, lease negotiation, and title services for solar, wind, and renewable energy projects — adapted to the distinct requirements of long-term energy lease structures."
-icon: "☀️"
+icon: "sun"
 sort_order: 6
 ---
 

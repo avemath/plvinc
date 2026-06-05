@@ -15,7 +15,7 @@
   --text-light:    #8A8A8A;
   --white:         #FFFFFF;
 
-  --font-serif: 'Playfair Display', Georgia, 'Times New Roman', serif;
+  --font-heading: 'Manrope', system-ui, -apple-system, sans-serif;
   --font-sans:  'Inter', system-ui, -apple-system, sans-serif;
 
   --container: 1200px;
@@ -53,7 +53,7 @@ body {
    Typography
    ============================================================ */
 h1, h2, h3, h4 {
-  font-family: var(--font-serif);
+  font-family: var(--font-heading);
   font-weight: 600;
   line-height: 1.2;
   margin-top: 0;
@@ -178,7 +178,7 @@ hr.divider {
 .nav-logo img { height: 44px; width: auto; }
 
 .nav-logo-text {
-  font-family: var(--font-serif);
+  font-family: var(--font-heading);
   font-size: 1.05rem;
   font-weight: 600;
   color: var(--green-dark);
@@ -322,7 +322,7 @@ hr.divider {
 
 .stat-number {
   display: block;
-  font-family: var(--font-serif);
+  font-family: var(--font-heading);
   font-size: 2.4rem;
   font-weight: 700;
   color: var(--green-dark);
@@ -531,7 +531,7 @@ hr.divider {
 }
 
 .state-name {
-  font-family: var(--font-serif);
+  font-family: var(--font-heading);
   font-size: 1.15rem;
   font-weight: 600;
   color: var(--green-dark);
@@ -704,9 +704,12 @@ a.contact-detail-value:hover { color: var(--green-dark); }
 }
 
 .service-detail-icon {
-  font-size: 2.5rem;
   margin-bottom: 1rem;
-  line-height: 1;
+  color: rgba(255,255,255,.85);
+}
+
+.service-detail-svg {
+  display: block;
 }
 
 .service-detail-header h1 { color: var(--white); margin-bottom: 0; }
@@ -837,7 +840,7 @@ a.contact-detail-value:hover { color: var(--green-dark); }
 }
 
 .footer-name {
-  font-family: var(--font-serif);
+  font-family: var(--font-heading);
   font-size: 1.05rem;
   font-weight: 600;
   margin-bottom: .3rem;

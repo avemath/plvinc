@@ -1,7 +1,7 @@
 ---
 title: "Right-of-Way & Surface Use"
 card_description: "Negotiation and acquisition of pipeline rights-of-way, surface use agreements, and access easements for energy and infrastructure projects."
-icon: "📍"
+icon: "pin"
 sort_order: 5
 ---
 

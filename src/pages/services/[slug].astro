@@ -1,5 +1,6 @@
 ---
 import Base from '../../layouts/Base.astro';
+import ServiceIcon from '../../components/ServiceIcon.astro';
 import { getCollection, render } from 'astro:content';
 import settings from '../../data/settings.json';
 
@@ -11,8 +12,8 @@ export async function getStaticPaths() {
   }));
 }
 
-const { entry }      = Astro.props;
-const { Content }    = await render(entry);
+const { entry }       = Astro.props;
+const { Content }     = await render(entry);
 const { title, icon } = entry.data;
 ---
 
@@ -23,7 +24,11 @@ const { title, icon } = entry.data;
   <!-- Header -->
   <div class="service-detail-header">
     <div class="container">
-      {icon && <div class="service-detail-icon" aria-hidden="true">{icon}</div>}
+      {icon && (
+        <div class="service-detail-icon">
+          <ServiceIcon name={icon} size={48} class="service-detail-svg" />
+        </div>
+      )}
       <h1>{title}</h1>
     </div>
   </div>
