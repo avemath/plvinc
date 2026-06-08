@@ -23,7 +23,10 @@
       "Read(//home/avemath/.wrangler/config/**)",
       "Bash(WRANGLER_CI=false wrangler deploy)",
       "Bash(WRANGLER_CI=false wrangler secret put GITHUB_CLIENT_ID)",
-      "Bash(WRANGLER_CI=false wrangler secret put GITHUB_CLIENT_SECRET)"
+      "Bash(WRANGLER_CI=false wrangler secret put GITHUB_CLIENT_SECRET)",
+      "Bash(git commit *)",
+      "WebSearch",
+      "Bash(grep -n \"\\\\.nav-links a\\\\|\\\\.service-card \\\\|\\\\.service-card:\\\\|\\\\.section-label\\\\|\\\\.site-footer\\\\|h1,\\\\|h2,\\\\|h1 {\\\\|h2 {\" \"/mnt/c/Users/avery/OneDrive/Projects - Github/plvinc/src/styles/global.css\")"
     ]
   }
 }
