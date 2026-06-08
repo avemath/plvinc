@@ -44,14 +44,30 @@ const { title, description, image, noindex = false } = Astro.props;
   </body>
 
   <script>
-    // ── Scroll-reveal ─────────────────────────────────────────
-    const observer = new IntersectionObserver(
+    // ── Scroll-reveal with per-row stagger ───────────────────
+    // Groups entries by their visual row (same top position) and
+    // staggers left-to-right within each row, so every row always
+    // animates from the leftmost card regardless of DOM index.
+    const obs = new IntersectionObserver(
       (entries) => {
-        entries.forEach((e) => {
-          if (e.isIntersecting) {
-            e.target.classList.add('is-visible');
-            observer.unobserve(e.target);
-          }
+        const rowMap = new Map<number, Element[]>();
+
+        entries
+          .filter((e) => e.isIntersecting)
+          .forEach((e) => {
+            const rowKey = Math.round(e.target.getBoundingClientRect().top / 5) * 5;
+            if (!rowMap.has(rowKey)) rowMap.set(rowKey, []);
+            rowMap.get(rowKey)!.push(e.target);
+          });
+
+        rowMap.forEach((rowEls) => {
+          rowEls
+            .sort((a, b) => a.getBoundingClientRect().left - b.getBoundingClientRect().left)
+            .forEach((el, col) => {
+              (el as HTMLElement).style.transitionDelay = `${col * 0.1}s`;
+              el.classList.add('is-visible');
+              obs.unobserve(el);
+            });
         });
       },
       { threshold: 0.1, rootMargin: '0px 0px -40px 0px' }
@@ -59,17 +75,11 @@ const { title, description, image, noindex = false } = Astro.props;
 
     document
       .querySelectorAll('.stat-item, .state-card, .testimonial-card, .person-card, .credential-item, .approach-section')
-      .forEach((el) => {
-        el.classList.add('reveal');
-        observer.observe(el);
-      });
+      .forEach((el) => { el.classList.add('reveal'); obs.observe(el); });
 
     document
       .querySelectorAll('.service-card')
-      .forEach((el) => {
-        el.classList.add('reveal-fade');
-        observer.observe(el);
-      });
+      .forEach((el) => { el.classList.add('reveal-fade'); obs.observe(el); });
 
     // ── Nav shadow on scroll ──────────────────────────────────
     const header = document.querySelector('.site-header');

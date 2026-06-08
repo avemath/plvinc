@@ -981,24 +981,13 @@ a.contact-detail-value:hover { color: var(--green-dark); }
   opacity: 1;
   transform: none;
 }
-/* Stagger siblings */
-.reveal:nth-child(2) { transition-delay: .08s; }
-.reveal:nth-child(3) { transition-delay: .16s; }
-.reveal:nth-child(4) { transition-delay: .24s; }
-.reveal:nth-child(5) { transition-delay: .32s; }
-.reveal:nth-child(6) { transition-delay: .40s; }
 
 /* Opacity-only variant — for cards with hover transforms */
 .reveal-fade {
   opacity: 0;
   transition: opacity .6s cubic-bezier(.22,1,.36,1);
 }
-.reveal-fade:nth-child(2) { transition-delay: .1s; }
-.reveal-fade:nth-child(3) { transition-delay: .2s; }
-.reveal-fade:nth-child(4) { transition-delay: .3s; }
-.reveal-fade:nth-child(5) { transition-delay: .4s; }
-.reveal-fade:nth-child(6) { transition-delay: .5s; }
-.reveal-fade.is-visible   { opacity: 1; }
+.reveal-fade.is-visible { opacity: 1; }
 
 @media (prefers-reduced-motion: reduce) {
   .reveal, .reveal-fade {
