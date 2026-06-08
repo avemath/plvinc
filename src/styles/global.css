@@ -54,15 +54,15 @@ body {
    ============================================================ */
 h1, h2, h3, h4 {
   font-family: var(--font-heading);
-  font-weight: 600;
+  font-weight: 700;
   line-height: 1.2;
   margin-top: 0;
   margin-bottom: .75rem;
 }
 
-h1 { font-size: clamp(2rem,   5vw, 3.25rem); }
-h2 { font-size: clamp(1.5rem, 3vw, 2.25rem); }
-h3 { font-size: clamp(1.1rem, 2vw, 1.4rem);  }
+h1 { font-size: clamp(2rem, 5vw, 3.25rem);   letter-spacing: -.025em; }
+h2 { font-size: clamp(1.5rem, 3vw, 2.25rem); letter-spacing: -.015em; }
+h3 { font-size: clamp(1.1rem, 2vw, 1.4rem);  letter-spacing: -.01em;  }
 
 p { margin-top: 0; }
 a { color: inherit; }
@@ -85,13 +85,25 @@ a { color: inherit; }
 section { padding: 5rem 0; }
 
 .section-label {
-  display: block;
-  font-size: .8rem;
-  font-weight: 600;
+  display: inline-flex;
+  align-items: center;
+  gap: .6rem;
+  font-size: .75rem;
+  font-weight: 700;
   text-transform: uppercase;
-  letter-spacing: .1em;
+  letter-spacing: .12em;
   color: var(--green-mid);
-  margin-bottom: .6rem;
+  margin-bottom: .75rem;
+}
+.section-label::before,
+.section-label::after {
+  content: '';
+  display: block;
+  width: 28px;
+  height: 1.5px;
+  background: currentColor;
+  opacity: .5;
+  flex-shrink: 0;
 }
 
 .section-header          { margin-bottom: 3rem; text-align: center; }
@@ -205,11 +217,28 @@ hr.divider {
   border-radius: var(--radius);
   transition: color var(--transition);
   white-space: nowrap;
+  position: relative;
 }
-
+.nav-links a::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: .85rem;
+  right: .85rem;
+  height: 2px;
+  background: var(--green-dark);
+  border-radius: 2px;
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform .22s ease;
+}
 .nav-links a:hover,
 .nav-links a[aria-current="page"] {
   color: var(--green-dark);
+}
+.nav-links a:hover::after,
+.nav-links a[aria-current="page"]::after {
+  transform: scaleX(1);
 }
 
 .nav-phone {
@@ -359,15 +388,17 @@ hr.divider {
 .service-card {
   background: var(--white);
   border: 1px solid var(--border);
+  border-top: 3px solid var(--border);
   border-radius: var(--radius-lg);
   padding: 2rem;
   display: flex;
   flex-direction: column;
-  transition: box-shadow var(--transition), transform var(--transition);
+  transition: box-shadow .25s ease, transform .25s ease, border-top-color .25s ease;
 }
 .service-card:hover {
-  box-shadow: var(--shadow-md);
-  transform: translateY(-2px);
+  box-shadow: 0 12px 36px rgba(27,67,50,.13);
+  transform: translateY(-4px);
+  border-top-color: var(--green-dark);
 }
 
 .service-card-icon {
@@ -569,8 +600,10 @@ hr.divider {
 }
 
 .project-types-list li {
-  padding: .55rem 1rem .55rem 2rem;
-  position: relative;
+  padding: .5rem 1rem;
+  display: flex;
+  align-items: flex-start;
+  gap: .75rem;
   font-size: .95rem;
   color: var(--text-muted);
   border-bottom: 1px solid var(--border);
@@ -580,14 +613,12 @@ hr.divider {
 
 .project-types-list li::before {
   content: '';
-  position: absolute;
-  left: .7rem;
-  top: 50%;
-  transform: translateY(-50%);
+  flex-shrink: 0;
   width: 6px;
   height: 6px;
   background: var(--green-dark);
   border-radius: 50%;
+  margin-top: .46em;
 }
 
 /* ============================================================
@@ -846,6 +877,7 @@ a.contact-detail-value:hover { color: var(--green-dark); }
   background: #111;
   color: var(--white);
   padding-top: 3.5rem;
+  border-top: 3px solid var(--green-dark);
 }
 
 .footer-inner {
@@ -936,6 +968,75 @@ a.contact-detail-value:hover { color: var(--green-dark); }
   transition: color var(--transition);
 }
 .back-link:hover { color: var(--green-dark); }
+
+/* ============================================================
+   Scroll-reveal animations
+   ============================================================ */
+.reveal {
+  opacity: 0;
+  transform: translateY(22px);
+  transition: opacity .6s cubic-bezier(.22,1,.36,1), transform .6s cubic-bezier(.22,1,.36,1);
+}
+.reveal.is-visible {
+  opacity: 1;
+  transform: none;
+}
+/* Stagger siblings */
+.reveal:nth-child(2) { transition-delay: .08s; }
+.reveal:nth-child(3) { transition-delay: .16s; }
+.reveal:nth-child(4) { transition-delay: .24s; }
+.reveal:nth-child(5) { transition-delay: .32s; }
+.reveal:nth-child(6) { transition-delay: .40s; }
+
+/* Opacity-only variant — for cards with hover transforms */
+.reveal-fade {
+  opacity: 0;
+  transition: opacity .6s cubic-bezier(.22,1,.36,1);
+}
+.reveal-fade:nth-child(2) { transition-delay: .1s; }
+.reveal-fade:nth-child(3) { transition-delay: .2s; }
+.reveal-fade:nth-child(4) { transition-delay: .3s; }
+.reveal-fade:nth-child(5) { transition-delay: .4s; }
+.reveal-fade:nth-child(6) { transition-delay: .5s; }
+.reveal-fade.is-visible   { opacity: 1; }
+
+@media (prefers-reduced-motion: reduce) {
+  .reveal, .reveal-fade {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+}
+
+/* ============================================================
+   Button arrow nudge on hover
+   ============================================================ */
+.btn span[aria-hidden="true"] {
+  display: inline-block;
+  transition: transform .2s ease;
+}
+.btn:hover span[aria-hidden="true"] { transform: translateX(4px); }
+
+/* ============================================================
+   Hero — subtle texture overlay
+   ============================================================ */
+.hero {
+  background-image:
+    repeating-linear-gradient(
+      -55deg,
+      rgba(255,255,255,.022) 0px,
+      rgba(255,255,255,.022) 1px,
+      transparent 1px,
+      transparent 22px
+    );
+}
+
+/* ============================================================
+   Nav — elevated shadow when page is scrolled
+   ============================================================ */
+.site-header.is-scrolled {
+  box-shadow: 0 2px 24px rgba(0,0,0,.13);
+}
 
 /* ============================================================
    Responsive
