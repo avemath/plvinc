@@ -56,15 +56,6 @@ function isActive(href: string) {
       <li><a href="/contact"    aria-current={isActive('/contact')    ? 'page' : undefined}>Contact</a></li>
     </ul>
 
-    {settings.phone && (
-      <a
-        href={`tel:${settings.phone.replace(/[^\d+]/g, '')}`}
-        class="nav-phone"
-        aria-label={`Call ${settings.phone}`}
-      >
-        {settings.phone}
-      </a>
-    )}
   </nav>
 </header>
 
