@@ -18,12 +18,14 @@ jobs:
           node-version: '22'
           cache: 'npm'
 
-      - run: npm ci
+      - name: Install dependencies
+        run: npm ci
 
-      - run: npm run build
+      - name: Build site
+        run: npm run build
 
-      - uses: cloudflare/wrangler-action@v3
-        with:
-          apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
-          accountId: 5332b557606637e7f7315510283aba46
-          command: pages deploy dist --project-name plvinc --branch main
+      - name: Deploy to Cloudflare Pages
+        run: npx wrangler pages deploy dist --project-name plvinc --branch main
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          CLOUDFLARE_ACCOUNT_ID: 5332b557606637e7f7315510283aba46
