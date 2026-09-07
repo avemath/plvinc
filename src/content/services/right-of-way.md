@@ -5,7 +5,7 @@ icon: "pin"
 sort_order: 5
 ---
 
-Pipeline and infrastructure projects require negotiating agreements with individual landowners — a process that demands patience, knowledge of landowner rights, and the ability to reach workable terms on a project timeline.
+Negotiation and acquisition of easements and surface agreements for pipeline and infrastructure projects, negotiated tract by tract.
 
 Services include:
 
@@ -19,4 +19,4 @@ Services include:
 - Condemnation support and coordination with legal counsel when voluntary negotiation is unsuccessful
 - Permit and regulatory filing support
 
-Projects are handled with respect for landowner concerns and a focus on reaching agreements that stick — reducing renegotiation, disputes, and project delays.
+Agreements are negotiated to reduce renegotiation, disputes, and schedule delays.

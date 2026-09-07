@@ -5,7 +5,7 @@ icon: "list"
 sort_order: 3
 ---
 
-Acquisitions move fast. Thorough due diligence is what separates a successful transaction from a costly mistake.
+Transaction support for acquisitions, divestitures, and financings, delivered on the deal timeline.
 
 Due diligence support includes:
 
@@ -20,4 +20,4 @@ Due diligence support includes:
 - Data room review and summary reporting
 - Coordination with counsel, engineers, and transaction teams
 
-Work product is clear, organized, and designed to give decision-makers an accurate picture of what they're buying or selling — on a timeline that matches the deal.
+Findings are delivered as organized summary reporting for decision-makers and transaction teams.

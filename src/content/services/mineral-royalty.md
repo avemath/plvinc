@@ -5,7 +5,7 @@ icon: "banknotes"
 sort_order: 4
 ---
 
-Mineral and royalty ownership comes with ongoing obligations: confirming accurate division orders, tracking production payments, resolving suspense, managing changes in ownership, and maintaining clean records across potentially dozens or hundreds of interests.
+Ongoing administration of mineral and royalty interests: division orders, production payments, suspense, ownership changes, and interest records.
 
 Services include:
 
@@ -17,4 +17,4 @@ Services include:
 - Operator communication and dispute resolution
 - Reporting for individual owners, estates, trusts, and institutional portfolios
 
-Whether you own a few inherited mineral acres or manage a large institutional portfolio, accurate and current records protect the value of your interests.
+Records are maintained for holdings of any size, from inherited acreage to institutional portfolios.
