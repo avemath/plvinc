@@ -1,0 +1,92 @@
+name: Domain Doctor
+
+# Diagnoses (and optionally repairs) the plvinc.com custom domain, which has been
+# serving a stale origin while plvinc.pages.dev updates correctly.
+on:
+  workflow_dispatch:
+    inputs:
+      attach_domains:
+        description: "Attach plvinc.com / www to the Pages project if missing"
+        type: boolean
+        default: false
+      purge_cache:
+        description: "Purge the plvinc.com zone cache"
+        type: boolean
+        default: false
+
+jobs:
+  doctor:
+    runs-on: ubuntu-latest
+    env:
+      CF_API: https://api.cloudflare.com/client/v4
+      ACCOUNT: 5332b557606637e7f7315510283aba46
+      PROJECT: plvinc
+      TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+    steps:
+      - name: Token scope check
+        run: |
+          curl -sS "$CF_API/user/tokens/verify" -H "Authorization: Bearer $TOKEN" \
+            | jq '{ok:.success, status:.result.status, errors:[.errors[]?.message]}'
+
+      - name: Pages project state
+        run: |
+          curl -sS "$CF_API/accounts/$ACCOUNT/pages/projects/$PROJECT" \
+            -H "Authorization: Bearer $TOKEN" \
+          | jq '{ok:.success,
+                 errors:[.errors[]?.message],
+                 production_branch:.result.production_branch,
+                 domains:.result.domains,
+                 latest_prod_deploy:.result.canonical_deployment.url,
+                 latest_prod_created:.result.canonical_deployment.created_on,
+                 latest_any_deploy:.result.latest_deployment.url,
+                 latest_any_env:.result.latest_deployment.environment}'
+
+      - name: Custom domain status
+        run: |
+          curl -sS "$CF_API/accounts/$ACCOUNT/pages/projects/$PROJECT/domains" \
+            -H "Authorization: Bearer $TOKEN" \
+          | jq '{ok:.success, errors:[.errors[]?.message],
+                 domains:[.result[]? | {name, status, verification_status: .validation_data.status}]}'
+
+      - name: Zone lookup
+        id: zone
+        run: |
+          Z=$(curl -sS "$CF_API/zones?name=plvinc.com" -H "Authorization: Bearer $TOKEN")
+          echo "$Z" | jq '{ok:.success, errors:[.errors[]?.message],
+                           zones:[.result[]? | {id, name, status, paused}]}'
+          echo "id=$(echo "$Z" | jq -r '.result[0].id // empty')" >> "$GITHUB_OUTPUT"
+
+      - name: Zone DNS records for apex and www
+        if: steps.zone.outputs.id != ''
+        run: |
+          curl -sS "$CF_API/zones/${{ steps.zone.outputs.id }}/dns_records" \
+            -H "Authorization: Bearer $TOKEN" \
+          | jq '{ok:.success, errors:[.errors[]?.message],
+                 records:[.result[]? | select(.name|test("^(www\\.)?plvinc\\.com$")) | {name, type, content, proxied}]}'
+
+      - name: Cache rules on the zone
+        if: steps.zone.outputs.id != ''
+        run: |
+          curl -sS "$CF_API/zones/${{ steps.zone.outputs.id }}/rulesets?phase=http_request_cache_settings" \
+            -H "Authorization: Bearer $TOKEN" \
+          | jq '{ok:.success, errors:[.errors[]?.message],
+                 rulesets:[.result[]? | {name, phase, kind}]}'
+
+      - name: Attach custom domains
+        if: inputs.attach_domains
+        run: |
+          for d in plvinc.com www.plvinc.com; do
+            echo "--- attaching $d"
+            curl -sS -X POST "$CF_API/accounts/$ACCOUNT/pages/projects/$PROJECT/domains" \
+              -H "Authorization: Bearer $TOKEN" -H "Content-Type: application/json" \
+              --data "{\"name\":\"$d\"}" \
+            | jq '{ok:.success, errors:[.errors[]?.message], name:.result.name, status:.result.status}'
+          done
+
+      - name: Purge zone cache
+        if: inputs.purge_cache && steps.zone.outputs.id != ''
+        run: |
+          curl -sS -X POST "$CF_API/zones/${{ steps.zone.outputs.id }}/purge_cache" \
+            -H "Authorization: Bearer $TOKEN" -H "Content-Type: application/json" \
+            --data '{"purge_everything":true}' \
+          | jq '{ok:.success, errors:[.errors[]?.message]}'
