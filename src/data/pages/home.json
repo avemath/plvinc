@@ -1,16 +1,135 @@
 {
   "hero_headline": "Trusted Land Services for Oil & Gas, Minerals & Renewables",
-  "hero_subheadline": "CPL-credentialed land services firm with decades of combined experience in title research, lease acquisition, due diligence, and renewable energy land work across the Gulf Coast, Appalachian, and Mid-Continent basins.",
+  "hero_subheadline": "Certified Professional Landmen handling title research, lease acquisition, due diligence, and renewable energy land work for operators, producers, mineral owners, and investors.",
   "hero_image": "",
   "hero_cta_text": "Discuss Your Project",
-  "value_paragraph": "When land work demands precision, experience matters. Petro Land Ventures is a land services firm staffed by Certified Professional Landmen (CPL) with decades of combined experience in oil and gas, minerals, and renewable energy land work. Every project is handled directly by a credentialed professional — from courthouse-level title research to complex due diligence and renewable energy acquisitions. Clients receive thorough, defensible work delivered on time, and know exactly what was found and what it means.",
-  "stats": [
-    { "number": "2", "label": "CPL-Credentialed Professionals" },
-    { "number": "25+", "label": "Years of Experience" },
-    { "number": "8", "label": "States Served" },
-    { "number": "6", "label": "Core Service Areas" }
+  "value_paragraph": "Land work is unforgiving of shortcuts. A missed severance, an unreleased lease, an heir nobody tracked down — these do not stay buried. They surface at closing, in diligence, or in a title opinion, at the point where they cost the most to fix.\n\nPetro Land Ventures exists to find them first. Every file is worked start to finish by a Certified Professional Landman, and what you get back is not a stack of copies but a clear account of what the record actually supports — and where it does not.",
+  "regions_label": "Coverage",
+  "regions_headline": "Where We Work",
+  "regions_note": "Select a basin or a highlighted state to see the plays worked there. Shaded states mark completed project experience — we take on work nationwide.",
+  "regions_legend_worked": "Project experience",
+  "regions_legend_available": "Available nationwide",
+  "regions": [
+    {
+      "id": "gulf-coast",
+      "name": "Gulf Coast Basin",
+      "states": [
+        "Texas",
+        "Louisiana",
+        "Mississippi"
+      ],
+      "summary": "Home ground for the firm. Deep, high-pressure gas in the Haynesville and Bossier, oil in the Tuscaloosa Marine Shale, and a century of conventional production along the coast — much of it over land with active salt-dome geology and long, tangled ownership chains.",
+      "plays": [
+        {
+          "name": "Haynesville Shale",
+          "definition": "A deep, high-pressure dry gas play across northwest Louisiana and East Texas, and one of the largest gas producers in the country."
+        },
+        {
+          "name": "Bossier",
+          "definition": "A gas-bearing interval stacked above the Haynesville, frequently developed alongside it in East Texas and North Louisiana."
+        },
+        {
+          "name": "Tuscaloosa Marine Shale",
+          "definition": "An oil-prone shale running across central Louisiana and southwest Mississippi, commonly abbreviated TMS."
+        },
+        {
+          "name": "Eagle Ford Shale",
+          "definition": "A South Texas oil, condensate, and gas play running in a band from the Mexican border northeast toward East Texas."
+        },
+        {
+          "name": "East Texas Basin",
+          "definition": "A long-producing conventional basin, home to the historic East Texas Oil Field and multiple stacked targets still developed today."
+        },
+        {
+          "name": "Gulf Coast Trend",
+          "definition": "The onshore coastal belt across Texas, Louisiana, and Mississippi, where shallow conventional production and salt-dome structures dominate."
+        }
+      ]
+    },
+    {
+      "id": "permian",
+      "name": "Permian Basin",
+      "states": [
+        "Texas"
+      ],
+      "summary": "The most prolific oil-producing basin in the United States, spanning more than 75,000 square miles of West Texas and southeast New Mexico. Stacked pay across the Midland and Delaware sub-basins makes depth severance and multi-horizon ownership the central title question.",
+      "plays": [
+        {
+          "name": "Midland Sub-basin",
+          "definition": "The eastern half of the Permian, where the Spraberry and Wolfcamp benches are developed in tight, heavily leased sections."
+        },
+        {
+          "name": "Delaware Sub-basin",
+          "definition": "The deeper western half of the Permian, running into southeast New Mexico with thicker Bone Spring and Wolfcamp targets."
+        }
+      ]
+    },
+    {
+      "id": "appalachian",
+      "name": "Appalachian Basin",
+      "states": [
+        "Pennsylvania",
+        "Ohio",
+        "Tennessee"
+      ],
+      "summary": "Stacked Marcellus and Utica development sitting on top of some of the oldest and most fragmented mineral title in the country. Heirship research, gaps in the record, and century-old severances are the routine work here rather than the exception.",
+      "plays": [
+        {
+          "name": "Marcellus Shale",
+          "definition": "The largest natural gas field in the United States, centered in Pennsylvania and West Virginia."
+        },
+        {
+          "name": "Utica Shale",
+          "definition": "A deeper play lying beneath the Marcellus, productive for gas, condensate, and oil, particularly in eastern Ohio."
+        },
+        {
+          "name": "Clinton / Medina",
+          "definition": "Shallow conventional sandstones across eastern Ohio and western Pennsylvania with more than a century of production history."
+        },
+        {
+          "name": "Chattanooga Shale",
+          "definition": "A Devonian shale across Tennessee and the southern Appalachians, developed both conventionally and unconventionally."
+        }
+      ]
+    },
+    {
+      "id": "michigan",
+      "name": "Michigan Basin",
+      "states": [
+        "Michigan"
+      ],
+      "summary": "A circular intracratonic basin centered on the Lower Peninsula, producing from multiple stacked horizons. Shallow biogenic gas here was among the earliest commercial shale development anywhere in the country.",
+      "plays": [
+        {
+          "name": "Antrim Shale",
+          "definition": "A shallow biogenic gas play in the northern Michigan Basin, and one of the first commercially developed shale gas plays in the United States."
+        },
+        {
+          "name": "Northern Michigan Conventional",
+          "definition": "Niagaran reef and Trenton-Black River targets developed across the northern Lower Peninsula."
+        }
+      ]
+    },
+    {
+      "id": "pacific-northwest",
+      "name": "Pacific Northwest",
+      "states": [
+        "Washington"
+      ],
+      "summary": "Renewable energy land work, where the underlying questions are familiar but the counterparties and agreements are not. Utility-scale solar and wind siting brings surface use, setbacks, and long-horizon option agreements to the front of the file.",
+      "plays": [
+        {
+          "name": "Solar & Wind Lease Acquisition",
+          "definition": "Option and lease packages assembled across contiguous surface tracts for utility-scale renewable siting."
+        },
+        {
+          "name": "Right-of-Way Corridors",
+          "definition": "Transmission and interconnection routing, negotiated tract by tract to connect generation to the grid."
+        }
+      ]
+    }
   ],
   "closing_headline": "Ready to Move Your Project Forward?",
-  "closing_text": "Reach out to discuss scope, timeline, and how we can work together.",
+  "closing_text": "Tell us about the tract, the timeline, and what needs to happen. We will tell you what the work involves.",
   "closing_cta_text": "Get in Touch"
 }

@@ -123,19 +123,122 @@ collections:
             widget: markdown
             hint: "A paragraph below the hero that explains your value and what you offer. Plain writing is best — skip the sales language."
 
-          - label: "Credibility Stats"
-            name: stats
+          - label: "Coverage Section Label"
+            name: regions_label
+            widget: string
+            hint: "Small uppercase label above the coverage headline (e.g., Coverage)."
+
+          - label: "Coverage Headline"
+            name: regions_headline
+            widget: string
+            hint: "Headline for the coverage map section (e.g., Where We Work)."
+
+          - label: "Coverage Intro"
+            name: regions_note
+            widget: text
+            hint: "Sentence below the headline explaining how to use the map. This is also where you say you take work nationwide."
+
+          - label: "Map Legend — Worked"
+            name: regions_legend_worked
+            widget: string
+            hint: "Label for shaded states on the map (e.g., Project experience)."
+
+          - label: "Map Legend — Available"
+            name: regions_legend_available
+            widget: string
+            hint: "Label for unshaded states on the map (e.g., Available nationwide)."
+
+          - label: "Basins & Regions"
+            name: regions
             widget: list
-            hint: "Numbers and labels displayed in a row across the page (e.g., '30+ Years' / 'Experience'). Add 3–5 stats."
+            summary: "{{name}}"
+            hint: "Each entry becomes a tab beside the map. Selecting it highlights that basin's states. Add as many as you like — no count appears anywhere on the site, so this list can grow as your coverage does."
             fields:
-              - label: "Number or Value"
-                name: number
+              - label: "Basin / Region Name"
+                name: name
                 widget: string
-                hint: "e.g., 30+ or CPL"
-              - label: "Label"
-                name: label
+                hint: "e.g., Appalachian Basin"
+
+              - label: "ID"
+                name: id
                 widget: string
-                hint: "e.g., Years of Experience"
+                pattern: ["^[a-z0-9-]+$", "Lowercase letters, numbers, and hyphens only."]
+                hint: "A short lowercase name used internally to link the tab to the map (e.g., appalachian). No spaces or capitals."
+
+              - label: "States"
+                name: states
+                widget: select
+                multiple: true
+                hint: "The states this basin covers. These are what light up on the map when the tab is selected. Pick from the list so the map always matches."
+                options:
+                  - "Alabama"
+                  - "Arizona"
+                  - "Arkansas"
+                  - "California"
+                  - "Colorado"
+                  - "Connecticut"
+                  - "Delaware"
+                  - "Florida"
+                  - "Georgia"
+                  - "Idaho"
+                  - "Illinois"
+                  - "Indiana"
+                  - "Iowa"
+                  - "Kansas"
+                  - "Kentucky"
+                  - "Louisiana"
+                  - "Maine"
+                  - "Maryland"
+                  - "Massachusetts"
+                  - "Michigan"
+                  - "Minnesota"
+                  - "Mississippi"
+                  - "Missouri"
+                  - "Montana"
+                  - "Nebraska"
+                  - "Nevada"
+                  - "New Hampshire"
+                  - "New Jersey"
+                  - "New Mexico"
+                  - "New York"
+                  - "North Carolina"
+                  - "North Dakota"
+                  - "Ohio"
+                  - "Oklahoma"
+                  - "Oregon"
+                  - "Pennsylvania"
+                  - "Rhode Island"
+                  - "South Carolina"
+                  - "South Dakota"
+                  - "Tennessee"
+                  - "Texas"
+                  - "Utah"
+                  - "Vermont"
+                  - "Virginia"
+                  - "Washington"
+                  - "West Virginia"
+                  - "Wisconsin"
+                  - "Wyoming"
+
+              - label: "Summary"
+                name: summary
+                widget: text
+                hint: "A short paragraph about working in this basin — what makes the land work here distinctive."
+
+              - label: "Plays & Formations"
+                name: plays
+                widget: list
+                summary: "{{name}}"
+                hint: "The plays worked in this basin. Each shows with its definition in the panel beside the map."
+                fields:
+                  - label: "Play / Formation Name"
+                    name: name
+                    widget: string
+                    hint: "e.g., Marcellus Shale"
+                  - label: "One-Line Definition"
+                    name: definition
+                    widget: text
+                    hint: "A plain-language sentence explaining what this play is and where it sits. Written for clients who are not landmen."
 
           - label: "Closing Section Headline"
             name: closing_headline

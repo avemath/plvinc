@@ -1,0 +1,196 @@
+---
+import states from '../data/us-states.json';
+import home from '../data/pages/home.json';
+
+const regions = home.regions;
+
+// A state can belong to more than one region (Texas is Gulf Coast and Permian).
+// The first region that claims a state is the one its map path selects.
+const regionsByState = new Map<string, typeof regions>();
+for (const r of regions) {
+  for (const s of r.states) {
+    if (!regionsByState.has(s)) regionsByState.set(s, []);
+    regionsByState.get(s)!.push(r);
+  }
+}
+
+const worked = states.filter((s) => regionsByState.has(s.name));
+const base   = states.filter((s) => !regionsByState.has(s.name));
+---
+
+<section class="coverage" aria-labelledby="coverage-heading">
+  <div class="container">
+    <header class="coverage-header">
+      <span class="section-label">{home.regions_label}</span>
+      <h2 id="coverage-heading">{home.regions_headline}</h2>
+      <p class="coverage-note">{home.regions_note}</p>
+    </header>
+
+    <div class="coverage-layout">
+      <!-- ── Map ── -->
+      <div class="coverage-map">
+        <svg viewBox="0 0 960 600" class="us-map" role="img" aria-labelledby="us-map-title">
+          <title id="us-map-title">
+            Map of the contiguous United States. States with completed project
+            experience are shaded: {worked.map((s) => s.name).join(', ')}.
+          </title>
+
+          <g class="map-base" aria-hidden="true">
+            {base.map((s) => <path d={s.d} />)}
+          </g>
+
+          <g class="map-worked">
+            {worked.map((s) => {
+              const rs = regionsByState.get(s.name)!;
+              return (
+                <path
+                  d={s.d}
+                  class="map-state"
+                  data-state={s.name}
+                  data-region={rs[0].id}
+                  data-regions={rs.map((r) => r.id).join(' ')}
+                  role="button"
+                  tabindex="0"
+                  aria-label={`${s.name} — ${rs.map((r) => r.name).join(', ')}`}
+                />
+              );
+            })}
+          </g>
+        </svg>
+
+        <p class="map-hint" data-default={`${worked.length} states of completed project work`} aria-hidden="true">
+          {worked.length} states of completed project work
+        </p>
+
+        <ul class="map-legend" role="list">
+          <li><span class="legend-swatch is-worked" aria-hidden="true"></span>{home.regions_legend_worked}</li>
+          <li><span class="legend-swatch is-available" aria-hidden="true"></span>{home.regions_legend_available}</li>
+        </ul>
+      </div>
+
+      <!-- ── Region detail ── -->
+      <div class="coverage-detail">
+        <div class="region-tabs" role="tablist" aria-label="Basins and regions">
+          {regions.map((r, i) => (
+            <button
+              type="button"
+              role="tab"
+              id={`tab-${r.id}`}
+              class="region-tab"
+              data-region={r.id}
+              aria-selected={i === 0 ? 'true' : 'false'}
+              aria-controls={`panel-${r.id}`}
+              tabindex={i === 0 ? 0 : -1}
+            >
+              {r.name}
+            </button>
+          ))}
+        </div>
+
+        {regions.map((r, i) => (
+          <div
+            role="tabpanel"
+            id={`panel-${r.id}`}
+            class="region-panel"
+            data-region={r.id}
+            aria-labelledby={`tab-${r.id}`}
+            tabindex="0"
+            hidden={i !== 0}
+          >
+            <p class="region-summary">{r.summary}</p>
+
+            <p class="region-states">
+              <span class="region-states-label">States worked</span>
+              {r.states.join(' · ')}
+            </p>
+
+            <ul class="play-list" role="list">
+              {r.plays.map((p) => (
+                <li class="play-item">
+                  <h3 class="play-name">{p.name}</h3>
+                  <p class="play-def">{p.definition}</p>
+                </li>
+              ))}
+            </ul>
+          </div>
+        ))}
+      </div>
+    </div>
+  </div>
+</section>
+
+<script>
+  document.querySelectorAll<HTMLElement>('.coverage').forEach((root) => {
+    const tabs   = [...root.querySelectorAll<HTMLButtonElement>('.region-tab')];
+    const panels = [...root.querySelectorAll<HTMLElement>('.region-panel')];
+    const paths  = [...root.querySelectorAll<SVGPathElement>('.map-state')];
+    const hint   = root.querySelector<HTMLElement>('.map-hint');
+    if (!tabs.length) return;
+
+    const fallbackHint = hint?.dataset.default ?? '';
+    const nameOf = (id: string) =>
+      tabs.find((t) => t.dataset.region === id)?.textContent?.trim() ?? '';
+
+    let selected = tabs[0].dataset.region!;
+
+    const setHint = (text: string) => { if (hint) hint.textContent = text; };
+
+    const select = (id: string, moveFocus = false) => {
+      selected = id;
+
+      tabs.forEach((t) => {
+        const on = t.dataset.region === id;
+        t.setAttribute('aria-selected', String(on));
+        t.tabIndex = on ? 0 : -1;
+        if (on && moveFocus) t.focus();
+      });
+
+      panels.forEach((p) => { p.hidden = p.dataset.region !== id; });
+
+      // Highlight every state belonging to the selected region
+      paths.forEach((p) => {
+        const inRegion = (p.dataset.regions ?? '').split(' ').includes(id);
+        p.classList.toggle('is-active', inRegion);
+      });
+
+      setHint(nameOf(id));
+    };
+
+    // ── Tabs: click plus standard roving-tabindex keyboard support ──
+    tabs.forEach((tab, i) => {
+      tab.addEventListener('click', () => select(tab.dataset.region!));
+
+      tab.addEventListener('keydown', (e) => {
+        const last = tabs.length - 1;
+        let next: number | null = null;
+
+        if (e.key === 'ArrowRight' || e.key === 'ArrowDown') next = i === last ? 0 : i + 1;
+        else if (e.key === 'ArrowLeft' || e.key === 'ArrowUp') next = i === 0 ? last : i - 1;
+        else if (e.key === 'Home') next = 0;
+        else if (e.key === 'End') next = last;
+
+        if (next !== null) {
+          e.preventDefault();
+          select(tabs[next].dataset.region!, true);
+        }
+      });
+    });
+
+    // ── Map states: hover previews in the hint line, click commits ──
+    paths.forEach((path) => {
+      const label = path.getAttribute('aria-label') ?? '';
+      const commit = () => select(path.dataset.region!);
+
+      path.addEventListener('mouseenter', () => setHint(label));
+      path.addEventListener('mouseleave', () => setHint(nameOf(selected) || fallbackHint));
+      path.addEventListener('focus', () => setHint(label));
+      path.addEventListener('blur', () => setHint(nameOf(selected) || fallbackHint));
+      path.addEventListener('click', commit);
+      path.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); commit(); }
+      });
+    });
+
+    select(selected);
+  });
+</script>

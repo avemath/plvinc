@@ -74,11 +74,12 @@ const { title, description, image, noindex = false } = Astro.props;
     );
 
     document
-      .querySelectorAll('.stat-item, .state-card, .testimonial-card, .person-card, .credential-item, .approach-section')
+      .querySelectorAll('.state-card, .testimonial-card, .person-card, .credential-item, .approach-section')
       .forEach((el) => { el.classList.add('reveal'); obs.observe(el); });
 
+    // Opacity-only reveal for elements that own a hover transform
     document
-      .querySelectorAll('.service-card')
+      .querySelectorAll('.service-card, .coverage-map, .coverage-detail')
       .forEach((el) => { el.classList.add('reveal-fade'); obs.observe(el); });
 
     // ── Nav shadow on scroll ──────────────────────────────────

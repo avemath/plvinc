@@ -1,5 +1,5 @@
 {
-  "intro": "The professionals at Petro Land Ventures have worked land projects across eight states and multiple basins — from the prolific plays of East Texas and Louisiana's emerging shale formations to Appalachian Basin development in Pennsylvania and Ohio, conventional and unconventional plays in Tennessee and Michigan, and renewable energy land work in Washington. The common thread: careful, thorough land work carried out by people who know the territory and the stakeholders.\n\nProjects have ranged from single-tract curative work to multi-county leasing programs, A&D packages, and complex portfolio due diligence. The experience is broad, and the standards are consistent.",
+  "intro": "Project work has run across eight states and five basins. The record includes deep gas development in northwest Louisiana and East Texas, oil-directed drilling in the southern Mississippi counties, stacked Marcellus and Utica programs in Pennsylvania and Ohio, shallow biogenic gas across northern Michigan, and utility-scale renewable siting in eastern Washington.\n\nWhat carries between them is method rather than geography. The counties change and the formations change; the way the work gets done does not.",
   "states_served": [
     {
       "state": "Texas",
@@ -7,11 +7,11 @@
     },
     {
       "state": "Louisiana",
-      "note": "Haynesville Shale, Tuscaloosa Marine Shale (TMS), Gulf Coast"
+      "note": "Haynesville Shale, Tuscaloosa Marine Shale, onshore Gulf Coast parishes"
     },
     {
       "state": "Mississippi",
-      "note": "Tuscaloosa Marine Shale (TMS), Gulf Coast"
+      "note": "Tuscaloosa Marine Shale, southwest counties, Gulf Coast salt-dome trend"
     },
     {
       "state": "Pennsylvania",
@@ -35,14 +35,30 @@
     }
   ],
   "project_types": [
-    { "label": "Greenfield leasing programs" },
-    { "label": "A&D due diligence packages" },
-    { "label": "Multi-county title examination" },
-    { "label": "Division order and royalty management" },
-    { "label": "Pipeline and infrastructure right-of-way" },
-    { "label": "Solar and wind lease acquisition" },
-    { "label": "Heirship research and curative work" },
-    { "label": "Mineral and surface ownership reports" }
+    {
+      "label": "Greenfield leasing programs"
+    },
+    {
+      "label": "A&D due diligence packages"
+    },
+    {
+      "label": "Multi-county title examination"
+    },
+    {
+      "label": "Division order and royalty management"
+    },
+    {
+      "label": "Pipeline and infrastructure right-of-way"
+    },
+    {
+      "label": "Solar and wind lease acquisition"
+    },
+    {
+      "label": "Heirship research and curative work"
+    },
+    {
+      "label": "Mineral and surface ownership reports"
+    }
   ],
   "testimonials": []
 }
