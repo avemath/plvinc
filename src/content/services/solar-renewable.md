@@ -5,7 +5,7 @@ icon: "sun"
 sort_order: 6
 ---
 
-The renewable energy transition has created significant demand for experienced land professionals who understand both traditional mineral work and the distinct requirements of solar and wind lease structures, transmission corridors, and interconnection easements.
+Land services for solar, wind, and transmission projects, where lease structures, option periods, and interconnection easements differ from mineral work.
 
 Services include:
 
@@ -19,4 +19,4 @@ Services include:
 - Decommissioning clause review and negotiation
 - Coordination with developers, utilities, and project counsel
 
-Renewable land work builds long-term relationships with landowners — which means getting the initial conversation and agreement right from the start.
+Option terms, encumbrance conflicts, and decommissioning provisions are reviewed before execution.

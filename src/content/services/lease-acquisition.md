@@ -5,7 +5,7 @@ icon: "pen"
 sort_order: 2
 ---
 
-Securing leasehold requires both land experience and people skills — the ability to locate the right parties, explain what you're asking for, and negotiate terms that work for everyone.
+Leasehold acquisition from owner identification through executed and recorded lease.
 
 Services include:
 
@@ -17,4 +17,4 @@ Services include:
 - Top leasing and lease maintenance programs
 - Bulk leasehold acquisition coordination
 
-Work is carried out with respect for landowners and attention to the details that matter: accurate bonus and royalty calculations, correct legal descriptions, proper execution, and timely recording.
+Bonus and royalty calculations, legal descriptions, execution, and recording are verified at each step.

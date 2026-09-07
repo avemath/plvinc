@@ -5,7 +5,7 @@ icon: "search"
 sort_order: 1
 ---
 
-Sound land work begins with sound title. A thorough title examination is the foundation of any successful leasing program, acquisition, or project financing — and a missed title defect can become an expensive problem years after closing.
+Courthouse-level examination of mineral and surface title, from chain of title construction through curative work.
 
 Services include:
 
@@ -18,4 +18,4 @@ Services include:
 - Heirship affidavit preparation and procurement; recordation support
 - Severance history research (documenting when mineral and surface estates were severed)
 
-Whether you need a single-tract ownership confirmation or a multi-county title project, the goal is the same: defensible, well-documented title work you can rely on.
+Scope ranges from single-tract ownership confirmation to multi-county title projects.

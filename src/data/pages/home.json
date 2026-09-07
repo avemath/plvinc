@@ -3,10 +3,10 @@
   "hero_subheadline": "Certified Professional Landmen handling title research, lease acquisition, due diligence, and renewable energy land work for operators, producers, mineral owners, and investors.",
   "hero_image": "",
   "hero_cta_text": "Discuss Your Project",
-  "value_paragraph": "Land work is unforgiving of shortcuts. A missed severance, an unreleased lease, an heir nobody tracked down — these do not stay buried. They surface at closing, in diligence, or in a title opinion, at the point where they cost the most to fix.\n\nPetro Land Ventures exists to find them first. Every file is worked start to finish by a Certified Professional Landman, and what you get back is not a stack of copies but a clear account of what the record actually supports — and where it does not.",
+  "value_paragraph": "Every file is worked start to finish by a Certified Professional Landman. There is no junior staff and no handoff between the person doing the research and the person reporting it.\n\nDeliverables state what the record shows, what it does not, and where the exposure sits.",
   "regions_label": "Coverage",
   "regions_headline": "Where We Work",
-  "regions_note": "Select a basin or a highlighted state to see the plays worked there. Shaded states mark completed project experience — we take on work nationwide.",
+  "regions_note": "Select a basin or a highlighted state to see the plays worked there. Shaded states mark completed project experience; we take on work nationwide.",
   "regions_legend_worked": "Project experience",
   "regions_legend_available": "Available nationwide",
   "regions": [
@@ -18,7 +18,7 @@
         "Louisiana",
         "Mississippi"
       ],
-      "summary": "Home ground for the firm. Deep, high-pressure gas in the Haynesville and Bossier, oil in the Tuscaloosa Marine Shale, and a century of conventional production along the coast — much of it over land with active salt-dome geology and long, tangled ownership chains.",
+      "summary": "Primary working area for the firm. Deep gas development in the Haynesville and Bossier, oil in the Tuscaloosa Marine Shale, and long-established conventional production along the coast. Salt-dome geology and fragmented ownership are common.",
       "plays": [
         {
           "name": "Haynesville Shale",
@@ -52,7 +52,7 @@
       "states": [
         "Texas"
       ],
-      "summary": "The most prolific oil-producing basin in the United States, spanning more than 75,000 square miles of West Texas and southeast New Mexico. Stacked pay across the Midland and Delaware sub-basins makes depth severance and multi-horizon ownership the central title question.",
+      "summary": "The largest oil-producing basin in the United States, covering more than 75,000 square miles across West Texas and southeast New Mexico. Stacked pay in the Midland and Delaware sub-basins makes depth severance and multi-horizon ownership routine title issues.",
       "plays": [
         {
           "name": "Midland Sub-basin",
@@ -72,7 +72,7 @@
         "Ohio",
         "Tennessee"
       ],
-      "summary": "Stacked Marcellus and Utica development sitting on top of some of the oldest and most fragmented mineral title in the country. Heirship research, gaps in the record, and century-old severances are the routine work here rather than the exception.",
+      "summary": "Stacked Marcellus and Utica development over some of the oldest and most fragmented mineral title in the country. Heirship research, record gaps, and century-old severances are common here.",
       "plays": [
         {
           "name": "Marcellus Shale",
@@ -98,7 +98,7 @@
       "states": [
         "Michigan"
       ],
-      "summary": "A circular intracratonic basin centered on the Lower Peninsula, producing from multiple stacked horizons. Shallow biogenic gas here was among the earliest commercial shale development anywhere in the country.",
+      "summary": "A circular intracratonic basin centered on the Lower Peninsula, producing from multiple stacked horizons. Shallow biogenic gas here was among the earliest commercial shale development in the country.",
       "plays": [
         {
           "name": "Antrim Shale",
@@ -116,7 +116,7 @@
       "states": [
         "Washington"
       ],
-      "summary": "Renewable energy land work, where the underlying questions are familiar but the counterparties and agreements are not. Utility-scale solar and wind siting brings surface use, setbacks, and long-horizon option agreements to the front of the file.",
+      "summary": "Renewable energy land work. Utility-scale solar and wind siting involves surface use agreements, setbacks, and long-term option periods, along with transmission and interconnection right-of-way.",
       "plays": [
         {
           "name": "Solar & Wind Lease Acquisition",
@@ -130,6 +130,6 @@
     }
   ],
   "closing_headline": "Ready to Move Your Project Forward?",
-  "closing_text": "Tell us about the tract, the timeline, and what needs to happen. We will tell you what the work involves.",
+  "closing_text": "Send the project details — location, scope, and timeline — and we will outline the work involved.",
   "closing_cta_text": "Get in Touch"
 }
