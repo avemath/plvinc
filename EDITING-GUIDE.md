@@ -71,7 +71,9 @@ These are global settings that appear across the whole site.
 
 **Tips:**
 - The **Hero Headline** is the first thing visitors read — keep it clear and direct.
-- **Credibility Stats** is a list. Click **Add** to add a new stat, or click the trash icon to remove one. Each stat has a **Number** (e.g., *30+*) and a **Label** (e.g., *Years of Experience*).
+- **Basins & Regions** powers the interactive coverage map. Each entry becomes a tab beside the map; selecting it lights up that basin's states. Every entry needs a **Name**, a short lowercase **ID**, the **States** it covers (pick them from the dropdown so the map always matches), a **Summary**, and its **Plays & Formations** — each play with a one-line definition written for clients who are not landmen.
+- Add as many basins, states, and plays as you want. No count is shown anywhere on the site, so coverage can grow without anything needing to be renumbered.
+- The **Coverage Intro** is the line under the headline. It is the right place to say you take work nationwide.
 - The **Value Paragraph** supports basic formatting — you can make text **bold** or *italic* using the toolbar that appears above the text field.
 
 ---

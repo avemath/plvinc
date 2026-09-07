@@ -1,6 +1,7 @@
 ---
 import Base from '../layouts/Base.astro';
 import ServiceCard from '../components/ServiceCard.astro';
+import CoverageMap from '../components/CoverageMap.astro';
 import { getCollection } from 'astro:content';
 import { renderMarkdown } from '../utils/markdown';
 import home from '../data/pages/home.json';
@@ -45,21 +46,8 @@ const valueParagraphHtml = await renderMarkdown(home.value_paragraph);
     </div>
   </section>
 
-  <!-- ─── Stats ─── -->
-  {home.stats.length > 0 && (
-    <section class="stats-bar" aria-label="At a glance">
-      <div class="container">
-        <ul class="stats-grid" role="list">
-          {home.stats.map((s) => (
-            <li class="stat-item">
-              <span class="stat-number">{s.number}</span>
-              <span class="stat-label">{s.label}</span>
-            </li>
-          ))}
-        </ul>
-      </div>
-    </section>
-  )}
+  <!-- ─── Coverage map ─── -->
+  <CoverageMap />
 
   <!-- ─── Services overview ─── -->
   <section>
