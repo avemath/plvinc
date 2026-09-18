@@ -31,8 +31,9 @@ const introHtml       = await renderMarkdown(exp.intro);
     <section style="background:var(--cream-dark); padding:4rem 0">
       <div class="container">
         <div class="section-header">
-          <span class="section-label">Geography</span>
-          <h2>States & Regions Served</h2>
+          <span class="section-label">Track Record</span>
+          <h2>Where We've Worked</h2>
+          <p>{exp.states_note}</p>
         </div>
         <div class="states-grid">
           {exp.states_served.map((s) => (

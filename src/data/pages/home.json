@@ -3,12 +3,13 @@
   "hero_subheadline": "Certified Professional Landmen handling title research, lease acquisition, due diligence, and renewable energy land work for operators, producers, mineral owners, and investors.",
   "hero_image": "",
   "hero_cta_text": "Discuss Your Project",
-  "value_paragraph": "Every file is worked start to finish by a Certified Professional Landman. There is no junior staff and no handoff between the person doing the research and the person reporting it.\n\nDeliverables state what the record shows, what it does not, and where the exposure sits.",
+  "value_paragraph": "Every file is worked start to finish by a Certified Professional Landman. The person who researches the record is the person who reports it, so nothing is lost between the courthouse and the deliverable.\n\nDeliverables state what the record shows, what it does not, and where the exposure sits.",
   "regions_label": "Coverage",
   "regions_headline": "Where We Work",
   "regions_note": "Select a basin or a highlighted state to see the plays worked there. Shaded states mark completed project experience; we take on work nationwide.",
   "regions_legend_worked": "Project experience",
   "regions_legend_available": "Available nationwide",
+  "regions_hint": "Shaded states mark completed project work — available nationwide",
   "regions": [
     {
       "id": "gulf-coast",

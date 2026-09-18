@@ -148,6 +148,11 @@ collections:
             widget: string
             hint: "Label for unshaded states on the map (e.g., Available nationwide)."
 
+          - label: "Map Caption"
+            name: regions_hint
+            widget: string
+            hint: "Caption under the map, shown until a state is hovered. Avoid counts here — they date quickly and make the coverage look smaller than it is."
+
           - label: "Basins & Regions"
             name: regions
             widget: list
@@ -323,10 +328,15 @@ collections:
             widget: markdown
             hint: "Opening paragraph(s) for the Experience page. Describe your regional background and depth of experience."
 
-          - label: "States & Regions Served"
+          - label: "Where We've Worked — Note"
+            name: states_note
+            widget: text
+            hint: "Sentence under the heading. Use it to make clear the list is past experience, not a limit on where you take work."
+
+          - label: "Where We've Worked"
             name: states_served
             widget: list
-            hint: "States and basins where you have active experience. Each entry appears as a highlighted card."
+            hint: "States and basins where you have active experience. Each entry appears as a highlighted card. No count is shown anywhere, so this list can grow freely."
             fields:
               - label: "State"
                 name: state

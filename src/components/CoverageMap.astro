@@ -58,8 +58,8 @@ const base   = states.filter((s) => !regionsByState.has(s.name));
           </g>
         </svg>
 
-        <p class="map-hint" data-default={`${worked.length} states of completed project work`} aria-hidden="true">
-          {worked.length} states of completed project work
+        <p class="map-hint" data-default={home.regions_hint} aria-hidden="true">
+          {home.regions_hint}
         </p>
 
         <ul class="map-legend" role="list">
