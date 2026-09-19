@@ -13,6 +13,10 @@ on:
         description: "Purge the plvinc.com zone cache"
         type: boolean
         default: false
+      fix_dns:
+        description: "Swap apex/www to CNAME -> plvinc.pages.dev (proxied). The actual DNS fix."
+        type: boolean
+        default: false
 
 jobs:
   doctor:
@@ -82,6 +86,40 @@ jobs:
               --data "{\"name\":\"$d\"}" \
             | jq '{ok:.success, errors:[.errors[]?.message], name:.result.name, status:.result.status}'
           done
+
+      # The actual fix. Apex and www are proxied AAAA records pointing at 100:: (the IPv6
+      # discard prefix) — a black-hole origin, so Cloudflare serves a frozen cached copy of
+      # an old build. Repointing them at the Pages project also clears the two custom
+      # domains stuck at status: pending.
+      - name: Point apex and www at the Pages project
+        if: inputs.fix_dns && steps.zone.outputs.id != ''
+        run: |
+          Z=${{ steps.zone.outputs.id }}
+          RECS=$(curl -sS "$CF_API/zones/$Z/dns_records?per_page=100" -H "Authorization: Bearer $TOKEN")
+          echo "$RECS" | jq -e '.success' >/dev/null \
+            || { echo "Cannot read DNS records — token needs Zone:DNS:Edit on this zone."; exit 1; }
+
+          for NAME in plvinc.com www.plvinc.com; do
+            echo "--- $NAME"
+            ID=$(echo "$RECS" | jq -r --arg n "$NAME" \
+              '.result[] | select(.name==$n and (.type=="A" or .type=="AAAA" or .type=="CNAME")) | .id' | head -1)
+            BODY=$(jq -nc --arg n "$NAME" \
+              '{type:"CNAME", name:$n, content:"plvinc.pages.dev", proxied:true, ttl:1,
+                comment:"Cloudflare Pages project plvinc"}')
+            if [ -n "$ID" ]; then
+              curl -sS -X PUT "$CF_API/zones/$Z/dns_records/$ID" \
+                -H "Authorization: Bearer $TOKEN" -H "Content-Type: application/json" --data "$BODY"
+            else
+              curl -sS -X POST "$CF_API/zones/$Z/dns_records" \
+                -H "Authorization: Bearer $TOKEN" -H "Content-Type: application/json" --data "$BODY"
+            fi \
+            | jq '{ok:.success, errors:[.errors[]?.message],
+                   type:.result.type, name:.result.name, content:.result.content, proxied:.result.proxied}'
+          done
+
+          echo "--- mail records left untouched:"
+          echo "$RECS" | jq -r \
+            '.result[] | select(.type=="MX" or (.type=="TXT" and (.content|test("spf|DMARC")))) | "\(.type) \(.name)"'
 
       - name: Purge zone cache
         if: inputs.purge_cache && steps.zone.outputs.id != ''
