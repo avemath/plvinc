@@ -13,7 +13,14 @@ const { title, description, image, siteName, noindex = false } = Astro.props;
 // domain so a misconfiguration produces wrong-but-harmless URLs rather than example.com ones.
 const SITE_FALLBACK = 'https://plvinc.com';
 
-const canonicalURL = new URL(Astro.url.pathname, Astro.site ?? SITE_FALLBACK);
+// build.format is 'file', so pathname arrives as "/about.html" (and "/index.html" at the root).
+// Cloudflare Pages serves those at their extensionless paths, which is what the sitemap and every
+// internal link use, so strip the extension rather than declare a canonical nobody links to.
+const cleanPath = Astro.url.pathname
+  .replace(/\/index\.html$/, '/')
+  .replace(/\.html$/, '');
+
+const canonicalURL = new URL(cleanPath, Astro.site ?? SITE_FALLBACK);
 const ogImage = image
   ? (image.startsWith('http') ? image : new URL(image, Astro.site ?? SITE_FALLBACK).toString())
   : '';
