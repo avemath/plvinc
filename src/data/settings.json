@@ -1,13 +1,18 @@
 {
   "professional_name": "Petro Land Ventures",
   "tagline": "Certified Professional Landmen",
-  "logo": "",
+  "logo": "/images/uploads/logo-full.png",
   "phone": "(504) 382-7479",
   "email": "rtmatherne@yahoo.com",
-  "service_area_summary": "Gulf Coast · Appalachian · Mid-Continent",
+  "service_area_summary": "Gulf Coast · Permian · Appalachian · Michigan · Pacific Northwest",
   "footer_name": "Petro Land Ventures",
   "seo_title": "Petro Land Ventures | Professional Land Services",
   "seo_description": "CPL-credentialed land services: title research, lease acquisition, due diligence, mineral and royalty management, right-of-way, and renewable land work.",
   "seo_share_image": "",
-  "web3forms_key": "3831ba9b-75f9-4559-82eb-cdc468d1f90f"
+  "web3forms_key": "3831ba9b-75f9-4559-82eb-cdc468d1f90f",
+  "logo_small": "/images/uploads/logo-mark.png",
+  "logo_small_light": "/images/uploads/logo-mark-light.png",
+  "city": "",
+  "state": "",
+  "linkedin_url": ""
 }

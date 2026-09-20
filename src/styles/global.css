@@ -211,8 +211,27 @@ hr.divider {
   height: 68px;
 }
 
-.nav-logo { text-decoration: none; flex-shrink: 0; }
-.nav-logo img { height: 44px; width: auto; }
+.nav-logo {
+  text-decoration: none;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+}
+
+/* Two logo files, one shown at a time. The full badge is nearly square and needs height to
+   stay legible; the narrow wordmark reads better in a cramped header, so it takes over on
+   small screens. Both are in the markup with explicit width and height so neither swap nor
+   load shifts the header. */
+.nav-logo-img { width: auto; display: block; }
+.nav-logo-img-wide   { height: 50px; }
+.nav-logo-img-narrow { height: 34px; display: none; }
+
+.nav-actions {
+  display: flex;
+  align-items: center;
+  gap: .5rem;
+  flex-shrink: 0;
+}
 
 .nav-logo-text {
   font-family: var(--font-heading);
@@ -274,7 +293,16 @@ hr.divider {
   white-space: nowrap;
   flex-shrink: 0;
   transition: color var(--transition);
+  display: inline-flex;
+  align-items: center;
+  gap: .45rem;
 }
+
+.nav-phone:hover { color: var(--green-dark); }
+.nav-phone-icon  { flex: 0 0 auto; }
+
+/* The number also sits in the mobile menu, where there is room to show it in full. */
+.nav-links-phone { display: none; }
 .nav-phone:hover { color: var(--green-dark); }
 
 .nav-toggle {
@@ -1173,6 +1201,19 @@ a.contact-detail-value:hover { color: var(--green-dark); }
   margin-bottom: .3rem;
 }
 
+/* The footer sits on #111, so this is the knockout version of the wordmark. */
+.footer-logo {
+  height: 30px;
+  width: auto;
+  margin-bottom: .6rem;
+}
+
+.footer-location {
+  font-style: normal;
+  font-size: .875rem;
+  color: rgba(255, 255, 255, .62);
+}
+
 .footer-tagline,
 .footer-area {
   font-size: .82rem;
@@ -1346,7 +1387,23 @@ a.contact-detail-value:hover { color: var(--green-dark); }
   section { padding: 3.5rem 0; }
 
   .nav-toggle { display: flex; }
-  .nav-phone  { display: none; }
+
+  /* The header is tight here, so the wordmark replaces the badge and the phone collapses
+     to its icon. The full number moves into the menu instead of disappearing. */
+  .nav-logo-img-wide   { display: none; }
+  .nav-logo-img-narrow { display: block; }
+
+  .nav-phone-number { display: none; }
+  .nav-phone {
+    padding: .5rem;
+    color: var(--green-dark);
+  }
+
+  .nav-links-phone { display: block; }
+  .nav-links-phone a {
+    font-weight: 600;
+    color: var(--green-dark);
+  }
 
   .nav-links {
     display: none;

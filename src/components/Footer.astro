@@ -9,6 +9,10 @@ interface Props {
     phone?: string;
     email?: string;
     service_area_summary?: string;
+    logo_small_light?: string;
+    city?: string;
+    state?: string;
+    linkedin_url?: string;
   };
 }
 
@@ -23,14 +27,32 @@ try {
 } catch {
   hasPeople = false;
 }
+
+// Only shown once both halves are filled in, so the footer never reads "Louisiana" alone
+// or carries a stray comma.
+const location = settings.city && settings.state
+  ? `${settings.city}, ${settings.state}`
+  : '';
 ---
 
 <footer class="site-footer">
   <div class="footer-inner">
     <div class="footer-brand">
-      <p class="footer-name">{name}</p>
+      {settings.logo_small_light
+        ? <img
+            src={settings.logo_small_light}
+            alt={name}
+            class="footer-logo"
+            width="465"
+            height="132"
+            loading="lazy"
+          />
+        : <p class="footer-name">{name}</p>
+      }
       {settings.tagline && <p class="footer-tagline">{settings.tagline}</p>}
-      {settings.service_area_summary && <p class="footer-area">{settings.service_area_summary}</p>}
+      {settings.service_area_summary && (
+        <p class="footer-area">{settings.service_area_summary}</p>
+      )}
     </div>
 
     <div>
@@ -53,6 +75,17 @@ try {
             {settings.email}
           </a>
         )}
+        {location && <address class="footer-location">{location}</address>}
+        {settings.linkedin_url && (
+          <a
+            href={settings.linkedin_url}
+            class="footer-link"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            LinkedIn
+          </a>
+        )}
       </div>
     </div>
 
@@ -61,6 +94,7 @@ try {
       <nav class="footer-nav-links" aria-label="Footer navigation">
         <a href="/about">About</a>
         <a href="/services">Services</a>
+        <a href="/mineral-owners">Mineral Owners</a>
         <a href="/experience">Experience</a>
         {hasPeople && <a href="/people">Team</a>}
         <a href="/contact">Contact</a>

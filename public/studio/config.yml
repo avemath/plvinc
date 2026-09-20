@@ -41,7 +41,19 @@ collections:
             name: logo
             widget: image
             required: false
-            hint: "Upload your logo. If left blank, your professional name is shown as text in the navigation."
+            hint: "The main logo, shown in the header on desktop. If left blank, your business name appears as text instead."
+
+          - label: "Logo (narrow)"
+            name: logo_small
+            widget: image
+            required: false
+            hint: "A narrower version of the logo, used in the header on phones where the main one is too tall. Leave blank to use the main logo everywhere."
+
+          - label: "Logo (light, for dark backgrounds)"
+            name: logo_small_light
+            widget: image
+            required: false
+            hint: "A white version of the narrow logo, used in the dark footer. Leave blank to show your business name as text there instead."
 
           - label: "Phone Number"
             name: phone
@@ -51,12 +63,31 @@ collections:
           - label: "Email Address"
             name: email
             widget: string
-            hint: "Your primary business email address."
+            hint: "The email address shown publicly on the site. This should be your business address at your own domain, not a personal one."
+
+          - label: "City"
+            name: city
+            widget: string
+            required: false
+            hint: "The city you are based in. Shown in the footer and on the Contact page, and used by search engines. Both City and State must be filled in before either appears."
+
+          - label: "State"
+            name: state
+            widget: string
+            required: false
+            hint: "The state you are based in, for example Louisiana. Shown alongside City."
+
+          - label: "LinkedIn URL"
+            name: linkedin_url
+            widget: string
+            required: false
+            hint: "The full web address of the company LinkedIn page. Leave blank to hide the LinkedIn link everywhere."
 
           - label: "Service Area Summary"
             name: service_area_summary
             widget: string
-            hint: "Short geographic description shown in the navigation and footer (e.g., Gulf Coast · Appalachian · Mid-Continent)."
+            hint: "The region line in the footer. Keep it in step with the basins on the home page
+              coverage map, which is where these names come from."
 
           - label: "Footer Name / Company"
             name: footer_name
