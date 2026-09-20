@@ -547,7 +547,7 @@ collections:
             name: projects
             widget: list
             required: false
-            summary: "{{region}} — {{type}}"
+            summary: "{{region}}: {{type}}"
             hint: "Individual pieces of work worth showing. Say only what you are comfortable making public, and leave client names out unless you have permission. The section stays hidden until you add one."
             fields:
               - label: "Play or Region"
