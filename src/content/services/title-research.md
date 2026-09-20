@@ -1,6 +1,8 @@
 ---
 title: "Title Research & Curative"
 card_description: "Courthouse-level mineral and surface title examination, chain of title analysis, and targeted curative work to confirm ownership and clear defects before they become problems."
+seo_title: "Title Research & Curative | CPL Landmen"
+seo_description: "Courthouse title examination and curative work across Louisiana, East Texas and the Gulf Coast, run by Certified Professional Landmen."
 icon: "search"
 sort_order: 1
 ---

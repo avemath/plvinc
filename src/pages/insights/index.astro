@@ -1,0 +1,69 @@
+---
+import Base from '../../layouts/Base.astro';
+import { getCollection } from 'astro:content';
+import page from '../../data/pages/insights.json';
+import settings from '../../data/settings.json';
+
+let insights: Awaited<ReturnType<typeof getCollection<'insights'>>> = [];
+try {
+  insights = await getCollection('insights');
+} catch {
+  insights = [];
+}
+
+// Same behaviour as the Team page: with nothing written, this page sends visitors home
+// and the nav never links here in the first place.
+if (insights.length === 0) {
+  return Astro.redirect('/');
+}
+
+const sorted = [...insights].sort(
+  (a, b) => b.data.date.valueOf() - a.data.date.valueOf()
+);
+
+const dateFormat = new Intl.DateTimeFormat('en-US', {
+  year: 'numeric',
+  month: 'long',
+  day: 'numeric',
+});
+---
+
+<Base
+  title={page.page_title}
+  description={page.meta_description}
+>
+  <div class="page-header">
+    <div class="container">
+      <h1>Insights</h1>
+      <p>{page.page_subtitle}</p>
+    </div>
+  </div>
+
+  <section class="section-alt">
+    <div class="container container-narrow">
+      <ul class="insight-list" role="list">
+        {sorted.map((post) => (
+          <li class="insight-item">
+            <a href={`/insights/${post.id}`} class="insight-link">
+              {post.data.image && (
+                <img
+                  src={post.data.image}
+                  alt=""
+                  class="insight-thumb"
+                  loading="lazy"
+                />
+              )}
+              <div class="insight-body">
+                <time class="insight-date" datetime={post.data.date.toISOString()}>
+                  {dateFormat.format(post.data.date)}
+                </time>
+                <h2 class="insight-title">{post.data.title}</h2>
+                <p class="insight-summary">{post.data.summary}</p>
+              </div>
+            </a>
+          </li>
+        ))}
+      </ul>
+    </div>
+  </section>
+</Base>

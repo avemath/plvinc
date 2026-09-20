@@ -41,7 +41,19 @@ collections:
             name: logo
             widget: image
             required: false
-            hint: "Upload your logo. If left blank, your professional name is shown as text in the navigation."
+            hint: "The main logo, shown in the header on desktop. If left blank, your business name appears as text instead."
+
+          - label: "Logo (narrow)"
+            name: logo_small
+            widget: image
+            required: false
+            hint: "A narrower version of the logo, used in the header on phones where the main one is too tall. Leave blank to use the main logo everywhere."
+
+          - label: "Logo (light, for dark backgrounds)"
+            name: logo_small_light
+            widget: image
+            required: false
+            hint: "A white version of the narrow logo, used in the dark footer. Leave blank to show your business name as text there instead."
 
           - label: "Phone Number"
             name: phone
@@ -51,12 +63,31 @@ collections:
           - label: "Email Address"
             name: email
             widget: string
-            hint: "Your primary business email address."
+            hint: "The email address shown publicly on the site. This should be your business address at your own domain, not a personal one."
+
+          - label: "City"
+            name: city
+            widget: string
+            required: false
+            hint: "The city you are based in. Shown in the footer and on the Contact page, and used by search engines. Both City and State must be filled in before either appears."
+
+          - label: "State"
+            name: state
+            widget: string
+            required: false
+            hint: "The state you are based in, for example Louisiana. Shown alongside City."
+
+          - label: "LinkedIn URL"
+            name: linkedin_url
+            widget: string
+            required: false
+            hint: "The full web address of the company LinkedIn page. Leave blank to hide the LinkedIn link everywhere."
 
           - label: "Service Area Summary"
             name: service_area_summary
             widget: string
-            hint: "Short geographic description shown in the navigation and footer (e.g., Gulf Coast · Appalachian · Mid-Continent)."
+            hint: "The region line in the footer. Keep it in step with the basins on the home page
+              coverage map, which is where these names come from."
 
           - label: "Footer Name / Company"
             name: footer_name
@@ -260,6 +291,45 @@ collections:
             widget: text
             hint: "A sentence or two below the services headline, before the service cards."
 
+          - label: "Figures Under the Hero"
+            name: stats
+            widget: list
+            summary: "{{value}} {{label}}"
+            required: false
+            hint: "The short row of figures below the hero. Only put numbers here you can stand behind, and update the states figure if the coverage map changes. Empty this list to hide the row."
+            fields:
+              - label: "Figure"
+                name: value
+                widget: string
+                hint: "Keep it short, for example 25+ or CPL."
+              - label: "Label"
+                name: label
+                widget: string
+
+          - label: "Testimonials Section Label"
+            name: testimonials_label
+            widget: string
+
+          - label: "Testimonials Section Headline"
+            name: testimonials_headline
+            widget: string
+
+          - label: "Testimonials"
+            name: testimonials
+            widget: list
+            required: false
+            summary: "{{attribution}}"
+            hint: "Client quotes for the home page. Attribution can be a role rather than a name, for example \"Operator, East Texas\". The section stays hidden until you add one."
+            fields:
+              - label: "Quote"
+                name: quote
+                widget: text
+              - label: "Attribution"
+                name: attribution
+                widget: string
+                required: false
+                hint: "Who said it. A role and region is enough."
+
           - label: "Closing Call to Action"
             name: cta
             widget: object
@@ -285,6 +355,11 @@ collections:
             name: page_subtitle
             widget: text
             hint: "The line under the page title in the green band at the top of the About page."
+
+          - label: "Page Title"
+            name: page_title
+            widget: string
+            hint: "The browser tab title and the blue headline in Google results. Keep it under about 60 characters."
 
           - label: "Search Description"
             name: meta_description
@@ -369,6 +444,11 @@ collections:
             name: page_subtitle
             widget: text
             hint: "The line under the page title in the green band at the top of the Experience page."
+
+          - label: "Page Title"
+            name: page_title
+            widget: string
+            hint: "The browser tab title and the blue headline in Google results. Keep it under about 60 characters."
 
           - label: "Search Description"
             name: meta_description
@@ -455,6 +535,39 @@ collections:
             name: testimonials_headline
             widget: string
 
+          - label: "Selected Projects Label"
+            name: projects_label
+            widget: string
+
+          - label: "Selected Projects Headline"
+            name: projects_headline
+            widget: string
+
+          - label: "Selected Projects"
+            name: projects
+            widget: list
+            required: false
+            summary: "{{region}}: {{type}}"
+            hint: "Individual pieces of work worth showing. Say only what you are comfortable making public, and leave client names out unless you have permission. The section stays hidden until you add one."
+            fields:
+              - label: "Play or Region"
+                name: region
+                widget: string
+                hint: "For example Haynesville Shale, or Northwest Louisiana."
+              - label: "Project Type"
+                name: type
+                widget: string
+                hint: "For example Multi-county title examination."
+              - label: "Scope"
+                name: scope
+                widget: text
+                hint: "What the work involved, in a sentence or two."
+              - label: "Outcome"
+                name: outcome
+                widget: text
+                required: false
+                hint: "What it produced for the client. Leave blank to omit."
+
           - label: "Closing Call to Action"
             name: cta
             widget: object
@@ -476,6 +589,11 @@ collections:
         file: src/data/pages/contact.json
         format: json
         fields:
+          - label: "Page Title"
+            name: page_title
+            widget: string
+            hint: "The browser tab title and the blue headline in Google results. Keep it under about 60 characters."
+
           - label: "Search Description"
             name: meta_description
             widget: text
@@ -512,6 +630,185 @@ collections:
             required: false
             hint: "Optional mailing address. Leave blank to omit from the page."
 
+          - label: "Form Headline"
+            name: form_headline
+            widget: string
+            hint: "The heading above the contact form."
+
+          - label: "Form Intro"
+            name: form_intro
+            widget: text
+            required: false
+            hint: "A short line under the form heading. Leave blank to hide it."
+
+          - label: "Form Field Labels"
+            name: form_labels
+            widget: object
+            hint: "The wording shown beside each box on the form. Changing these does not change what the form collects."
+            fields:
+              - label: "Phone field"
+                name: phone
+                widget: string
+              - label: "I am a field"
+                name: inquirer_type
+                widget: string
+              - label: "State field"
+                name: state
+                widget: string
+              - label: "County field"
+                name: county
+                widget: string
+              - label: "Service field"
+                name: service
+                widget: string
+              - label: "Timeline field"
+                name: timeline
+                widget: string
+
+          - label: "\"I am a\" Options"
+            name: inquirer_types
+            widget: list
+            summary: "{{label}}"
+            hint: "The choices in the \"I am a\" dropdown. Add, remove or reorder them. Empty this list to remove the question from the form."
+            fields:
+              - label: "Option"
+                name: label
+                widget: string
+
+          - label: "Timeline Options"
+            name: timelines
+            widget: list
+            summary: "{{label}}"
+            hint: "The choices in the Timeline dropdown. Empty this list to remove the question from the form."
+            fields:
+              - label: "Option"
+                name: label
+                widget: string
+
+      - name: mineral_owners
+        label: "Mineral Owners Page"
+        file: src/data/pages/mineral-owners.json
+        format: json
+        fields:
+          - label: "Page Subtitle"
+            name: page_subtitle
+            widget: text
+            hint: "The line under the page title in the green band at the top."
+
+          - label: "Page Title"
+            name: page_title
+            widget: string
+            hint: "The browser tab title and the blue headline in Google results. Keep it under about 60 characters."
+
+          - label: "Search Description"
+            name: meta_description
+            widget: text
+            hint: "The sentence shown under this page's title in Google results. Around 155 characters."
+
+          - label: "Introduction"
+            name: intro
+            widget: markdown
+            hint: "The opening paragraphs. Write for someone who has never dealt with a landman before."
+
+          - label: "Services Section Label"
+            name: services_label
+            widget: string
+
+          - label: "Services Section Headline"
+            name: services_headline
+            widget: string
+
+          - label: "What You Can Bring to Us"
+            name: services
+            widget: list
+            summary: "{{title}}"
+            hint: "Each entry becomes a card. Empty this list to hide the whole section."
+            fields:
+              - label: "Title"
+                name: title
+                widget: string
+              - label: "Description"
+                name: description
+                widget: text
+
+          - label: "FAQ Section Label"
+            name: faq_label
+            widget: string
+
+          - label: "FAQ Section Headline"
+            name: faq_headline
+            widget: string
+
+          - label: "Questions and Answers"
+            name: faq
+            widget: list
+            summary: "{{question}}"
+            hint: "These also tell Google what this page answers, so write the question the way someone would actually ask it. Empty this list to hide the section."
+            fields:
+              - label: "Question"
+                name: question
+                widget: string
+              - label: "Answer"
+                name: answer
+                widget: text
+
+          - label: "Legal Note"
+            name: disclaimer
+            widget: text
+            required: false
+            hint: "The note at the bottom about not giving legal advice. Leave blank to hide it."
+
+          - label: "Closing Call to Action"
+            name: cta
+            widget: object
+            hint: "The band at the bottom of this page."
+            fields:
+              - label: "Headline"
+                name: headline
+                widget: string
+              - label: "Text"
+                name: text
+                widget: text
+                required: false
+              - label: "Button Text"
+                name: button
+                widget: string
+
+      - name: insights_page
+        label: "Insights Page"
+        file: src/data/pages/insights.json
+        format: json
+        fields:
+          - label: "Page Subtitle"
+            name: page_subtitle
+            widget: text
+            hint: "The line under the title on the Insights index. Only visible once you have written a post."
+
+          - label: "Page Title"
+            name: page_title
+            widget: string
+            hint: "The browser tab title and the blue headline in Google results. Keep it under about 60 characters."
+
+          - label: "Search Description"
+            name: meta_description
+            widget: text
+
+          - label: "Closing Call to Action"
+            name: cta
+            widget: object
+            hint: "The band at the bottom of each individual post."
+            fields:
+              - label: "Headline"
+                name: headline
+                widget: string
+              - label: "Text"
+                name: text
+                widget: text
+                required: false
+              - label: "Button Text"
+                name: button
+                widget: string
+
       - name: services_page
         label: "Services Page"
         file: src/data/pages/services.json
@@ -521,6 +818,11 @@ collections:
             name: page_subtitle
             widget: text
             hint: "The line under the page title in the green band at the top of the Services page."
+
+          - label: "Page Title"
+            name: page_title
+            widget: string
+            hint: "The browser tab title and the blue headline in Google results. Keep it under about 60 characters."
 
           - label: "Search Description"
             name: meta_description
@@ -552,6 +854,11 @@ collections:
             name: page_subtitle
             widget: text
             hint: "The line under the page title in the green band at the top of the Team page."
+
+          - label: "Page Title"
+            name: page_title
+            widget: string
+            hint: "The browser tab title and the blue headline in Google results. Keep it under about 60 characters."
 
           - label: "Search Description"
             name: meta_description
@@ -598,6 +905,18 @@ collections:
         widget: string
         hint: "Short description shown on the Services overview page — 1 to 2 sentences, ideally under 160 characters."
 
+      - label: "Page Title (search)"
+        name: seo_title
+        widget: string
+        required: false
+        hint: "The browser tab title and the headline in Google results for this service. Under about 60 characters. Leave blank to use the service title."
+
+      - label: "Search Description"
+        name: seo_description
+        widget: text
+        required: false
+        hint: "The sentence under this service in Google results. Under about 160 characters. Leave blank to use the card description."
+
       - label: "Full Description"
         name: body
         widget: markdown
@@ -642,6 +961,12 @@ collections:
         required: false
         hint: "Optional professional title (e.g., Senior Landman, Project Manager). Leave blank to omit."
 
+      - label: "LinkedIn URL"
+        name: linkedin_url
+        widget: string
+        required: false
+        hint: "The full web address of this person's LinkedIn profile. Leave blank to hide the link."
+
       - label: "Photo"
         name: photo
         widget: image
@@ -667,3 +992,45 @@ collections:
         widget: markdown
         required: false
         hint: "Optional section for additional work history, notable projects, or areas of expertise. Leave blank to omit."
+
+  # ──────────────────────────────────────────────────────────────
+  # INSIGHTS
+  # ──────────────────────────────────────────────────────────────
+  - name: insights
+    label: "📝 Insights"
+    label_singular: "Insight"
+    folder: src/content/insights
+    create: true
+    slug: "{{title | slugify}}"
+    format: frontmatter
+    summary: "{{title}}"
+    sortable_fields: ["date", "title"]
+    hint: "Short articles. Until you write one, the Insights page and its menu link do not appear on the site at all."
+    fields:
+      - label: "Title"
+        name: title
+        widget: string
+
+      - label: "Date"
+        name: date
+        widget: datetime
+        date_format: "YYYY-MM-DD"
+        time_format: false
+        picker_utc: false
+        hint: "Posts are listed newest first."
+
+      - label: "Summary"
+        name: summary
+        widget: text
+        hint: "One or two sentences shown in the list and used by search engines."
+
+      - label: "Image"
+        name: image
+        widget: image
+        required: false
+        hint: "Optional. Shown beside the summary in the list. Leave blank to omit it."
+
+      - label: "Body"
+        name: body
+        widget: markdown
+        hint: "The article itself."

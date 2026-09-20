@@ -63,7 +63,7 @@
   ],
   "testimonials": [],
   "page_subtitle": "Decades of active land work across major U.S. basins and plays.",
-  "meta_description": "Regional experience across Texas, Louisiana, Mississippi, Pennsylvania, Michigan, Ohio, Tennessee, and Washington — title, leasing, due diligence, right-of-way, and renewables.",
+  "meta_description": "Completed land work across Texas, Louisiana, Mississippi, Pennsylvania, Ohio, Michigan, Tennessee and Washington, from single tracts to multi-county programs.",
   "states_label": "Track Record",
   "states_headline": "Where We've Worked",
   "project_types_label": "Scope",
@@ -74,5 +74,9 @@
     "headline": "Have a Project in Your Region?",
     "text": "Reach out to discuss the scope and how we can work together.",
     "button": "Discuss Your Project"
-  }
+  },
+  "projects_label": "Selected Work",
+  "projects_headline": "Selected Projects",
+  "projects": [],
+  "page_title": "Experience | Gulf Coast, Permian & Appalachian Work"
 }

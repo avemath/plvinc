@@ -1,13 +1,17 @@
 ---
+import settings from '../data/settings.json';
+
 interface Props {
   title: string;
   description: string;
   image: string;
   siteName: string;
   noindex?: boolean;
+  /** Extra JSON-LD for this page, emitted alongside the site-wide business entry. */
+  schema?: unknown;
 }
 
-const { title, description, image, siteName, noindex = false } = Astro.props;
+const { title, description, image, siteName, noindex = false, schema } = Astro.props;
 
 // Fallback only matters if `site` is ever dropped from astro.config.mjs. Point it at the real
 // domain so a misconfiguration produces wrong-but-harmless URLs rather than example.com ones.
@@ -21,9 +25,44 @@ const cleanPath = Astro.url.pathname
   .replace(/\.html$/, '');
 
 const canonicalURL = new URL(cleanPath, Astro.site ?? SITE_FALLBACK);
-const ogImage = image
-  ? (image.startsWith('http') ? image : new URL(image, Astro.site ?? SITE_FALLBACK).toString())
-  : '';
+
+const abs = (u: string) =>
+  u.startsWith('http') ? u : new URL(u, Astro.site ?? SITE_FALLBACK).toString();
+
+// Per-page image wins, then the image set in Site Settings, then the generated default so
+// a shared link is never a bare text card.
+const ogImage = abs(image || settings.seo_share_image || '/images/og-default.png');
+
+const s = settings as Record<string, string>;
+
+// Address is only meaningful with both halves, and an incomplete PostalAddress is worse
+// than none at all.
+const hasAddress = Boolean(s.city && s.state);
+
+const business = {
+  '@context': 'https://schema.org',
+  '@type': 'ProfessionalService',
+  name: siteName,
+  description,
+  url: new URL('/', Astro.site ?? SITE_FALLBACK).toString(),
+  image: ogImage,
+  ...(s.phone ? { telephone: s.phone } : {}),
+  ...(s.email ? { email: s.email } : {}),
+  ...(hasAddress
+    ? {
+        address: {
+          '@type': 'PostalAddress',
+          addressLocality: s.city,
+          addressRegion: s.state,
+          addressCountry: 'US',
+        },
+      }
+    : {}),
+  ...(s.service_area_summary
+    ? { areaServed: s.service_area_summary.split('·').map((a) => a.trim()).filter(Boolean) }
+    : {}),
+  ...(s.linkedin_url ? { sameAs: [s.linkedin_url] } : {}),
+};
 ---
 
 <title>{title}</title>
@@ -38,18 +77,14 @@ const ogImage = image
 <meta property="og:title"       content={title} />
 <meta property="og:description" content={description} />
 <meta property="og:site_name"   content={siteName} />
-{ogImage && <meta property="og:image" content={ogImage} />}
+<meta property="og:image"       content={ogImage} />
+<meta property="og:image:width"  content="1200" />
+<meta property="og:image:height" content="630" />
 
-<meta name="twitter:card"        content={ogImage ? 'summary_large_image' : 'summary'} />
+<meta name="twitter:card"        content="summary_large_image" />
 <meta name="twitter:title"       content={title} />
 <meta name="twitter:description" content={description} />
-{ogImage && <meta name="twitter:image" content={ogImage} />}
+<meta name="twitter:image"       content={ogImage} />
 
-<script type="application/ld+json" set:html={JSON.stringify({
-  '@context': 'https://schema.org',
-  '@type': 'ProfessionalService',
-  name: siteName,
-  description,
-  url: canonicalURL.toString(),
-  ...(ogImage ? { image: ogImage } : {}),
-})} />
+<script type="application/ld+json" set:html={JSON.stringify(business)} />
+{schema && <script type="application/ld+json" set:html={JSON.stringify(schema)} />}

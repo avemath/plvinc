@@ -33,24 +33,36 @@ plvinc/
 │   ├── content.config.ts        # Collection schemas (Astro 6 glob loader)
 │   ├── content/
 │   │   ├── services/            # One .md per service (6 of them)
-│   │   └── people/              # One .md per team member
+│   │   ├── people/              # One .md per team member
+│   │   └── insights/            # Articles. Empty, and dormant while empty.
 │   ├── data/
 │   │   ├── settings.json        # Global site settings
 │   │   ├── us-states.json       # State paths and labels for the coverage map
 │   │   └── pages/               # One file per page: home, about, services,
-│   │                            #   experience, people, contact
+│   │                            #   mineral-owners, experience, people,
+│   │                            #   insights, contact
 │   ├── components/              # Nav, Footer, SEO, ContactForm, CoverageMap,
-│   │                            #   CallToAction, service cards
+│   │                            #   CallToAction, ServiceCard, ServiceList
 │   ├── layouts/Base.astro       # Shared HTML shell
 │   ├── pages/                   # One .astro per route, plus services/[slug].astro
-│   ├── styles/global.css        # Design system
+│   │                            #   and insights/[slug].astro
+│   ├── styles/
+│   │   ├── fonts.css            # Self-hosted @font-face rules
+│   │   └── global.css           # Design system
 │   └── utils/markdown.ts        # Renders markdown held in JSON fields
 ├── public/
 │   ├── studio/
 │   │   ├── index.html           # CMS shell, served at /studio
 │   │   └── config.yml           # CMS collections and field definitions
-│   ├── images/uploads/          # Media uploaded through the CMS
+│   ├── images/
+│   │   ├── og-default.png       # 1200x630 default share image
+│   │   └── uploads/             # Media uploaded through the CMS, incl. logos
+│   ├── fonts/                   # Self-hosted woff2
+│   ├── _headers                 # Cache-Control for hashed assets
 │   ├── favicon.svg
+│   ├── favicon-16.png
+│   ├── favicon-32.png
+│   ├── apple-touch-icon.png
 │   └── robots.txt
 ├── astro.config.mjs
 ├── wrangler.jsonc
@@ -199,6 +211,12 @@ setup exists to avoid. If a page needs a new piece of text, add a field to the J
 The closing band on every page is one component, `CallToAction.astro`, reading that page's `cta`
 object. It takes a `tone` of `dark` or `light`; interior pages use `light` so they don't open and
 close on the same green.
+
+**Sections hide when their data is empty.** The figures row, home testimonials, Selected Projects,
+the Mineral Owners FAQ, the Team page and Insights all render nothing at all when their list is
+empty, rather than leaving a heading over a gap. Insights goes further and drops out of the nav,
+the footer and the sitemap until a post exists. Keep that behaviour when adding anything similar,
+because it is what lets the owner switch a section off without asking for a code change.
 
 ---
 

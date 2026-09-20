@@ -21,6 +21,28 @@ const sorted = [...people].sort(
   (a, b) => (a.data.sort_order ?? 0) - (b.data.sort_order ?? 0)
 );
 
+// One Person entry per landman, each carrying the CPL credential the bios claim.
+const schema = {
+  '@context': 'https://schema.org',
+  '@graph': sorted.map((person) => ({
+    '@type': 'Person',
+    name: person.data.name,
+    ...(person.data.role ? { jobTitle: person.data.role } : {}),
+    hasCredential: {
+      '@type': 'EducationalOccupationalCredential',
+      credentialCategory: 'professional certification',
+      name: 'Certified Professional Landman (CPL)',
+      recognizedBy: {
+        '@type': 'Organization',
+        name: 'American Association of Professional Landmen',
+      },
+    },
+    worksFor: { '@type': 'Organization', name: settings.professional_name },
+    ...(person.data.photo ? { image: new URL(person.data.photo, Astro.site).toString() } : {}),
+    ...(person.data.linkedin_url ? { sameAs: [person.data.linkedin_url] } : {}),
+  })),
+};
+
 const rendered = await Promise.all(
   sorted.map(async (person) => {
     const { Content }        = await render(person);
@@ -31,8 +53,9 @@ const rendered = await Promise.all(
 ---
 
 <Base
-  title={`Team — ${settings.professional_name}`}
+  title={page.page_title}
   description={page.meta_description}
+  schema={schema}
 >
   <div class="page-header">
     <div class="container">
@@ -49,9 +72,12 @@ const rendered = await Promise.all(
             {person.data.photo
               ? <img
                   src={person.data.photo}
-                  alt={`${person.data.name} — professional photo`}
+                  alt={`${person.data.name}, professional photo`}
                   class="person-photo"
+                  width="800"
+                  height="800"
                   loading="lazy"
+                  decoding="async"
                 />
               : <div class="person-photo-placeholder" aria-hidden="true">👤</div>
             }
@@ -60,6 +86,18 @@ const rendered = await Promise.all(
               <h2 class="person-name">{person.data.name}</h2>
               {person.data.role && (
                 <p class="person-role">{person.data.role}</p>
+              )}
+
+              {person.data.linkedin_url && (
+                <p class="person-linkedin">
+                  <a
+                    href={person.data.linkedin_url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    {person.data.name} on LinkedIn
+                  </a>
+                </p>
               )}
 
               <div class="person-bio">

@@ -1,0 +1,97 @@
+---
+import Base from '../layouts/Base.astro';
+import CallToAction from '../components/CallToAction.astro';
+import { renderMarkdown } from '../utils/markdown';
+import page from '../data/pages/mineral-owners.json';
+import settings from '../data/settings.json';
+
+const introHtml = await renderMarkdown(page.intro);
+
+const faq = (page.faq || []).filter((f) => f.question && f.answer);
+
+// FAQPage markup is only valid with at least one entry, so it is built here and passed to
+// the layout rather than emitted unconditionally.
+const faqSchema = faq.length > 0
+  ? {
+      '@context': 'https://schema.org',
+      '@type': 'FAQPage',
+      mainEntity: faq.map((f) => ({
+        '@type': 'Question',
+        name: f.question,
+        acceptedAnswer: { '@type': 'Answer', text: f.answer },
+      })),
+    }
+  : undefined;
+---
+
+<Base
+  title={page.page_title}
+  description={page.meta_description}
+  schema={faqSchema}
+>
+  <div class="page-header">
+    <div class="container">
+      <h1>Mineral Owners</h1>
+      <p>{page.page_subtitle}</p>
+    </div>
+  </div>
+
+  <section>
+    <div class="container container-narrow">
+      <div class="prose owner-intro" set:html={introHtml} />
+    </div>
+  </section>
+
+  {page.services?.length > 0 && (
+    <section class="section-alt">
+      <div class="container">
+        <div class="section-header">
+          <span class="section-label">{page.services_label}</span>
+          <h2>{page.services_headline}</h2>
+        </div>
+        <ul class="owner-services" role="list">
+          {page.services.map((s) => (
+            <li class="owner-service">
+              <h3>{s.title}</h3>
+              <p>{s.description}</p>
+            </li>
+          ))}
+        </ul>
+      </div>
+    </section>
+  )}
+
+  {faq.length > 0 && (
+    <section>
+      <div class="container container-narrow">
+        <div class="section-header">
+          <span class="section-label">{page.faq_label}</span>
+          <h2>{page.faq_headline}</h2>
+        </div>
+        <dl class="owner-faq">
+          {faq.map((f) => (
+            <div class="owner-faq-item">
+              <dt>{f.question}</dt>
+              <dd>{f.answer}</dd>
+            </div>
+          ))}
+        </dl>
+      </div>
+    </section>
+  )}
+
+  {page.disclaimer && (
+    <section class="owner-disclaimer-band">
+      <div class="container container-narrow">
+        <p class="owner-disclaimer">{page.disclaimer}</p>
+      </div>
+    </section>
+  )}
+
+  <CallToAction
+    headline={page.cta.headline}
+    text={page.cta.text}
+    button={page.cta.button}
+    tone="light"
+  />
+</Base>

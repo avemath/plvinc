@@ -1,5 +1,13 @@
+import fs from 'node:fs';
+
 import { defineConfig } from 'astro/config';
 import sitemap from '@astrojs/sitemap';
+
+// While the insights folder is empty the index redirects home, so it should not be
+// advertised in the sitemap. Writing the first post brings it back automatically.
+const hasInsights = fs
+  .readdirSync(new URL('./src/content/insights', import.meta.url))
+  .some((f) => f.endsWith('.md'));
 
 export default defineConfig({
   output: 'static',
@@ -12,7 +20,9 @@ export default defineConfig({
   build: { format: 'file' },
   integrations: [
     sitemap({
-      filter: (page) => !page.includes('/studio'),
+      filter: (page) =>
+        !page.includes('/studio') &&
+        (hasInsights || !page.includes('/insights')),
     }),
   ],
 });
