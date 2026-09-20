@@ -1,6 +1,8 @@
 ---
 title: "Lease Acquisition & Negotiation"
 card_description: "Leasehold acquisition from initial prospect identification through executed lease — including landowner contact, negotiation, bonus and royalty calculation, and title verification."
+seo_title: "Oil & Gas Lease Acquisition | Gulf Coast Landmen"
+seo_description: "Leasehold acquisition from prospect to executed lease: landowner contact, negotiation, bonus and royalty calculation, and title verification."
 icon: "pen"
 sort_order: 2
 ---

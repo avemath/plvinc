@@ -3,10 +3,15 @@ import Base from '../layouts/Base.astro';
 import ContactForm from '../components/ContactForm.astro';
 import contact from '../data/pages/contact.json';
 import settings from '../data/settings.json';
+
+// Both halves or neither, so the page never shows a lone state or a stray comma.
+const location = settings.city && settings.state
+  ? `${settings.city}, ${settings.state}`
+  : '';
 ---
 
 <Base
-  title={`Contact — ${settings.professional_name}`}
+  title={contact.page_title}
   description={contact.meta_description}
 >
   <div class="page-header">
@@ -45,6 +50,27 @@ import settings from '../data/settings.json';
                   class="contact-detail-value"
                 >
                   {contact.email}
+                </a>
+              </div>
+            )}
+
+            {location && (
+              <div>
+                <span class="contact-detail-label">Based In</span>
+                <address class="contact-detail-value contact-address">{location}</address>
+              </div>
+            )}
+
+            {settings.linkedin_url && (
+              <div>
+                <span class="contact-detail-label">LinkedIn</span>
+                <a
+                  href={settings.linkedin_url}
+                  class="contact-detail-value"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  {settings.professional_name} on LinkedIn
                 </a>
               </div>
             )}

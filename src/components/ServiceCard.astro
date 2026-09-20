@@ -17,9 +17,10 @@ const { title, card_description, icon, slug } = Astro.props;
       <ServiceIcon name={icon} size={36} />
     </div>
   )}
-  <h3>{title}</h3>
+  <h2>{title}</h2>
   <p class="service-card-desc">{card_description}</p>
   <a href={`/services/${slug}`} class="service-card-link">
-    Learn more <span aria-hidden="true">→</span>
+    Learn more<span class="sr-only"> about {title}</span>
+    <span aria-hidden="true">→</span>
   </a>
 </article>

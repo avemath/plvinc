@@ -18,8 +18,8 @@ const { title, icon } = entry.data;
 ---
 
 <Base
-  title={`${title} — ${settings.professional_name}`}
-  description={entry.data.card_description}
+  title={entry.data.seo_title || `${title} — ${settings.professional_name}`}
+  description={entry.data.seo_description || entry.data.card_description}
 >
   <!-- Header -->
   <div class="service-detail-header">

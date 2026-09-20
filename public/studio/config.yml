@@ -356,6 +356,11 @@ collections:
             widget: text
             hint: "The line under the page title in the green band at the top of the About page."
 
+          - label: "Page Title"
+            name: page_title
+            widget: string
+            hint: "The browser tab title and the blue headline in Google results. Keep it under about 60 characters."
+
           - label: "Search Description"
             name: meta_description
             widget: text
@@ -439,6 +444,11 @@ collections:
             name: page_subtitle
             widget: text
             hint: "The line under the page title in the green band at the top of the Experience page."
+
+          - label: "Page Title"
+            name: page_title
+            widget: string
+            hint: "The browser tab title and the blue headline in Google results. Keep it under about 60 characters."
 
           - label: "Search Description"
             name: meta_description
@@ -579,6 +589,11 @@ collections:
         file: src/data/pages/contact.json
         format: json
         fields:
+          - label: "Page Title"
+            name: page_title
+            widget: string
+            hint: "The browser tab title and the blue headline in Google results. Keep it under about 60 characters."
+
           - label: "Search Description"
             name: meta_description
             widget: text
@@ -680,6 +695,11 @@ collections:
             widget: text
             hint: "The line under the page title in the green band at the top."
 
+          - label: "Page Title"
+            name: page_title
+            widget: string
+            hint: "The browser tab title and the blue headline in Google results. Keep it under about 60 characters."
+
           - label: "Search Description"
             name: meta_description
             widget: text
@@ -764,6 +784,11 @@ collections:
             widget: text
             hint: "The line under the title on the Insights index. Only visible once you have written a post."
 
+          - label: "Page Title"
+            name: page_title
+            widget: string
+            hint: "The browser tab title and the blue headline in Google results. Keep it under about 60 characters."
+
           - label: "Search Description"
             name: meta_description
             widget: text
@@ -793,6 +818,11 @@ collections:
             name: page_subtitle
             widget: text
             hint: "The line under the page title in the green band at the top of the Services page."
+
+          - label: "Page Title"
+            name: page_title
+            widget: string
+            hint: "The browser tab title and the blue headline in Google results. Keep it under about 60 characters."
 
           - label: "Search Description"
             name: meta_description
@@ -824,6 +854,11 @@ collections:
             name: page_subtitle
             widget: text
             hint: "The line under the page title in the green band at the top of the Team page."
+
+          - label: "Page Title"
+            name: page_title
+            widget: string
+            hint: "The browser tab title and the blue headline in Google results. Keep it under about 60 characters."
 
           - label: "Search Description"
             name: meta_description
@@ -870,6 +905,18 @@ collections:
         widget: string
         hint: "Short description shown on the Services overview page — 1 to 2 sentences, ideally under 160 characters."
 
+      - label: "Page Title (search)"
+        name: seo_title
+        widget: string
+        required: false
+        hint: "The browser tab title and the headline in Google results for this service. Under about 60 characters. Leave blank to use the service title."
+
+      - label: "Search Description"
+        name: seo_description
+        widget: text
+        required: false
+        hint: "The sentence under this service in Google results. Under about 160 characters. Leave blank to use the card description."
+
       - label: "Full Description"
         name: body
         widget: markdown
@@ -913,6 +960,12 @@ collections:
         widget: string
         required: false
         hint: "Optional professional title (e.g., Senior Landman, Project Manager). Leave blank to omit."
+
+      - label: "LinkedIn URL"
+        name: linkedin_url
+        widget: string
+        required: false
+        hint: "The full web address of this person's LinkedIn profile. Leave blank to hide the link."
 
       - label: "Photo"
         name: photo

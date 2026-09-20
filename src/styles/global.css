@@ -1661,3 +1661,14 @@ a.contact-detail-value:hover { color: var(--green-dark); }
   .insight-link  { flex-direction: column; gap: .9rem; }
   .insight-thumb { width: 100%; }
 }
+
+.person-linkedin {
+  margin: -.5rem 0 1rem;
+  font-size: .875rem;
+}
+.person-linkedin a {
+  color: var(--green-mid);
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+.person-linkedin a:hover { color: var(--green-dark); }
