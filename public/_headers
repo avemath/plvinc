@@ -1,0 +1,18 @@
+# Cloudflare Pages reads this file and applies these headers to matching responses.
+#
+# HTML is deliberately not cached here. Saving in /studio rebuilds the site, and the
+# owner expects the change to be live in a minute or two; caching pages at the edge
+# would break that expectation for the sake of very little.
+
+# Astro fingerprints these filenames, so the content behind a given URL never changes.
+/_astro/*
+  Cache-Control: public, max-age=31536000, immutable
+
+# Font filenames carry the upstream hash and are replaced rather than edited.
+/fonts/*
+  Cache-Control: public, max-age=31536000, immutable
+
+# Uploads can be overwritten under the same name from the CMS, so these get a week
+# rather than a year, and revalidate after that.
+/images/*
+  Cache-Control: public, max-age=604800, must-revalidate
