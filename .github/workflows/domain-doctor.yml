@@ -17,6 +17,10 @@ on:
         description: "Release plvinc.com / www from the leftover plvinc Worker and hand them to Pages."
         type: boolean
         default: false
+      delete_stale_worker:
+        description: "Delete the leftover plvinc Worker script. One-time cleanup."
+        type: boolean
+        default: false
 
 jobs:
   doctor:
@@ -137,6 +141,38 @@ jobs:
           echo "### Worker Custom Domains remaining (sveltia-cms-auth must survive)"
           curl -sS "$CF_API/accounts/$ACCOUNT/workers/domains" -H "Authorization: Bearer $TOKEN" \
           | jq '[.result[]? | {hostname, service}]'
+
+      # The Worker still has workers.dev enabled, so the stale June build stays publicly
+      # reachable until the script itself is removed. It is a different object from the Pages
+      # project despite sharing the name: the Worker was created 2026-06-05, the Pages project
+      # 2026-06-08. Both guards below must pass before anything is deleted.
+      - name: Delete the leftover plvinc Worker script
+        if: inputs.delete_stale_worker
+        run: |
+          DOMS=$(curl -sS "$CF_API/accounts/$ACCOUNT/workers/domains" -H "Authorization: Bearer $TOKEN")
+          echo "$DOMS" | jq -e '.success' >/dev/null || { echo "Cannot list Worker Custom Domains."; exit 1; }
+          BOUND=$(echo "$DOMS" | jq '[.result[]? | select(.service=="plvinc")] | length')
+          [ "$BOUND" = "0" ] \
+            || { echo "Refusing: the Worker still holds $BOUND hostname(s). Run cutover first."; exit 1; }
+
+          P=$(curl -sS "$CF_API/accounts/$ACCOUNT/pages/projects/$PROJECT" -H "Authorization: Bearer $TOKEN")
+          echo "$P" | jq -e '.success and (.result.name == "plvinc")' >/dev/null \
+            || { echo "Refusing: cannot confirm the Pages project is healthy."; exit 1; }
+          echo "Pages project intact, serving: $(echo "$P" | jq -c '.result.domains')"
+
+          printf 'Deleting Worker script plvinc ... '
+          CODE=$(curl -sS -o /tmp/w.json -w '%{http_code}' -X DELETE \
+            "$CF_API/accounts/$ACCOUNT/workers/scripts/plvinc" -H "Authorization: Bearer $TOKEN")
+          echo "HTTP $CODE"
+          [ -s /tmp/w.json ] && jq '{errors:[.errors[]?.message]}' /tmp/w.json 2>/dev/null || true
+          case "$CODE" in 2*) ;; *) echo "FAILED"; exit 1;; esac
+
+          echo "### Remaining Worker scripts — sveltia-cms-auth must still be here:"
+          curl -sS "$CF_API/accounts/$ACCOUNT/workers/scripts" -H "Authorization: Bearer $TOKEN" \
+            | jq -c '[.result[]?.id]'
+          echo "### Pages project after deletion:"
+          curl -sS "$CF_API/accounts/$ACCOUNT/pages/projects/$PROJECT" -H "Authorization: Bearer $TOKEN" \
+            | jq '{ok:.success, name:.result.name, domains:.result.domains}'
 
       # Tolerated: the token may not carry Zone:Cache Purge, and a failed purge should not
       # mask a successful cutover.
