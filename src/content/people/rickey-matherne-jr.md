@@ -1,7 +1,7 @@
 ---
 name: "Rickey Matherne, Jr., CPL"
 role: "Certified Professional Landman"
-photo: ""
+photo: "/images/uploads/rickey-matherne-jr.jpg"
 sort_order: 1
 experience_details: ""
 ---

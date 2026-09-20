@@ -9,9 +9,13 @@ interface Props {
 
 const { title, description, image, siteName, noindex = false } = Astro.props;
 
-const canonicalURL = new URL(Astro.url.pathname, Astro.site ?? 'https://example.com');
+// Fallback only matters if `site` is ever dropped from astro.config.mjs. Point it at the real
+// domain so a misconfiguration produces wrong-but-harmless URLs rather than example.com ones.
+const SITE_FALLBACK = 'https://plvinc.com';
+
+const canonicalURL = new URL(Astro.url.pathname, Astro.site ?? SITE_FALLBACK);
 const ogImage = image
-  ? (image.startsWith('http') ? image : new URL(image, Astro.site ?? 'https://example.com').toString())
+  ? (image.startsWith('http') ? image : new URL(image, Astro.site ?? SITE_FALLBACK).toString())
   : '';
 ---
 
