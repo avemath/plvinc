@@ -1,0 +1,67 @@
+{
+  "page_subtitle": "Plain answers about what you own and what you have been offered.",
+  "meta_description": "Help for mineral owners and landowners: ownership reports, heirship research, lease and right-of-way offer review, and division order questions.",
+  "intro": "If someone has approached you about leasing your minerals, crossing your land, or signing a division order, you do not have to work out what it means on your own.\n\nWe are Certified Professional Landmen. We read the public record for a living. We can tell you what the record shows about your ownership, what a document in front of you actually says, and, just as importantly, what the record does not settle.",
+  "services_label": "How We Help",
+  "services_headline": "What You Can Bring to Us",
+  "services": [
+    {
+      "title": "Mineral ownership reports",
+      "description": "A written report of what the public record shows you own, how that interest came to you, and where the chain of title is unclear or incomplete."
+    },
+    {
+      "title": "Heirship and succession research",
+      "description": "Tracing an interest through estates, probate and heirship when a relative's ownership was never formally passed down on paper."
+    },
+    {
+      "title": "Lease offer review",
+      "description": "Checking an offer against the record: whether the tract described is the tract you own, whether the interest stated matches what the record shows, and which terms are worth asking about."
+    },
+    {
+      "title": "Division order and royalty questions",
+      "description": "Working out why a decimal is what it is, and checking it against the record before you sign and return the document."
+    },
+    {
+      "title": "Right-of-way and surface use offers",
+      "description": "Reading what is being asked for across your surface and what the document would actually grant, which is not always the same thing."
+    },
+    {
+      "title": "Solar and renewable lease offers",
+      "description": "Reviewing solar and wind land offers, which usually run far longer than an oil and gas lease and cover more of your surface."
+    }
+  ],
+  "faq_label": "Common Questions",
+  "faq_headline": "Questions We Are Asked Often",
+  "faq": [
+    {
+      "question": "What does a landman actually do?",
+      "answer": "A landman researches ownership in the public record. That means reading deeds, leases, probate files and court records at the courthouse to work out who owns what, and reporting it in a form you can act on."
+    },
+    {
+      "question": "I inherited minerals and I am not sure what I own. Can you find out?",
+      "answer": "Usually, yes. This is ordinary work for us. We trace the interest back through the record and report what it shows, including any gaps where an estate was never settled or a transfer was never filed."
+    },
+    {
+      "question": "Can you tell me whether the offer I received is a fair price?",
+      "answer": "We can tell you what the record supports, whether the described tract and interest are correct, and which terms carry the most weight. We do not appraise mineral value or advise you on whether to sign."
+    },
+    {
+      "question": "How long does this take?",
+      "answer": "It depends on the county, how far back the chain has to be run, and how much of the record has been indexed. We will give you a realistic estimate before starting rather than after."
+    },
+    {
+      "question": "What will it cost?",
+      "answer": "Fees depend on the scope of the research and the number of tracts involved. Tell us what you have and we will quote the work before we begin."
+    },
+    {
+      "question": "What do you need from me to get started?",
+      "answer": "Whatever paperwork you already have. A copy of the offer or division order, any deed or probate documents, and the county and state where the property sits is usually enough for a first conversation."
+    }
+  ],
+  "disclaimer": "We are not attorneys and we do not give legal advice. Our work is research and reporting on what the public record shows. Many owners bring their own attorney in for the legal questions, and we are used to working alongside one.",
+  "cta": {
+    "headline": "Not Sure Where to Start?",
+    "text": "Send us what you have received and the county it relates to. We will tell you what we can find out.",
+    "button": "Ask a Question"
+  }
+}

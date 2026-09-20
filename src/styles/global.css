@@ -1467,3 +1467,64 @@ a.contact-detail-value:hover { color: var(--green-dark); }
   .region-tabs { gap: .4rem; }
   .region-tab  { font-size: .78rem; padding: .45rem .8rem; }
 }
+
+/* ============================================================
+   Mineral owners page
+   ============================================================ */
+.owner-intro p:last-child { margin-bottom: 0; }
+
+.owner-services {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 1.5rem;
+}
+
+.owner-service {
+  background: var(--white);
+  border: 1px solid var(--border);
+  border-top: 3px solid var(--green-mid);
+  border-radius: var(--radius-lg);
+  padding: 1.6rem;
+}
+
+.owner-service h3 { margin-bottom: .45rem; color: var(--green-dark); }
+.owner-service p  { margin: 0; color: var(--text-muted); font-size: .95rem; }
+
+.owner-faq { margin: 0; }
+
+.owner-faq-item {
+  padding: 1.4rem 0;
+  border-bottom: 1px solid var(--border);
+}
+.owner-faq-item:first-child { border-top: 1px solid var(--border); }
+
+.owner-faq dt {
+  font-family: var(--font-heading);
+  font-weight: 600;
+  font-size: 1.05rem;
+  color: var(--green-dark);
+  margin-bottom: .45rem;
+}
+
+.owner-faq dd {
+  margin: 0;
+  color: var(--text-muted);
+}
+
+/* Set apart from the advice above it, because it qualifies all of it. */
+.owner-disclaimer-band {
+  padding: 0 0 4rem;
+}
+
+.owner-disclaimer {
+  margin: 0;
+  padding: 1.25rem 1.5rem;
+  background: var(--green-pale);
+  border-left: 3px solid var(--green-mid);
+  border-radius: var(--radius);
+  font-size: .95rem;
+  color: var(--text-muted);
+}

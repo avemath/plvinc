@@ -598,6 +598,90 @@ collections:
                 name: label
                 widget: string
 
+      - name: mineral_owners
+        label: "Mineral Owners Page"
+        file: src/data/pages/mineral-owners.json
+        format: json
+        fields:
+          - label: "Page Subtitle"
+            name: page_subtitle
+            widget: text
+            hint: "The line under the page title in the green band at the top."
+
+          - label: "Search Description"
+            name: meta_description
+            widget: text
+            hint: "The sentence shown under this page's title in Google results. Around 155 characters."
+
+          - label: "Introduction"
+            name: intro
+            widget: markdown
+            hint: "The opening paragraphs. Write for someone who has never dealt with a landman before."
+
+          - label: "Services Section Label"
+            name: services_label
+            widget: string
+
+          - label: "Services Section Headline"
+            name: services_headline
+            widget: string
+
+          - label: "What You Can Bring to Us"
+            name: services
+            widget: list
+            summary: "{{title}}"
+            hint: "Each entry becomes a card. Empty this list to hide the whole section."
+            fields:
+              - label: "Title"
+                name: title
+                widget: string
+              - label: "Description"
+                name: description
+                widget: text
+
+          - label: "FAQ Section Label"
+            name: faq_label
+            widget: string
+
+          - label: "FAQ Section Headline"
+            name: faq_headline
+            widget: string
+
+          - label: "Questions and Answers"
+            name: faq
+            widget: list
+            summary: "{{question}}"
+            hint: "These also tell Google what this page answers, so write the question the way someone would actually ask it. Empty this list to hide the section."
+            fields:
+              - label: "Question"
+                name: question
+                widget: string
+              - label: "Answer"
+                name: answer
+                widget: text
+
+          - label: "Legal Note"
+            name: disclaimer
+            widget: text
+            required: false
+            hint: "The note at the bottom about not giving legal advice. Leave blank to hide it."
+
+          - label: "Closing Call to Action"
+            name: cta
+            widget: object
+            hint: "The band at the bottom of this page."
+            fields:
+              - label: "Headline"
+                name: headline
+                widget: string
+              - label: "Text"
+                name: text
+                widget: text
+                required: false
+              - label: "Button Text"
+                name: button
+                widget: string
+
       - name: services_page
         label: "Services Page"
         file: src/data/pages/services.json
