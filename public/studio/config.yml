@@ -543,6 +543,61 @@ collections:
             required: false
             hint: "Optional mailing address. Leave blank to omit from the page."
 
+          - label: "Form Headline"
+            name: form_headline
+            widget: string
+            hint: "The heading above the contact form."
+
+          - label: "Form Intro"
+            name: form_intro
+            widget: text
+            required: false
+            hint: "A short line under the form heading. Leave blank to hide it."
+
+          - label: "Form Field Labels"
+            name: form_labels
+            widget: object
+            hint: "The wording shown beside each box on the form. Changing these does not change what the form collects."
+            fields:
+              - label: "Phone field"
+                name: phone
+                widget: string
+              - label: "I am a field"
+                name: inquirer_type
+                widget: string
+              - label: "State field"
+                name: state
+                widget: string
+              - label: "County field"
+                name: county
+                widget: string
+              - label: "Service field"
+                name: service
+                widget: string
+              - label: "Timeline field"
+                name: timeline
+                widget: string
+
+          - label: "\"I am a\" Options"
+            name: inquirer_types
+            widget: list
+            summary: "{{label}}"
+            hint: "The choices in the \"I am a\" dropdown. Add, remove or reorder them. Empty this list to remove the question from the form."
+            fields:
+              - label: "Option"
+                name: label
+                widget: string
+
+          - label: "Timeline Options"
+            name: timelines
+            widget: list
+            summary: "{{label}}"
+            hint: "The choices in the Timeline dropdown. Empty this list to remove the question from the form."
+            fields:
+              - label: "Option"
+                name: label
+                widget: string
+
       - name: services_page
         label: "Services Page"
         file: src/data/pages/services.json

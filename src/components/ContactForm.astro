@@ -1,5 +1,8 @@
 ---
+import { getCollection } from 'astro:content';
 import settings from '../data/settings.json';
+import contact from '../data/pages/contact.json';
+import states from '../data/us-states.json';
 
 interface Props {
   recipientEmail?: string;
@@ -7,10 +10,33 @@ interface Props {
 
 const { recipientEmail } = Astro.props;
 const email = recipientEmail || settings.email || '';
+
+// Web3Forms uses each field's name attribute as the label in the email it sends, so the
+// new fields are named in plain words rather than in code style. `name`, `email` and
+// `message` keep their original names because Web3Forms treats those specially.
+const labels = contact.form_labels;
+const inquirerTypes = (contact.inquirer_types || []).map((t) => t.label).filter(Boolean);
+const timelines = (contact.timelines || []).map((t) => t.label).filter(Boolean);
+
+// The service list comes from the services collection so the form can never offer
+// something the site does not describe, or miss one that was added.
+let serviceNames: string[] = [];
+try {
+  const services = await getCollection('services');
+  serviceNames = [...services]
+    .sort((a, b) => a.data.sort_order - b.data.sort_order)
+    .map((s) => s.data.title);
+} catch {
+  serviceNames = [];
+}
+
+// The map data covers the contiguous states, which is the same footprint the site claims.
+const stateNames = (states as { name: string }[]).map((s) => s.name);
 ---
 
 <div class="contact-form-block">
-  <h2>Drop us a line!</h2>
+  <h2>{contact.form_headline}</h2>
+  {contact.form_intro && <p class="form-intro">{contact.form_intro}</p>}
 
   <form
     id="contact-form"
@@ -45,21 +71,114 @@ const email = recipientEmail || settings.email || '';
       <p class="field-error" id="contact-name-error" hidden></p>
     </div>
 
-    <div class="form-group">
-      <label for="contact-email">
-        Email <span class="required-mark" aria-hidden="true">*</span>
-      </label>
-      <input
-        type="email"
-        id="contact-email"
-        name="email"
-        placeholder="your@email.com"
-        required
-        autocomplete="email"
-        aria-describedby="contact-email-error"
-      />
-      <p class="field-error" id="contact-email-error" hidden></p>
+    <div class="form-row">
+      <div class="form-group">
+        <label for="contact-email">
+          Email <span class="required-mark" aria-hidden="true">*</span>
+        </label>
+        <input
+          type="email"
+          id="contact-email"
+          name="email"
+          placeholder="your@email.com"
+          required
+          autocomplete="email"
+          aria-describedby="contact-email-error"
+        />
+        <p class="field-error" id="contact-email-error" hidden></p>
+      </div>
+
+      <div class="form-group">
+        <label for="contact-phone">{labels.phone}</label>
+        <input
+          type="tel"
+          id="contact-phone"
+          name="Phone"
+          placeholder="(555) 555-5555"
+          autocomplete="tel"
+        />
+      </div>
     </div>
+
+    {inquirerTypes.length > 0 && (
+      <div class="form-group">
+        <label for="contact-role">
+          {labels.inquirer_type} <span class="required-mark" aria-hidden="true">*</span>
+        </label>
+        <select
+          id="contact-role"
+          name="I am a"
+          required
+          aria-describedby="contact-role-error"
+        >
+          <option value="">Please choose</option>
+          {inquirerTypes.map((t) => <option value={t}>{t}</option>)}
+        </select>
+        <p class="field-error" id="contact-role-error" hidden></p>
+      </div>
+    )}
+
+    <div class="form-row">
+      <div class="form-group">
+        <label for="contact-state">
+          {labels.state} <span class="required-mark" aria-hidden="true">*</span>
+        </label>
+        <select
+          id="contact-state"
+          name="State"
+          required
+          aria-describedby="contact-state-error"
+        >
+          <option value="">Please choose</option>
+          {stateNames.map((s) => <option value={s}>{s}</option>)}
+        </select>
+        <p class="field-error" id="contact-state-error" hidden></p>
+      </div>
+
+      <div class="form-group">
+        <label for="contact-county">
+          {labels.county} <span class="required-mark" aria-hidden="true">*</span>
+        </label>
+        <input
+          type="text"
+          id="contact-county"
+          name="County or parish"
+          placeholder="Where the tract sits"
+          required
+          aria-describedby="contact-county-error"
+        />
+        <p class="field-error" id="contact-county-error" hidden></p>
+      </div>
+    </div>
+
+    {serviceNames.length > 0 && (
+      <div class="form-group">
+        <label for="contact-service">
+          {labels.service} <span class="required-mark" aria-hidden="true">*</span>
+        </label>
+        <select
+          id="contact-service"
+          name="Service needed"
+          required
+          aria-describedby="contact-service-error"
+        >
+          <option value="">Please choose</option>
+          {serviceNames.map((s) => <option value={s}>{s}</option>)}
+          <option value="Not sure yet">Not sure yet</option>
+        </select>
+        <p class="field-error" id="contact-service-error" hidden></p>
+      </div>
+    )}
+
+    {timelines.length > 0 && (
+      <div class="form-group">
+        <label for="contact-timeline">{labels.timeline}</label>
+        <select id="contact-timeline" name="Timeline">
+          <option value="">Please choose</option>
+          {timelines.map((t) => <option value={t}>{t}</option>)}
+        </select>
+      </div>
+    )}
 
     <div class="form-group">
       <label for="contact-message">
@@ -114,11 +233,12 @@ const email = recipientEmail || settings.email || '';
   // Simple, permissive shape check: something@something.tld, no spaces.
   const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
 
+  const required = (message: string) => (v: string) => (v ? null : message);
+
+  // Only fields actually rendered are checked, so a list emptied in the CMS cannot
+  // leave the form permanently invalid.
   const CHECKS: FieldCheck[] = [
-    {
-      id: 'contact-name',
-      validate: (v) => (v ? null : 'Please enter your name.'),
-    },
+    { id: 'contact-name',    validate: required('Please enter your name.') },
     {
       id: 'contact-email',
       validate: (v) => {
@@ -126,16 +246,18 @@ const email = recipientEmail || settings.email || '';
         return EMAIL_RE.test(v) ? null : 'Please enter a valid email address.';
       },
     },
-    {
-      id: 'contact-message',
-      validate: (v) => (v ? null : 'Please enter a message.'),
-    },
-  ];
+    { id: 'contact-role',    validate: required('Please choose the option that fits you best.') },
+    { id: 'contact-state',   validate: required('Please choose a state.') },
+    { id: 'contact-county',  validate: required('Please enter the county or parish.') },
+    { id: 'contact-service', validate: required('Please choose a service.') },
+    { id: 'contact-message', validate: required('Please enter a message.') },
+  ].filter((c) => document.getElementById(c.id));
 
   function setFieldError(id: string, message: string | null) {
     const field = document.getElementById(id) as
       | HTMLInputElement
       | HTMLTextAreaElement
+      | HTMLSelectElement
       | null;
     const slot = document.getElementById(`${id}-error`);
     if (!field || !slot) return;
@@ -155,6 +277,7 @@ const email = recipientEmail || settings.email || '';
     const field = document.getElementById(check.id) as
       | HTMLInputElement
       | HTMLTextAreaElement
+      | HTMLSelectElement
       | null;
     if (!field) return true;
 
@@ -167,6 +290,9 @@ const email = recipientEmail || settings.email || '';
   for (const check of CHECKS) {
     const field = document.getElementById(check.id);
     field?.addEventListener('input', () => {
+      if (field.getAttribute('aria-invalid') === 'true') validateField(check);
+    });
+    field?.addEventListener('change', () => {
       if (field.getAttribute('aria-invalid') === 'true') validateField(check);
     });
     field?.addEventListener('blur', () => {

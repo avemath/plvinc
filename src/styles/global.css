@@ -1011,6 +1011,7 @@ a.contact-detail-value:hover { color: var(--green-dark); }
 .required-mark { color: var(--green-dark); margin-left: .1em; }
 
 .form-group input,
+.form-group select,
 .form-group textarea {
   padding: .75rem 1rem;
   border: 1px solid var(--border);
@@ -1025,6 +1026,7 @@ a.contact-detail-value:hover { color: var(--green-dark); }
 }
 
 .form-group input:focus,
+.form-group select:focus,
 .form-group textarea:focus {
   outline: none;
   border-color: var(--green-mid);
@@ -1032,6 +1034,33 @@ a.contact-detail-value:hover { color: var(--green-dark); }
 }
 
 .form-group textarea { resize: vertical; min-height: 140px; }
+
+/* appearance:none above strips the native arrow, so draw one back in. */
+.form-group select {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 12 8'%3E%3Cpath fill='none' stroke='%235C5C5C' stroke-width='1.6' d='M1 1.5 6 6.5l5-5'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 1rem center;
+  background-size: 12px 8px;
+  padding-right: 2.5rem;
+  cursor: pointer;
+}
+
+/* Two short fields share a row on wider screens and stack on phones. */
+.form-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.2rem;
+}
+
+.form-intro {
+  font-size: .925rem;
+  color: var(--text-muted);
+  margin: -.4rem 0 1.4rem;
+}
+
+@media (max-width: 560px) {
+  .form-row { grid-template-columns: 1fr; }
+}
 
 .form-success,
 .form-error {

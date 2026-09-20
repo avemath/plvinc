@@ -5,5 +5,49 @@
   "service_area_note": "Primary working area is the Gulf Coast, with active projects in the Permian, Appalachian, Michigan, and Pacific Northwest regions. Available for engagements nationwide.",
   "mailing_address": "",
   "meta_description": "Get in touch to discuss your land project — title research, lease acquisition, due diligence, right-of-way, or renewable energy land work.",
-  "details_headline": "Reach Out Directly"
+  "details_headline": "Reach Out Directly",
+  "form_headline": "Drop us a line!",
+  "form_intro": "The more you can tell us about the tract and the timing, the more useful our first reply will be.",
+  "form_labels": {
+    "phone": "Phone (optional)",
+    "inquirer_type": "I am a",
+    "state": "State",
+    "county": "County or parish",
+    "service": "Service needed",
+    "timeline": "Timeline (optional)"
+  },
+  "inquirer_types": [
+    {
+      "label": "Operator or producer"
+    },
+    {
+      "label": "Mineral or royalty owner"
+    },
+    {
+      "label": "Landowner"
+    },
+    {
+      "label": "Attorney or lender"
+    },
+    {
+      "label": "Other"
+    }
+  ],
+  "timelines": [
+    {
+      "label": "As soon as possible"
+    },
+    {
+      "label": "Within 30 days"
+    },
+    {
+      "label": "One to three months"
+    },
+    {
+      "label": "More than three months"
+    },
+    {
+      "label": "Not sure yet"
+    }
+  ]
 }
