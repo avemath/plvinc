@@ -22,4 +22,16 @@ const people = defineCollection({
   }),
 });
 
-export const collections = { services, people };
+// Dormant by design. With no files in the folder the index redirects, no detail pages are
+// generated, and the nav link is not rendered, exactly as the people collection behaves.
+const insights = defineCollection({
+  loader: glob({ pattern: '**/*.md', base: './src/content/insights' }),
+  schema: z.object({
+    title: z.string(),
+    date: z.coerce.date(),
+    summary: z.string(),
+    image: z.string().optional(),
+  }),
+});
+
+export const collections = { services, people, insights };

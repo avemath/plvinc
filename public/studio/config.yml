@@ -754,6 +754,36 @@ collections:
                 name: button
                 widget: string
 
+      - name: insights_page
+        label: "Insights Page"
+        file: src/data/pages/insights.json
+        format: json
+        fields:
+          - label: "Page Subtitle"
+            name: page_subtitle
+            widget: text
+            hint: "The line under the title on the Insights index. Only visible once you have written a post."
+
+          - label: "Search Description"
+            name: meta_description
+            widget: text
+
+          - label: "Closing Call to Action"
+            name: cta
+            widget: object
+            hint: "The band at the bottom of each individual post."
+            fields:
+              - label: "Headline"
+                name: headline
+                widget: string
+              - label: "Text"
+                name: text
+                widget: text
+                required: false
+              - label: "Button Text"
+                name: button
+                widget: string
+
       - name: services_page
         label: "Services Page"
         file: src/data/pages/services.json
@@ -909,3 +939,45 @@ collections:
         widget: markdown
         required: false
         hint: "Optional section for additional work history, notable projects, or areas of expertise. Leave blank to omit."
+
+  # ──────────────────────────────────────────────────────────────
+  # INSIGHTS
+  # ──────────────────────────────────────────────────────────────
+  - name: insights
+    label: "📝 Insights"
+    label_singular: "Insight"
+    folder: src/content/insights
+    create: true
+    slug: "{{title | slugify}}"
+    format: frontmatter
+    summary: "{{title}}"
+    sortable_fields: ["date", "title"]
+    hint: "Short articles. Until you write one, the Insights page and its menu link do not appear on the site at all."
+    fields:
+      - label: "Title"
+        name: title
+        widget: string
+
+      - label: "Date"
+        name: date
+        widget: datetime
+        date_format: "YYYY-MM-DD"
+        time_format: false
+        picker_utc: false
+        hint: "Posts are listed newest first."
+
+      - label: "Summary"
+        name: summary
+        widget: text
+        hint: "One or two sentences shown in the list and used by search engines."
+
+      - label: "Image"
+        name: image
+        widget: image
+        required: false
+        hint: "Optional. Shown beside the summary in the list. Leave blank to omit it."
+
+      - label: "Body"
+        name: body
+        widget: markdown
+        hint: "The article itself."

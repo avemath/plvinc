@@ -18,6 +18,14 @@ try {
 } catch {
   hasPeople = false;
 }
+
+// Insights is dormant until something is written, so the link only appears then.
+let hasInsights = false;
+try {
+  hasInsights = (await getCollection('insights')).length > 0;
+} catch {
+  hasInsights = false;
+}
 const path = Astro.url.pathname;
 
 function isActive(href: string) {
@@ -72,6 +80,9 @@ const telHref = settings.phone ? `tel:${settings.phone.replace(/[^\d+]/g, '')}` 
       <li><a href="/experience" aria-current={isActive('/experience') ? 'page' : undefined}>Experience</a></li>
       {hasPeople && (
         <li><a href="/people"   aria-current={isActive('/people')     ? 'page' : undefined}>Team</a></li>
+      )}
+      {hasInsights && (
+        <li><a href="/insights" aria-current={isActive('/insights')   ? 'page' : undefined}>Insights</a></li>
       )}
       <li><a href="/contact"    aria-current={isActive('/contact')    ? 'page' : undefined}>Contact</a></li>
       {settings.phone && (

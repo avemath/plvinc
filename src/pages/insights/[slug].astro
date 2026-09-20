@@ -1,0 +1,70 @@
+---
+import Base from '../../layouts/Base.astro';
+import CallToAction from '../../components/CallToAction.astro';
+import { getCollection, render } from 'astro:content';
+import page from '../../data/pages/insights.json';
+import settings from '../../data/settings.json';
+
+export async function getStaticPaths() {
+  let insights: Awaited<ReturnType<typeof getCollection<'insights'>>> = [];
+  try {
+    insights = await getCollection('insights');
+  } catch {
+    insights = [];
+  }
+  // An empty collection yields no paths, so no detail pages are built.
+  return insights.map((post) => ({ params: { slug: post.id }, props: { post } }));
+}
+
+const { post } = Astro.props;
+const { Content } = await render(post);
+
+const dateFormat = new Intl.DateTimeFormat('en-US', {
+  year: 'numeric',
+  month: 'long',
+  day: 'numeric',
+});
+
+const schema = {
+  '@context': 'https://schema.org',
+  '@type': 'Article',
+  headline: post.data.title,
+  description: post.data.summary,
+  datePublished: post.data.date.toISOString(),
+  author: { '@type': 'Organization', name: settings.professional_name },
+};
+---
+
+<Base
+  title={`${post.data.title} — ${settings.professional_name}`}
+  description={post.data.summary}
+  image={post.data.image}
+  schema={schema}
+>
+  <div class="page-header">
+    <div class="container">
+      <h1>{post.data.title}</h1>
+      <p>
+        <time datetime={post.data.date.toISOString()}>
+          {dateFormat.format(post.data.date)}
+        </time>
+      </p>
+    </div>
+  </div>
+
+  <section>
+    <div class="container container-narrow">
+      <a href="/insights" class="back-link">← All insights</a>
+      <div class="prose insight-prose">
+        <Content />
+      </div>
+    </div>
+  </section>
+
+  <CallToAction
+    headline={page.cta.headline}
+    text={page.cta.text}
+    button={page.cta.button}
+    tone="light"
+  />
+</Base>

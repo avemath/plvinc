@@ -28,6 +28,13 @@ try {
   hasPeople = false;
 }
 
+let hasInsights = false;
+try {
+  hasInsights = (await getCollection('insights')).length > 0;
+} catch {
+  hasInsights = false;
+}
+
 // Only shown once both halves are filled in, so the footer never reads "Louisiana" alone
 // or carries a stray comma.
 const location = settings.city && settings.state
@@ -97,6 +104,7 @@ const location = settings.city && settings.state
         <a href="/mineral-owners">Mineral Owners</a>
         <a href="/experience">Experience</a>
         {hasPeople && <a href="/people">Team</a>}
+        {hasInsights && <a href="/insights">Insights</a>}
         <a href="/contact">Contact</a>
       </nav>
     </div>
