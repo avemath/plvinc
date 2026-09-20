@@ -586,6 +586,64 @@ hr.divider {
   gap: 1.5rem;
 }
 
+/* Home-page index of the same services. Deliberately not the card grid: hairline rows
+   rather than bordered boxes, so the home page and /services do not read as the same
+   block shown twice. */
+.services-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+  column-gap: 3.5rem;
+  border-top: 1px solid var(--border);
+}
+
+.service-item { border-bottom: 1px solid var(--border); }
+
+.service-item-link {
+  display: flex;
+  align-items: flex-start;
+  gap: 1.1rem;
+  padding: 1.5rem .25rem;
+  text-decoration: none;
+  color: inherit;
+  transition: background var(--transition), padding-left var(--transition);
+}
+
+.service-item-link:hover {
+  background: var(--green-pale);
+  padding-left: .9rem;
+}
+
+.service-item-icon {
+  flex: 0 0 auto;
+  color: var(--green-mid);
+  margin-top: .15rem;
+}
+
+.service-item-body { display: block; }
+
+.service-item-title {
+  display: block;
+  font-family: var(--font-heading);
+  font-weight: 600;
+  font-size: 1.05rem;
+  color: var(--green-dark);
+  margin-bottom: .2rem;
+}
+
+.service-item-desc {
+  display: block;
+  font-size: .925rem;
+  line-height: 1.6;
+  color: var(--text-muted);
+}
+
+@media (max-width: 640px) {
+  .service-item-link { padding: 1.25rem .25rem; }
+}
+
 .service-card {
   background: var(--white);
   border: 1px solid var(--border);

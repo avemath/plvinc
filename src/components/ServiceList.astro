@@ -1,0 +1,33 @@
+---
+import ServiceIcon from './ServiceIcon.astro';
+
+// A compact index of the services, used on the home page.
+//
+// Home and /services previously rendered the same ServiceCard grid, byte for byte, so
+// anyone who followed the nav from one to the other saw the identical block twice. The
+// cards stay on /services where they are the page; here the same six read as a list, which
+// is quicker to scan and gives the home page its own texture.
+interface Props {
+  services: { title: string; card_description: string; icon?: string; slug: string }[];
+}
+
+const { services } = Astro.props;
+---
+
+<ul class="services-list" role="list">
+  {services.map((svc) => (
+    <li class="service-item">
+      <a href={`/services/${svc.slug}`} class="service-item-link">
+        {svc.icon && (
+          <span class="service-item-icon" aria-hidden="true">
+            <ServiceIcon name={svc.icon} size={24} />
+          </span>
+        )}
+        <span class="service-item-body">
+          <span class="service-item-title">{svc.title}</span>
+          <span class="service-item-desc">{svc.card_description}</span>
+        </span>
+      </a>
+    </li>
+  ))}
+</ul>

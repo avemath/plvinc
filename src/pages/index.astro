@@ -1,6 +1,6 @@
 ---
 import Base from '../layouts/Base.astro';
-import ServiceCard from '../components/ServiceCard.astro';
+import ServiceList from '../components/ServiceList.astro';
 import CoverageMap from '../components/CoverageMap.astro';
 import CallToAction from '../components/CallToAction.astro';
 import { getCollection } from 'astro:content';
@@ -58,16 +58,18 @@ const valueParagraphHtml = await renderMarkdown(home.value_paragraph);
         <h2>{home.services_headline}</h2>
         <p>{home.services_intro}</p>
       </div>
-      <div class="services-grid">
-        {sorted.map((svc) => (
-          <ServiceCard
-            title={svc.data.title}
-            card_description={svc.data.card_description}
-            icon={svc.data.icon}
-            slug={svc.id}
-          />
-        ))}
-      </div>
+      <ServiceList
+        services={sorted.map((svc) => ({
+          title: svc.data.title,
+          card_description: svc.data.card_description,
+          icon: svc.data.icon,
+          slug: svc.id,
+        }))}
+      />
+
+      <p class="section-aside">
+        <a href="/services">See what each service covers →</a>
+      </p>
     </div>
   </section>
 
