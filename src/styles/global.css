@@ -1168,8 +1168,21 @@ a.contact-detail-value:hover { color: var(--green-dark); }
   padding: 4rem 0 3rem;
   text-align: center;
 }
-.page-header h1 { color: var(--white); margin-bottom: .4rem; }
+.page-header h1 { color: var(--white); margin-bottom: 0; }
 .page-header p  { opacity: .8; max-width: 560px; margin: 0 auto; font-size: 1.05rem; }
+
+/* A short gold rule under the title. --gold is the brand's accent but was used only
+   inside the coverage map, so every interior page opened on the same flat green slab.
+   This gives the header a deliberate mark and carries the accent across the site. */
+.page-header h1::after {
+  content: '';
+  display: block;
+  width: 44px;
+  height: 3px;
+  border-radius: 2px;
+  background: var(--gold);
+  margin: 1rem auto 1.1rem;
+}
 
 /* ============================================================
    Breadcrumb / back link
