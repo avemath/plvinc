@@ -37,8 +37,10 @@ plvinc/
 │   ├── data/
 │   │   ├── settings.json        # Global site settings
 │   │   ├── us-states.json       # State paths and labels for the coverage map
-│   │   └── pages/               # Per-page content: home, about, experience, contact
-│   ├── components/              # Nav, Footer, SEO, ContactForm, CoverageMap, service cards
+│   │   └── pages/               # One file per page: home, about, services,
+│   │                            #   experience, people, contact
+│   ├── components/              # Nav, Footer, SEO, ContactForm, CoverageMap,
+│   │                            #   CallToAction, service cards
 │   ├── layouts/Base.astro       # Shared HTML shell
 │   ├── pages/                   # One .astro per route, plus services/[slug].astro
 │   ├── styles/global.css        # Design system
@@ -187,6 +189,16 @@ Everything the CMS writes is a plain file, so it can all be edited directly and 
 - `src/data/pages/*.json` for page content
 - `src/content/services/*.md` for the service pages
 - `src/content/people/*.md` for team members, one file each
+
+**Keep copy out of the templates.** Page subtitles, section labels, search descriptions and the
+closing call to action all live in `src/data/pages/*.json` and are exposed in `/studio`. Putting a
+string straight into an `.astro` file puts it beyond the owner's reach, which is the one thing this
+setup exists to avoid. If a page needs a new piece of text, add a field to the JSON and to
+`public/studio/config.yml` alongside it.
+
+The closing band on every page is one component, `CallToAction.astro`, reading that page's `cta`
+object. It takes a `tone` of `dark` or `light`; interior pages use `light` so they don't open and
+close on the same green.
 
 ---
 

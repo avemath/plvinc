@@ -33,11 +33,19 @@ The left sidebar lists everything you can edit:
 | Section | What it controls |
 |---|---|
 | **Site Settings** | Your name, logo, phone, email, site description |
-| **Pages** | The content on Home, About, Experience, and Contact |
+| **Pages** | The content on Home, About, Services, Experience, Team and Contact |
 | **Services** | Each of the six service pages |
 | **Team / People** | The people shown on the Team page |
 
 Click a section name to open it.
+
+Two things worth knowing about **Pages**. Every page has a **Page Subtitle**, the line under the
+title in the green band at the top, and a **Search Description**, the sentence Google shows beneath
+the page in results. Every page except Contact also has a **Closing Call to Action** — the band at
+the very bottom, with its own headline, text and button label.
+
+Those closing bands are separate on purpose. It's worth making them say different things; a visitor
+who reads three pages shouldn't meet the same sentence three times.
 
 ---
 
