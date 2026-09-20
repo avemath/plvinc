@@ -32,20 +32,35 @@ The left sidebar lists everything you can edit:
 
 | Section | What it controls |
 |---|---|
-| **Site Settings** | Your name, logo, phone, email, site description |
-| **Pages** | The content on Home, About, Services, Experience, Team and Contact |
+| **Site Settings** | Your name, logos, phone, email, city, LinkedIn, site description |
+| **Pages** | The content on Home, About, Services, Mineral Owners, Experience, Team, Insights and Contact |
 | **Services** | Each of the six service pages |
 | **Team / People** | The people shown on the Team page |
+| **Insights** | Short articles. Empty to begin with. |
 
 Click a section name to open it.
 
-Two things worth knowing about **Pages**. Every page has a **Page Subtitle**, the line under the
-title in the green band at the top, and a **Search Description**, the sentence Google shows beneath
-the page in results. Every page except Contact also has a **Closing Call to Action** — the band at
-the very bottom, with its own headline, text and button label.
+Three things worth knowing about **Pages**. Every page has a **Page Title**, which shows in the
+browser tab and as the blue headline in Google results, and a **Search Description**, the sentence
+Google shows underneath it. Every page also has a **Page Subtitle**, the line under the title in the
+green band at the top. Every page except Contact has a **Closing Call to Action**, the band at the
+very bottom, with its own headline, text and button label.
+
+Keep page titles under about 60 characters and search descriptions under about 160. Past those
+lengths Google cuts them off mid sentence.
 
 Those closing bands are separate on purpose. It's worth making them say different things; a visitor
 who reads three pages shouldn't meet the same sentence three times.
+
+### Sections that hide themselves
+
+Several parts of the site only exist once you put something in them. If the list behind one is
+empty, the whole section disappears from the page, headings and all. Nothing looks broken and no
+empty box is left behind.
+
+That applies to the figures under the hero, the home page testimonials, Selected Projects on the
+Experience page, the questions on the Mineral Owners page, the Team page, and Insights. Emptying a
+list is a normal way to turn a section off, and filling it again turns it back on.
 
 ---
 
@@ -61,7 +76,9 @@ These apply across the whole site.
 |---|---|
 | Professional Name | Your full name and credentials, for example *Jane Smith, CPL* |
 | Tagline | One short line for the footer, for example *Certified Professional Landman* |
-| Logo | An image file. Leave it blank to show your name as text instead. |
+| Logo | The main logo, shown in the header on desktop. Leave blank to show your name as text. |
+| Logo (narrow) | A narrower version of the logo, used in the header on phones. |
+| Logo (light, for dark backgrounds) | A white version, used in the dark footer. |
 | Phone Number | Your business phone, written exactly as you want it displayed |
 | Email Address | Your primary business email |
 | Service Area Summary | A short geography note for the footer |
@@ -69,6 +86,8 @@ These apply across the whole site.
 | Default Page Title | What appears in browser tabs and Google results |
 | Default Meta Description | The sentence under your name in Google results, around 155 characters |
 | Default Share Image | The image shown when the site is shared on social media |
+| City and State | Where you are based. Both must be filled in before either one appears. |
+| LinkedIn URL | Your company LinkedIn page. Leave blank to hide the link everywhere. |
 | Contact Form Access Key | The Web3Forms key. The contact form won't send without it. |
 
 ---
@@ -93,6 +112,14 @@ A few notes on the trickier fields:
   work nationwide.
 - The **Value Paragraph** supports basic formatting. Select text to get a toolbar for bold and
   italic.
+
+**Figures Under the Hero** is the short row of numbers below the headline. Each entry is a figure
+and a label. Only put numbers there you can stand behind, and if you change the coverage map,
+remember the states figure does not update itself. Empty the list to remove the row.
+
+**To add a testimonial:** scroll to **Testimonials**, click **Add**, and fill in the quote. The
+attribution is optional and a role works better than a name, for example *Operator, East Texas*.
+The section stays hidden until you add the first one.
 
 ---
 
@@ -121,6 +148,11 @@ name, issuing organization, and year. Repeat for each one.
    won't appear on the site at all.
 6. Click **Save**.
 
+**To add a project:** scroll to **Selected Projects** and click **Add**. Each one takes a **Play or
+Region**, a **Project Type**, a **Scope** of a sentence or two, and an optional **Outcome**. Say
+only what you are comfortable making public, and leave client names out unless you have their
+permission. The section is hidden until you add the first project.
+
 ---
 
 ## Editing the Contact Page
@@ -129,6 +161,18 @@ name, issuing organization, and year. Repeat for each one.
 2. Update the phone, email, and any notes.
 3. **Mailing Address** is optional. Leave it blank to hide it.
 4. Click **Save**.
+
+The form asks for more than a name and a message, so that a first reply can be useful. You control
+two of the dropdowns:
+
+- **"I am a" Options** are the choices for who is getting in touch. Add, remove or reorder them.
+- **Timeline Options** are the choices for how soon the work is needed.
+
+Empty either list and that question disappears from the form. The **Service needed** dropdown
+builds itself from your Services section, so adding a service adds it to the form automatically.
+
+**Form Field Labels** changes the wording beside each box. It does not change what the form
+collects, only what it is called.
 
 ---
 
@@ -144,6 +188,8 @@ Each service has its own page, and there are six to start with.
      formatting.
    - **Icon / Symbol**, an optional emoji shown beside the title
    - **Display Order**, which controls the order services appear in. Lower numbers come first.
+   - **Page Title (search)** and **Search Description**, which are what Google shows for this
+     service. Leave them blank to fall back to the service title and card description.
 3. Click **Save**.
 
 **To add a service:** click **New Services** at the top of the section, fill in the fields, and
@@ -163,6 +209,7 @@ on their own.
 2. Fill in:
    - **Full Name**, required
    - **Role / Title**, optional
+   - **LinkedIn URL**, optional. Leave blank to hide the link.
    - **Photo**, optional
    - **Display Order**, optional. Lower numbers appear first.
    - **Bio**, required
@@ -172,6 +219,43 @@ on their own.
 The page updates within a minute or two.
 
 **To remove someone:** open their entry and click **Delete**.
+
+---
+
+## The Mineral Owners Page
+
+This page is written for someone who has been handed a lease offer or a division order and does not
+know what it means. Keep the language plainer here than anywhere else on the site.
+
+1. Click **Pages**, then **Mineral Owners Page**.
+2. Edit the **Introduction**, and the cards under **What You Can Bring to Us**.
+3. Click **Save**.
+
+**To add a question:** scroll to **Questions and Answers** and click **Add**. Write the question the
+way somebody would actually ask it out loud, because these also tell Google what the page answers.
+Empty the list and the whole section disappears.
+
+**Legal Note** is the line at the bottom about not giving legal advice. Leave it blank to hide it,
+though it is worth keeping.
+
+---
+
+## Writing an Insight
+
+Insights are short articles. Until you write the first one, the Insights page does not exist and no
+link to it appears anywhere on the site. Publishing one brings both into being automatically.
+
+1. Click **Insights**, then **New Insight**.
+2. Fill in:
+   - **Title**
+   - **Date**, which controls the order. Newest appears first.
+   - **Summary**, one or two sentences shown in the list and used by search engines.
+   - **Image**, optional, shown beside the summary in the list.
+   - **Body**, the article itself.
+3. Click **Save**.
+
+**To unpublish one:** open it and click **Delete**. Remove them all and the page and its link
+disappear again.
 
 ---
 
