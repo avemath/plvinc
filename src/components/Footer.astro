@@ -10,6 +10,7 @@ interface Props {
     email?: string;
     service_area_summary?: string;
     logo_small_light?: string;
+    based_in?: string;
     city?: string;
     state?: string;
     linkedin_url?: string;
@@ -27,11 +28,10 @@ try {
   hasInsights = false;
 }
 
-// Only shown once both halves are filled in, so the footer never reads "Louisiana" alone
-// or carries a stray comma.
-const location = settings.city && settings.state
-  ? `${settings.city}, ${settings.state}`
-  : '';
+// based_in is what visitors read, and it can be a region rather than a town. Falling back
+// to city and state keeps working for anyone who fills those in instead.
+const location = settings.based_in
+  || (settings.city && settings.state ? `${settings.city}, ${settings.state}` : '');
 ---
 
 <footer class="site-footer">

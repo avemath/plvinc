@@ -65,17 +65,23 @@ collections:
             widget: string
             hint: "The email address shown publicly on the site. This should be your business address at your own domain, not a personal one."
 
+          - label: "Based In"
+            name: based_in
+            widget: string
+            required: false
+            hint: "Where you are based, as visitors should read it. A region is fine, for example Central Pennsylvania. Shown in the footer and on the Contact page. Leave blank to hide it."
+
           - label: "City"
             name: city
             widget: string
             required: false
-            hint: "The city you are based in. Shown in the footer and on the Contact page, and used by search engines. Both City and State must be filled in before either appears."
+            hint: "Optional. Only used to tell search engines where you are, never shown on the page. Leave blank if you would rather not publish a town."
 
           - label: "State"
             name: state
             widget: string
             required: false
-            hint: "The state you are based in, for example Louisiana. Shown alongside City."
+            hint: "The state you are based in, for example Pennsylvania. Used to tell search engines where you are."
 
           - label: "LinkedIn URL"
             name: linkedin_url

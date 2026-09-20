@@ -4,10 +4,9 @@ import ContactForm from '../components/ContactForm.astro';
 import contact from '../data/pages/contact.json';
 import settings from '../data/settings.json';
 
-// Both halves or neither, so the page never shows a lone state or a stray comma.
-const location = settings.city && settings.state
-  ? `${settings.city}, ${settings.state}`
-  : '';
+// Same rule as the footer: based_in first, then city and state if that is how it was filled in.
+const location = settings.based_in
+  || (settings.city && settings.state ? `${settings.city}, ${settings.state}` : '');
 ---
 
 <Base
