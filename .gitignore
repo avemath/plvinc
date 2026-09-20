@@ -10,3 +10,6 @@ Thumbs.db
 
 # Local editor/agent settings
 .claude/
+
+# Original/source assets kept out of the published site
+_source-images/

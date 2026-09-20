@@ -1,7 +1,7 @@
 ---
 name: "Shannon Matherne, CPL"
 role: "Certified Professional Landman"
-photo: ""
+photo: "/images/uploads/shannon-matherne.jpg"
 sort_order: 2
 experience_details: ""
 ---
