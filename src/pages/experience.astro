@@ -68,6 +68,33 @@ const introHtml       = await renderMarkdown(exp.intro);
     </section>
   )}
 
+  <!-- Selected projects — hidden until at least one is added -->
+  {exp.projects?.length > 0 && (
+    <section class="section-alt">
+      <div class="container">
+        <div class="section-header">
+          <span class="section-label">{exp.projects_label}</span>
+          <h2>{exp.projects_headline}</h2>
+        </div>
+        <ul class="projects-list" role="list">
+          {exp.projects.map((p) => (
+            <li class="project-card">
+              {p.region && <span class="project-region">{p.region}</span>}
+              {p.type && <h3 class="project-type">{p.type}</h3>}
+              {p.scope && <p class="project-scope">{p.scope}</p>}
+              {p.outcome && (
+                <p class="project-outcome">
+                  <span class="project-outcome-label">Outcome</span>
+                  {p.outcome}
+                </p>
+              )}
+            </li>
+          ))}
+        </ul>
+      </div>
+    </section>
+  )}
+
   <!-- Testimonials -->
   {hasTestimonials && (
     <section class="section-alt">

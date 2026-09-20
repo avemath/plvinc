@@ -40,6 +40,22 @@ const valueParagraphHtml = await renderMarkdown(home.value_paragraph);
     </div>
   </section>
 
+  <!-- ─── Proof points ─── -->
+  {home.stats?.length > 0 && (
+    <section class="stat-row" aria-label="At a glance">
+      <div class="container">
+        <ul class="stat-row-list" role="list">
+          {home.stats.map((s) => (
+            <li class="stat">
+              <span class="stat-value">{s.value}</span>
+              <span class="stat-label">{s.label}</span>
+            </li>
+          ))}
+        </ul>
+      </div>
+    </section>
+  )}
+
   <!-- ─── Value paragraph ─── -->
   <section class="value-section">
     <div class="container">
@@ -72,6 +88,32 @@ const valueParagraphHtml = await renderMarkdown(home.value_paragraph);
       </p>
     </div>
   </section>
+
+  <!-- ─── Testimonials — hidden until at least one is added ─── -->
+  {home.testimonials?.length > 0 && (
+    <section class="section-alt">
+      <div class="container">
+        <div class="section-header">
+          <span class="section-label">{home.testimonials_label}</span>
+          <h2>{home.testimonials_headline}</h2>
+        </div>
+        <div class="testimonials-grid">
+          {home.testimonials.map((t) => (
+            <figure class="testimonial-card">
+              <blockquote>
+                <p class="testimonial-quote">{t.quote}</p>
+              </blockquote>
+              {t.attribution && (
+                <figcaption>
+                  <span class="testimonial-title">{t.attribution}</span>
+                </figcaption>
+              )}
+            </figure>
+          ))}
+        </div>
+      </div>
+    </section>
+  )}
 
   <!-- ─── Closing CTA ─── -->
   <CallToAction

@@ -1528,3 +1528,89 @@ a.contact-detail-value:hover { color: var(--green-dark); }
   font-size: .95rem;
   color: var(--text-muted);
 }
+
+/* ============================================================
+   Proof points
+   ============================================================ */
+/* Sits directly under the hero, so it keeps the hero's dark field rather than
+   introducing a third band colour between it and the value paragraph. */
+.stat-row {
+  background: var(--green-dark);
+  padding: 0 0 3rem;
+}
+
+.stat-row-list {
+  list-style: none;
+  margin: 0;
+  padding: 2.5rem 0 0;
+  border-top: 1px solid rgba(255,255,255,.14);
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 2rem;
+  text-align: center;
+}
+
+.stat { color: var(--white); }
+
+.stat-value {
+  display: block;
+  font-family: var(--font-heading);
+  font-size: clamp(1.9rem, 4vw, 2.6rem);
+  font-weight: 700;
+  line-height: 1.1;
+  color: var(--gold);
+}
+
+.stat-label {
+  display: block;
+  margin-top: .35rem;
+  font-size: .875rem;
+  color: rgba(255,255,255,.78);
+}
+
+.projects-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: 1.5rem;
+}
+
+.project-card {
+  background: var(--white);
+  border: 1px solid var(--border);
+  border-left: 3px solid var(--green-mid);
+  border-radius: var(--radius-lg);
+  padding: 1.6rem;
+}
+
+.project-region {
+  display: block;
+  font-size: .75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: .1em;
+  color: var(--green-mid);
+  margin-bottom: .5rem;
+}
+
+.project-type  { margin-bottom: .5rem; color: var(--green-dark); }
+.project-scope { color: var(--text-muted); font-size: .95rem; }
+
+.project-outcome {
+  margin: .9rem 0 0;
+  padding-top: .9rem;
+  border-top: 1px solid var(--border);
+  font-size: .95rem;
+}
+
+.project-outcome-label {
+  display: block;
+  font-size: .72rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: .1em;
+  color: var(--text-light);
+  margin-bottom: .2rem;
+}

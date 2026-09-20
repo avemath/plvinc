@@ -291,6 +291,45 @@ collections:
             widget: text
             hint: "A sentence or two below the services headline, before the service cards."
 
+          - label: "Figures Under the Hero"
+            name: stats
+            widget: list
+            summary: "{{value}} {{label}}"
+            required: false
+            hint: "The short row of figures below the hero. Only put numbers here you can stand behind, and update the states figure if the coverage map changes. Empty this list to hide the row."
+            fields:
+              - label: "Figure"
+                name: value
+                widget: string
+                hint: "Keep it short, for example 25+ or CPL."
+              - label: "Label"
+                name: label
+                widget: string
+
+          - label: "Testimonials Section Label"
+            name: testimonials_label
+            widget: string
+
+          - label: "Testimonials Section Headline"
+            name: testimonials_headline
+            widget: string
+
+          - label: "Testimonials"
+            name: testimonials
+            widget: list
+            required: false
+            summary: "{{attribution}}"
+            hint: "Client quotes for the home page. Attribution can be a role rather than a name, for example \"Operator, East Texas\". The section stays hidden until you add one."
+            fields:
+              - label: "Quote"
+                name: quote
+                widget: text
+              - label: "Attribution"
+                name: attribution
+                widget: string
+                required: false
+                hint: "Who said it. A role and region is enough."
+
           - label: "Closing Call to Action"
             name: cta
             widget: object
@@ -485,6 +524,39 @@ collections:
           - label: "Testimonials — Headline"
             name: testimonials_headline
             widget: string
+
+          - label: "Selected Projects Label"
+            name: projects_label
+            widget: string
+
+          - label: "Selected Projects Headline"
+            name: projects_headline
+            widget: string
+
+          - label: "Selected Projects"
+            name: projects
+            widget: list
+            required: false
+            summary: "{{region}} — {{type}}"
+            hint: "Individual pieces of work worth showing. Say only what you are comfortable making public, and leave client names out unless you have permission. The section stays hidden until you add one."
+            fields:
+              - label: "Play or Region"
+                name: region
+                widget: string
+                hint: "For example Haynesville Shale, or Northwest Louisiana."
+              - label: "Project Type"
+                name: type
+                widget: string
+                hint: "For example Multi-county title examination."
+              - label: "Scope"
+                name: scope
+                widget: text
+                hint: "What the work involved, in a sentence or two."
+              - label: "Outcome"
+                name: outcome
+                widget: text
+                required: false
+                hint: "What it produced for the client. Leave blank to omit."
 
           - label: "Closing Call to Action"
             name: cta

@@ -137,5 +137,22 @@
     "headline": "Ready to Move Your Project Forward?",
     "text": "Send the project details — location, scope, and timeline — and we will outline the work involved.",
     "button": "Get in Touch"
-  }
+  },
+  "stats": [
+    {
+      "value": "25+",
+      "label": "Years of land experience"
+    },
+    {
+      "value": "CPL",
+      "label": "Certified Professional Landmen"
+    },
+    {
+      "value": "8",
+      "label": "States with completed work"
+    }
+  ],
+  "testimonials_label": "From Clients",
+  "testimonials_headline": "What They Say",
+  "testimonials": []
 }
