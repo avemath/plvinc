@@ -1,198 +1,209 @@
 # How to Edit Your Website
 
-This guide walks you through editing every part of your site using the built-in editor. No coding or technical knowledge needed.
+This guide covers every part of the site you can change yourself, through the built-in editor. You
+don't need to know anything technical, and you can't break the site by using it.
 
 ---
 
 ## Getting Started: Log In
 
-1. Open a web browser and go to: **yourwebsite.com/studio**
+1. Go to **plvinc.com/studio**.
 2. Click **Login with GitHub**.
-3. If this is your first time, GitHub will ask you to authorize the editor — click **Authorize**.
-4. You'll land on the editor dashboard. From here you can change anything on the site.
+3. The first time, GitHub will ask you to authorize the editor. Click **Authorize**.
+4. You'll land on the editor dashboard, where everything on the site can be changed.
 
-**Having trouble logging in?** Make sure you've been added as a collaborator on the GitHub repository (ask your web contact to do this — it takes about 30 seconds).
+**Can't log in?** You need to be added as a collaborator on the GitHub repository first. Let me
+know and I'll add you; it takes about thirty seconds.
 
 ---
 
 ## How Saving Works
 
-When you click **Save** inside the editor, your change is sent to GitHub, which automatically triggers a rebuild of the site. The live site will reflect your change within about **1–2 minutes**.
+When you click **Save**, the change is recorded and the site rebuilds itself automatically. Your
+change appears on the live site within about **one to two minutes**.
 
-You don't need to do anything else after saving. There's no separate "publish" step.
+There's no separate publish step. Save is all there is.
 
 ---
 
 ## The Editor Dashboard
 
-The left sidebar shows everything you can edit, organized into sections:
+The left sidebar lists everything you can edit:
 
 | Section | What it controls |
 |---|---|
 | **Site Settings** | Your name, logo, phone, email, site description |
-| **Pages** | The content on Home, About, Experience, and Contact pages |
+| **Pages** | The content on Home, About, Experience, and Contact |
 | **Services** | Each of the six service pages |
-| **Team / People** | Team members (optional — leave empty to hide the Team page) |
+| **Team / People** | The people shown on the Team page |
 
-Click any section name to open it.
+Click a section name to open it.
 
 ---
 
 ## Editing Site Settings
 
-These are global settings that appear across the whole site.
+These apply across the whole site.
 
-1. Click **Site Settings** in the left sidebar.
-2. Click **Global Settings**.
-3. Change any field (see the list below for what each one does).
-4. Click **Save** in the top right.
+1. Click **Site Settings**, then **Global Settings**.
+2. Change whichever fields you need.
+3. Click **Save** in the top right.
 
 | Field | What to put here |
 |---|---|
-| Professional Name | Your full name and credentials (e.g., *Jane Smith, CPL*) |
-| Tagline | One short line shown in the footer (e.g., *Certified Professional Landman*) |
-| Logo | Upload an image file. Leave blank to show your name as text instead. |
-| Phone Number | Your business phone, exactly as you want it displayed |
+| Professional Name | Your full name and credentials, for example *Jane Smith, CPL* |
+| Tagline | One short line for the footer, for example *Certified Professional Landman* |
+| Logo | An image file. Leave it blank to show your name as text instead. |
+| Phone Number | Your business phone, written exactly as you want it displayed |
 | Email Address | Your primary business email |
-| Service Area Summary | Short geography note for the footer (e.g., *Gulf Coast · Appalachian · Mid-Continent*) |
-| Footer Name / Company | Name or company in the copyright line at the bottom |
-| Default Page Title | What appears in browser tabs and Google search results |
-| Default Meta Description | The sentence shown under your name in Google search results (~155 characters) |
-| Default Share Image | Image shown when someone shares your website on social media |
-| Contact Form Access Key | Your Web3Forms key — needed for the contact form to send emails |
+| Service Area Summary | A short geography note for the footer |
+| Footer Name / Company | The name in the copyright line at the bottom |
+| Default Page Title | What appears in browser tabs and Google results |
+| Default Meta Description | The sentence under your name in Google results, around 155 characters |
+| Default Share Image | The image shown when the site is shared on social media |
+| Contact Form Access Key | The Web3Forms key. The contact form won't send without it. |
 
 ---
 
 ## Editing the Home Page
 
-1. Click **Pages** → **Home Page**.
-2. Edit the fields (descriptions are shown in gray under each field).
+1. Click **Pages**, then **Home Page**.
+2. Edit the fields. Each one has a short description in gray underneath.
 3. Click **Save**.
 
-**Tips:**
-- The **Hero Headline** is the first thing visitors read — keep it clear and direct.
-- **Basins & Regions** powers the interactive coverage map. Each entry becomes a tab beside the map; selecting it lights up that basin's states. Every entry needs a **Name**, a short lowercase **ID**, the **States** it covers (pick them from the dropdown so the map always matches), a **Summary**, and its **Plays & Formations** — each play with a one-line definition written for clients who are not landmen.
-- Add as many basins, states, and plays as you want. No count is shown anywhere on the site, so coverage can grow without anything needing to be renumbered.
-- The **Coverage Intro** is the line under the headline. It is the right place to say you take work nationwide.
-- The **Value Paragraph** supports basic formatting — you can make text **bold** or *italic* using the toolbar that appears above the text field.
+A few notes on the trickier fields:
+
+- The **Hero Headline** is the first thing anyone reads. Keep it clear and direct.
+- **Basins & Regions** drives the interactive coverage map. Each entry becomes a tab beside the
+  map, and selecting it highlights that basin's states. Every entry needs a **Name**, a short
+  lowercase **ID**, the **States** it covers, a **Summary**, and its **Plays & Formations**. Pick
+  states from the dropdown rather than typing them, so the map always matches.
+- Write each play's one-line definition for a client who isn't a landman.
+- Add as many basins, states, and plays as you like. No count appears anywhere on the site, so
+  coverage can grow without anything needing to be renumbered.
+- The **Coverage Intro** is the line under the headline, and it's the right place to say you take
+  work nationwide.
+- The **Value Paragraph** supports basic formatting. Select text to get a toolbar for bold and
+  italic.
 
 ---
 
 ## Editing the About Page
 
-1. Click **Pages** → **About Page**.
-2. Edit the fields.
-3. Click **Save**.
+1. Click **Pages**, then **About Page**.
+2. Edit the fields and click **Save**.
 
-**Uploading a headshot:**
-1. Click the image field labeled **Headshot / Professional Photo**.
-2. Click **Choose an image** → **Upload** → select your photo file.
-3. The photo will appear on the site after you save.
+**To upload a headshot:** click the **Headshot / Professional Photo** field, then **Choose an
+image**, then **Upload**, and pick the file. It appears on the site once you save.
 
-**Adding a credential:**
-1. Scroll to **Credentials & Certifications**.
-2. Click **Add Credentials & Certifications**.
-3. Fill in Credential Name, Issuing Organization, and Year.
-4. Repeat for additional credentials.
-5. Click **Save**.
+**To add a credential:** scroll to **Credentials & Certifications**, click **Add**, and fill in the
+name, issuing organization, and year. Repeat for each one.
 
-**Adding an affiliation:**
-Same process — scroll to **Affiliations & Memberships** and click **Add**.
+**To add an affiliation:** same process, under **Affiliations & Memberships**.
 
 ---
 
 ## Editing the Experience Page
 
-1. Click **Pages** → **Experience Page**.
+1. Click **Pages**, then **Experience Page**.
 2. Edit the **Introduction** text.
-3. Add, remove, or reorder **States & Regions Served** — click **Add** for a new one.
+3. Add, remove, or reorder entries under **States & Regions Served**.
 4. Edit the **Project Types** list.
-5. If you have client testimonials, add them in the **Testimonials** section. If you leave this empty, the testimonials section won't appear on the site.
+5. Add any client testimonials in the **Testimonials** section. Leave it empty and that section
+   won't appear on the site at all.
 6. Click **Save**.
 
 ---
 
 ## Editing the Contact Page
 
-1. Click **Pages** → **Contact Page**.
-2. Update your phone, email, and any notes.
-3. The **Mailing Address** field is optional — leave it blank to hide it from the page.
+1. Click **Pages**, then **Contact Page**.
+2. Update the phone, email, and any notes.
+3. **Mailing Address** is optional. Leave it blank to hide it.
 4. Click **Save**.
 
 ---
 
 ## Editing Services
 
-Each service has its own page. There are six services by default.
+Each service has its own page, and there are six to start with.
 
-1. Click **Services** in the left sidebar.
-2. Click the service you want to edit (e.g., *Title Research & Curative*).
-3. Edit:
-   - **Service Title** — the name shown on the site
-   - **Card Description** — the short summary shown on the main Services page (keep it to 1–2 sentences)
-   - **Full Description** — the detailed text on the individual service page (supports bullet lists and formatting)
-   - **Icon / Symbol** — optional emoji shown next to the title (e.g., ⚖️)
-   - **Display Order** — controls the order services appear; lower numbers come first
-4. Click **Save**.
+1. Click **Services**, then the one you want to edit.
+2. Edit any of:
+   - **Service Title**, the name shown on the site
+   - **Card Description**, the short summary on the main Services page. One or two sentences.
+   - **Full Description**, the detailed text on that service's own page. Supports lists and
+     formatting.
+   - **Icon / Symbol**, an optional emoji shown beside the title
+   - **Display Order**, which controls the order services appear in. Lower numbers come first.
+3. Click **Save**.
 
-**To add a new service:** Click **New Services** at the top of the Services section, fill in all fields, and save.
+**To add a service:** click **New Services** at the top of the section, fill in the fields, and
+save.
 
 ---
 
 ## Adding or Editing Team Members
 
-The Team page only appears on your site if you have at least one person added here. If this section is empty, no Team link appears in the navigation and no Team page exists.
+The Team page lists everyone in this section, and the **Team** link in the site navigation appears
+only while at least one person is listed. Remove everyone and both the page and the link disappear
+on their own.
 
-**To add a team member:**
-1. Click **Team / People** in the left sidebar.
-2. Click **New Person**.
-3. Fill in:
-   - **Full Name** (required)
-   - **Role / Title** (optional — e.g., *Senior Landman*)
-   - **Photo** (optional — upload a headshot)
-   - **Display Order** (optional — controls order; lower numbers appear first)
-   - **Bio** (required — their professional biography)
-   - **Work & Experience Details** (optional — additional background or project history)
-4. Click **Save**.
+**To add someone:**
 
-The Team page and navigation link will appear automatically on the live site within 1–2 minutes.
+1. Click **Team / People**, then **New Person**.
+2. Fill in:
+   - **Full Name**, required
+   - **Role / Title**, optional
+   - **Photo**, optional
+   - **Display Order**, optional. Lower numbers appear first.
+   - **Bio**, required
+   - **Work & Experience Details**, optional
+3. Click **Save**.
 
-**To remove a team member:** Open their entry and click the **Delete** button (usually in the top right or a menu). After saving, if no team members remain, the Team page will disappear from the site automatically.
+The page updates within a minute or two.
+
+**To remove someone:** open their entry and click **Delete**.
 
 ---
 
 ## Uploading Photos and Images
 
-1. Click any image field (headshot, logo, hero background, etc.).
+1. Click any image field.
 2. Click **Choose an image**.
-3. To upload a new photo: click **Upload** and select the file from your computer.
-4. To use a photo you've already uploaded: browse the media library and click the image.
-5. Click **Choose selected** to apply it.
-6. Save the page.
+3. Either click **Upload** and pick a file from your computer, or choose something already in the
+   media library.
+4. Click **Choose selected**, then save the page.
 
-**Recommended formats:** JPG or PNG. Keep file sizes under 2 MB for fast loading.
-
----
-
-## Frequently Asked Questions
-
-**Q: I saved a change but the site doesn't look different yet.**
-A: The site rebuilds automatically after every save, which takes about 1–2 minutes. Wait a moment and refresh the page. If it still hasn't updated after 5 minutes, contact your web contact.
-
-**Q: I accidentally deleted something. Can I undo it?**
-A: Every save is recorded in the site's history. Contact your web contact — they can restore any previous version.
-
-**Q: The contact form stopped working.**
-A: Check that the **Contact Form Access Key** in Site Settings is still correct. The Web3Forms free plan allows 250 submissions per month — if that limit is reached, submissions will stop until the next month or until you upgrade.
-
-**Q: I want to change the domain or move the site.**
-A: Contact your web contact — domain and hosting changes require technical steps that can't be done through the editor.
-
-**Q: Can I add a new page?**
-A: New pages require a code change. Contact your web contact to request one.
+Use JPG or PNG, and keep files under about 2 MB so pages stay quick to load.
 
 ---
 
-## Need Help?
+## Common Questions
 
-If something isn't working or you're unsure what to do, don't worry — nothing you do in the editor can break the site permanently. Every change is saved and reversible. When in doubt, just reach out to your web contact.
+**I saved a change but the site looks the same.**
+The rebuild takes a minute or two. Wait a moment and refresh. If nothing has changed after five
+minutes, let me know.
+
+**I deleted something by accident. Can it come back?**
+Yes. Every save is recorded in the site's history and any previous version can be restored. Tell
+me roughly what it was and when, and I'll put it back.
+
+**The contact form stopped working.**
+Check that the **Contact Form Access Key** in Site Settings is still filled in and correct. The
+free Web3Forms plan allows 250 submissions a month, and submissions stop once that's reached until
+the next month or the plan is upgraded.
+
+**I want to change the domain, or move the site somewhere else.**
+That one needs technical steps outside the editor. Get in touch with me.
+
+**Can I add a new page?**
+New pages need a code change. Let me know what you have in mind.
+
+---
+
+## If You Get Stuck
+
+Nothing you do in the editor can permanently break the site. Every change is saved and every
+change is reversible. If something looks wrong or you're not sure what a field does, leave it and
+ask me rather than guessing.
