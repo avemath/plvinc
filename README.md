@@ -39,8 +39,8 @@ plvinc/
 │   │   ├── settings.json        # Global site settings
 │   │   ├── us-states.json       # State paths and labels for the coverage map
 │   │   └── pages/               # One file per page: home, about, services,
-│   │                            #   mineral-owners, experience, people,
-│   │                            #   insights, contact
+│   │                            #   mineral-owners, experience, insights,
+│   │                            #   contact
 │   ├── components/              # Nav, Footer, SEO, ContactForm, CoverageMap,
 │   │                            #   CallToAction, ServiceCard, ServiceList
 │   ├── layouts/Base.astro       # Shared HTML shell
@@ -70,8 +70,10 @@ plvinc/
 └── .nvmrc
 ```
 
-The Team page is generated from `src/content/people/`. It only exists when that folder has at
-least one entry; empty it and both the page and its nav link disappear.
+The people in `src/content/people/` render at the foot of the **About** page. About and Team were
+separate pages until About was down to a sentence that Team already said better; the methodology
+in "How We Work" belonged to neither, so it leads the merged page. `/people` 301s to `/about` via
+`public/_redirects`. Empty the folder and only the people section disappears, not the page.
 
 ---
 
@@ -213,8 +215,8 @@ object. It takes a `tone` of `dark` or `light`; interior pages use `light` so th
 close on the same green.
 
 **Sections hide when their data is empty.** The figures row, home testimonials, Selected Projects,
-the Mineral Owners FAQ, the Team page and Insights all render nothing at all when their list is
-empty, rather than leaving a heading over a gap. Insights goes further and drops out of the nav,
+the Mineral Owners FAQ, the About page's people and Insights all render nothing at all when their
+list is empty, rather than leaving a heading over a gap. Insights goes further and drops out of the nav,
 the footer and the sitemap until a post exists. Keep that behaviour when adding anything similar,
 because it is what lets the owner switch a section off without asking for a code change.
 

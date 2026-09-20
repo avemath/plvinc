@@ -754,38 +754,16 @@ hr.divider {
 /* ============================================================
    About page
    ============================================================ */
-.about-grid {
-  display: grid;
-  grid-template-columns: 280px 1fr;
-  gap: 4rem;
-  align-items: start;
-}
+
 
 /* Used when no headshot is set — single centered column */
-.about-full {
-  max-width: 780px;
-  margin: 0 auto;
-}
 
-.about-photo {
-  border-radius: var(--radius-lg);
-  width: 100%;
-  box-shadow: var(--shadow-md);
-}
 
-.about-photo-placeholder {
-  width: 100%;
-  aspect-ratio: 3/4;
-  background: var(--green-pale);
-  border-radius: var(--radius-lg);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: var(--green-mid);
-  font-size: 4rem;
-}
 
-.about-section { margin-bottom: 2.5rem; }
+
+
+
+.about-intro { font-size: 1.05rem; color: var(--text-muted); margin-bottom: 2.5rem; }
 
 .about-bio { font-size: 1.05rem; color: var(--text-muted); line-height: 1.85; }
 .about-bio p { margin-bottom: 1.1rem; }
@@ -1393,12 +1371,6 @@ a.contact-detail-value:hover { color: var(--green-dark); }
    Responsive
    ============================================================ */
 @media (max-width: 900px) {
-  .about-grid {
-    grid-template-columns: 1fr;
-    gap: 2.5rem;
-  }
-  .about-photo,
-  .about-photo-placeholder { max-width: 240px; }
 
   .contact-grid {
     grid-template-columns: 1fr;
@@ -1672,3 +1644,21 @@ a.contact-detail-value:hover { color: var(--green-dark); }
   text-underline-offset: 2px;
 }
 .person-linkedin a:hover { color: var(--green-dark); }
+
+/* Affiliations band. A membership with an outbound link, set apart from the people above
+   so it reads as a footnote rather than another section competing for attention. */
+.affiliations-band {
+  padding: 0 0 4rem;
+  text-align: center;
+}
+
+.affiliations-heading {
+  font-size: .75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: .12em;
+  color: var(--text-light);
+  margin-bottom: .9rem;
+}
+
+.affiliations-band .affiliations-list { justify-content: center; }

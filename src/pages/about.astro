@@ -1,29 +1,67 @@
 ---
 import Base from '../layouts/Base.astro';
 import CallToAction from '../components/CallToAction.astro';
-import { getCollection } from 'astro:content';
+import { getCollection, render } from 'astro:content';
 import { renderMarkdown } from '../utils/markdown';
 import about from '../data/pages/about.json';
 import settings from '../data/settings.json';
 
-const bioHtml      = await renderMarkdown(about.bio);
+const introHtml    = await renderMarkdown(about.intro);
 const approachHtml = await renderMarkdown(about.approach);
 
-// About covers the firm; Team covers the people. The two pages describe overlapping
-// ground, so point at the fuller treatment rather than leaving the reader to find it.
-let hasPeople = false;
+// About and Team were separate pages describing overlapping ground: About named both
+// landmen and their credential, which Team then repeated with full bios. They are one page
+// now. How We Work is the part that belonged to neither, so it leads.
+let people: Awaited<ReturnType<typeof getCollection<'people'>>> = [];
 try {
-  hasPeople = (await getCollection('people')).length > 0;
+  people = await getCollection('people');
 } catch {
-  hasPeople = false;
+  people = [];
 }
+
+const sorted = [...people].sort(
+  (a, b) => (a.data.sort_order ?? 0) - (b.data.sort_order ?? 0)
+);
+
+const rendered = await Promise.all(
+  sorted.map(async (person) => {
+    const { Content }    = await render(person);
+    const experienceHtml = await renderMarkdown(person.data.experience_details);
+    return { person, Content, experienceHtml };
+  })
+);
+
+// One Person entry per landman, each carrying the CPL credential the bios claim. Only
+// emitted when there is somebody to describe.
+const schema = sorted.length > 0
+  ? {
+      '@context': 'https://schema.org',
+      '@graph': sorted.map((person) => ({
+        '@type': 'Person',
+        name: person.data.name,
+        ...(person.data.role ? { jobTitle: person.data.role } : {}),
+        hasCredential: {
+          '@type': 'EducationalOccupationalCredential',
+          credentialCategory: 'professional certification',
+          name: 'Certified Professional Landman (CPL)',
+          recognizedBy: {
+            '@type': 'Organization',
+            name: 'American Association of Professional Landmen',
+          },
+        },
+        worksFor: { '@type': 'Organization', name: settings.professional_name },
+        ...(person.data.photo ? { image: new URL(person.data.photo, Astro.site).toString() } : {}),
+        ...(person.data.linkedin_url ? { sameAs: [person.data.linkedin_url] } : {}),
+      })),
+    }
+  : undefined;
 ---
 
 <Base
   title={about.page_title}
   description={about.meta_description}
+  schema={schema}
 >
-  <!-- ─── Page header ─── -->
   <div class="page-header">
     <div class="container">
       <h1>About</h1>
@@ -31,72 +69,102 @@ try {
     </div>
   </div>
 
-  <!-- ─── Bio + photo ─── -->
+  <!-- ─── Positioning, then the methodology ─── -->
   <section>
-    <div class="container">
-      <div class={about.headshot ? 'about-grid' : 'about-full'}>
-        <!-- Photo column — only rendered when a headshot is set -->
-        {about.headshot && (
-          <div class="about-photo-col">
-            <img
-              src={about.headshot}
-              alt=""
-              class="about-photo"
-            />
-          </div>
-        )}
+    <div class="container container-narrow">
+      <div class="prose about-intro" set:html={introHtml} />
 
-        <!-- Text column -->
-        <div>
-          <div class="about-section about-bio" set:html={bioHtml} />
-
-          {about.credentials.length > 0 && (
-            <div class="about-section">
-              <h2>Credentials</h2>
-              <ul class="credentials-list" role="list">
-                {about.credentials.map((c) => (
-                  <li class="credential-item">
-                    <span class="credential-name">{c.name}</span>
-                    <span class="credential-meta">{c.issuer}{c.year ? ` · ${c.year}` : ''}</span>
-                  </li>
-                ))}
-              </ul>
-            </div>
-          )}
-
-          {about.affiliations.length > 0 && (
-            <div class="about-section">
-              <h2>Affiliations</h2>
-              <ul class="affiliations-list" role="list">
-                {about.affiliations.map((a) => (
-                  <li>
-                    {a.url
-                      ? <a href={a.url} class="affiliation-tag" target="_blank" rel="noopener noreferrer">{a.name}</a>
-                      : <span class="affiliation-tag">{a.name}</span>
-                    }
-                  </li>
-                ))}
-              </ul>
-            </div>
-          )}
-        </div>
-      </div>
-
-      <!-- Approach block — full width below the grid -->
       <div class="approach-section">
         <h2>{about.approach_headline}</h2>
         <div class="approach-body" set:html={approachHtml} />
       </div>
-
-      {hasPeople && (
-        <p class="section-aside">
-          Full background on each landman is on the <a href="/people">team page</a>.
-        </p>
-      )}
     </div>
   </section>
 
-  <!-- ─── CTA ─── -->
+  <!-- ─── The people. Hidden entirely when nobody is listed, so the page above survives. ─── -->
+  {rendered.length > 0 && (
+    <section class="section-alt">
+      <div class="container">
+        <div class="section-header">
+          <span class="section-label">{about.team_label}</span>
+          <h2>{about.team_headline}</h2>
+        </div>
+
+        <div class="people-grid">
+          {rendered.map(({ person, Content, experienceHtml }) => (
+            <article class="person-card">
+              {person.data.photo
+                ? <img
+                    src={person.data.photo}
+                    alt={`${person.data.name}, professional photo`}
+                    class="person-photo"
+                    width="800"
+                    height="800"
+                    loading="lazy"
+                    decoding="async"
+                  />
+                : <div class="person-photo-placeholder" aria-hidden="true">👤</div>
+              }
+
+              <div class="person-info">
+                <h3 class="person-name">{person.data.name}</h3>
+                {person.data.role && (
+                  <p class="person-role">{person.data.role}</p>
+                )}
+
+                {person.data.linkedin_url && (
+                  <p class="person-linkedin">
+                    <a
+                      href={person.data.linkedin_url}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
+                      {person.data.name} on LinkedIn
+                    </a>
+                  </p>
+                )}
+
+                <div class="person-bio">
+                  <Content />
+                </div>
+
+                {person.data.experience_details && (
+                  <div class="person-experience">
+                    <span class="person-experience-label">Background</span>
+                    <div
+                      class="person-experience-body"
+                      set:html={experienceHtml}
+                    />
+                  </div>
+                )}
+              </div>
+            </article>
+          ))}
+        </div>
+      </div>
+    </section>
+  )}
+
+  <!-- ─── Affiliations. A membership with an outbound link, not a restatement of the
+       credential each person card already carries. ─── -->
+  {about.affiliations.length > 0 && (
+    <section class="affiliations-band">
+      <div class="container container-narrow">
+        <h2 class="affiliations-heading">Affiliations</h2>
+        <ul class="affiliations-list" role="list">
+          {about.affiliations.map((a) => (
+            <li>
+              {a.url
+                ? <a href={a.url} class="affiliation-tag" target="_blank" rel="noopener noreferrer">{a.name}</a>
+                : <span class="affiliation-tag">{a.name}</span>
+              }
+            </li>
+          ))}
+        </ul>
+      </div>
+    </section>
+  )}
+
   <CallToAction
     headline={about.cta.headline}
     text={about.cta.text}

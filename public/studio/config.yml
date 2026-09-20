@@ -366,14 +366,8 @@ collections:
             widget: text
             hint: "The sentence shown under this page's title in Google results. Around 155 characters."
 
-          - label: "Headshot / Professional Photo"
-            name: headshot
-            widget: image
-            required: false
-            hint: "Your professional photo. Square or portrait orientation works best. Leave blank to hide the photo."
-
-          - label: "Bio"
-            name: bio
+          - label: "Introduction"
+            name: intro
             widget: markdown
             hint: "Your full professional biography. This is the main text on the About page."
 
@@ -386,6 +380,15 @@ collections:
             name: approach
             widget: markdown
             hint: "Describe your working philosophy, approach to projects, and what clients can expect."
+
+          - label: "Team Section Label"
+            name: team_label
+            widget: string
+            hint: "Small uppercase label above the people on this page."
+
+          - label: "Team Section Headline"
+            name: team_headline
+            widget: string
 
           - label: "Credentials & Certifications"
             name: credentials
@@ -845,192 +848,4 @@ collections:
                 name: button
                 widget: string
 
-      - name: people_page
-        label: "Team Page"
-        file: src/data/pages/people.json
-        format: json
-        fields:
-          - label: "Page Subtitle"
-            name: page_subtitle
-            widget: text
-            hint: "The line under the page title in the green band at the top of the Team page."
 
-          - label: "Page Title"
-            name: page_title
-            widget: string
-            hint: "The browser tab title and the blue headline in Google results. Keep it under about 60 characters."
-
-          - label: "Search Description"
-            name: meta_description
-            widget: text
-            hint: "The sentence shown under this page's title in Google results. Around 155 characters."
-
-          - label: "Closing Call to Action"
-            name: cta
-            widget: object
-            hint: "The band at the bottom of the Team page."
-            fields:
-              - label: "Headline"
-                name: headline
-                widget: string
-              - label: "Text"
-                name: text
-                widget: text
-                required: false
-              - label: "Button Text"
-                name: button
-                widget: string
-
-
-  # ──────────────────────────────────────────────────────────────
-  # SERVICES
-  # ──────────────────────────────────────────────────────────────
-  - name: services
-    label: "🛠️ Services"
-    label_singular: "Service"
-    folder: src/content/services
-    create: true
-    slug: "{{slug}}"
-    format: frontmatter
-    extension: md
-    summary: "{{sort_order}}. {{title}}"
-    fields:
-      - label: "Service Title"
-        name: title
-        widget: string
-        hint: "The name of this service as shown on the website."
-
-      - label: "Card Description"
-        name: card_description
-        widget: string
-        hint: "Short description shown on the Services overview page — 1 to 2 sentences, ideally under 160 characters."
-
-      - label: "Page Title (search)"
-        name: seo_title
-        widget: string
-        required: false
-        hint: "The browser tab title and the headline in Google results for this service. Under about 60 characters. Leave blank to use the service title."
-
-      - label: "Search Description"
-        name: seo_description
-        widget: text
-        required: false
-        hint: "The sentence under this service in Google results. Under about 160 characters. Leave blank to use the card description."
-
-      - label: "Full Description"
-        name: body
-        widget: markdown
-        hint: "Detailed description shown on this service's individual page. Bullet lists work well here."
-
-      - label: "Icon / Symbol"
-        name: icon
-        widget: string
-        required: false
-        hint: "Optional emoji shown next to the service title (e.g., ⚖️ or 🔍). Leave blank for none."
-
-      - label: "Display Order"
-        name: sort_order
-        widget: number
-        default: 0
-        value_type: int
-        hint: "Controls the order services appear. Lower numbers come first (1, 2, 3...)."
-
-  # ──────────────────────────────────────────────────────────────
-  # PEOPLE / TEAM
-  # ──────────────────────────────────────────────────────────────
-  - name: people
-    label: "👤 Team / People"
-    label_singular: "Person"
-    folder: src/content/people
-    create: true
-    slug: "{{name | slugify}}"
-    format: frontmatter
-    extension: md
-    summary: "{{name}}{{role | ternary(' — ', '')}}{{role}}"
-    description: "Add people here to create a Team page. The page and navigation link appear automatically once at least one person is added. Leave this section empty to hide the Team page entirely."
-    fields:
-      - label: "Full Name"
-        name: name
-        widget: string
-        required: true
-        hint: "This person's full name as it should appear on the website."
-
-      - label: "Role / Title"
-        name: role
-        widget: string
-        required: false
-        hint: "Optional professional title (e.g., Senior Landman, Project Manager). Leave blank to omit."
-
-      - label: "LinkedIn URL"
-        name: linkedin_url
-        widget: string
-        required: false
-        hint: "The full web address of this person's LinkedIn profile. Leave blank to hide the link."
-
-      - label: "Photo"
-        name: photo
-        widget: image
-        required: false
-        hint: "Optional professional headshot. Square or portrait orientation works best. Leave blank to omit."
-
-      - label: "Display Order"
-        name: sort_order
-        widget: number
-        required: false
-        default: 0
-        value_type: int
-        hint: "Order in which this person appears on the Team page. Lower numbers appear first."
-
-      - label: "Bio"
-        name: body
-        widget: markdown
-        required: true
-        hint: "This person's professional biography."
-
-      - label: "Work & Experience Details"
-        name: experience_details
-        widget: markdown
-        required: false
-        hint: "Optional section for additional work history, notable projects, or areas of expertise. Leave blank to omit."
-
-  # ──────────────────────────────────────────────────────────────
-  # INSIGHTS
-  # ──────────────────────────────────────────────────────────────
-  - name: insights
-    label: "📝 Insights"
-    label_singular: "Insight"
-    folder: src/content/insights
-    create: true
-    slug: "{{title | slugify}}"
-    format: frontmatter
-    summary: "{{title}}"
-    sortable_fields: ["date", "title"]
-    hint: "Short articles. Until you write one, the Insights page and its menu link do not appear on the site at all."
-    fields:
-      - label: "Title"
-        name: title
-        widget: string
-
-      - label: "Date"
-        name: date
-        widget: datetime
-        date_format: "YYYY-MM-DD"
-        time_format: false
-        picker_utc: false
-        hint: "Posts are listed newest first."
-
-      - label: "Summary"
-        name: summary
-        widget: text
-        hint: "One or two sentences shown in the list and used by search engines."
-
-      - label: "Image"
-        name: image
-        widget: image
-        required: false
-        hint: "Optional. Shown beside the summary in the list. Leave blank to omit it."
-
-      - label: "Body"
-        name: body
-        widget: markdown
-        hint: "The article itself."

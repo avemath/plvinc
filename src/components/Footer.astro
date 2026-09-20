@@ -20,14 +20,6 @@ const { settings } = Astro.props;
 const year = new Date().getFullYear();
 const name = settings.footer_name || settings.professional_name;
 
-// Mirror the main nav: Team only exists while someone is listed.
-let hasPeople = false;
-try {
-  hasPeople = (await getCollection('people')).length > 0;
-} catch {
-  hasPeople = false;
-}
-
 let hasInsights = false;
 try {
   hasInsights = (await getCollection('insights')).length > 0;
@@ -103,7 +95,6 @@ const location = settings.city && settings.state
         <a href="/services">Services</a>
         <a href="/mineral-owners">Mineral Owners</a>
         <a href="/experience">Experience</a>
-        {hasPeople && <a href="/people">Team</a>}
         {hasInsights && <a href="/insights">Insights</a>}
         <a href="/contact">Contact</a>
       </nav>

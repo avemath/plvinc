@@ -11,14 +11,6 @@ interface Props {
 }
 
 const { settings } = Astro.props;
-let hasPeople = false;
-try {
-  const people = await getCollection('people');
-  hasPeople = people.length > 0;
-} catch {
-  hasPeople = false;
-}
-
 // Insights is dormant until something is written, so the link only appears then.
 let hasInsights = false;
 try {
@@ -78,9 +70,6 @@ const telHref = settings.phone ? `tel:${settings.phone.replace(/[^\d+]/g, '')}` 
       <li><a href="/services"   aria-current={isActive('/services')   ? 'page' : undefined}>Services</a></li>
       <li><a href="/mineral-owners" aria-current={isActive('/mineral-owners') ? 'page' : undefined}>Mineral Owners</a></li>
       <li><a href="/experience" aria-current={isActive('/experience') ? 'page' : undefined}>Experience</a></li>
-      {hasPeople && (
-        <li><a href="/people"   aria-current={isActive('/people')     ? 'page' : undefined}>Team</a></li>
-      )}
       {hasInsights && (
         <li><a href="/insights" aria-current={isActive('/insights')   ? 'page' : undefined}>Insights</a></li>
       )}

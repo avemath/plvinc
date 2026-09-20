@@ -33,9 +33,9 @@ The left sidebar lists everything you can edit:
 | Section | What it controls |
 |---|---|
 | **Site Settings** | Your name, logos, phone, email, city, LinkedIn, site description |
-| **Pages** | The content on Home, About, Services, Mineral Owners, Experience, Team, Insights and Contact |
+| **Pages** | The content on Home, About, Services, Mineral Owners, Experience, Insights and Contact |
 | **Services** | Each of the six service pages |
-| **Team / People** | The people shown on the Team page |
+| **Team / People** | The people shown at the foot of the About page |
 | **Insights** | Short articles. Empty to begin with. |
 
 Click a section name to open it.
@@ -59,8 +59,9 @@ empty, the whole section disappears from the page, headings and all. Nothing loo
 empty box is left behind.
 
 That applies to the figures under the hero, the home page testimonials, Selected Projects on the
-Experience page, the questions on the Mineral Owners page, the Team page, and Insights. Emptying a
-list is a normal way to turn a section off, and filling it again turns it back on.
+Experience page, the questions on the Mineral Owners page, the people on the About page, and
+Insights. Emptying a list is a normal way to turn a section off, and filling it again turns it
+back on.
 
 ---
 
@@ -125,16 +126,25 @@ The section stays hidden until you add the first one.
 
 ## Editing the About Page
 
+About and Team used to be separate pages. They are one page now: it opens with how you work, then
+introduces the people who do the work. The wording for both lives here, while the people themselves
+are still edited under **Team / People**.
+
 1. Click **Pages**, then **About Page**.
 2. Edit the fields and click **Save**.
 
-**To upload a headshot:** click the **Headshot / Professional Photo** field, then **Choose an
-image**, then **Upload**, and pick the file. It appears on the site once you save.
+The **Introduction** is the short opening paragraph about who you serve. **How We Work** is the
+section below it, and it is the strongest writing on the site, so it is worth keeping sharp.
+
+**Team Section Label** and **Team Section Headline** are the small heading above the people. Adding
+or removing a person happens under **Team / People**, not here.
 
 **To add a credential:** scroll to **Credentials & Certifications**, click **Add**, and fill in the
-name, issuing organization, and year. Repeat for each one.
+name, issuing organization, and year. This list is empty, because both landmen already show their
+CPL on their own cards. Anything you add appears above the Affiliations line.
 
-**To add an affiliation:** same process, under **Affiliations & Memberships**.
+**To add an affiliation:** same process, under **Affiliations & Memberships**. These show as small
+tags at the foot of the page, and link out if you give them a web address.
 
 ---
 
@@ -199,9 +209,9 @@ save.
 
 ## Adding or Editing Team Members
 
-The Team page lists everyone in this section, and the **Team** link in the site navigation appears
-only while at least one person is listed. Remove everyone and both the page and the link disappear
-on their own.
+Everyone in this section appears near the bottom of the **About** page. There is no separate Team
+page any more. Remove everyone and that part of About disappears on its own, while the rest of the
+page carries on as normal.
 
 **To add someone:**
 
@@ -216,7 +226,7 @@ on their own.
    - **Work & Experience Details**, optional
 3. Click **Save**.
 
-The page updates within a minute or two.
+The About page updates within a minute or two.
 
 **To remove someone:** open their entry and click **Delete**.
 

@@ -1,27 +1,22 @@
 {
-  "headshot": "",
-  "bio": "Rickey Matherne, Jr., CPL and Shannon Matherne, CPL hold the Certified Professional Landman designation from the American Association of Professional Landmen and work files directly.\n\nClients include operators, exploration companies, independent producers, mineral and royalty owners, and institutional investors. Engagements range from single-tract curative work to multi-county leasing programs, A&D packages, and portfolio-scale due diligence.",
+  "page_title": "About | Certified Professional Landmen, Gulf Coast",
+  "meta_description": "How Petro Land Ventures works files, and the Certified Professional Landmen who work them, across Louisiana, East Texas and the Gulf Coast.",
+  "page_subtitle": "How we work, and who does the work.",
+  "intro": "Clients include operators, exploration companies, independent producers, mineral and royalty owners, and institutional investors. Engagements range from single-tract curative work to multi-county leasing programs, A&D packages, and portfolio-scale due diligence.",
   "approach_headline": "How We Work",
   "approach": "Title work is run to the end of the chain rather than to the first clean deed. Defects frequently sit several conveyances back, in probate and heirship records filed outside the expected county or index.\n\nWhere the record is unclear, it is reported as unclear rather than resolved by assumption. Reports state what was found, what it means, and what the options are, and are written to be handed directly to counsel, a lender, or a buyer's diligence team.\n\nThe same standard applies to every project, regardless of size.",
-  "credentials": [
-    {
-      "name": "Certified Professional Landman (CPL)",
-      "issuer": "American Association of Professional Landmen (AAPL)",
-      "year": ""
-    }
-  ],
+  "team_label": "The Team",
+  "team_headline": "Who Does the Work",
+  "credentials": [],
   "affiliations": [
     {
       "name": "American Association of Professional Landmen (AAPL)",
       "url": "https://www.landman.org"
     }
   ],
-  "page_subtitle": "CPL-credentialed professionals. Thorough work. Clear communication.",
-  "meta_description": "How Petro Land Ventures works files: title run to the end of the chain, and reports written to hand straight to counsel, a lender or a buyer's diligence team.",
   "cta": {
     "headline": "Let's Work Together",
     "text": "Ready to discuss a project? Reach out and let's talk about scope, timeline, and fit.",
     "button": "Start a Conversation"
-  },
-  "page_title": "About | Certified Professional Landmen, Gulf Coast"
+  }
 }
