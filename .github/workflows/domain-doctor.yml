@@ -27,10 +27,13 @@ jobs:
       PROJECT: plvinc
       TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
     steps:
+      # .result.id identifies WHICH dashboard token this secret holds. It is an identifier,
+      # not a credential — the token value itself is never printed. Match it against the id
+      # in the URL when you open a token from the API Tokens list.
       - name: Token scope check
         run: |
           curl -sS "$CF_API/user/tokens/verify" -H "Authorization: Bearer $TOKEN" \
-            | jq '{ok:.success, status:.result.status, errors:[.errors[]?.message]}'
+            | jq '{ok:.success, token_id:.result.id, status:.result.status, errors:[.errors[]?.message]}'
 
       - name: Pages project state
         run: |
