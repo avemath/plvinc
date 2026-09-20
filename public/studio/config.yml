@@ -245,26 +245,52 @@ collections:
                     widget: text
                     hint: "A plain-language sentence explaining what this play is and where it sits. Written for clients who are not landmen."
 
-          - label: "Closing Section Headline"
-            name: closing_headline
+          - label: "Services Section Label"
+            name: services_label
             widget: string
-            hint: "Headline for the call-to-action section at the bottom of the home page."
+            hint: "Small uppercase label above the services headline (e.g., What We Do)."
 
-          - label: "Closing Section Text"
-            name: closing_text
+          - label: "Services Section Headline"
+            name: services_headline
             widget: string
-            hint: "One or two sentences inviting visitors to get in touch."
+            hint: "Headline for the services section on the home page (e.g., Land Services)."
 
-          - label: "Closing Button Text"
-            name: closing_cta_text
-            widget: string
-            hint: "Text on the closing call-to-action button (e.g., Get in Touch)."
+          - label: "Services Section Intro"
+            name: services_intro
+            widget: text
+            hint: "A sentence or two below the services headline, before the service cards."
+
+          - label: "Closing Call to Action"
+            name: cta
+            widget: object
+            hint: "The band at the bottom of the home page. Each page has its own — vary the wording so they do not all read the same."
+            fields:
+              - label: "Headline"
+                name: headline
+                widget: string
+              - label: "Text"
+                name: text
+                widget: text
+                required: false
+              - label: "Button Text"
+                name: button
+                widget: string
 
       - name: about
         label: "About Page"
         file: src/data/pages/about.json
         format: json
         fields:
+          - label: "Page Subtitle"
+            name: page_subtitle
+            widget: text
+            hint: "The line under the page title in the green band at the top of the About page."
+
+          - label: "Search Description"
+            name: meta_description
+            widget: text
+            hint: "The sentence shown under this page's title in Google results. Around 155 characters."
+
           - label: "Headshot / Professional Photo"
             name: headshot
             widget: image
@@ -318,11 +344,37 @@ collections:
                 required: false
                 hint: "e.g., https://www.landman.org — leave blank if you do not want a link."
 
+          - label: "Closing Call to Action"
+            name: cta
+            widget: object
+            hint: "The band at the bottom of the About page."
+            fields:
+              - label: "Headline"
+                name: headline
+                widget: string
+              - label: "Text"
+                name: text
+                widget: text
+                required: false
+              - label: "Button Text"
+                name: button
+                widget: string
+
       - name: experience
         label: "Experience Page"
         file: src/data/pages/experience.json
         format: json
         fields:
+          - label: "Page Subtitle"
+            name: page_subtitle
+            widget: text
+            hint: "The line under the page title in the green band at the top of the Experience page."
+
+          - label: "Search Description"
+            name: meta_description
+            widget: text
+            hint: "The sentence shown under this page's title in Google results. Around 155 characters."
+
           - label: "Introduction"
             name: intro
             widget: markdown
@@ -376,11 +428,64 @@ collections:
                 widget: string
                 hint: "e.g., Land Manager, XYZ Energy"
 
+          - label: "Where We've Worked — Label"
+            name: states_label
+            widget: string
+            hint: "Small uppercase label above the states section (e.g., Track Record)."
+
+          - label: "Where We've Worked — Headline"
+            name: states_headline
+            widget: string
+
+          - label: "Project Types — Label"
+            name: project_types_label
+            widget: string
+            hint: "Small uppercase label above the project types section (e.g., Scope)."
+
+          - label: "Project Types — Headline"
+            name: project_types_headline
+            widget: string
+
+          - label: "Testimonials — Label"
+            name: testimonials_label
+            widget: string
+            hint: "Only shown when at least one testimonial is added below."
+
+          - label: "Testimonials — Headline"
+            name: testimonials_headline
+            widget: string
+
+          - label: "Closing Call to Action"
+            name: cta
+            widget: object
+            hint: "The band at the bottom of the Experience page."
+            fields:
+              - label: "Headline"
+                name: headline
+                widget: string
+              - label: "Text"
+                name: text
+                widget: text
+                required: false
+              - label: "Button Text"
+                name: button
+                widget: string
+
       - name: contact
         label: "Contact Page"
         file: src/data/pages/contact.json
         format: json
         fields:
+          - label: "Search Description"
+            name: meta_description
+            widget: text
+            hint: "The sentence shown under this page's title in Google results. Around 155 characters."
+
+          - label: "Contact Details Headline"
+            name: details_headline
+            widget: string
+            hint: "Heading above your phone, email and service area (e.g., Reach Out Directly)."
+
           - label: "Intro Text"
             name: intro
             widget: string
@@ -406,6 +511,69 @@ collections:
             widget: text
             required: false
             hint: "Optional mailing address. Leave blank to omit from the page."
+
+      - name: services_page
+        label: "Services Page"
+        file: src/data/pages/services.json
+        format: json
+        fields:
+          - label: "Page Subtitle"
+            name: page_subtitle
+            widget: text
+            hint: "The line under the page title in the green band at the top of the Services page."
+
+          - label: "Search Description"
+            name: meta_description
+            widget: text
+            hint: "The sentence shown under this page's title in Google results. Around 155 characters."
+
+          - label: "Closing Call to Action"
+            name: cta
+            widget: object
+            hint: "The band at the bottom of the Services page."
+            fields:
+              - label: "Headline"
+                name: headline
+                widget: string
+              - label: "Text"
+                name: text
+                widget: text
+                required: false
+              - label: "Button Text"
+                name: button
+                widget: string
+
+      - name: people_page
+        label: "Team Page"
+        file: src/data/pages/people.json
+        format: json
+        fields:
+          - label: "Page Subtitle"
+            name: page_subtitle
+            widget: text
+            hint: "The line under the page title in the green band at the top of the Team page."
+
+          - label: "Search Description"
+            name: meta_description
+            widget: text
+            hint: "The sentence shown under this page's title in Google results. Around 155 characters."
+
+          - label: "Closing Call to Action"
+            name: cta
+            widget: object
+            hint: "The band at the bottom of the Team page."
+            fields:
+              - label: "Headline"
+                name: headline
+                widget: string
+              - label: "Text"
+                name: text
+                widget: text
+                required: false
+              - label: "Button Text"
+                name: button
+                widget: string
+
 
   # ──────────────────────────────────────────────────────────────
   # SERVICES

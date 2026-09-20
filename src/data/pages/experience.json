@@ -61,5 +61,18 @@
       "label": "Mineral and surface ownership reports"
     }
   ],
-  "testimonials": []
+  "testimonials": [],
+  "page_subtitle": "Decades of active land work across major U.S. basins and plays.",
+  "meta_description": "Regional experience across Texas, Louisiana, Mississippi, Pennsylvania, Michigan, Ohio, Tennessee, and Washington — title, leasing, due diligence, right-of-way, and renewables.",
+  "states_label": "Track Record",
+  "states_headline": "Where We've Worked",
+  "project_types_label": "Scope",
+  "project_types_headline": "Project Types",
+  "testimonials_label": "From Clients",
+  "testimonials_headline": "What They Say",
+  "cta": {
+    "headline": "Have a Project in Your Region?",
+    "text": "Reach out to discuss the scope and how we can work together.",
+    "button": "Discuss Your Project"
+  }
 }

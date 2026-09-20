@@ -1,5 +1,6 @@
 ---
 import Base from '../layouts/Base.astro';
+import CallToAction from '../components/CallToAction.astro';
 import { renderMarkdown } from '../utils/markdown';
 import exp from '../data/pages/experience.json';
 import settings from '../data/settings.json';
@@ -10,29 +11,29 @@ const introHtml       = await renderMarkdown(exp.intro);
 
 <Base
   title={`Experience — ${settings.professional_name}`}
-  description={`Regional experience across Texas, Louisiana, Mississippi, Pennsylvania, Michigan, and the Gulf Coast — title, leasing, due diligence, ROW, and renewables.`}
+  description={exp.meta_description}
 >
   <div class="page-header">
     <div class="container">
       <h1>Experience</h1>
-      <p>Decades of active land work across major U.S. basins and plays.</p>
+      <p>{exp.page_subtitle}</p>
     </div>
   </div>
 
   <!-- Intro -->
   <section>
-    <div class="container" style="max-width:760px">
+    <div class="container container-narrow">
       <div class="experience-intro" set:html={introHtml} />
     </div>
   </section>
 
   <!-- States served -->
   {exp.states_served.length > 0 && (
-    <section style="background:var(--cream-dark); padding:4rem 0">
+    <section class="section-alt">
       <div class="container">
         <div class="section-header">
-          <span class="section-label">Track Record</span>
-          <h2>Where We've Worked</h2>
+          <span class="section-label">{exp.states_label}</span>
+          <h2>{exp.states_headline}</h2>
           <p>{exp.states_note}</p>
         </div>
         <div class="states-grid">
@@ -43,6 +44,9 @@ const introHtml       = await renderMarkdown(exp.intro);
             </div>
           ))}
         </div>
+        <p class="section-aside">
+          The <a href="/#coverage">coverage map</a> breaks these down by basin and play.
+        </p>
       </div>
     </section>
   )}
@@ -52,8 +56,8 @@ const introHtml       = await renderMarkdown(exp.intro);
     <section>
       <div class="container">
         <div class="section-header">
-          <span class="section-label">Scope</span>
-          <h2>Project Types</h2>
+          <span class="section-label">{exp.project_types_label}</span>
+          <h2>{exp.project_types_headline}</h2>
         </div>
         <ul class="project-types-list" role="list">
           {exp.project_types.map((p) => (
@@ -66,11 +70,11 @@ const introHtml       = await renderMarkdown(exp.intro);
 
   <!-- Testimonials -->
   {hasTestimonials && (
-    <section style="background:var(--cream-dark); padding:4rem 0">
+    <section class="section-alt">
       <div class="container">
         <div class="section-header">
-          <span class="section-label">From Clients</span>
-          <h2>What They Say</h2>
+          <span class="section-label">{exp.testimonials_label}</span>
+          <h2>{exp.testimonials_headline}</h2>
         </div>
         <div class="testimonials-grid">
           {exp.testimonials.map((t) => (
@@ -92,11 +96,10 @@ const introHtml       = await renderMarkdown(exp.intro);
   )}
 
   <!-- CTA -->
-  <section class="cta-band">
-    <div class="container">
-      <h2>Have a Project in Your Region?</h2>
-      <p>Reach out to discuss the scope and how we can work together.</p>
-      <a href="/contact" class="btn btn-white">Get in Touch →</a>
-    </div>
-  </section>
+  <CallToAction
+    headline={exp.cta.headline}
+    text={exp.cta.text}
+    button={exp.cta.button}
+    tone="light"
+  />
 </Base>

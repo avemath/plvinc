@@ -1,7 +1,9 @@
 ---
 import Base from '../layouts/Base.astro';
+import CallToAction from '../components/CallToAction.astro';
 import { getCollection, render } from 'astro:content';
 import { renderMarkdown } from '../utils/markdown';
+import page from '../data/pages/people.json';
 import settings from '../data/settings.json';
 
 let people: Awaited<ReturnType<typeof getCollection<'people'>>> = [];
@@ -30,12 +32,12 @@ const rendered = await Promise.all(
 
 <Base
   title={`Team — ${settings.professional_name}`}
-  description={`Meet the team at ${settings.professional_name} — experienced land professionals serving clients across the Gulf Coast, Appalachian, and Mid-Continent regions.`}
+  description={page.meta_description}
 >
   <div class="page-header">
     <div class="container">
       <h1>Team</h1>
-      <p>Experienced land professionals dedicated to thorough, reliable work.</p>
+      <p>{page.page_subtitle}</p>
     </div>
   </div>
 
@@ -80,11 +82,10 @@ const rendered = await Promise.all(
     </div>
   </section>
 
-  <section class="cta-band">
-    <div class="container">
-      <h2>Work With Us</h2>
-      <p>Ready to discuss a project? We'd love to hear from you.</p>
-      <a href="/contact" class="btn btn-white">Get in Touch →</a>
-    </div>
-  </section>
+  <CallToAction
+    headline={page.cta.headline}
+    text={page.cta.text}
+    button={page.cta.button}
+    tone="light"
+  />
 </Base>

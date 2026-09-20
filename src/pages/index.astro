@@ -2,6 +2,7 @@
 import Base from '../layouts/Base.astro';
 import ServiceCard from '../components/ServiceCard.astro';
 import CoverageMap from '../components/CoverageMap.astro';
+import CallToAction from '../components/CallToAction.astro';
 import { getCollection } from 'astro:content';
 import { renderMarkdown } from '../utils/markdown';
 import home from '../data/pages/home.json';
@@ -53,12 +54,9 @@ const valueParagraphHtml = await renderMarkdown(home.value_paragraph);
   <section>
     <div class="container">
       <div class="section-header">
-        <span class="section-label">What We Do</span>
-        <h2>Land Services</h2>
-        <p>
-          From initial title research to executed agreements, every service is delivered
-          with the thoroughness and direct communication that complex land work demands.
-        </p>
+        <span class="section-label">{home.services_label}</span>
+        <h2>{home.services_headline}</h2>
+        <p>{home.services_intro}</p>
       </div>
       <div class="services-grid">
         {sorted.map((svc) => (
@@ -74,13 +72,9 @@ const valueParagraphHtml = await renderMarkdown(home.value_paragraph);
   </section>
 
   <!-- ─── Closing CTA ─── -->
-  <section class="cta-band">
-    <div class="container">
-      <h2>{home.closing_headline}</h2>
-      <p>{home.closing_text}</p>
-      <a href="/contact" class="btn btn-white">
-        {home.closing_cta_text} <span aria-hidden="true">→</span>
-      </a>
-    </div>
-  </section>
+  <CallToAction
+    headline={home.cta.headline}
+    text={home.cta.text}
+    button={home.cta.button}
+  />
 </Base>

@@ -18,7 +18,7 @@ const worked = states.filter((s) => regionsByState.has(s.name));
 const base   = states.filter((s) => !regionsByState.has(s.name));
 ---
 
-<section class="coverage" aria-labelledby="coverage-heading">
+<section class="coverage" id="coverage" aria-labelledby="coverage-heading">
   <div class="container">
     <header class="coverage-header">
       <span class="section-label">{home.regions_label}</span>

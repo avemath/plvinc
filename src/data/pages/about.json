@@ -15,5 +15,12 @@
       "name": "American Association of Professional Landmen (AAPL)",
       "url": "https://www.landman.org"
     }
-  ]
+  ],
+  "page_subtitle": "CPL-credentialed professionals. Thorough work. Clear communication.",
+  "meta_description": "About Petro Land Ventures — CPL-credentialed land services with decades of combined experience in title research, lease acquisition, due diligence, and renewable land work.",
+  "cta": {
+    "headline": "Let's Work Together",
+    "text": "Ready to discuss a project? Reach out and let's talk about scope, timeline, and fit.",
+    "button": "Start a Conversation"
+  }
 }

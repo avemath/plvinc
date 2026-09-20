@@ -1,7 +1,9 @@
 ---
 import Base from '../../layouts/Base.astro';
 import ServiceCard from '../../components/ServiceCard.astro';
+import CallToAction from '../../components/CallToAction.astro';
 import { getCollection } from 'astro:content';
+import page from '../../data/pages/services.json';
 import settings from '../../data/settings.json';
 
 const services = await getCollection('services');
@@ -10,15 +12,12 @@ const sorted   = [...services].sort((a, b) => a.data.sort_order - b.data.sort_or
 
 <Base
   title={`Services — ${settings.professional_name}`}
-  description="Full-service land consulting: title research and curative, lease acquisition, A&D due diligence, mineral and royalty management, right-of-way, and solar and renewable land acquisition."
+  description={page.meta_description}
 >
   <div class="page-header">
     <div class="container">
       <h1>Services</h1>
-      <p>
-        Full-service land consulting across the complete project lifecycle — from
-        courthouse research through executed agreements and ongoing portfolio management.
-      </p>
+      <p>{page.page_subtitle}</p>
     </div>
   </div>
 
@@ -37,13 +36,10 @@ const sorted   = [...services].sort((a, b) => a.data.sort_order - b.data.sort_or
     </div>
   </section>
 
-  <section class="cta-band">
-    <div class="container">
-      <h2>Not Sure What You Need?</h2>
-      <p>
-        Describe the project and we'll talk through how to approach it — no obligation.
-      </p>
-      <a href="/contact" class="btn btn-white">Get in Touch →</a>
-    </div>
-  </section>
+  <CallToAction
+    headline={page.cta.headline}
+    text={page.cta.text}
+    button={page.cta.button}
+    tone="light"
+  />
 </Base>

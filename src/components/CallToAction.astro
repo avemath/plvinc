@@ -1,0 +1,33 @@
+---
+// The closing call to action, shared by every page. Previously this markup was
+// copy-pasted into five templates with the copy hardcoded, so the owner could not
+// change any of it and all five ended in the same button.
+//
+// `tone` alternates the background so a page does not open and close on the same
+// dark green band. Pages whose header is dark should pass tone="light".
+interface Props {
+  headline: string;
+  text?: string;
+  button?: string;
+  href?: string;
+  tone?: 'dark' | 'light';
+}
+
+const {
+  headline,
+  text,
+  button = 'Get in Touch',
+  href = '/contact',
+  tone = 'dark',
+} = Astro.props;
+---
+
+<section class:list={['cta-band', tone === 'light' && 'cta-band-light']}>
+  <div class="container">
+    <h2>{headline}</h2>
+    {text && <p>{text}</p>}
+    <a href={href} class:list={['btn', tone === 'light' ? 'btn-primary' : 'btn-white']}>
+      {button} <span aria-hidden="true">→</span>
+    </a>
+  </div>
+</section>

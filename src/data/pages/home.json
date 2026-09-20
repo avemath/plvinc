@@ -130,7 +130,12 @@
       ]
     }
   ],
-  "closing_headline": "Ready to Move Your Project Forward?",
-  "closing_text": "Send the project details — location, scope, and timeline — and we will outline the work involved.",
-  "closing_cta_text": "Get in Touch"
+  "services_label": "What We Do",
+  "services_headline": "Land Services",
+  "services_intro": "From initial title research to executed agreements, every service is delivered with the thoroughness and direct communication that complex land work demands.",
+  "cta": {
+    "headline": "Ready to Move Your Project Forward?",
+    "text": "Send the project details — location, scope, and timeline — and we will outline the work involved.",
+    "button": "Get in Touch"
+  }
 }

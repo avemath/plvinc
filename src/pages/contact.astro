@@ -7,7 +7,7 @@ import settings from '../data/settings.json';
 
 <Base
   title={`Contact — ${settings.professional_name}`}
-  description="Get in touch to discuss your land project — title research, lease acquisition, due diligence, ROW, or renewable energy land work."
+  description={contact.meta_description}
 >
   <div class="page-header">
     <div class="container">
@@ -22,7 +22,7 @@ import settings from '../data/settings.json';
 
         <!-- Contact details -->
         <div>
-          <h2>Reach Out Directly</h2>
+          <h2>{contact.details_headline}</h2>
           <div class="contact-details">
             {contact.phone && (
               <div>
@@ -59,7 +59,7 @@ import settings from '../data/settings.json';
             {contact.mailing_address && (
               <div>
                 <span class="contact-detail-label">Mailing Address</span>
-                <address class="contact-detail-value" style="font-style:normal; white-space:pre-line">
+                <address class="contact-detail-value contact-address">
                   {contact.mailing_address}
                 </address>
               </div>

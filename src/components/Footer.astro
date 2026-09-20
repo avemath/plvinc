@@ -1,4 +1,6 @@
 ---
+import { getCollection } from 'astro:content';
+
 interface Props {
   settings: {
     professional_name: string;
@@ -13,6 +15,14 @@ interface Props {
 const { settings } = Astro.props;
 const year = new Date().getFullYear();
 const name = settings.footer_name || settings.professional_name;
+
+// Mirror the main nav: Team only exists while someone is listed.
+let hasPeople = false;
+try {
+  hasPeople = (await getCollection('people')).length > 0;
+} catch {
+  hasPeople = false;
+}
 ---
 
 <footer class="site-footer">
@@ -52,6 +62,7 @@ const name = settings.footer_name || settings.professional_name;
         <a href="/about">About</a>
         <a href="/services">Services</a>
         <a href="/experience">Experience</a>
+        {hasPeople && <a href="/people">Team</a>}
         <a href="/contact">Contact</a>
       </nav>
     </div>

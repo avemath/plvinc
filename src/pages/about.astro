@@ -1,5 +1,6 @@
 ---
 import Base from '../layouts/Base.astro';
+import CallToAction from '../components/CallToAction.astro';
 import { renderMarkdown } from '../utils/markdown';
 import about from '../data/pages/about.json';
 import settings from '../data/settings.json';
@@ -10,13 +11,13 @@ const approachHtml = await renderMarkdown(about.approach);
 
 <Base
   title={`About — ${settings.professional_name}`}
-  description={`About ${settings.professional_name} — CPL-credentialed land services firm with decades of combined experience in title research, lease acquisition, due diligence, and renewable land work.`}
+  description={about.meta_description}
 >
   <!-- ─── Page header ─── -->
   <div class="page-header">
     <div class="container">
       <h1>About</h1>
-      <p>CPL-credentialed professionals. Thorough work. Clear communication.</p>
+      <p>{about.page_subtitle}</p>
     </div>
   </div>
 
@@ -26,13 +27,13 @@ const approachHtml = await renderMarkdown(about.approach);
       <div class={about.headshot ? 'about-grid' : 'about-full'}>
         <!-- Photo column — only rendered when a headshot is set -->
         {about.headshot && (
-          <aside>
+          <div class="about-photo-col">
             <img
               src={about.headshot}
-              alt={`${settings.professional_name} — photo`}
+              alt=""
               class="about-photo"
             />
-          </aside>
+          </div>
         )}
 
         <!-- Text column -->
@@ -80,11 +81,10 @@ const approachHtml = await renderMarkdown(about.approach);
   </section>
 
   <!-- ─── CTA ─── -->
-  <section class="cta-band">
-    <div class="container">
-      <h2>Let's Work Together</h2>
-      <p>Ready to discuss a project? Reach out and let's talk about scope, timeline, and fit.</p>
-      <a href="/contact" class="btn btn-white">Get in Touch →</a>
-    </div>
-  </section>
+  <CallToAction
+    headline={about.cta.headline}
+    text={about.cta.text}
+    button={about.cta.button}
+    tone="light"
+  />
 </Base>
