@@ -13,8 +13,8 @@ on:
         description: "Purge the plvinc.com zone cache"
         type: boolean
         default: false
-      fix_dns:
-        description: "Swap apex/www to CNAME -> plvinc.pages.dev (proxied). The actual DNS fix."
+      cutover:
+        description: "Release plvinc.com / www from the leftover plvinc Worker and hand them to Pages."
         type: boolean
         default: false
 
@@ -90,41 +90,58 @@ jobs:
             | jq '{ok:.success, errors:[.errors[]?.message], name:.result.name, status:.result.status}'
           done
 
-      # The actual fix. Apex and www are proxied AAAA records pointing at 100:: (the IPv6
-      # discard prefix) — a black-hole origin, so Cloudflare serves a frozen cached copy of
-      # an old build. Repointing them at the Pages project also clears the two custom
-      # domains stuck at status: pending.
-      - name: Point apex and www at the Pages project
-        if: inputs.fix_dns && steps.zone.outputs.id != ''
+      # The actual fix. Two resources are both named "plvinc": this Pages project, and a
+      # leftover Worker with static assets last deployed 2026-06-08. The Worker holds
+      # plvinc.com and www.plvinc.com as Worker Custom Domains, so it — not DNS, and not the
+      # cache — is what serves the stale June build. It is also why the Pages custom domains
+      # never left status: pending: the hostnames were already claimed.
+      #
+      # The AAAA 100:: records in the DNS tab are Cloudflare's own bookkeeping for those
+      # bindings ("Selection unavailable" in the dashboard) and disappear with them. Nothing
+      # here touches DNS records, so no Zone:DNS permission is required — only
+      # Workers Scripts:Edit, which this token already has.
+      - name: Release the hostnames from the Worker and hand them to Pages
+        if: inputs.cutover
         run: |
-          Z=${{ steps.zone.outputs.id }}
-          RECS=$(curl -sS "$CF_API/zones/$Z/dns_records?per_page=100" -H "Authorization: Bearer $TOKEN")
-          echo "$RECS" | jq -e '.success' >/dev/null \
-            || { echo "Cannot read DNS records — token needs Zone:DNS:Edit on this zone."; exit 1; }
+          DOMS=$(curl -sS "$CF_API/accounts/$ACCOUNT/workers/domains" -H "Authorization: Bearer $TOKEN")
+          echo "$DOMS" | jq -e '.success' >/dev/null \
+            || { echo "Cannot list Worker Custom Domains — token needs Workers Scripts:Edit."; exit 1; }
 
-          for NAME in plvinc.com www.plvinc.com; do
-            echo "--- $NAME"
-            ID=$(echo "$RECS" | jq -r --arg n "$NAME" \
-              '.result[] | select(.name==$n and (.type=="A" or .type=="AAAA" or .type=="CNAME")) | .id' | head -1)
-            BODY=$(jq -nc --arg n "$NAME" \
-              '{type:"CNAME", name:$n, content:"plvinc.pages.dev", proxied:true, ttl:1,
-                comment:"Cloudflare Pages project plvinc"}')
-            if [ -n "$ID" ]; then
-              curl -sS -X PUT "$CF_API/zones/$Z/dns_records/$ID" \
-                -H "Authorization: Bearer $TOKEN" -H "Content-Type: application/json" --data "$BODY"
-            else
-              curl -sS -X POST "$CF_API/zones/$Z/dns_records" \
-                -H "Authorization: Bearer $TOKEN" -H "Content-Type: application/json" --data "$BODY"
-            fi \
-            | jq '{ok:.success, errors:[.errors[]?.message],
-                   type:.result.type, name:.result.name, content:.result.content, proxied:.result.proxied}'
+          echo "### Releasing hostnames from the '$PROJECT' Worker"
+          for H in plvinc.com www.plvinc.com; do
+            ID=$(echo "$DOMS" | jq -r --arg h "$H" \
+              '.result[] | select(.hostname==$h and .service=="plvinc") | .id')
+            if [ -z "$ID" ]; then
+              echo "--- $H: not bound to the Worker, nothing to release"
+              continue
+            fi
+            printf -- "--- %s: deleting Worker Custom Domain %s ... " "$H" "$ID"
+            CODE=$(curl -sS -o /tmp/del.json -w '%{http_code}' -X DELETE \
+              "$CF_API/accounts/$ACCOUNT/workers/domains/$ID" -H "Authorization: Bearer $TOKEN")
+            echo "HTTP $CODE"
+            [ -s /tmp/del.json ] && jq '{errors:[.errors[]?.message]}' /tmp/del.json 2>/dev/null || true
+            case "$CODE" in 2*) ;; *) echo "FAILED to release $H"; exit 1;; esac
           done
 
-          echo "--- mail records left untouched:"
-          echo "$RECS" | jq -r \
-            '.result[] | select(.type=="MX" or (.type=="TXT" and (.content|test("spf|DMARC")))) | "\(.type) \(.name)"'
+          # Re-add each Pages domain so validation restarts against the now-free hostname;
+          # they have been sitting at pending since 2026-09-18 and will not retry on their own.
+          echo "### Re-triggering Pages custom domain validation"
+          for D in plvinc.com www.plvinc.com; do
+            curl -sS -o /dev/null -w "--- $D: detach HTTP %{http_code}\n" -X DELETE \
+              "$CF_API/accounts/$ACCOUNT/pages/projects/$PROJECT/domains/$D" -H "Authorization: Bearer $TOKEN"
+            curl -sS -X POST "$CF_API/accounts/$ACCOUNT/pages/projects/$PROJECT/domains" \
+              -H "Authorization: Bearer $TOKEN" -H "Content-Type: application/json" --data "{\"name\":\"$D\"}" \
+            | jq '{ok:.success, errors:[.errors[]?.message], name:.result.name, status:.result.status}'
+          done
 
+          echo "### Worker Custom Domains remaining (sveltia-cms-auth must survive)"
+          curl -sS "$CF_API/accounts/$ACCOUNT/workers/domains" -H "Authorization: Bearer $TOKEN" \
+          | jq '[.result[]? | {hostname, service}]'
+
+      # Tolerated: the token may not carry Zone:Cache Purge, and a failed purge should not
+      # mask a successful cutover.
       - name: Purge zone cache
+        continue-on-error: true
         if: inputs.purge_cache && steps.zone.outputs.id != ''
         run: |
           curl -sS -X POST "$CF_API/zones/${{ steps.zone.outputs.id }}/purge_cache" \
