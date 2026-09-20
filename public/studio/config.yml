@@ -119,7 +119,10 @@ collections:
           - label: "Contact Form Access Key"
             name: web3forms_key
             widget: string
-            hint: "Your Web3Forms access key — required for the contact form to send emails. Get a free key at web3forms.com, then paste it here."
+            hint: "Where contact form submissions are delivered. The key decides the
+              destination, not the Email Address field above, so changing your email does not
+              move the form. To redirect it, get a new free key at web3forms.com using the
+              address you want the enquiries to reach, then paste that key here."
 
   # ──────────────────────────────────────────────────────────────
   # PAGES
