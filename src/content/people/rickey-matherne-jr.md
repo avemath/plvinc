@@ -2,7 +2,7 @@
 name: "Rickey Matherne, Jr., CPL"
 role: "Certified Professional Landman"
 linkedin_url: "https://www.linkedin.com/in/rickey-t-matherne-jr-63914b4b/"
-photo: "/images/uploads/rickey-matherne-jr.jpg"
+photo: "/images/uploads/rickey-matherne-jr-2026.jpg"
 sort_order: 1
 experience_details: ""
 ---

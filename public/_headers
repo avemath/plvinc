@@ -12,7 +12,9 @@
 /fonts/*
   Cache-Control: public, max-age=31536000, immutable
 
-# Uploads can be overwritten under the same name from the CMS, so these get a week
-# rather than a year, and revalidate after that.
+# Uploads get overwritten under the same name from the CMS, and a long window means a
+# replaced photo keeps showing the old one until the cache expires. A day is short enough
+# that a swap lands the next time somebody visits, and Cloudflare still absorbs the load.
+# When replacing an image that people have already seen, change the filename as well.
 /images/*
-  Cache-Control: public, max-age=604800, must-revalidate
+  Cache-Control: public, max-age=86400, must-revalidate
