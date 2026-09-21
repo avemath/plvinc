@@ -1752,3 +1752,327 @@ a.contact-detail-value:hover { color: var(--green-dark); }
 }
 
 .affiliations-band .affiliations-list { justify-content: center; }
+
+/* ============================================================
+   Sample work product
+   The three samples are set as documents rather than as web
+   sections: a bordered sheet on the page background, compact
+   type, and figures aligned on the decimal so columns of
+   interests and acres can be read down.
+   ============================================================ */
+.sample-format-note {
+  margin: 1.75rem 0 0;
+  font-size: .95rem;
+  color: var(--text-muted);
+}
+
+/* Stated before any table, and loud enough that nobody mistakes the sheets
+   below for a real record. */
+.fiction-notice {
+  margin: 2rem 0 0;
+  padding: 1.1rem 1.35rem;
+  background: #FFF6E5;
+  border: 1px solid #E0B457;
+  border-left: 5px solid var(--gold);
+  border-radius: var(--radius);
+}
+
+.fiction-notice-title {
+  margin: 0 0 .35rem;
+  font-family: var(--font-heading);
+  font-weight: 700;
+  font-size: .78rem;
+  text-transform: uppercase;
+  letter-spacing: .12em;
+  color: #7A551A;
+}
+
+.fiction-notice-body {
+  margin: 0;
+  font-size: .95rem;
+  line-height: 1.65;
+  color: #5C431A;
+}
+
+.sample-section { padding: 3rem 0; }
+.sample-section:first-of-type { padding-top: 2rem; }
+
+.sample-sheet {
+  position: relative;
+  background: var(--white);
+  border: 1px solid var(--border);
+  border-top: 3px solid var(--green-dark);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow-sm);
+  padding: 2.25rem 2rem;
+}
+
+.sample-stamp {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  font-family: var(--font-heading);
+  font-size: .68rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: .18em;
+  color: var(--green-mid);
+  border: 1px solid var(--green-light);
+  border-radius: 2px;
+  padding: .2rem .5rem;
+  opacity: .8;
+}
+
+.sample-sheet-title {
+  margin: 0 0 1.5rem;
+  padding-right: 5rem;
+  font-size: clamp(1.3rem, 2.4vw, 1.75rem);
+}
+
+.sample-block-title {
+  margin: 2.25rem 0 .85rem;
+  font-size: .8rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: .1em;
+  color: var(--green-mid);
+}
+
+/* Header fields read down a single column, the way the head of a report does.
+   A grid here would stretch every cell in a row to match the description,
+   which is several lines long, and open gaps beside the short ones. */
+.sample-fields {
+  margin: 0;
+  border-top: 1px solid var(--border);
+}
+
+.sample-field {
+  display: grid;
+  grid-template-columns: minmax(8.5rem, 34%) 1fr;
+  gap: 1rem;
+  padding: .55rem 0;
+  border-bottom: 1px solid var(--border);
+}
+
+.sample-field dt {
+  font-size: .8rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: .04em;
+  color: var(--text-light);
+}
+
+.sample-field dd {
+  margin: 0;
+  font-size: .92rem;
+  line-height: 1.5;
+  color: var(--text);
+}
+
+/* Terms are short label and value pairs, so they pair up where there is room. */
+.sample-fields.is-terms {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  column-gap: 2rem;
+}
+
+/* Every table gets its own scroller so the page body never moves sideways. */
+.sample-table-scroll {
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+}
+
+.sample-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: .85rem;
+  line-height: 1.5;
+}
+
+/* A runsheet is wide by nature. It scrolls inside its container rather than
+   dropping below a readable size. */
+.sample-table.is-runsheet { min-width: 1900px; }
+
+.sample-table caption { text-align: left; }
+
+.sample-table th,
+.sample-table td {
+  padding: .6rem .75rem;
+  text-align: left;
+  vertical-align: top;
+  border-bottom: 1px solid var(--border);
+}
+
+.sample-table thead th {
+  position: relative;
+  background: var(--green-pale);
+  font-size: .72rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: .06em;
+  color: var(--green-dark);
+  white-space: nowrap;
+  border-bottom: 2px solid var(--green-light);
+}
+
+.sample-table tbody th {
+  font-weight: 600;
+  color: var(--text);
+}
+
+.sample-table tbody tr:nth-child(even) { background: var(--cream); }
+.sample-table tbody tr:last-child th,
+.sample-table tbody tr:last-child td { border-bottom: none; }
+
+/* Figures line up on the decimal so a column of interests reads down. */
+.sample-table .is-num,
+.sample-field dd.is-num {
+  font-variant-numeric: tabular-nums;
+  font-feature-settings: 'tnum' 1;
+}
+.sample-table .is-num { text-align: right; white-space: nowrap; }
+
+.sample-total-row {
+  background: var(--green-pale) !important;
+  font-weight: 700;
+}
+.sample-total-row th,
+.sample-total-row td { border-top: 2px solid var(--green-light); }
+
+/* The first runsheet column stays put while the rest scrolls, so a row can
+   still be identified once it is scrolled away from its book number. */
+.sample-table.is-runsheet .is-sticky {
+  position: sticky;
+  left: 0;
+  z-index: 1;
+  background: var(--white);
+  border-right: 1px solid var(--border);
+}
+.sample-table.is-runsheet thead .is-sticky { background: var(--green-pale); z-index: 2; }
+.sample-table.is-runsheet tbody tr:nth-child(even) .is-sticky { background: var(--cream); }
+
+.sample-notes {
+  margin: 0;
+  padding-left: 1.3rem;
+  font-size: .9rem;
+  line-height: 1.7;
+  color: var(--text-muted);
+}
+.sample-notes li { margin-bottom: .7rem; }
+.sample-notes li:last-child { margin-bottom: 0; }
+
+/* Checkbox rows are drawn, not real inputs: this is a printed form on a page,
+   not something anyone should be able to tick. */
+.sample-checks {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: .6rem 1.75rem;
+}
+.sample-checks.is-stacked {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: .55rem 1.75rem;
+}
+
+.sample-check {
+  display: flex;
+  align-items: center;
+  gap: .55rem;
+  font-size: .9rem;
+  color: var(--text-muted);
+}
+
+.sample-check-box {
+  flex-shrink: 0;
+  width: 15px;
+  height: 15px;
+  border: 1.5px solid var(--text-light);
+  border-radius: 2px;
+  background: var(--white);
+  position: relative;
+}
+
+.sample-check.is-checked { color: var(--text); font-weight: 600; }
+.sample-check.is-checked .sample-check-box {
+  background: var(--green-mid);
+  border-color: var(--green-mid);
+}
+/* The tick is drawn from two borders so it needs no icon font or SVG. */
+.sample-check.is-checked .sample-check-box::after {
+  content: '';
+  position: absolute;
+  left: 4px;
+  top: .5px;
+  width: 4px;
+  height: 8px;
+  border: solid var(--white);
+  border-width: 0 2px 2px 0;
+  transform: rotate(45deg);
+}
+
+.sample-comments,
+.sample-key,
+.sample-prepared {
+  font-size: .9rem;
+  line-height: 1.7;
+  color: var(--text-muted);
+  margin: 0;
+}
+
+.sample-key { margin-top: 1rem; font-size: .82rem; }
+.sample-prepared { margin-top: 2rem; font-weight: 600; color: var(--text); }
+
+.sample-disclaimer {
+  margin: .6rem 0 0;
+  font-size: .8rem;
+  line-height: 1.6;
+  color: var(--text-light);
+}
+
+@media (max-width: 700px) {
+  .sample-sheet { padding: 1.5rem 1.1rem; }
+  .sample-sheet-title { padding-right: 4.5rem; }
+  .sample-field { grid-template-columns: 1fr; gap: .1rem; }
+}
+
+/* Each sample starts a fresh sheet on paper, and the site furniture drops away. */
+@media print {
+  .site-header,
+  .site-footer,
+  .cta-band,
+  .page-header { display: none !important; }
+
+  .sample-section {
+    padding: 0;
+    break-before: page;
+    page-break-before: always;
+  }
+  .sample-section:first-of-type {
+    break-before: auto;
+    page-break-before: auto;
+  }
+
+  .sample-sheet {
+    border: none;
+    box-shadow: none;
+    padding: 0;
+  }
+
+  .sample-table-scroll { overflow: visible; border: none; }
+  .sample-table.is-runsheet { min-width: 0; font-size: .62rem; }
+  .sample-table.is-runsheet .is-sticky { position: static; }
+  .sample-table { break-inside: auto; }
+  .sample-table tr { break-inside: avoid; page-break-inside: avoid; }
+  .sample-table thead { display: table-header-group; }
+
+  .fiction-notice {
+    border: 1px solid #000;
+    background: none;
+  }
+}
+

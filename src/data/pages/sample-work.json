@@ -1,0 +1,348 @@
+{
+  "page_title": "Sample Work Product",
+  "seo_title": "Sample Work Product | Ownership Report, Runsheet & LAR",
+  "meta_description": "A fictional mineral ownership report, runsheet, and lease acquisition report showing how Petro Land Ventures documents title and leasing work.",
+  "page_subtitle": "What you receive at the end of a file.",
+  "intro": "Most land work ends in three documents: a runsheet that lists every instrument in the chain, an ownership report that states who owns what and what stands in the way, and, once a lease is taken, an acquisition report that tells the client exactly what was bought.\n\nThe samples below follow one fictional tract through all three.",
+  "fiction_notice": "Everything on this page is fictional. The county, township, people, companies, tract, dollar figures, and recording references were invented for illustration and do not describe any real property, owner, or transaction.",
+  "format_note": "Formats vary by client and by state. We work in your templates or in ours. The content stays the same: every instrument accounted for, every open question stated as open.",
+  "mor": {
+    "title": "Mineral Ownership Report",
+    "fields": [
+      {
+        "label": "Report date",
+        "value": "09/04/2026"
+      },
+      {
+        "label": "County",
+        "value": "Alder County, Pennsylvania"
+      },
+      {
+        "label": "Tract no.",
+        "value": "SP-014"
+      },
+      {
+        "label": "Prospect",
+        "value": "Sample Prospect"
+      },
+      {
+        "label": "Records examined",
+        "value": "03/14/1921 through 08/31/2026 (see Note 1)"
+      },
+      {
+        "label": "Description",
+        "value": "62.40 acres, more or less, Whitmore Township, Alder County, Pennsylvania, Tax Parcel 14-006-021, being the same land conveyed by deed recorded in Record Book 1042, Page 677."
+      }
+    ],
+    "mineral_headline": "Oil and Gas Ownership",
+    "mineral_owners": [
+      {
+        "name": "Daniel W. Hallbeck",
+        "address": "Address on file",
+        "gross_acres": "62.40",
+        "interest": "0.750000",
+        "net_acres": "46.80",
+        "status": "Appears open. Last lease: Operator A, LLC, effective 05/01/2012, 5 year primary term, option to extend not exercised of record. Recorded RB 1388, Page 102. See Notes 3 and 4."
+      },
+      {
+        "name": "Heirs of Marian H. Oster",
+        "address": "Unknown",
+        "gross_acres": "62.40",
+        "interest": "0.250000",
+        "net_acres": "15.60",
+        "status": "Unleased. Heirship not established. See Note 5."
+      }
+    ],
+    "mineral_totals": {
+      "interest": "1.000000",
+      "net_acres": "62.40"
+    },
+    "surface_headline": "Surface Ownership",
+    "surface_owners": [
+      {
+        "name": "Daniel W. Hallbeck",
+        "address": "Address on file",
+        "gross_acres": "62.40",
+        "interest": "1.000000",
+        "net_acres": "62.40",
+        "comments": "Subject to open mortgage. See Note 4."
+      }
+    ],
+    "notes_headline": "Notes",
+    "notes": [
+      "Limited search. At the client's instruction the record was run forward from the 1921 deed into Jonas P. Hallbeck. Earlier title was not examined. Indexes searched: Recorder of Deeds, Register of Wills, and Prothonotary.",
+      "The 1921 deed excepts and reserves \"all coal and other minerals.\" Oil and gas are not named. Whether that reservation reaches oil and gas is a legal question and is referred to the examining attorney. Ownership above is shown on the assumption that oil and gas passed to the grantee.",
+      "Two prior oil and gas leases appear of record (1968 and 2012). No well, unit declaration, production, or extension was found for either, and neither has been released. Both appear to have expired by their own terms. Recorded releases or an affidavit of non-production are recommended.",
+      "A 2016 mortgage from Daniel W. Hallbeck to Alder County Savings Bank is open of record. No satisfaction was found. Subordination should be considered at leasing.",
+      "Marian H. Oster took a one-quarter oil and gas interest under her father's 1961 estate. Nothing further appears in her name in Alder County. She is believed to have died in 2011 while living out of state. No estate, affidavit of heirship, or conveyance is of record. This interest cannot be leased until heirship is established.",
+      "The coal estate was severed in 1921 and was not examined."
+    ],
+    "prepared_by": "Prepared by: Petro Land Ventures",
+    "report_disclaimer": "This report is a landman's summary of the public record. It is not an attorney's title opinion and carries no warranty of title."
+  },
+  "runsheet": {
+    "title": "Runsheet: Chain of Title",
+    "columns": [
+      "Book",
+      "Page",
+      "Instrument No.",
+      "Inst. Date",
+      "Rec. Date",
+      "Instrument Type",
+      "Grantor",
+      "Grantee",
+      "Mineral Reservation",
+      "Description",
+      "Comments",
+      "Oil and Gas Ownership After"
+    ],
+    "rows": [
+      {
+        "book": "DB 212",
+        "page": "144",
+        "instrument_no": "N/A",
+        "inst_date": "03/14/1921",
+        "rec_date": "03/22/1921",
+        "type": "Deed",
+        "grantor": "Elias R. Vandermeer and Clara Vandermeer, his wife",
+        "grantee": "Jonas P. Hallbeck",
+        "reservation": "YES",
+        "description": "62.40 acres, Whitmore Township, described by adjoiners",
+        "comments": "Grantors except and reserve all coal and other minerals, with mining rights. Oil and gas are not named. See Note 2.",
+        "ownership_after": "Jonas P. Hallbeck: all, subject to Note 2"
+      },
+      {
+        "book": "DB 388",
+        "page": "501",
+        "instrument_no": "N/A",
+        "inst_date": "06/02/1954",
+        "rec_date": "06/09/1954",
+        "type": "Deed",
+        "grantor": "Jonas P. Hallbeck, widower",
+        "grantee": "Walter J. Hallbeck and Ruth E. Hallbeck, his wife",
+        "reservation": "YES",
+        "description": "Same 62.40 acres",
+        "comments": "Grantor reserves an undivided one-half of the oil and gas.",
+        "ownership_after": "Jonas: 1/2. Walter and Ruth, by the entireties: 1/2"
+      },
+      {
+        "book": "WB 31",
+        "page": "88",
+        "instrument_no": "Estate 1961-0147",
+        "inst_date": "10/02/1958",
+        "rec_date": "12/01/1961",
+        "type": "Will and estate file",
+        "grantor": "Estate of Jonas P. Hallbeck, died 11/09/1961",
+        "grantee": "Walter J. Hallbeck and Marian H. Oster",
+        "reservation": "N/A",
+        "description": "Residue, including the reserved one-half oil and gas",
+        "comments": "Residue devised to two children in equal shares. Estate closed. No deed of distribution of record.",
+        "ownership_after": "Walter and Ruth: 1/2. Walter: 1/4. Marian: 1/4"
+      },
+      {
+        "book": "DB 455",
+        "page": "210",
+        "instrument_no": "N/A",
+        "inst_date": "04/18/1968",
+        "rec_date": "05/02/1968",
+        "type": "Oil and Gas Lease",
+        "grantor": "Walter J. Hallbeck and Ruth E. Hallbeck",
+        "grantee": "Alder Valley Gas Company",
+        "reservation": "NO",
+        "description": "62.40 acres, lessors' interest",
+        "comments": "Primary term 10 years, 1/8 royalty. No well, unit, or production found of record. No release of record. See Note 3.",
+        "ownership_after": "No change"
+      },
+      {
+        "book": "WB 58",
+        "page": "301",
+        "instrument_no": "Estate 1989-0312",
+        "inst_date": "02/11/1980",
+        "rec_date": "08/21/1989",
+        "type": "Will and estate file",
+        "grantor": "Estate of Walter J. Hallbeck, died 07/30/1989",
+        "grantee": "Ruth E. Hallbeck",
+        "reservation": "N/A",
+        "description": "All property",
+        "comments": "Entireties interest passed to Ruth by survivorship. Walter's separate 1/4 oil and gas devised to Ruth.",
+        "ownership_after": "Ruth: 3/4. Marian: 1/4"
+      },
+      {
+        "book": "RB 1042",
+        "page": "677",
+        "instrument_no": "2003-006152",
+        "inst_date": "09/12/2003",
+        "rec_date": "09/19/2003",
+        "type": "Deed",
+        "grantor": "Ruth E. Hallbeck, widow",
+        "grantee": "Daniel W. Hallbeck",
+        "reservation": "NO",
+        "description": "62.40 acres, Tax Parcel 14-006-021",
+        "comments": "Conveys the surface and all of grantor's oil and gas. No reservation.",
+        "ownership_after": "Daniel: 3/4. Marian: 1/4"
+      },
+      {
+        "book": "RB 1388",
+        "page": "102",
+        "instrument_no": "2012-004417",
+        "inst_date": "05/01/2012",
+        "rec_date": "05/24/2012",
+        "type": "Memorandum of Oil and Gas Lease",
+        "grantor": "Daniel W. Hallbeck",
+        "grantee": "Operator A, LLC",
+        "reservation": "NO",
+        "description": "62.40 acres, lessor's interest",
+        "comments": "Primary term 5 years with option to extend 5 years. No extension, unit declaration, or production found of record. Appears expired 05/01/2017. No release of record. See Note 3.",
+        "ownership_after": "No change"
+      },
+      {
+        "book": "RB 1533",
+        "page": "290",
+        "instrument_no": "2016-009920",
+        "inst_date": "10/03/2016",
+        "rec_date": "10/07/2016",
+        "type": "Mortgage",
+        "grantor": "Daniel W. Hallbeck",
+        "grantee": "Alder County Savings Bank",
+        "reservation": "N/A",
+        "description": "62.40 acres",
+        "comments": "Open of record. No satisfaction found. See Note 4.",
+        "ownership_after": "No change"
+      }
+    ],
+    "key": "DB: Deed Book. RB: Record Book. WB: Will Book."
+  },
+  "lar": {
+    "title": "Lease Acquisition Report",
+    "fields": [
+      {
+        "label": "Prospect",
+        "value": "Sample Prospect"
+      },
+      {
+        "label": "County and state",
+        "value": "Alder County, Pennsylvania"
+      },
+      {
+        "label": "Lessor",
+        "value": "Daniel W. Hallbeck"
+      },
+      {
+        "label": "Lessor contact",
+        "value": "Address, phone, and email on file"
+      },
+      {
+        "label": "Lessee",
+        "value": "Operator B, LLC"
+      }
+    ],
+    "lease_types": [
+      {
+        "label": "New lease",
+        "checked": true
+      },
+      {
+        "label": "Top lease",
+        "checked": false
+      },
+      {
+        "label": "Renewal or extension",
+        "checked": false
+      },
+      {
+        "label": "Option",
+        "checked": false
+      },
+      {
+        "label": "Assignment",
+        "checked": false
+      }
+    ],
+    "terms": [
+      {
+        "label": "Lease date",
+        "value": "09/10/2026"
+      },
+      {
+        "label": "Primary term",
+        "value": "5 years"
+      },
+      {
+        "label": "Expiration",
+        "value": "09/10/2031"
+      },
+      {
+        "label": "Net acres",
+        "value": "46.80"
+      },
+      {
+        "label": "Bonus per net acre",
+        "value": "$1,500.00"
+      },
+      {
+        "label": "Total bonus",
+        "value": "$70,200.00"
+      },
+      {
+        "label": "Option to extend",
+        "value": "5 years at $1,500.00 per net acre"
+      },
+      {
+        "label": "Royalty",
+        "value": "18%"
+      },
+      {
+        "label": "Shut-in clause",
+        "value": "Yes"
+      },
+      {
+        "label": "Pugh clause",
+        "value": "Yes, horizontal and vertical"
+      },
+      {
+        "label": "Depths covered",
+        "value": "All"
+      },
+      {
+        "label": "Surface use",
+        "value": "Non-surface lease"
+      },
+      {
+        "label": "Lease modifications",
+        "value": "Yes, see addendum"
+      }
+    ],
+    "tracts": [
+      {
+        "tract": "SP-014",
+        "description": "62.40 acres, Whitmore Township, Tax Parcel 14-006-021",
+        "record_title": "RB 1042/677",
+        "gross_acres": "62.40",
+        "interest": "0.750000",
+        "net_acres": "46.80"
+      }
+    ],
+    "tract_totals": {
+      "gross_acres": "62.40",
+      "net_acres": "46.80"
+    },
+    "documents_headline": "Included With This Report",
+    "documents": [
+      "Executed lease and addendum",
+      "Memorandum of lease for recording",
+      "Vesting deed",
+      "Tax parcel record",
+      "Plat",
+      "Mineral ownership report",
+      "W-9",
+      "Copy of payment"
+    ],
+    "comments": "Lease covers lessor's 3/4 interest only. The remaining 1/4 stands in the heirs of Marian H. Oster and is unleased pending heirship (MOR Note 5). Releases of the 1968 and 2012 leases requested. Lender subordination requested.",
+    "prepared_by": "Prepared by: Petro Land Ventures. Date: 09/11/2026."
+  },
+  "cta": {
+    "headline": "Want This Level of Detail on Your Tract?",
+    "text": "Send the county, the tract, and the timing, and we will tell you what the work involves.",
+    "button": "Get in Touch"
+  }
+}

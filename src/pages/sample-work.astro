@@ -1,0 +1,272 @@
+---
+import Base from '../layouts/Base.astro';
+import CallToAction from '../components/CallToAction.astro';
+import { renderMarkdown } from '../utils/markdown';
+import page from '../data/pages/sample-work.json';
+
+const introHtml = await renderMarkdown(page.intro);
+
+const { mor, runsheet, lar } = page;
+
+// The runsheet columns are declared in the data so the owner can relabel them in the
+// CMS. The cell order below is fixed to match, since a runsheet only reads correctly
+// left to right in recording order.
+const runsheetCells = (r: typeof runsheet.rows[number]) => [
+  r.book, r.page, r.instrument_no, r.inst_date, r.rec_date, r.type,
+  r.grantor, r.grantee, r.reservation, r.description, r.comments, r.ownership_after,
+];
+---
+
+<Base
+  title={page.seo_title}
+  description={page.meta_description}
+>
+  <div class="page-header">
+    <div class="container">
+      <h1>{page.page_title}</h1>
+      <p>{page.page_subtitle}</p>
+    </div>
+  </div>
+
+  <section>
+    <div class="container container-narrow">
+      <div class="prose" set:html={introHtml} />
+
+      <!-- Stated before anything that could be mistaken for a real record. -->
+      <aside class="fiction-notice" role="note" aria-labelledby="fiction-notice-title">
+        <p class="fiction-notice-title" id="fiction-notice-title">Fictional samples</p>
+        <p class="fiction-notice-body">{page.fiction_notice}</p>
+      </aside>
+
+      <p class="sample-format-note">{page.format_note}</p>
+    </div>
+  </section>
+
+  <!-- ─── Mineral Ownership Report ─── -->
+  <section class="sample-section" aria-labelledby="mor-title">
+    <div class="container">
+      <article class="sample-sheet">
+        <span class="sample-stamp" aria-hidden="true">Sample</span>
+        <h2 class="sample-sheet-title" id="mor-title">{mor.title}</h2>
+
+        <dl class="sample-fields">
+          {mor.fields.map((f) => (
+            <div class="sample-field">
+              <dt>{f.label}</dt>
+              <dd>{f.value}</dd>
+            </div>
+          ))}
+        </dl>
+
+        <h3 class="sample-block-title">{mor.mineral_headline}</h3>
+        <div class="sample-table-scroll">
+          <table class="sample-table">
+            <caption class="sr-only">{mor.mineral_headline}</caption>
+            <thead>
+              <tr>
+                <th scope="col">Owner</th>
+                <th scope="col">Address</th>
+                <th scope="col" class="is-num">Gross acres</th>
+                <th scope="col" class="is-num">Interest</th>
+                <th scope="col" class="is-num">Net acres</th>
+                <th scope="col">Lease status</th>
+              </tr>
+            </thead>
+            <tbody>
+              {mor.mineral_owners.map((o) => (
+                <tr>
+                  <th scope="row">{o.name}</th>
+                  <td>{o.address}</td>
+                  <td class="is-num">{o.gross_acres}</td>
+                  <td class="is-num">{o.interest}</td>
+                  <td class="is-num">{o.net_acres}</td>
+                  <td>{o.status}</td>
+                </tr>
+              ))}
+              <tr class="sample-total-row">
+                <th scope="row">Total</th>
+                <td>N/A</td>
+                <td class="is-num">N/A</td>
+                <td class="is-num">{mor.mineral_totals.interest}</td>
+                <td class="is-num">{mor.mineral_totals.net_acres}</td>
+                <td>N/A</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h3 class="sample-block-title">{mor.surface_headline}</h3>
+        <div class="sample-table-scroll">
+          <table class="sample-table">
+            <caption class="sr-only">{mor.surface_headline}</caption>
+            <thead>
+              <tr>
+                <th scope="col">Owner</th>
+                <th scope="col">Address</th>
+                <th scope="col" class="is-num">Gross acres</th>
+                <th scope="col" class="is-num">Interest</th>
+                <th scope="col" class="is-num">Net acres</th>
+                <th scope="col">Comments</th>
+              </tr>
+            </thead>
+            <tbody>
+              {mor.surface_owners.map((o) => (
+                <tr>
+                  <th scope="row">{o.name}</th>
+                  <td>{o.address}</td>
+                  <td class="is-num">{o.gross_acres}</td>
+                  <td class="is-num">{o.interest}</td>
+                  <td class="is-num">{o.net_acres}</td>
+                  <td>{o.comments}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+
+        <h3 class="sample-block-title">{mor.notes_headline}</h3>
+        <ol class="sample-notes">
+          {mor.notes.map((n) => <li>{n}</li>)}
+        </ol>
+
+        <p class="sample-prepared">{mor.prepared_by}</p>
+        <p class="sample-disclaimer">{mor.report_disclaimer}</p>
+      </article>
+    </div>
+  </section>
+
+  <!-- ─── Runsheet ─── -->
+  <section class="sample-section" aria-labelledby="runsheet-title">
+    <div class="container">
+      <article class="sample-sheet">
+        <span class="sample-stamp" aria-hidden="true">Sample</span>
+        <h2 class="sample-sheet-title" id="runsheet-title">{runsheet.title}</h2>
+
+        <div class="sample-table-scroll">
+          <table class="sample-table is-runsheet">
+            <caption class="sr-only">{runsheet.title}</caption>
+            <thead>
+              <tr>
+                {runsheet.columns.map((c, i) => (
+                  <th scope="col" class:list={[i === 0 && 'is-sticky']}>{c}</th>
+                ))}
+              </tr>
+            </thead>
+            <tbody>
+              {runsheet.rows.map((r) => (
+                <tr>
+                  {runsheetCells(r).map((cell, i) => (
+                    i === 0
+                      ? <th scope="row" class="is-sticky">{cell}</th>
+                      : <td>{cell}</td>
+                  ))}
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+
+        <p class="sample-key">{runsheet.key}</p>
+      </article>
+    </div>
+  </section>
+
+  <!-- ─── Lease Acquisition Report ─── -->
+  <section class="sample-section" aria-labelledby="lar-title">
+    <div class="container">
+      <article class="sample-sheet">
+        <span class="sample-stamp" aria-hidden="true">Sample</span>
+        <h2 class="sample-sheet-title" id="lar-title">{lar.title}</h2>
+
+        <dl class="sample-fields">
+          {lar.fields.map((f) => (
+            <div class="sample-field">
+              <dt>{f.label}</dt>
+              <dd>{f.value}</dd>
+            </div>
+          ))}
+        </dl>
+
+        <h3 class="sample-block-title">Lease Type</h3>
+        <ul class="sample-checks" role="list">
+          {lar.lease_types.map((t) => (
+            <li class:list={['sample-check', t.checked && 'is-checked']}>
+              <span class="sample-check-box" aria-hidden="true"></span>
+              <span class="sample-check-label">{t.label}</span>
+              <span class="sr-only">{t.checked ? '(selected)' : '(not selected)'}</span>
+            </li>
+          ))}
+        </ul>
+
+        <h3 class="sample-block-title">Terms</h3>
+        <dl class="sample-fields is-terms">
+          {lar.terms.map((t) => (
+            <div class="sample-field">
+              <dt>{t.label}</dt>
+              <dd class="is-num">{t.value}</dd>
+            </div>
+          ))}
+        </dl>
+
+        <h3 class="sample-block-title">Tracts</h3>
+        <div class="sample-table-scroll">
+          <table class="sample-table">
+            <caption class="sr-only">Tracts covered by this lease</caption>
+            <thead>
+              <tr>
+                <th scope="col">Tract</th>
+                <th scope="col">Description</th>
+                <th scope="col">Record title</th>
+                <th scope="col" class="is-num">Gross acres</th>
+                <th scope="col" class="is-num">Interest</th>
+                <th scope="col" class="is-num">Net acres</th>
+              </tr>
+            </thead>
+            <tbody>
+              {lar.tracts.map((t) => (
+                <tr>
+                  <th scope="row">{t.tract}</th>
+                  <td>{t.description}</td>
+                  <td>{t.record_title}</td>
+                  <td class="is-num">{t.gross_acres}</td>
+                  <td class="is-num">{t.interest}</td>
+                  <td class="is-num">{t.net_acres}</td>
+                </tr>
+              ))}
+              <tr class="sample-total-row">
+                <th scope="row">Total</th>
+                <td>N/A</td>
+                <td>N/A</td>
+                <td class="is-num">{lar.tract_totals.gross_acres}</td>
+                <td class="is-num">N/A</td>
+                <td class="is-num">{lar.tract_totals.net_acres}</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h3 class="sample-block-title">{lar.documents_headline}</h3>
+        <ul class="sample-checks is-stacked" role="list">
+          {lar.documents.map((doc) => (
+            <li class="sample-check is-checked">
+              <span class="sample-check-box" aria-hidden="true"></span>
+              <span class="sample-check-label">{doc}</span>
+            </li>
+          ))}
+        </ul>
+
+        <h3 class="sample-block-title">Comments</h3>
+        <p class="sample-comments">{lar.comments}</p>
+
+        <p class="sample-prepared">{lar.prepared_by}</p>
+      </article>
+    </div>
+  </section>
+
+  <CallToAction
+    headline={page.cta.headline}
+    text={page.cta.text}
+    button={page.cta.button}
+    tone="light"
+  />
+</Base>
