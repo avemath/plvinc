@@ -1509,7 +1509,19 @@ a.contact-detail-value:hover { color: var(--green-dark); }
     gap: 2rem;
   }
 
-  .hero { padding: 5rem 0 4rem; }
+  /* The subheadline names both audiences, so it runs long on a phone. The band
+     is tightened here so the headline, the subheadline, both paths and the
+     number all land above the fold rather than below it. */
+  .hero { padding: 2.25rem 0 2rem; }
+  .hero h1 { margin-bottom: .85rem; }
+  .hero-sub {
+    font-size: 1rem;
+    line-height: 1.55;
+    margin-bottom: 1.4rem;
+  }
+  .hero-paths { gap: .6rem; }
+  .hero-paths .btn { width: 100%; justify-content: center; }
+  .hero-phone { margin-top: .9rem; }
 
   .coverage    { padding: 3.5rem 0; }
   .region-tabs { gap: .4rem; }
@@ -2201,3 +2213,40 @@ a.contact-detail-value:hover { color: var(--green-dark); }
   text-underline-offset: 3px;
 }
 .sample-callout-link:hover { color: var(--green-mid); }
+
+/* ============================================================
+   Hero: two audience paths and a tappable number
+   ============================================================ */
+.hero-paths {
+  display: flex;
+  flex-wrap: wrap;
+  gap: .75rem;
+}
+
+/* Outlined against the photo rather than filled, so the two paths read as a
+   pair without the second one competing with the first. */
+.btn-hero-outline {
+  background: transparent;
+  color: var(--white);
+  border-color: rgba(255,255,255,.65);
+}
+.btn-hero-outline:hover {
+  background: rgba(255,255,255,.12);
+  border-color: var(--white);
+}
+
+.hero-phone { margin: 1.25rem 0 0; }
+
+.hero-phone a {
+  display: inline-flex;
+  align-items: center;
+  gap: .5rem;
+  min-height: 44px;
+  padding: .35rem .1rem;
+  font-size: 1.05rem;
+  font-weight: 600;
+  color: var(--white);
+  text-decoration: none;
+  opacity: .92;
+}
+.hero-phone a:hover { opacity: 1; text-decoration: underline; text-underline-offset: 3px; }

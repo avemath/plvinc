@@ -1,8 +1,11 @@
 {
-  "hero_headline": "Trusted Land Services for Oil & Gas, Minerals & Renewables",
-  "hero_subheadline": "Certified Professional Landmen handling title research, lease acquisition, due diligence, and renewable energy land work for operators, producers, mineral owners, and investors.",
+  "hero_headline": "Land title research and reporting you can act on.",
+  "hero_subheadline": "Petro Land Ventures is a firm of Certified Professional Landmen based in Duncansville, Pennsylvania. We read the public record and tell you plainly what you own, what it shows, and where the risk sits, for operators, brokers, lenders and developers, and for landowners and heirs with a single tract or a single lease offer.",
   "hero_image": "/images/uploads/hero-office-monitors.jpg",
-  "hero_cta_text": "Discuss Your Project",
+  "hero_cta_text": "I own minerals or land",
+  "hero_cta_href": "/mineral-owners",
+  "hero_secondary_cta_text": "I represent a company",
+  "hero_secondary_cta_href": "/contact",
   "value_paragraph": "Every file is worked start to finish by a Certified Professional Landman. The person who researches the record is the person who reports it, so nothing is lost between the courthouse and the deliverable.\n\nDeliverables state what the record shows, what it does not, and where the exposure sits.",
   "regions_label": "Coverage",
   "regions_headline": "Where We Work",
@@ -134,9 +137,9 @@
   "services_headline": "Land Services",
   "services_intro": "From initial title research to executed agreements, every service is delivered with the thoroughness and direct communication that complex land work demands.",
   "cta": {
-    "headline": "Ready to Move Your Project Forward?",
-    "text": "Send the location, scope, and timeline, and we will outline the work involved.",
-    "button": "Get in Touch",
+    "headline": "Not sure what you own? Let us find out.",
+    "text": "Send the county and the tract, or just the letter you received, and we will tell you what the record shows.",
+    "button": "Talk to a landman",
     "image": "/images/uploads/cta-rig-horizon.jpg"
   },
   "stats": [
