@@ -95,6 +95,12 @@ collections:
             hint: "The region line in the footer. Keep it in step with the basins on the home page
               coverage map, which is where these names come from."
 
+          - label: "Footer Scope Line"
+            name: footer_scope_line
+            widget: text
+            required: false
+            hint: "One line at the foot of every page saying what the work covers. Leave blank to hide it."
+
           - label: "Footer Name / Company"
             name: footer_name
             widget: string
@@ -157,6 +163,24 @@ collections:
             name: hero_cta_text
             widget: string
             hint: "Text on the call-to-action button in the hero (e.g., Discuss Your Project)."
+
+          - label: "Hero Button Link"
+            name: hero_cta_href
+            widget: string
+            required: false
+            hint: "Where the first hero button goes. Defaults to the Mineral Owners page."
+
+          - label: "Second Hero Button"
+            name: hero_secondary_cta_text
+            widget: string
+            required: false
+            hint: "The second path in the hero, for companies. Leave blank to show only one button."
+
+          - label: "Second Hero Button Link"
+            name: hero_secondary_cta_href
+            widget: string
+            required: false
+            hint: "Where the second hero button goes. Defaults to the Contact page."
 
           - label: "Value Paragraph"
             name: value_paragraph
@@ -339,6 +363,17 @@ collections:
                 required: false
                 hint: "Who said it. A role and region is enough."
 
+          - label: "Sample Work Band"
+            name: sample_feature
+            widget: object
+            required: false
+            hint: "The band that points at the sample file on the home page. Leave the headline blank to hide the band."
+            fields:
+              - { label: "Small Label", name: label, widget: string, required: false }
+              - { label: "Headline", name: headline, widget: string }
+              - { label: "Text", name: text, widget: text }
+              - { label: "Button Text", name: button, widget: string }
+
           - label: "Closing Call to Action"
             name: cta
             widget: object
@@ -506,11 +541,16 @@ collections:
                 widget: string
                 hint: "e.g., Greenfield leasing programs"
 
-          - label: "Sample Work Link"
-            name: sample_link_text
-            widget: string
+          - label: "Sample Work Band"
+            name: sample_feature
+            widget: object
             required: false
-            hint: "One sentence under the project types, linking to the sample work page. Leave blank to hide the link."
+            hint: "The band that points at the sample file on the Experience page. Leave the headline blank to hide the band."
+            fields:
+              - { label: "Small Label", name: label, widget: string, required: false }
+              - { label: "Headline", name: headline, widget: string }
+              - { label: "Text", name: text, widget: text }
+              - { label: "Button Text", name: button, widget: string }
 
           - label: "Testimonials"
             name: testimonials
@@ -664,6 +704,37 @@ collections:
             required: false
             hint: "A short line under the form heading. Leave blank to hide it."
 
+          - label: "Short Note Form"
+            name: short_form
+            widget: object
+            required: false
+            hint: "The four field form for a landowner holding a letter. Do not promise a response time in the success message."
+            fields:
+              - { label: "Landowner Tab Label", name: tab_label, widget: string }
+              - { label: "Project Tab Label", name: project_tab_label, widget: string }
+              - { label: "Headline", name: headline, widget: string }
+              - { label: "Introduction", name: intro, widget: text }
+              - { label: "Contact Field Label", name: contact_label, widget: string }
+              - { label: "County Field Label", name: county_label, widget: string }
+              - { label: "What Showed Up Label", name: what_label, widget: string }
+              - { label: "Button Text", name: button, widget: string }
+              - { label: "Success Message", name: success, widget: text }
+
+          - label: "What Happens Next"
+            name: how_it_works
+            widget: object
+            required: false
+            hint: "The four steps between a first call and a report. Do not promise a response time here."
+            fields:
+              - { label: "Headline", name: headline, widget: string }
+              - label: "Steps"
+                name: steps
+                widget: list
+                summary: "{{title}}"
+                fields:
+                  - { label: "Step Title", name: title, widget: string }
+                  - { label: "Step Text", name: text, widget: text }
+
           - label: "Form Success Message"
             name: form_success
             widget: text
@@ -764,6 +835,29 @@ collections:
                 name: description
                 widget: text
 
+          - label: "Service Area Line"
+            name: service_area_line
+            widget: text
+            required: false
+            hint: "One sentence naming the counties you take work in. This is about availability, not past projects."
+
+          - label: "Common Reasons People Call"
+            name: reasons_to_call
+            widget: object
+            required: false
+            hint: "The list of reasons a landowner gets in touch, written in their words rather than yours."
+            fields:
+              - { label: "Introduction", name: intro, widget: string }
+              - label: "Reasons"
+                name: items
+                widget: list
+                summary: "{{text}}"
+                hint: "One sentence each, phrased the way somebody would say it out loud."
+                fields:
+                  - { label: "Reason", name: text, widget: string }
+              - { label: "Closing Line", name: closing, widget: text }
+              - { label: "Button Text", name: button, widget: string }
+
           - label: "Lease Offer Section"
             name: lease_packet
             widget: object
@@ -802,13 +896,33 @@ collections:
               - label: "Closing Line"
                 name: closing
                 widget: text
-                hint: "The line about checking an offer against the record and speaking to an attorney."
+                hint: "The line that closes the section by inviting the reader to call us and walk through the offer."
 
-          - label: "Sample Work Link"
-            name: sample_link_text
-            widget: string
+          - label: "What Happens Next"
+            name: how_it_works
+            widget: object
             required: false
-            hint: "One sentence under the lease offer section, linking to the sample work page. Leave blank to hide the link."
+            hint: "The four steps between a first call and a report. Do not promise a response time here."
+            fields:
+              - { label: "Headline", name: headline, widget: string }
+              - label: "Steps"
+                name: steps
+                widget: list
+                summary: "{{title}}"
+                fields:
+                  - { label: "Step Title", name: title, widget: string }
+                  - { label: "Step Text", name: text, widget: text }
+
+          - label: "Sample Work Band"
+            name: sample_feature
+            widget: object
+            required: false
+            hint: "The band that points at the sample file on the Mineral Owners page. Leave the headline blank to hide the band."
+            fields:
+              - { label: "Small Label", name: label, widget: string, required: false }
+              - { label: "Headline", name: headline, widget: string }
+              - { label: "Text", name: text, widget: text }
+              - { label: "Button Text", name: button, widget: string }
 
           - label: "FAQ Section Label"
             name: faq_label
@@ -853,7 +967,7 @@ collections:
             name: disclaimer
             widget: text
             required: false
-            hint: "The note at the bottom about not giving legal advice. Leave blank to hide it."
+            hint: "The note at the bottom saying what our work covers and that the next step is a conversation with us. Leave blank to hide it."
 
           - label: "Closing Call to Action"
             name: cta
@@ -947,6 +1061,28 @@ collections:
             widget: text
             hint: "The line about working in the client's templates or your own."
 
+          - label: "Simple File Note"
+            name: simple_note
+            widget: text
+            required: false
+            hint: "The callout under the fiction notice saying this file is a short one on purpose."
+
+          - label: "How To Read This"
+            name: how_to_read
+            widget: list
+            required: false
+            summary: "{{title}}"
+            hint: "Two cards, one for a landowner and one for a land department."
+            fields:
+              - { label: "Title", name: title, widget: string }
+              - { label: "Text", name: text, widget: text }
+
+          - label: "Notes Control Label"
+            name: notes_toggle_label
+            widget: string
+            required: false
+            hint: "The wording on the switch that turns the reader's notes on and off."
+
           - label: "Mineral Ownership Report"
             name: mor
             widget: object
@@ -1006,6 +1142,17 @@ collections:
               - label: "Prepared By"
                 name: prepared_by
                 widget: string
+              - label: "Reader's Notes"
+                name: annotations
+                widget: list
+                required: false
+                summary: "{{n}}. {{anchor}}"
+                hint: "The notes shown beside this document. Anchor picks which part the note sits next to."
+                fields:
+                  - { label: "Number", name: n, widget: number, value_type: int }
+                  - { label: "Anchor", name: anchor, widget: string }
+                  - { label: "Note", name: text, widget: text }
+
               - label: "Report Disclaimer"
                 name: report_disclaimer
                 widget: text
@@ -1041,6 +1188,17 @@ collections:
                   - { label: "Description", name: description, widget: text }
                   - { label: "Comments", name: comments, widget: text }
                   - { label: "Oil and gas ownership after", name: ownership_after, widget: text }
+              - label: "Reader's Notes"
+                name: annotations
+                widget: list
+                required: false
+                summary: "{{n}}. {{anchor}}"
+                hint: "The notes shown beside this document. Anchor picks which part the note sits next to."
+                fields:
+                  - { label: "Number", name: n, widget: number, value_type: int }
+                  - { label: "Anchor", name: anchor, widget: string }
+                  - { label: "Note", name: text, widget: text }
+
               - label: "Abbreviation Key"
                 name: key
                 widget: string
@@ -1103,6 +1261,85 @@ collections:
                 name: prepared_by
                 widget: string
 
+              - label: "Reader's Notes"
+                name: annotations
+                widget: list
+                required: false
+                summary: "{{n}}. {{anchor}}"
+                hint: "The notes shown beside this document. Anchor picks which part the note sits next to."
+                fields:
+                  - { label: "Number", name: n, widget: number, value_type: int }
+                  - { label: "Anchor", name: anchor, widget: string }
+                  - { label: "Note", name: text, widget: text }
+
+          - label: "Supplemental Report"
+            name: supplemental
+            widget: object
+            required: false
+            hint: "The fourth document, where the open quarter interest gets resolved. This is the one that shows hard work."
+            fields:
+              - { label: "Sheet Title", name: title, widget: string }
+              - label: "Header Fields"
+                name: fields
+                widget: list
+                fields:
+                  - { label: "Label", name: label, widget: string }
+                  - { label: "Value", name: value, widget: text }
+              - { label: "Sources Heading", name: sources_headline, widget: string }
+              - label: "Sources"
+                name: sources
+                widget: list
+                field: { label: "Source", name: source, widget: text }
+              - { label: "Tree Heading", name: tree_headline, widget: string }
+              - { label: "Owners Heading", name: owners_headline, widget: string }
+              - label: "Present Owners"
+                name: owners
+                widget: list
+                hint: "Interests use six decimals and must add back to the parent interest."
+                fields:
+                  - { label: "Owner", name: name, widget: string }
+                  - { label: "Interest", name: interest, widget: string }
+                  - { label: "Net acres", name: net_acres, widget: string }
+                  - { label: "Status", name: status, widget: string }
+              - label: "Owner Totals"
+                name: owners_totals
+                widget: object
+                fields:
+                  - { label: "Interest", name: interest, widget: string }
+                  - { label: "Net acres", name: net_acres, widget: string }
+              - { label: "Curative Heading", name: curative_headline, widget: string }
+              - label: "Curative Items"
+                name: curative
+                widget: list
+                field: { label: "Item", name: item, widget: text }
+              - { label: "Curative Note", name: curative_note, widget: string }
+              - { label: "Prepared By", name: prepared_by, widget: string }
+              - label: "Reader's Notes"
+                name: annotations
+                widget: list
+                required: false
+                summary: "{{n}}. {{anchor}}"
+                fields:
+                  - { label: "Number", name: n, widget: number, value_type: int }
+                  - { label: "Anchor", name: anchor, widget: string }
+                  - { label: "Note", name: text, widget: text }
+
+          - label: "What Makes a File Hard"
+            name: hard_files
+            widget: object
+            required: false
+            hint: "The section after the documents. Only list work the service pages already describe, and never describe a real past project."
+            fields:
+              - { label: "Headline", name: headline, widget: string }
+              - { label: "Introduction", name: intro, widget: text }
+              - label: "Items"
+                name: items
+                widget: list
+                summary: "{{title}}"
+                fields:
+                  - { label: "Title", name: title, widget: string }
+                  - { label: "Text", name: text, widget: text }
+
           - label: "Closing Call to Action"
             name: cta
             widget: object
@@ -1163,6 +1400,18 @@ collections:
             name: meta_description
             widget: text
             hint: "The sentence shown under this page's title in Google results. Around 155 characters."
+
+          - label: "Sample Work Band"
+            name: sample_feature
+            widget: object
+            required: false
+            hint: "The band shown at the foot of every service page that has Show link to sample work turned on."
+            fields:
+              - { label: "Small Label", name: label, widget: string, required: false }
+              - { label: "Headline", name: headline, widget: string }
+              - { label: "Text", name: text, widget: text }
+              - { label: "Button Text", name: button, widget: string }
+
 
           - label: "Closing Call to Action"
             name: cta
@@ -1226,6 +1475,18 @@ collections:
         required: false
         default: false
         hint: "Adds a box at the foot of this service page pointing to the sample work page. Only worth turning on for services the samples actually illustrate."
+
+      - label: "Closing Headline"
+        name: cta_headline
+        widget: string
+        required: false
+        hint: "The headline on the band at the foot of this service page. Leave blank to use the shared one from the Services page."
+
+      - label: "Closing Button Text"
+        name: cta_button
+        widget: string
+        required: false
+        hint: "The button on that band. Leave blank to use the shared one."
 
       - label: "Page Title (search)"
         name: seo_title
