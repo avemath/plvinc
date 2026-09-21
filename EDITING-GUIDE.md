@@ -33,7 +33,7 @@ The left sidebar lists everything you can edit:
 | Section | What it controls |
 |---|---|
 | **Site Settings** | Your name, logos, phone, email, city, LinkedIn, site description |
-| **Pages** | The content on Home, About, Services, Mineral Owners, Experience, Insights and Contact |
+| **Pages** | The content on Home, About, Services, Mineral Owners, Experience, Insights, Contact and Privacy |
 | **Services** | Each of the six service pages |
 | **Team / People** | The people shown at the foot of the About page |
 | **Insights** | Short articles. Empty to begin with. |
@@ -245,8 +245,33 @@ know what it means. Keep the language plainer here than anywhere else on the sit
 way somebody would actually ask it out loud, because these also tell Google what the page answers.
 Empty the list and the whole section disappears.
 
+**State Section Heading** and **State Section Text** are the block near the bottom about how
+ownership and leasing work in your home state. Clearing the text hides the whole block, heading
+included. Keep it to what the record commonly shows rather than advice, and update it if you start
+working a different state as your base.
+
+**Conflict of Interest Note** is the disclosure that you also take lease work for operators, and
+that you will say so rather than review an offer on a tract where you are already acting for the
+other side. It sits beside the legal note at the foot of the page. Leave it blank to hide it,
+though it is the kind of thing an owner remembers you for.
+
 **Legal Note** is the line at the bottom about not giving legal advice. Leave it blank to hide it,
 though it is worth keeping.
+
+---
+
+## The Privacy Page
+
+The privacy page explains what the contact form collects and what happens to it. It is linked in
+small type at the very bottom of every page.
+
+1. Click **Pages**, then **Privacy Page**.
+2. Edit the **Policy Text**.
+3. Click **Save**.
+
+Keep it true rather than tidy. It currently says the site uses no analytics or advertising cookies
+and does not track anyone, which is accurate today. If that ever changes, or if the contact form
+starts collecting something new, this page needs to change with it.
 
 ---
 
