@@ -93,6 +93,14 @@ These apply across the whole site.
 
 ---
 
+### The footer scope line
+
+**Footer Scope Line** in Site Settings is the single sentence at the foot of every page saying what
+the work covers. It is stated once, in one place, so it never has to be repeated in the middle of a
+page where it would talk a visitor out of calling.
+
+---
+
 ## Editing the Home Page
 
 1. Click **Pages**, then **Home Page**.
@@ -121,6 +129,23 @@ remember the states figure does not update itself. Empty the list to remove the 
 **To add a testimonial:** scroll to **Testimonials**, click **Add**, and fill in the quote. The
 attribution is optional and a role works better than a name, for example *Operator, East Texas*.
 The section stays hidden until you add the first one.
+
+---
+
+## The Two Hero Buttons
+
+The home page opens with two paths, because two very different people land there: a company with a
+project, and a landowner holding a letter.
+
+- **Hero Button Text** and **Hero Button Link** are the first path. It points at the Mineral Owners
+  page.
+- **Second Hero Button** and **Second Hero Button Link** are the second path, for companies. It
+  points at Contact. Clear the text to show only one button.
+
+Under them sits your phone number, which is tappable on a phone. It comes from Site Settings.
+
+**Sample Work Band** is the section further down that points at the sample file. Clear the headline
+to hide the whole band.
 
 ---
 
@@ -186,6 +211,22 @@ collects, only what it is called.
 
 ---
 
+## The Two Contact Forms
+
+The contact page offers two paths. The visitor picks one with the buttons above the form.
+
+- **I own land or minerals** is the short form: name, phone or email, county and state, and what
+  showed up. Four fields is deliberate. Somebody holding a letter they did not expect should not
+  have to fill in a project brief.
+- **I have a project** is the longer form, unchanged.
+
+Under **Short Note Form** you can edit every label, the button, and the **Success Message**. Keep a
+response time out of the success message.
+
+**What Happens Next** on this page is the same four steps as on Mineral Owners.
+
+---
+
 ## Editing Services
 
 Each service has its own page, and there are six to start with.
@@ -200,9 +241,11 @@ Each service has its own page, and there are six to start with.
      magnifying glass, pen is a document, list is a clipboard, banknotes is money, pin is a map
      pin, sun is renewables. Leave it blank for no icon.
    - **Display Order**, which controls the order services appear in. Lower numbers come first.
-   - **Show link to sample work**, which adds a box at the foot of this service page pointing to
-     the sample work page. It is on for Title Research and Lease Acquisition, which are the two
-     the samples illustrate.
+   - **Show link to sample work**, which adds the sample file band at the foot of this service
+     page. It is on for Title Research, Lease Acquisition, Due Diligence and Mineral & Royalty.
+   - **Closing Headline** and **Closing Button Text**, which are the call to action at the very
+     bottom of this service page. Leave them blank to fall back to the shared one from the Services
+     page.
    - **Page Title (search)** and **Search Description**, which are what Google shows for this
      service. Leave them blank to fall back to the service title and card description.
 3. Click **Save**.
@@ -265,6 +308,24 @@ though it is worth keeping.
 
 ---
 
+## Blocks on the Mineral Owners Page
+
+Three blocks were added for landowners who are not sure whether to call.
+
+**Service Area Line** is one sentence naming the counties you take work in. Say where you are
+available, not where you have worked before, so it never reads as a claim about past projects.
+
+**Common Reasons People Call** is a list written in the visitor's words rather than yours, so
+somebody recognises their own situation and picks up the phone. Each entry is one sentence. Add or
+remove them freely.
+
+**What Happens Next** is the four steps between a first call and a report. Do not put a response
+time in it, here or anywhere else on the site.
+
+**Sample Work Band** points at the sample file. Clear the headline to hide it.
+
+---
+
 ## The Sample Work Page
 
 This page shows three specimen documents: an ownership report, the runsheet behind it, and a lease
@@ -284,6 +345,23 @@ client's business, not a sample.
 
 **Fiction Notice** is the highlighted box that tells the reader the samples are invented. It sits
 above every table on purpose. Do not delete it.
+
+**Simple File Note** is the line admitting the sample is a short file on purpose. It is there so a
+land department does not mistake an easy example for the limit of the work.
+
+**How To Read This** is the two cards, one for a landowner and one for a land department.
+
+**Reader's Notes** are the numbered notes beside each document, under each document's own
+**Reader's Notes** list. **Anchor** decides which part of the document a note sits next to, so
+leave it alone unless you know the part name. Visitors can switch the notes off with the control at
+the top, and the sheets then read as a plain deliverable.
+
+**Supplemental Report** is the fourth document, where the open quarter interest is traced to four
+living owners. It is the one that shows hard work rather than easy work. The interests must still
+add back to 0.250000 and the net acres to 15.60.
+
+**What Makes a File Hard** is the section after the documents. Only list work the service pages
+already describe, and never describe a real past project.
 
 The numbers are meant to agree with each other: a three-quarter interest in 62.40 acres is 46.80
 net acres, and a bonus of $1,500.00 an acre on 46.80 acres is $70,200.00. The notes are referred to
