@@ -31,6 +31,11 @@
   --shadow-lg: 0 8px 24px rgba(0,0,0,.12);
 
   --transition: .18s ease;
+
+  /* The mobile dropdown is absolutely positioned to open directly under the
+     header, so its offset and the header's height are the same number. Keep
+     it here rather than as two literals that have to be changed in step. */
+  --nav-height: 76px;
 }
 
 /* ============================================================
@@ -212,7 +217,7 @@ hr.divider {
   display: flex;
   align-items: center;
   gap: 1.5rem;
-  height: 68px;
+  height: var(--nav-height);
 }
 
 .nav-logo {
@@ -227,8 +232,8 @@ hr.divider {
    small screens. Both are in the markup with explicit width and height so neither swap nor
    load shifts the header. */
 .nav-logo-img { width: auto; display: block; }
-.nav-logo-img-wide   { height: 50px; }
-.nav-logo-img-narrow { height: 34px; display: none; }
+.nav-logo-img-wide   { height: 58px; }
+.nav-logo-img-narrow { height: 40px; display: none; }
 
 .nav-actions {
   display: flex;
@@ -960,6 +965,14 @@ hr.divider {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
   gap: .15rem;
+  /* Every item carries a divider, which would leave a stray rule closing the last
+     row. The column count here is decided by auto-fit, so no :nth-last-child() can
+     name that row: the old rule assumed two columns and left the dividers showing
+     at the four columns this actually renders at on a desktop. Grid stretches rows
+     to equal height, so every last-row border lands on the list's bottom edge, and
+     clipping that one pixel takes them all out at once, whatever the width and
+     however many items the CMS holds. */
+  clip-path: inset(0 0 1px 0);
 }
 
 .project-types-list li {
@@ -971,8 +984,6 @@ hr.divider {
   color: var(--text-muted);
   border-bottom: 1px solid var(--border);
 }
-
-.project-types-list li:nth-last-child(-n+2) { border-bottom: none; }
 
 .project-types-list li::before {
   content: '';
@@ -1544,7 +1555,7 @@ a.contact-detail-value:hover { color: var(--green-dark); }
   .nav-links {
     display: none;
     position: absolute;
-    top: 68px;
+    top: var(--nav-height);
     left: 0;
     right: 0;
     background: var(--white);
@@ -2660,9 +2671,13 @@ a.contact-detail-value:hover { color: var(--green-dark); }
   transform: rotate(-2.5deg);
   opacity: .85;
 }
+/* The pull-up used to be deep enough that the front sheet's dark top border landed
+   across the third runsheet row, slicing a date in half: it read as a rendering
+   fault rather than as one sheet resting on another. Overlap the sheet's lower
+   edge instead, so every row behind it stays whole. */
 .sample-preview-sheet.is-front {
   position: relative;
-  margin-top: -2.25rem;
+  margin-top: -1rem;
   margin-left: 1.5rem;
   transform: rotate(1.5deg);
 }
