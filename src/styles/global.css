@@ -396,15 +396,15 @@ hr.divider {
   display: block;
   width: max-content;
   max-width: 100%;
-  font-size: clamp(.75rem, 1.2vw, .85rem);
+  font-size: clamp(.875rem, 1.5vw, 1.05rem);
   font-weight: 700;
   line-height: 1.35;
   text-transform: uppercase;
   /* h1 carries -.025em; a small uppercase line needs that won back and then some. */
   letter-spacing: .16em;
   color: var(--gold-light);
-  margin-bottom: 1.15rem;
-  padding-bottom: .85rem;
+  margin-bottom: 1.3rem;
+  padding-bottom: .95rem;
   border-bottom: 1.5px solid rgba(217, 190, 142, .32);
 }
 
@@ -1844,8 +1844,11 @@ a.contact-detail-value:hover { color: var(--green-dark); }
 
 /* Affiliations band. A membership with an outbound link, set apart from the people above
    so it reads as a footnote rather than another section competing for attention. */
+/* Even padding top and bottom. With no top padding the heading sat on the seam where
+   the team section's cream meets this band's white, which read as a mistake against
+   the 4rem of air underneath. */
 .affiliations-band {
-  padding: 0 0 4rem;
+  padding: 4rem 0;
   text-align: center;
 }
 
