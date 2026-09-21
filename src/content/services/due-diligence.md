@@ -17,7 +17,7 @@ Due diligence support includes:
 - Surface use agreement and ROW inventory
 - Identification of title defects, outstanding obligations, and encumbrances
 - Net revenue interest (NRI) and working interest (WI) verification
-- Consent-to-assign (CTA) and preferential right to purchase (PRFP) review
+- Consent-to-assign (CTA) and preferential right to purchase (pref right) review
 - Estoppel certificate coordination
 - Data room review and summary reporting
 - Coordination with counsel, engineers, and transaction teams
