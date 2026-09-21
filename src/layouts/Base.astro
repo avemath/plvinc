@@ -2,6 +2,7 @@
 import Nav from '../components/Nav.astro';
 import Footer from '../components/Footer.astro';
 import StickyContactBar from '../components/StickyContactBar.astro';
+import CountUp from '../components/CountUp.astro';
 import SEO from '../components/SEO.astro';
 import '../styles/fonts.css';
 import '../styles/global.css';
@@ -70,6 +71,7 @@ const { title, description, image, noindex = false, schema } = Astro.props;
     </main>
     <Footer settings={settings} />
     <StickyContactBar phone={settings.phone} />
+    <CountUp />
   </body>
 
   <script>
@@ -103,12 +105,15 @@ const { title, description, image, noindex = false, schema } = Astro.props;
     );
 
     document
-      .querySelectorAll('.state-card, .testimonial-card, .person-card, .credential-item, .approach-section')
+      .querySelectorAll(
+        '.state-card, .testimonial-card, .person-card, .credential-item, .approach-section,' +
+        '.stat, .hiw-step, .reason, .hard-file, .lease-doc, .how-to-read-card'
+      )
       .forEach((el) => { el.classList.add('reveal'); obs.observe(el); });
 
     // Opacity-only reveal for elements that own a hover transform
     document
-      .querySelectorAll('.service-card, .coverage-map, .coverage-detail')
+      .querySelectorAll('.service-card, .coverage-map, .coverage-detail, .service-tile, .sample-preview')
       .forEach((el) => { el.classList.add('reveal-fade'); obs.observe(el); });
 
     // ── Nav shadow on scroll ──────────────────────────────────

@@ -123,7 +123,10 @@ A few notes on the trickier fields:
   italic.
 
 **Figures Under the Hero** is the band below the headline. Each entry is a figure, a label, and a
-line saying **What it means**. Two entries read best there: a row of three or more turns into a
+line saying **What it means**. A figure that is a number counts up from zero when the band comes
+into view; one that is letters, like CPL, simply appears. You do not have to do anything to turn
+that on or off, and a visitor who has asked their device for reduced motion sees the figures sit
+still. Two entries read best there: a row of three or more turns into a
 scoreboard, and the coverage map already shows the footprint better than a count of states would.
 Use the **What it means** line to say what a figure actually is, the way the CPL entry explains the
 credential rather than leaving three letters on their own. Only put figures there you can stand

@@ -1,0 +1,63 @@
+---
+// Counts the figures in the band under the hero up to their printed value.
+//
+// Only values that are actually numbers are touched, so "CPL" is left exactly
+// as it is. The final figure is already in the HTML, so nothing here is needed
+// for the page to be correct: without script, or with reduced motion asked for,
+// the printed value simply stands.
+//
+// Scroll-reveal lives in Base.astro, which staggers by visual row. This file
+// deliberately does not repeat it.
+---
+
+<script>
+  const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const figures = [...document.querySelectorAll<HTMLElement>('.stat-value')];
+
+  if (!reduced && figures.length && 'IntersectionObserver' in window) {
+    // A figure, then anything trailing it: "25+" counts to 25 and keeps the plus.
+    const NUMERIC = /^(\d[\d,]*)(\D*)$/;
+
+    const countUp = (el: HTMLElement) => {
+      const final = el.textContent?.trim() ?? '';
+      const match = NUMERIC.exec(final);
+      if (!match) return;
+
+      const target = Number(match[1].replace(/,/g, ''));
+      const suffix = match[2];
+      if (!Number.isFinite(target) || target === 0) return;
+
+      // The count is decoration. Screen readers get the final figure once,
+      // from a sibling, rather than a number that changes sixty times a second.
+      el.setAttribute('aria-hidden', 'true');
+      const label = document.createElement('span');
+      label.className = 'sr-only';
+      label.textContent = final;
+      el.after(label);
+
+      const DURATION = 900;
+      const start = performance.now();
+      const ease = (t: number) => 1 - Math.pow(1 - t, 3);
+
+      const tick = (now: number) => {
+        const t = Math.min((now - start) / DURATION, 1);
+        el.textContent = String(Math.round(ease(t) * target)) + suffix;
+        if (t < 1) requestAnimationFrame(tick);
+        else el.textContent = final;
+      };
+      requestAnimationFrame(tick);
+    };
+
+    const obs = new IntersectionObserver(
+      (entries) => {
+        for (const entry of entries) {
+          if (!entry.isIntersecting) continue;
+          countUp(entry.target as HTMLElement);
+          obs.unobserve(entry.target);
+        }
+      },
+      { threshold: 0.6 },
+    );
+    figures.forEach((el) => obs.observe(el));
+  }
+</script>

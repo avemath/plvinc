@@ -73,6 +73,34 @@ plvinc/
 
 ---
 
+## Motion
+
+Two effects, both opt-in and both harmless if they never run.
+
+**Scroll-reveal** lives in the inline script at the foot of `src/layouts/Base.astro`. It adds the
+`reveal` or `reveal-fade` class in script, then an IntersectionObserver adds `is-visible`. Because
+the class that sets `opacity: 0` is only ever added by script, a visitor without JavaScript sees
+the finished page, not a blank one. The observer staggers by visual row rather than DOM index, so
+each row animates left to right whatever order the markup is in. `reveal-fade` is the opacity-only
+variant, used for anything that owns a hover transform so the two do not fight.
+
+To bring a new block into it, add its class to one of the two `querySelectorAll` lists in that
+script. Do not write a second reveal system: there was briefly one in a `Motion.astro` component,
+and it was removed in favour of this.
+
+**Count-up** is `src/components/CountUp.astro`, mounted once in the layout. It animates
+`.stat-value` from zero to the figure already printed in the HTML, and only when that figure parses
+as a number, so `25` and `1,200+` count and `CPL` is left alone. The final value is in the markup,
+so the figure is correct before, during and after. While counting, the element is `aria-hidden` and
+a visually hidden sibling carries the final figure, so a screen reader is told the number once
+rather than on every frame.
+
+Both check `prefers-reduced-motion: reduce` and do nothing at all when it is set. Verified by
+dumping the DOM under `--force-prefers-reduced-motion`: no classes are added and no attributes
+change.
+
+---
+
 ## Photography
 
 Three bands carry a photograph: the home hero, the dark closing band on the home page, and the

@@ -1604,13 +1604,17 @@ a.contact-detail-value:hover { color: var(--green-dark); }
   display: grid;
   grid-template-columns: auto 1fr;
   column-gap: 1.25rem;
-  align-items: baseline;
+  align-items: center;
 }
 
+/* Centred against the whole text block rather than sat on the first baseline.
+   Baseline alignment left a figure this size looking like it was floating
+   above its own label. */
 .stat-value {
   grid-row: 1 / span 2;
+  align-self: center;
   font-family: var(--font-heading);
-  font-size: clamp(2.6rem, 5vw, 3.4rem);
+  font-size: clamp(2.4rem, 4.4vw, 3.1rem);
   font-weight: 700;
   line-height: 1;
   color: var(--gold);
