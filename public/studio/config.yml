@@ -151,7 +151,7 @@ collections:
             name: hero_image
             widget: image
             required: false
-            hint: "Optional background photo for the hero section. Landscape format works best, with the right-hand side carrying the subject — the headline sits over the left. A dark green wash is laid over whatever you upload so the text stays readable. Leave blank for a solid green background."
+            hint: "Optional background photo for the hero section. Landscape format works best, with the right-hand side carrying the subject. The headline sits over the left. A dark green wash is laid over whatever you upload so the text stays readable. Leave blank for a solid green background."
 
           - label: "Hero Button Text"
             name: hero_cta_text
@@ -161,7 +161,7 @@ collections:
           - label: "Value Paragraph"
             name: value_paragraph
             widget: markdown
-            hint: "A paragraph below the hero that explains your value and what you offer. Plain writing is best — skip the sales language."
+            hint: "A paragraph below the hero that explains your value and what you offer. Plain writing is best. Skip the sales language."
 
           - label: "Coverage Section Label"
             name: regions_label
@@ -178,12 +178,12 @@ collections:
             widget: text
             hint: "Sentence below the headline explaining how to use the map. This is also where you say you take work nationwide."
 
-          - label: "Map Legend — Worked"
+          - label: "Map Legend: Worked"
             name: regions_legend_worked
             widget: string
             hint: "Label for shaded states on the map (e.g., Project experience)."
 
-          - label: "Map Legend — Available"
+          - label: "Map Legend: Available"
             name: regions_legend_available
             widget: string
             hint: "Label for unshaded states on the map (e.g., Available nationwide)."
@@ -191,13 +191,13 @@ collections:
           - label: "Map Caption"
             name: regions_hint
             widget: string
-            hint: "Caption under the map, shown until a state is hovered. Avoid counts here — they date quickly and make the coverage look smaller than it is."
+            hint: "Caption under the map, shown until a state is hovered. Avoid counts here. They date quickly and make the coverage look smaller than it is."
 
           - label: "Basins & Regions"
             name: regions
             widget: list
             summary: "{{name}}"
-            hint: "Each entry becomes a tab beside the map. Selecting it highlights that basin's states. Add as many as you like — no count appears anywhere on the site, so this list can grow as your coverage does."
+            hint: "Each entry becomes a tab beside the map. Selecting it highlights that basin's states. Add as many as you like. No count appears anywhere on the site, so this list can grow as your coverage does."
             fields:
               - label: "Basin / Region Name"
                 name: name
@@ -268,7 +268,7 @@ collections:
               - label: "Summary"
                 name: summary
                 widget: text
-                hint: "A short paragraph about working in this basin — what makes the land work here distinctive."
+                hint: "A short paragraph about working in this basin: what makes the land work here distinctive."
 
               - label: "Plays & Formations"
                 name: plays
@@ -342,7 +342,7 @@ collections:
           - label: "Closing Call to Action"
             name: cta
             widget: object
-            hint: "The band at the bottom of the home page. Each page has its own — vary the wording so they do not all read the same."
+            hint: "The band at the bottom of the home page. Each page has its own. Vary the wording so they do not all read the same."
             fields:
               - label: "Headline"
                 name: headline
@@ -434,7 +434,7 @@ collections:
                 name: url
                 widget: string
                 required: false
-                hint: "e.g., https://www.landman.org — leave blank if you do not want a link."
+                hint: "e.g., https://www.landman.org. Leave blank if you do not want a link."
 
           - label: "Closing Call to Action"
             name: cta
@@ -477,7 +477,7 @@ collections:
             widget: markdown
             hint: "Opening paragraph(s) for the Experience page. Describe your regional background and depth of experience."
 
-          - label: "Where We've Worked — Note"
+          - label: "Where We've Worked: Note"
             name: states_note
             widget: text
             hint: "Sentence under the heading. Use it to make clear the list is past experience, not a limit on where you take work."
@@ -510,12 +510,12 @@ collections:
             name: testimonials
             widget: list
             required: false
-            hint: "Optional client testimonials. Leave this empty if you prefer not to show them — the section will be hidden automatically."
+            hint: "Optional client testimonials. Leave this empty if you prefer not to show them. The section will be hidden automatically."
             fields:
               - label: "Quote"
                 name: quote
                 widget: text
-                hint: "The client's words. Do not include quotation marks — they are added automatically."
+                hint: "The client's words. Do not include quotation marks. They are added automatically."
               - label: "Client Name"
                 name: attribution_name
                 widget: string
@@ -525,30 +525,30 @@ collections:
                 widget: string
                 hint: "e.g., Land Manager, XYZ Energy"
 
-          - label: "Where We've Worked — Label"
+          - label: "Where We've Worked: Label"
             name: states_label
             widget: string
             hint: "Small uppercase label above the states section (e.g., Track Record)."
 
-          - label: "Where We've Worked — Headline"
+          - label: "Where We've Worked: Headline"
             name: states_headline
             widget: string
 
-          - label: "Project Types — Label"
+          - label: "Project Types: Label"
             name: project_types_label
             widget: string
             hint: "Small uppercase label above the project types section (e.g., Scope)."
 
-          - label: "Project Types — Headline"
+          - label: "Project Types: Headline"
             name: project_types_headline
             widget: string
 
-          - label: "Testimonials — Label"
+          - label: "Testimonials: Label"
             name: testimonials_label
             widget: string
             hint: "Only shown when at least one testimonial is added below."
 
-          - label: "Testimonials — Headline"
+          - label: "Testimonials: Headline"
             name: testimonials_headline
             widget: string
 

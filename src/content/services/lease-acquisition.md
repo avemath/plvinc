@@ -1,6 +1,6 @@
 ---
 title: "Lease Acquisition & Negotiation"
-card_description: "Leasehold acquisition from initial prospect identification through executed lease — including landowner contact, negotiation, bonus and royalty calculation, and title verification."
+card_description: "Leasehold acquisition from initial prospect identification through executed lease, including landowner contact, negotiation, bonus and royalty calculation, and title verification."
 seo_title: "Oil & Gas Lease Acquisition | Appalachian & Gulf Coast"
 seo_description: "Leasehold acquisition from prospect to executed lease across the Marcellus, Utica and Gulf Coast: landowner contact, negotiation, and title verification."
 icon: "pen"

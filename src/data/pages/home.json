@@ -9,7 +9,7 @@
   "regions_note": "Select a basin or a highlighted state to see the plays worked there. Shaded states mark completed project experience; we take on work nationwide.",
   "regions_legend_worked": "Project experience",
   "regions_legend_available": "Available nationwide",
-  "regions_hint": "Shaded states mark completed project work — available nationwide",
+  "regions_hint": "Shaded states mark completed project work. Available nationwide.",
   "regions": [
     {
       "id": "appalachian",
@@ -135,7 +135,7 @@
   "services_intro": "From initial title research to executed agreements, every service is delivered with the thoroughness and direct communication that complex land work demands.",
   "cta": {
     "headline": "Ready to Move Your Project Forward?",
-    "text": "Send the project details — location, scope, and timeline — and we will outline the work involved.",
+    "text": "Send the location, scope, and timeline, and we will outline the work involved.",
     "button": "Get in Touch",
     "image": "/images/uploads/cta-rig-horizon.jpg"
   },
