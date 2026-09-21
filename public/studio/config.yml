@@ -791,6 +791,12 @@ collections:
             required: false
             hint: "Background on how ownership and leasing work in your home state. Leave blank to hide the whole section, heading included."
 
+          - label: "Conflict of Interest Note"
+            name: conflict_note
+            widget: text
+            required: false
+            hint: "The disclosure about also working for operators, shown beside the legal note at the bottom. Leave blank to hide it."
+
           - label: "Legal Note"
             name: disclaimer
             widget: text

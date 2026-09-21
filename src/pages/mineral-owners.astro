@@ -92,10 +92,11 @@ const faqSchema = faq.length > 0
     </section>
   )}
 
-  {page.disclaimer && (
+  {(page.conflict_note || page.disclaimer) && (
     <section class="owner-disclaimer-band">
       <div class="container container-narrow">
-        <p class="owner-disclaimer">{page.disclaimer}</p>
+        {page.conflict_note && <p class="owner-disclaimer">{page.conflict_note}</p>}
+        {page.disclaimer && <p class="owner-disclaimer">{page.disclaimer}</p>}
       </div>
     </section>
   )}

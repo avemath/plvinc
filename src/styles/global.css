@@ -1562,6 +1562,10 @@ a.contact-detail-value:hover { color: var(--green-dark); }
 }
 .owner-state-note p:last-child { margin-bottom: 0; }
 
+/* Two notes can sit in this band: the conflict disclosure and the general
+   disclaimer. They are separate paragraphs so either can stand alone. */
+.owner-disclaimer + .owner-disclaimer { margin-top: 1rem; }
+
 .owner-disclaimer {
   margin: 0;
   padding: 1.25rem 1.5rem;
