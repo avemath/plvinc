@@ -136,7 +136,24 @@ fold legitimately has not revealed yet and never will without scrolling. And
 `--run-all-compositor-stages-before-draw` can capture the frame before the transition has settled,
 which produces an entirely empty band.
 
-Check the DOM instead. A block that has arrived carries `is-visible`:
+**Take the screenshot with `--force-prefers-reduced-motion`.** The reveal and the count-up both
+do nothing under that setting, as the section above notes, so every block paints at its final
+opacity on the very first frame and there is no transition left to catch halfway through:
+
+```bash
+chrome-headless-shell --headless --disable-gpu --no-sandbox \
+  --force-prefers-reduced-motion --hide-scrollbars \
+  --window-size=1280,6200 --virtual-time-budget=12000 \
+  --screenshot=out.png http://localhost:PORT/mineral-owners.html
+```
+
+The window still has to be tall enough to hold the whole page. The flag takes away the animation,
+not the need to render what you asked for, and anything past the bottom of the window is simply
+not in the file.
+
+That is the fix worth reaching for first, because it gives you something you can actually look at.
+When you only need to know whether a block arrived, the DOM carries it too: one that has arrived
+carries `is-visible`.
 
 ```bash
 chrome-headless-shell --headless --disable-gpu --no-sandbox \
@@ -146,9 +163,7 @@ chrome-headless-shell --headless --disable-gpu --no-sandbox \
 ```
 
 Every card should come back with `is-visible` on it. If the class is there and the pixels are not,
-the page is fine and the screenshot is not. If you do want a usable screenshot, make the window
-tall enough to hold the whole page and take it more than once, because the first pass often lands
-before the images have decoded.
+the page is fine and the screenshot is not.
 
 ---
 
