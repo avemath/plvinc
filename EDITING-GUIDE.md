@@ -196,13 +196,18 @@ Each service has its own page, and there are six to start with.
    - **Card Description**, the short summary on the main Services page. One or two sentences.
    - **Full Description**, the detailed text on that service's own page. Supports lists and
      formatting.
-   - **Icon / Symbol**, an optional emoji shown beside the title
+   - **Icon / Symbol**, the line drawing beside the title. Pick one from the list: search is a
+     magnifying glass, pen is a document, list is a clipboard, banknotes is money, pin is a map
+     pin, sun is renewables. Leave it blank for no icon.
    - **Display Order**, which controls the order services appear in. Lower numbers come first.
+   - **Show link to sample work**, which adds a box at the foot of this service page pointing to
+     the sample work page. It is on for Title Research and Lease Acquisition, which are the two
+     the samples illustrate.
    - **Page Title (search)** and **Search Description**, which are what Google shows for this
      service. Leave them blank to fall back to the service title and card description.
 3. Click **Save**.
 
-**To add a service:** click **New Services** at the top of the section, fill in the fields, and
+**To add a service:** click **New Service** at the top of the section, fill in the fields, and
 save.
 
 ---
