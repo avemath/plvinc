@@ -46,6 +46,10 @@ const faqSchema = faq.length > 0
   <section>
     <div class="container container-narrow">
       <div class="prose owner-intro" set:html={introHtml} />
+
+      {page.service_area_line && (
+        <p class="service-area-line">{page.service_area_line}</p>
+      )}
     </div>
   </section>
 

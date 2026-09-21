@@ -1,6 +1,6 @@
 {
   "page_subtitle": "Plain answers about what you own and what you have been offered.",
-  "meta_description": "Help for Pennsylvania and Appalachian Basin mineral owners: ownership reports, heirship research, Marcellus lease offer review, and division order questions.",
+  "meta_description": "Help for Pennsylvania mineral owners: understanding an oil and gas lease offer, inherited mineral rights, division orders, and royalty questions, from Certified Professional Landmen in Duncansville.",
   "intro": "If someone has approached you about leasing your minerals, crossing your land, or signing a division order, you do not have to work out what it means on your own.\n\nWe are Certified Professional Landmen. We read the public record for a living. We can tell you what the record shows about your ownership, what a document in front of you actually says, and, just as importantly, what the record does not settle.",
   "services_label": "How We Help",
   "services_headline": "What You Can Bring to Us",
@@ -180,11 +180,12 @@
     "text": "Tell us the county and what showed up in your mailbox. We will look at it with you.",
     "button": "Call or send it over"
   },
-  "page_title": "Mineral Owner Help | Pennsylvania & Appalachian Basin",
+  "page_title": "Oil and Gas Lease Offer Help in Pennsylvania | Mineral Owners",
   "sample_feature": {
     "label": "Sample Work",
     "headline": "See the Report Before You Call",
     "text": "This is the kind of report you would get from us, with notes beside it that say what each part means for who signs and who gets paid.",
     "button": "View the sample file"
-  }
+  },
+  "service_area_line": "We take work across central and western Pennsylvania, including Blair, Cambria, Bedford, Huntingdon, Centre, Clearfield, Indiana and Westmoreland counties, and the Marcellus counties beyond them."
 }
