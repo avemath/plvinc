@@ -81,9 +81,9 @@ derived JPEGs in `public/images/uploads/` are committed and served.
 
 | Source | Derived | Used by |
 |---|---|---|
-| `workspace-window-monitors.png` | `workspace-hero-window.jpg` | Home hero |
-| `workspace-rig-sunset.png` | `cta-rig-sunset.jpg` | Home closing band |
-| `workspace-desk-map.png` | `mineral-owners-desk.jpg` | Mineral Owners header |
+| `workspace-window-monitors.png` | `hero-office-monitors.jpg` | Home hero |
+| `workspace-rig-sunset.png` | `cta-rig-horizon.jpg` | Home closing band |
+| `workspace-desk-map.png` | `mineral-owners-lease-map.jpg` | Mineral Owners header |
 
 Each is softened slightly and desaturated at build time rather than with a CSS filter. Blurring a
 bitmap that size on every paint costs a full composited layer, and the processed file also

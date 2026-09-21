@@ -1323,7 +1323,7 @@ a.contact-detail-value:hover { color: var(--green-dark); }
    deliberate rather than as the start of a pattern. The green wash is
    composited into the file — see the note on .cta-band-image. */
 .page-header-image {
-  background-image: url('/images/uploads/mineral-owners-desk.jpg');
+  background-image: url('/images/uploads/mineral-owners-lease-map.jpg');
   background-size: cover;
   background-position: center 72%;
   background-repeat: no-repeat;
