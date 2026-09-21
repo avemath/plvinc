@@ -2169,3 +2169,35 @@ a.contact-detail-value:hover { color: var(--green-dark); }
   .lease-term { grid-template-columns: 1fr; gap: .2rem; }
 }
 
+/* ============================================================
+   Sample work callout on a service page
+   ============================================================ */
+.sample-callout {
+  margin: 2.5rem 0 0;
+  padding: 1.5rem 1.6rem;
+  background: var(--green-pale);
+  border-left: 3px solid var(--green-mid);
+  border-radius: var(--radius);
+}
+
+.sample-callout-title {
+  margin: 0 0 .4rem;
+  font-size: 1.05rem;
+  color: var(--green-dark);
+}
+
+.sample-callout-text {
+  margin: 0 0 .9rem;
+  font-size: .95rem;
+  line-height: 1.7;
+  color: var(--text-muted);
+}
+
+.sample-callout-link {
+  font-size: .95rem;
+  font-weight: 600;
+  color: var(--green-dark);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+.sample-callout-link:hover { color: var(--green-mid); }

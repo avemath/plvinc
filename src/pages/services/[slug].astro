@@ -14,7 +14,7 @@ export async function getStaticPaths() {
 
 const { entry }       = Astro.props;
 const { Content }     = await render(entry);
-const { title, icon } = entry.data;
+const { title, icon, show_sample_link } = entry.data;
 ---
 
 <Base
@@ -39,6 +39,19 @@ const { title, icon } = entry.data;
       <div class="prose">
         <Content />
       </div>
+
+      {show_sample_link && (
+        <aside class="sample-callout">
+          <h2 class="sample-callout-title">See what the deliverable looks like</h2>
+          <p class="sample-callout-text">
+            A fictional ownership report, runsheet, and lease acquisition report, laid out the
+            way we deliver them.
+          </p>
+          <a href="/sample-work" class="sample-callout-link">
+            View sample work <span aria-hidden="true">&rarr;</span>
+          </a>
+        </aside>
+      )}
 
       <div class="service-nav">
         <a href="/services" class="back-link">

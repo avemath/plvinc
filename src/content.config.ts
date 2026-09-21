@@ -12,6 +12,9 @@ const services = defineCollection({
     seo_description: z.string().optional(),
     icon: z.string().optional(),
     sort_order: z.number().default(0),
+    // Off unless a service actually has a sample to point at, so the callout
+    // never appears on a page it does not belong on.
+    show_sample_link: z.boolean().optional().default(false),
   }),
 });
 

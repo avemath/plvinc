@@ -506,6 +506,12 @@ collections:
                 widget: string
                 hint: "e.g., Greenfield leasing programs"
 
+          - label: "Sample Work Link"
+            name: sample_link_text
+            widget: string
+            required: false
+            hint: "One sentence under the project types, linking to the sample work page. Leave blank to hide the link."
+
           - label: "Testimonials"
             name: testimonials
             widget: list

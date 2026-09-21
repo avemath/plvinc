@@ -4,6 +4,7 @@ card_description: "Leasehold acquisition from initial prospect identification th
 seo_title: "Oil & Gas Lease Acquisition | Appalachian & Gulf Coast"
 seo_description: "Leasehold acquisition from prospect to executed lease across the Marcellus, Utica and Gulf Coast: landowner contact, negotiation, and title verification."
 icon: "pen"
+show_sample_link: true
 sort_order: 2
 ---
 
