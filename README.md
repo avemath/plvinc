@@ -85,15 +85,15 @@ derived JPEGs in `public/images/uploads/` are committed and served.
 | `workspace-rig-sunset.png` | `cta-rig-sunset.jpg` | Home closing band |
 | `workspace-desk-map.png` | `mineral-owners-desk.jpg` | Mineral Owners header |
 
-Each is blurred and desaturated at build time rather than with a CSS filter. Blurring a bitmap
-that size on every paint costs a full composited layer, and a pre-blurred file compresses far
-harder — the three together deploy at about 106 KB, against 6 MB of originals. Regenerate with
-[sharp](https://sharp.pixelplumbing.com), already a dependency:
+Each is softened slightly and desaturated at build time rather than with a CSS filter. Blurring a
+bitmap that size on every paint costs a full composited layer, and the processed file also
+compresses harder — the three together deploy at about 160 KB, against 6 MB of originals.
+Regenerate with [sharp](https://sharp.pixelplumbing.com), already a dependency:
 
 ```js
-sharp(src).resize({ width: 1672 }).blur(3.5)
+sharp(src).resize({ width: 1672 }).blur(1.2)
   .modulate({ saturation: 0.85 })
-  .jpeg({ quality: 62, mozjpeg: true })
+  .jpeg({ quality: 64, mozjpeg: true })
   .toFile(out)
 ```
 
@@ -104,16 +104,19 @@ two sit behind centred text, so their wash is even and is composited into the fi
 `#1B4332` then `#0B1F15`, at `.20`/`.58` for the closing band and `.18`/`.60` for the header:
 
 ```js
-sharp(src).resize({ width: 1672, height: 941, fit: 'cover' }).blur(3.5)
+sharp(src).resize({ width: 1672, height: 941, fit: 'cover' }).blur(1.2)
   .modulate({ saturation: 0.85 })
   .composite([{ input: greenLayer }, { input: darkLayer }])
-  .jpeg({ quality: 66, mozjpeg: true })
+  .jpeg({ quality: 68, mozjpeg: true })
   .toFile(out)
 ```
 
-Swapping a source means rechecking contrast: white text should clear 4.5:1 against the brightest
-point it covers. The current files measure 4.5:1 or better at their worst, and above 10:1 on
-average.
+The blur is deliberately light — enough to stop map grids and document text competing with the
+copy, not enough to make the scene mush. Raising it much past 2 starts to read as out of focus.
+
+Swapping a source, or changing the blur, means rechecking contrast: white text should clear 4.5:1
+against the brightest point it covers. The current files measure 4.4:1 at worst behind the large
+hero headline, which needs only 3:1, and 5.5:1 or better everywhere the body copy sits.
 
 The hero and closing-band images are set through the CMS, so either can be changed without
 touching code — but an unprocessed upload will be sharp, heavy, and washed only by whatever the
