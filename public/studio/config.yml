@@ -854,6 +854,31 @@ collections:
                 name: button
                 widget: string
 
+      - name: privacy
+        label: "Privacy Page"
+        file: src/data/pages/privacy.json
+        format: json
+        fields:
+          - label: "Page Subtitle"
+            name: page_subtitle
+            widget: text
+            hint: "The line under the title at the top of the privacy page."
+
+          - label: "Page Title"
+            name: page_title
+            widget: string
+            hint: "The browser tab title and the blue headline in Google results. Keep it under about 60 characters."
+
+          - label: "Search Description"
+            name: meta_description
+            widget: text
+            hint: "Search result description shown under the title. Aim for under 155 characters."
+
+          - label: "Policy Text"
+            name: body
+            widget: markdown
+            hint: "The policy itself. If you change how the contact form works, or start using analytics, update this to match."
+
       - name: services_page
         label: "Services Page"
         file: src/data/pages/services.json

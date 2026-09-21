@@ -1278,11 +1278,18 @@ a.contact-detail-value:hover { color: var(--green-dark); }
   display: block;
 }
 
+/* Copyright on one side, legal links on the other. Privacy sits here rather
+   than in the Navigation column, which lists pages about the work. */
 .footer-bottom {
   border-top: 1px solid rgba(255,255,255,.1);
   max-width: var(--container);
   margin: 0 auto;
   padding: 1.25rem 1.5rem;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: .5rem 1.5rem;
 }
 
 .footer-bottom p {
@@ -1290,6 +1297,14 @@ a.contact-detail-value:hover { color: var(--green-dark); }
   opacity: .4;
   margin: 0;
 }
+
+.footer-bottom a {
+  font-size: .78rem;
+  opacity: .55;
+  text-decoration: none;
+  transition: opacity var(--transition);
+}
+.footer-bottom a:hover { opacity: 1; }
 
 /* ============================================================
    Page-header band (shared by About, Experience, etc.)
