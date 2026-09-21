@@ -95,7 +95,7 @@
         "text": "This says who is responsible if the company's operations lead to a claim."
       }
     ],
-    "closing": "We can check an offer against the record and explain what each clause does. For advice on whether to sign, talk to an oil and gas attorney."
+    "closing": "We can check an offer against the record and explain what each clause does, so you know exactly what you own before you respond. Call us and we will walk through it with you."
   },
   "sample_link_text": "See a fictional sample of the ownership report we prepare.",
   "faq_label": "Common Questions",
@@ -111,7 +111,7 @@
     },
     {
       "question": "Can you tell me whether the offer I received is a fair price?",
-      "answer": "We can tell you whether the offer describes the right tract, whether the interest it credits you with matches what the record shows, and which of the terms will matter most over the life of the agreement. What we do not do is put a value on your minerals or tell you whether to sign. That decision is yours, often with your attorney, and our job is to make sure you are making it against an accurate picture of what you actually own."
+      "answer": "We can tell you whether the offer describes the right tract, whether the interest it credits you with matches what the record shows, and which of the terms will matter most over the life of the agreement. Our job is to make sure any decision you make is based on an accurate picture of what you actually own and what the offer actually says. Send us the offer and we will go through it with you clause by clause."
     },
     {
       "question": "How long does this take?",
@@ -127,13 +127,13 @@
     }
   ],
   "pennsylvania_headline": "Pennsylvania mineral owners",
-  "pennsylvania_note": "In Pennsylvania the surface and the minerals are often owned separately, and severed oil, gas, and coal estates are common. Deeds and oil and gas leases are recorded with the county Recorder of Deeds, and a decedent's estate is handled through the county Register of Wills and the Orphans' Court. Under the Dunham Rule, reaffirmed in Butler v. Charles Powers Estate (2013), a deed that reserves \"minerals\" does not by itself include oil and gas unless the instrument says so. Pennsylvania has no general forced pooling for the Marcellus, and the Guaranteed Minimum Royalty Act (58 P.S. section 33.3) requires an oil and gas lease to guarantee the owner at least a one-eighth royalty. This is what the record commonly shows, not legal advice.",
+  "pennsylvania_note": "In Pennsylvania the surface and the minerals are often owned separately, and severed oil, gas, and coal estates are common. Deeds and oil and gas leases are recorded with the county Recorder of Deeds, and a decedent's estate is handled through the county Register of Wills and the Orphans' Court. Under the Dunham Rule, reaffirmed in Butler v. Charles Powers Estate (2013), a deed that reserves \"minerals\" does not by itself include oil and gas unless the instrument says so. Pennsylvania has no general forced pooling for the Marcellus, and the Guaranteed Minimum Royalty Act (58 P.S. section 33.3) requires an oil and gas lease to guarantee the owner at least a one-eighth royalty.",
   "conflict_note": "We also acquire leases for operators. Under the AAPL Code of Ethics and Standards of Practice, which require a land professional to disclose any interest that may conflict with a client, we will not review your offer on a tract where we are already working for the other side, and we will tell you up front if that is the case.",
-  "disclaimer": "We are not attorneys and we do not give legal advice. Our work is research and reporting on what the public record shows. Many owners bring their own attorney in for the legal questions, and we are used to working alongside one.",
+  "disclaimer": "What we do is research and report the public record: what you own, what it shows, and where the exposure sits. If your situation ever calls for more than that, we will say so when we talk. Many owners keep their own attorney in the loop, and we work alongside one comfortably. Either way, the next step is a conversation with Petro Land Ventures.",
   "cta": {
-    "headline": "Not Sure Where to Start?",
-    "text": "Send us what you have received and the county it relates to. We will tell you what we can find out.",
-    "button": "Ask a Question"
+    "headline": "Send us the letter or the offer. We will tell you what it means.",
+    "text": "Tell us the county and what showed up in your mailbox. We will look at it with you.",
+    "button": "Call or send it over"
   },
   "page_title": "Mineral Owner Help | Pennsylvania & Appalachian Basin"
 }
