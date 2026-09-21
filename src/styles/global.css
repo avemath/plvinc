@@ -2613,3 +2613,161 @@ a.contact-detail-value:hover { color: var(--green-dark); }
   .sample-feature-inner { grid-template-columns: 1fr; gap: 2rem; }
   .sample-feature-art { max-width: 380px; }
 }
+
+/* ============================================================
+   Reasons people call, the four steps, and the footer scope line
+   ============================================================ */
+.reasons-list {
+  list-style: none;
+  margin: 0 0 1.75rem;
+  padding: 0;
+  display: grid;
+  gap: .65rem;
+}
+
+/* Each reason is a sentence in the visitor's own words, so it is set as a line
+   they can recognise rather than a bullet they have to parse. */
+.reason {
+  padding: .9rem 1.1rem;
+  background: var(--white);
+  border: 1px solid var(--border);
+  border-left: 3px solid var(--green-light);
+  border-radius: var(--radius);
+  font-size: 1.02rem;
+  line-height: 1.6;
+  color: var(--text);
+}
+
+.reasons-closing {
+  margin: 0 0 1.5rem;
+  font-size: 1.02rem;
+  line-height: 1.75;
+  color: var(--text-muted);
+}
+
+.reasons-actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: .75rem 1.5rem;
+}
+
+.inline-phone {
+  display: inline-flex;
+  align-items: center;
+  gap: .5rem;
+  min-height: 44px;
+  padding: .35rem .25rem;
+  font-size: 1.05rem;
+  font-weight: 600;
+  color: var(--green-dark);
+  text-decoration: none;
+}
+.inline-phone:hover { text-decoration: underline; text-underline-offset: 3px; }
+
+.how-it-works { padding: 4rem 0; }
+
+.hiw-steps {
+  list-style: none;
+  counter-reset: hiw;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+  gap: 1.25rem;
+}
+
+.hiw-step {
+  counter-increment: hiw;
+  position: relative;
+  padding: 1.35rem 1.4rem 1.35rem 1.4rem;
+  background: var(--white);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+}
+
+.hiw-step::before {
+  content: counter(hiw);
+  display: grid;
+  place-items: center;
+  width: 1.9rem;
+  height: 1.9rem;
+  margin-bottom: .75rem;
+  border-radius: 50%;
+  background: var(--green-dark);
+  color: var(--white);
+  font-family: var(--font-heading);
+  font-size: .85rem;
+  font-weight: 700;
+}
+
+.hiw-step-title { margin: 0 0 .35rem; font-size: 1rem; }
+.hiw-step-text {
+  margin: 0;
+  font-size: .95rem;
+  line-height: 1.7;
+  color: var(--text-muted);
+}
+
+/* One line, stated once, at the foot of every page. */
+.footer-scope {
+  max-width: var(--container);
+  margin: 0 auto;
+  padding: 0 1.5rem 1.5rem;
+  font-size: .85rem;
+  line-height: 1.7;
+  opacity: .55;
+}
+
+/* ============================================================
+   Contact form: two paths
+   A short note for a landowner holding a letter, and the full
+   project form. Switched with radios so it needs no script.
+   ============================================================ */
+.form-path-input {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.form-path-tabs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: .5rem;
+  margin-bottom: 1.75rem;
+}
+
+.form-path-tab {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+  padding: .5rem 1.1rem;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  background: var(--white);
+  font-size: .95rem;
+  font-weight: 600;
+  color: var(--text-muted);
+  cursor: pointer;
+  transition: background var(--transition), color var(--transition), border-color var(--transition);
+}
+.form-path-tab:hover { border-color: var(--green-light); color: var(--text); }
+
+#path-short:checked   ~ .form-path-tabs label[for="path-short"],
+#path-project:checked ~ .form-path-tabs label[for="path-project"] {
+  background: var(--green-dark);
+  border-color: var(--green-dark);
+  color: var(--white);
+}
+
+#path-short:focus-visible   ~ .form-path-tabs label[for="path-short"],
+#path-project:focus-visible ~ .form-path-tabs label[for="path-project"] {
+  outline: 2px solid var(--green-mid);
+  outline-offset: 2px;
+}
+
+/* Only the chosen panel is in the page, so nothing is submitted from the other. */
+#path-short:checked   ~ .form-panel-project,
+#path-project:checked ~ .form-panel-short { display: none; }

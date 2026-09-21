@@ -30,6 +30,31 @@
       "description": "Reviewing solar and wind land offers, which usually run far longer than an oil and gas lease and cover more of your surface."
     }
   ],
+  "reasons_to_call": {
+    "intro": "Most people call us about one of these.",
+    "items": [
+      {
+        "text": "I got a lease offer and want to understand it before I respond."
+      },
+      {
+        "text": "I inherited mineral rights and I am not sure what I own."
+      },
+      {
+        "text": "A division order showed up and I do not know if the decimal is right."
+      },
+      {
+        "text": "My royalty check stopped, dropped, or looks wrong."
+      },
+      {
+        "text": "A pipeline, solar, or wind company contacted me about my land."
+      },
+      {
+        "text": "I am buying or selling land and need to know about the minerals."
+      }
+    ],
+    "closing": "If any of these sound familiar, call us and we will look at it with you.",
+    "button": "Call or send it over"
+  },
   "lease_packet": {
     "label": "Lease Offers",
     "headline": "What Is in a Lease Offer",
@@ -96,6 +121,27 @@
       }
     ],
     "closing": "We can check an offer against the record and explain what each clause does, so you know exactly what you own before you respond. Call us and we will walk through it with you."
+  },
+  "how_it_works": {
+    "headline": "What Happens When You Contact Us",
+    "steps": [
+      {
+        "title": "You reach out.",
+        "text": "Call, or send a short note. Tell us the county and what showed up in your mailbox."
+      },
+      {
+        "title": "We look at the record.",
+        "text": "We pull what the public record shows about your tract and your ownership."
+      },
+      {
+        "title": "We report back in plain language.",
+        "text": "You get a clear picture of what you own, what the document says, and where the risk sits."
+      },
+      {
+        "title": "You decide the next step, with us.",
+        "text": "If the work calls for more, we will tell you. Either way you are talking to Petro Land Ventures."
+      }
+    ]
   },
   "faq_label": "Common Questions",
   "faq_headline": "Questions We Are Asked Often",

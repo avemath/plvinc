@@ -15,6 +15,7 @@ const email = recipientEmail || settings.email || '';
 // new fields are named in plain words rather than in code style. `name`, `email` and
 // `message` keep their original names because Web3Forms treats those specially.
 const labels = contact.form_labels;
+const shortForm = contact.short_form;
 const inquirerTypes = (contact.inquirer_types || []).map((t) => t.label).filter(Boolean);
 const timelines = (contact.timelines || []).map((t) => t.label).filter(Boolean);
 
@@ -35,6 +36,78 @@ const stateNames = (states as { name: string }[]).map((s) => s.name);
 ---
 
 <div class="contact-form-block">
+  {shortForm && (
+    <>
+      <input type="radio" name="form-path" id="path-short" class="form-path-input" checked />
+      <input type="radio" name="form-path" id="path-project" class="form-path-input" />
+
+      <div class="form-path-tabs" role="presentation">
+        <label for="path-short" class="form-path-tab">{shortForm.tab_label}</label>
+        <label for="path-project" class="form-path-tab">{shortForm.project_tab_label}</label>
+      </div>
+
+      <!-- Short path: four fields, for someone holding a letter they did not expect. -->
+      <div class="form-panel form-panel-short">
+        <h2>{shortForm.headline}</h2>
+        <p class="form-intro">{shortForm.intro}</p>
+
+        <form id="short-form" action="https://api.web3forms.com/submit" method="POST" novalidate>
+          <input type="hidden" name="access_key" value={settings.web3forms_key} />
+          <input type="hidden" name="subject" value="New note from a landowner" />
+          <input type="hidden" name="redirect" value="false" />
+
+          <label class="botcheck-field" aria-hidden="true">
+            <input type="checkbox" name="botcheck" tabindex="-1" autocomplete="off" />
+          </label>
+
+          <div class="form-group">
+            <label for="short-name">Name <span class="required-mark" aria-hidden="true">*</span></label>
+            <input type="text" id="short-name" name="name" autocomplete="name" required
+                   aria-describedby="short-name-error" />
+            <p class="field-error" id="short-name-error" hidden></p>
+          </div>
+
+          <div class="form-group">
+            <label for="short-contact">
+              {shortForm.contact_label} <span class="required-mark" aria-hidden="true">*</span>
+            </label>
+            <input type="text" id="short-contact" name="Phone or email" required
+                   aria-describedby="short-contact-error" />
+            <p class="field-error" id="short-contact-error" hidden></p>
+          </div>
+
+          <div class="form-group">
+            <label for="short-county">
+              {shortForm.county_label} <span class="required-mark" aria-hidden="true">*</span>
+            </label>
+            <input type="text" id="short-county" name="County and state" required
+                   aria-describedby="short-county-error" />
+            <p class="field-error" id="short-county-error" hidden></p>
+          </div>
+
+          <div class="form-group">
+            <label for="short-message">
+              {shortForm.what_label} <span class="required-mark" aria-hidden="true">*</span>
+            </label>
+            <textarea id="short-message" name="message" rows="5" required
+                      aria-describedby="short-message-error"></textarea>
+            <p class="field-error" id="short-message-error" hidden></p>
+          </div>
+
+          <button type="submit" class="btn btn-primary">{shortForm.button}</button>
+
+          <div id="short-success" class="form-success" role="status" aria-live="polite" hidden>
+            <p>{shortForm.success}</p>
+          </div>
+          <div id="short-error" class="form-error" role="alert" aria-live="polite" hidden>
+            <p>{contact.form_error}</p>
+          </div>
+        </form>
+      </div>
+    </>
+  )}
+
+  <div class:list={['form-panel', shortForm && 'form-panel-project']}>
   <h2>{contact.form_headline}</h2>
   {contact.form_intro && <p class="form-intro">{contact.form_intro}</p>}
 
@@ -204,6 +277,7 @@ const stateNames = (states as { name: string }[]).map((s) => s.name);
       <p>{contact.form_error}</p>
     </div>
   </form>
+  </div>
 </div>
 
 <style>
@@ -220,6 +294,70 @@ const stateNames = (states as { name: string }[]).map((s) => s.name);
 </style>
 
 <script>
+  // The short path posts to the same endpoint with its own four checks.
+  const shortForm    = document.getElementById('short-form') as HTMLFormElement | null;
+  const shortSuccess = document.getElementById('short-success') as HTMLElement | null;
+  const shortError   = document.getElementById('short-error')   as HTMLElement | null;
+  const shortBtn     = shortForm?.querySelector<HTMLButtonElement>('button[type="submit"]');
+  const shortLabel   = shortBtn?.textContent ?? 'Send it over';
+
+  const SHORT_CHECKS: { id: string; message: string }[] = [
+    { id: 'short-name',    message: 'Please enter your name.' },
+    { id: 'short-contact', message: 'Please give us a phone number or an email address.' },
+    { id: 'short-county',  message: 'Please tell us the county and state.' },
+    { id: 'short-message', message: 'Please tell us what showed up.' },
+  ];
+
+  function setShortError(id: string, message: string | null) {
+    const field = document.getElementById(id) as HTMLInputElement | HTMLTextAreaElement | null;
+    const slot  = document.getElementById(`${id}-error`);
+    if (!field || !slot) return;
+    slot.textContent = message ?? '';
+    slot.hidden = !message;
+    if (message) field.setAttribute('aria-invalid', 'true');
+    else field.removeAttribute('aria-invalid');
+  }
+
+  shortForm?.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    if (!shortForm || !shortSuccess || !shortError || !shortBtn) return;
+
+    let firstInvalid: HTMLElement | null = null;
+    for (const c of SHORT_CHECKS) {
+      const field = document.getElementById(c.id) as HTMLInputElement | HTMLTextAreaElement | null;
+      const bad = !field?.value.trim();
+      setShortError(c.id, bad ? c.message : null);
+      if (bad && !firstInvalid) firstInvalid = field;
+    }
+    if (firstInvalid) {
+      shortSuccess.hidden = true;
+      shortError.hidden = true;
+      firstInvalid.focus();
+      return;
+    }
+
+    shortBtn.disabled = true;
+    shortBtn.textContent = 'Sending…';
+    try {
+      const res  = await fetch('https://api.web3forms.com/submit', {
+        method: 'POST',
+        body: new FormData(shortForm),
+      });
+      const json = await res.json();
+      if (!json.success) throw new Error('Submission failed');
+      shortForm.reset();
+      for (const c of SHORT_CHECKS) setShortError(c.id, null);
+      shortSuccess.hidden = false;
+      shortError.hidden = true;
+    } catch {
+      shortError.hidden = false;
+      shortSuccess.hidden = true;
+    } finally {
+      shortBtn.disabled = false;
+      shortBtn.textContent = shortLabel;
+    }
+  });
+
   const form    = document.getElementById('contact-form') as HTMLFormElement | null;
   const success = document.getElementById('form-success') as HTMLElement | null;
   const error   = document.getElementById('form-error')   as HTMLElement | null;

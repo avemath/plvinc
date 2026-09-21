@@ -9,6 +9,7 @@ interface Props {
     phone?: string;
     email?: string;
     service_area_summary?: string;
+    footer_scope_line?: string;
     logo_small_light?: string;
     based_in?: string;
     city?: string;
@@ -101,6 +102,10 @@ const location = settings.based_in
       </nav>
     </div>
   </div>
+
+  {settings.footer_scope_line && (
+    <p class="footer-scope">{settings.footer_scope_line}</p>
+  )}
 
   <div class="footer-bottom">
     <p>&copy; {year} {name}. All rights reserved.</p>

@@ -1,0 +1,28 @@
+---
+// The four steps between a first call and a report. Shown on Contact and on
+// Mineral Owners, where the visitor is most likely to be wondering what happens
+// if they pick up the phone. No timeframe is stated anywhere.
+interface Props {
+  headline: string;
+  steps: { title: string; text: string }[];
+  tone?: 'plain' | 'alt';
+}
+
+const { headline, steps, tone = 'plain' } = Astro.props;
+---
+
+<section class:list={['how-it-works', tone === 'alt' && 'section-alt']} aria-labelledby="how-it-works-headline">
+  <div class="container">
+    <div class="section-header">
+      <h2 id="how-it-works-headline">{headline}</h2>
+    </div>
+    <ol class="hiw-steps" role="list">
+      {steps.map((s) => (
+        <li class="hiw-step">
+          <h3 class="hiw-step-title">{s.title}</h3>
+          <p class="hiw-step-text">{s.text}</p>
+        </li>
+      ))}
+    </ol>
+  </div>
+</section>

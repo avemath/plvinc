@@ -1,5 +1,6 @@
 ---
 import Base from '../layouts/Base.astro';
+import HowItWorks from '../components/HowItWorks.astro';
 import ContactForm from '../components/ContactForm.astro';
 import contact from '../data/pages/contact.json';
 import settings from '../data/settings.json';
@@ -97,4 +98,11 @@ const location = settings.based_in
       </div>
     </div>
   </section>
+  {contact.how_it_works && (
+    <HowItWorks
+      headline={contact.how_it_works.headline}
+      steps={contact.how_it_works.steps}
+      tone="alt"
+    />
+  )}
 </Base>

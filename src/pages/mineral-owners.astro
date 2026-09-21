@@ -2,6 +2,7 @@
 import Base from '../layouts/Base.astro';
 import CallToAction from '../components/CallToAction.astro';
 import SampleFeature from '../components/SampleFeature.astro';
+import HowItWorks from '../components/HowItWorks.astro';
 import { renderMarkdown } from '../utils/markdown';
 import page from '../data/pages/mineral-owners.json';
 import settings from '../data/settings.json';
@@ -12,6 +13,8 @@ const pennsylvaniaHtml = page.pennsylvania_note
   : '';
 
 const faq = (page.faq || []).filter((f) => f.question && f.answer);
+
+const telHref = settings.phone ? `tel:${settings.phone.replace(/[^\d+]/g, '')}` : '';
 
 // FAQPage markup is only valid with at least one entry, so it is built here and passed to
 // the layout rather than emitted unconditionally.
@@ -65,6 +68,37 @@ const faqSchema = faq.length > 0
     </section>
   )}
 
+  {page.reasons_to_call && (
+    <section class="section-alt" aria-labelledby="reasons-headline">
+      <div class="container container-narrow">
+        <div class="section-header">
+          <h2 id="reasons-headline">Common reasons people call us</h2>
+          <p>{page.reasons_to_call.intro}</p>
+        </div>
+        <ul class="reasons-list" role="list">
+          {page.reasons_to_call.items.map((r) => (
+            <li class="reason">{r.text}</li>
+          ))}
+        </ul>
+        <p class="reasons-closing">{page.reasons_to_call.closing}</p>
+        <div class="reasons-actions">
+          <a href="/contact" class="btn btn-primary">
+            {page.reasons_to_call.button} <span aria-hidden="true">→</span>
+          </a>
+          {settings.phone && (
+            <a href={telHref} class="inline-phone" aria-label={`Call ${settings.phone}`}>
+              <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor"
+                   stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6A19.79 19.79 0 0 1 2.12 4.18 2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.9.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92Z" />
+              </svg>
+              {settings.phone}
+            </a>
+          )}
+        </div>
+      </div>
+    </section>
+  )}
+
   {page.lease_packet && (
     <section aria-labelledby="lease-packet-headline">
       <div class="container container-narrow">
@@ -97,6 +131,10 @@ const faqSchema = faq.length > 0
 
       </div>
     </section>
+  )}
+
+  {page.how_it_works && (
+    <HowItWorks headline={page.how_it_works.headline} steps={page.how_it_works.steps} />
   )}
 
   {page.sample_feature && (

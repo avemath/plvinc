@@ -52,5 +52,37 @@
   ],
   "page_title": "Contact a Certified Professional Landman | Pennsylvania",
   "form_success": "Thank you, your message has been sent. We will be in touch.",
-  "form_error": "Something went wrong. Please try again, or reach out directly by phone or email."
+  "form_error": "Something went wrong. Please try again, or reach out directly by phone or email.",
+  "how_it_works": {
+    "headline": "What Happens When You Contact Us",
+    "steps": [
+      {
+        "title": "You reach out.",
+        "text": "Call, or send a short note. Tell us the county and what showed up in your mailbox."
+      },
+      {
+        "title": "We look at the record.",
+        "text": "We pull what the public record shows about your tract and your ownership."
+      },
+      {
+        "title": "We report back in plain language.",
+        "text": "You get a clear picture of what you own, what the document says, and where the risk sits."
+      },
+      {
+        "title": "You decide the next step, with us.",
+        "text": "If the work calls for more, we will tell you. Either way you are talking to Petro Land Ventures."
+      }
+    ]
+  },
+  "short_form": {
+    "tab_label": "I own land or minerals",
+    "project_tab_label": "I have a project",
+    "headline": "Send us a short note",
+    "intro": "Four things is enough to start. Tell us what showed up and where the land sits.",
+    "what_label": "What showed up (a lease offer, a division order, a letter, a question)",
+    "contact_label": "Phone or email",
+    "county_label": "County and state",
+    "button": "Send it over",
+    "success": "Thanks. Your note reached Rickey and Shannon directly. We will get back to you."
+  }
 }
