@@ -405,7 +405,7 @@ hr.divider {
 }
 
 /* ============================================================
-   Coverage map — basins & plays
+   Coverage map: basins & plays
    ============================================================ */
 .coverage {
   position: relative;
@@ -765,11 +765,11 @@ hr.divider {
 
 /* With a photo behind it the band closes the home page on the same device the
    hero opens it with. The copy is centred rather than ranged left, so the wash
-   over the photo is even instead of weighted to one side — and because it is
+   over the photo is even instead of weighted to one side, and because it is
    even, it is composited into the file at build time rather than laid over it
    with a pseudo-element. That also lets the photo ride as a background layer
    over the band's existing green, so nothing has to be stacked above it.
-   Regenerate with sharp if the source changes — see README.md. */
+   Regenerate with sharp if the source changes, see README.md. */
 .cta-band-image {
   background-image: var(--cta-image);
   background-size: cover;
@@ -782,7 +782,7 @@ hr.divider {
    ============================================================ */
 
 
-/* Used when no headshot is set — single centered column */
+/* Used when no headshot is set: single centered column */
 
 
 
@@ -1318,10 +1318,10 @@ a.contact-detail-value:hover { color: var(--green-dark); }
 
 /* Photo variant of the header band. Mineral Owners is the one interior page
    aimed at a public rather than a trade audience, and it is where a picture of
-   the actual work — an ownership map and a lease on the table — does more than
+   the actual work, an ownership map and a lease on the table, does more than
    the flat green slab. The other headers stay plain so this one reads as
    deliberate rather than as the start of a pattern. The green wash is
-   composited into the file — see the note on .cta-band-image. */
+   composited into the file. See the note on .cta-band-image. */
 .page-header-image {
   background-image: url('/images/uploads/mineral-owners-lease-map.jpg');
   background-size: cover;
@@ -1358,7 +1358,7 @@ a.contact-detail-value:hover { color: var(--green-dark); }
   transform: none;
 }
 
-/* Opacity-only variant — for cards with hover transforms */
+/* Opacity-only variant: for cards with hover transforms */
 .reveal-fade {
   opacity: 0;
   transition: opacity .6s cubic-bezier(.22,1,.36,1);
@@ -1386,7 +1386,7 @@ a.contact-detail-value:hover { color: var(--green-dark); }
 .btn:hover span[aria-hidden="true"] { transform: translateX(4px); }
 
 /* ============================================================
-   Hero — subtle texture overlay
+   Hero: subtle texture overlay
    ============================================================ */
 /* Only for the plain green hero. When a photo is set, .hero-image owns the
    background layers and this weave would both override them and be invisible
@@ -1403,7 +1403,7 @@ a.contact-detail-value:hover { color: var(--green-dark); }
 }
 
 /* ============================================================
-   Nav — elevated shadow when page is scrolled
+   Nav: elevated shadow when page is scrolled
    ============================================================ */
 .site-header.is-scrolled {
   box-shadow: 0 2px 24px rgba(0,0,0,.13);
@@ -1415,7 +1415,7 @@ a.contact-detail-value:hover { color: var(--green-dark); }
 @media (max-width: 900px) {
 
   /* The text runs the full width here, so the left-weighted scrim has nothing
-     to hug — swap it for an even one and crop toward the laptop, which is the
+     to hug, so swap it for an even one and crop toward the laptop, which is the
      part of the scene that still reads at this size. */
   .hero-image {
     background-image:

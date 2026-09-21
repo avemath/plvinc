@@ -1,4 +1,4 @@
-# PLV Inc — Professional Land Services Website
+# PLV Inc: Professional Land Services Website
 
 Static site for Petro Land Ventures. Built with [Astro](https://astro.build), edited through
 [Sveltia CMS](https://github.com/sveltia/sveltia-cms) at `/studio`, hosted on Cloudflare Pages.
@@ -76,7 +76,7 @@ plvinc/
 ## Photography
 
 Three bands carry a photograph: the home hero, the dark closing band on the home page, and the
-**Mineral Owners** header. Originals live in `_source-images/`, which is gitignored — only the
+**Mineral Owners** header. Originals live in `_source-images/`, which is gitignored. Only the
 derived JPEGs in `public/images/uploads/` are committed and served.
 
 | Source | Derived | Used by |
@@ -87,7 +87,7 @@ derived JPEGs in `public/images/uploads/` are committed and served.
 
 Each is softened slightly and desaturated at build time rather than with a CSS filter. Blurring a
 bitmap that size on every paint costs a full composited layer, and the processed file also
-compresses harder — the three together deploy at about 160 KB, against 6 MB of originals.
+compresses harder. The three together deploy at about 160 KB, against 6 MB of originals.
 Regenerate with [sharp](https://sharp.pixelplumbing.com), already a dependency:
 
 ```js
@@ -100,8 +100,8 @@ sharp(src).resize({ width: 1672 }).blur(1.2)
 The green wash over each photograph sits in the same `background-image` stack as the picture,
 earliest layer on top, rather than in a pseudo-element above it. The hero keeps its wash in CSS
 because it is weighted to the left to carry the headline and has to follow the crop. The other
-two sit behind centred text, so their wash is even and is composited into the file instead —
-`#1B4332` then `#0B1F15`, at `.20`/`.58` for the closing band and `.18`/`.60` for the header:
+two sit behind centred text, so their wash is even and is composited into the file instead,
+using `#1B4332` then `#0B1F15` at `.20`/`.58` for the closing band and `.18`/`.60` for the header:
 
 ```js
 sharp(src).resize({ width: 1672, height: 941, fit: 'cover' }).blur(1.2)
@@ -111,7 +111,7 @@ sharp(src).resize({ width: 1672, height: 941, fit: 'cover' }).blur(1.2)
   .toFile(out)
 ```
 
-The blur is deliberately light — enough to stop map grids and document text competing with the
+The blur is deliberately light, enough to stop map grids and document text competing with the
 copy, not enough to make the scene mush. Raising it much past 2 starts to read as out of focus.
 
 Swapping a source, or changing the blur, means rechecking contrast: white text should clear 4.5:1
@@ -119,7 +119,7 @@ against the brightest point it covers. The current files measure 4.4:1 at worst 
 hero headline, which needs only 3:1, and 5.5:1 or better everywhere the body copy sits.
 
 The hero and closing-band images are set through the CMS, so either can be changed without
-touching code — but an unprocessed upload will be sharp, heavy, and washed only by whatever the
+touching code, but an unprocessed upload will be sharp, heavy, and washed only by whatever the
 CSS provides. The **Mineral Owners** header is wired in `global.css`.
 
 ---

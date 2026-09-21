@@ -51,7 +51,7 @@ const base   = states.filter((s) => !regionsByState.has(s.name));
                   data-regions={rs.map((r) => r.id).join(' ')}
                   role="button"
                   tabindex="0"
-                  aria-label={`${s.name} — ${rs.map((r) => r.name).join(', ')}`}
+                  aria-label={`${s.name}: ${rs.map((r) => r.name).join(', ')}`}
                 />
               );
             })}

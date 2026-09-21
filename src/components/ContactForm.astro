@@ -49,7 +49,7 @@ const stateNames = (states as { name: string }[]).map((s) => s.name);
     <input type="hidden" name="redirect"    value="false" />
     {email && <input type="hidden" name="from_name" value={settings.professional_name} />}
 
-    <!-- Honeypot — hidden from people, left unchecked. Web3Forms silently
+    <!-- Honeypot, hidden from people, left unchecked. Web3Forms silently
          rejects any submission where this arrives checked. -->
     <label class="botcheck-field" aria-hidden="true">
       <input type="checkbox" name="botcheck" tabindex="-1" autocomplete="off" />
