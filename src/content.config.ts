@@ -15,6 +15,10 @@ const services = defineCollection({
     // Off unless a service actually has a sample to point at, so the callout
     // never appears on a page it does not belong on.
     show_sample_link: z.boolean().optional().default(false),
+    // Optional per-service closing CTA. Empty falls back to the shared one on
+    // the Services page, so a new service still ends on a call to action.
+    cta_headline: z.string().optional(),
+    cta_button: z.string().optional(),
   }),
 });
 

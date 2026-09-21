@@ -4,6 +4,8 @@ card_description: "Land acquisition, lease negotiation, and title services for s
 seo_title: "Solar & Renewable Land Acquisition | CPL Landmen"
 seo_description: "Land acquisition, lease negotiation and title work for solar and wind projects, built around long-term renewable lease structures."
 icon: "sun"
+cta_headline: "Siting a solar or wind project? Let us talk land."
+cta_button: "Discuss a project"
 sort_order: 6
 ---
 

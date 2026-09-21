@@ -5,6 +5,8 @@ seo_title: "Mineral & Royalty Management | CPL Landmen"
 seo_description: "Division orders, suspense resolution, ownership records and reporting for mineral and royalty portfolios in Pennsylvania, Louisiana and East Texas."
 icon: "banknotes"
 show_sample_link: true
+cta_headline: "Questions about your minerals or royalties? Call us."
+cta_button: "Talk to a landman"
 sort_order: 4
 ---
 

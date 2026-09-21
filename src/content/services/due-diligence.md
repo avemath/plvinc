@@ -5,6 +5,8 @@ seo_title: "A&D Due Diligence | Certified Professional Landmen"
 seo_description: "Acquisition and divestiture due diligence on a deal timeline: leasehold review, title, contracts and land obligations across Appalachia and the Gulf Coast."
 icon: "list"
 show_sample_link: true
+cta_headline: "Deal on a clock? Send us the package."
+cta_button: "Start due diligence"
 sort_order: 3
 ---
 

@@ -2,6 +2,7 @@
 import Base from '../../layouts/Base.astro';
 import ServiceIcon from '../../components/ServiceIcon.astro';
 import SampleFeature from '../../components/SampleFeature.astro';
+import CallToAction from '../../components/CallToAction.astro';
 import servicesPage from '../../data/pages/services.json';
 import { getCollection, render } from 'astro:content';
 import settings from '../../data/settings.json';
@@ -16,7 +17,7 @@ export async function getStaticPaths() {
 
 const { entry }       = Astro.props;
 const { Content }     = await render(entry);
-const { title, icon, show_sample_link } = entry.data;
+const { title, icon, show_sample_link, cta_headline, cta_button } = entry.data;
 ---
 
 <Base
@@ -60,4 +61,11 @@ const { title, icon, show_sample_link } = entry.data;
       tone="alt"
     />
   )}
+
+  <CallToAction
+    headline={cta_headline || servicesPage.cta.headline}
+    text={servicesPage.cta.text}
+    button={cta_button || servicesPage.cta.button}
+    tone="light"
+  />
 </Base>
