@@ -64,11 +64,62 @@ plvinc/
 │   ├── favicon-32.png
 │   ├── apple-touch-icon.png
 │   └── robots.txt
+├── _source-images/              # Full-resolution originals. Gitignored.
 ├── astro.config.mjs
 ├── wrangler.jsonc
 ├── package.json
 └── .nvmrc
 ```
+
+---
+
+## Photography
+
+Three bands carry a photograph: the home hero, the dark closing band on the home page, and the
+**Mineral Owners** header. Originals live in `_source-images/`, which is gitignored — only the
+derived JPEGs in `public/images/uploads/` are committed and served.
+
+| Source | Derived | Used by |
+|---|---|---|
+| `workspace-window-monitors.png` | `workspace-hero-window.jpg` | Home hero |
+| `workspace-rig-sunset.png` | `cta-rig-sunset.jpg` | Home closing band |
+| `workspace-desk-map.png` | `mineral-owners-desk.jpg` | Mineral Owners header |
+
+Each is blurred and desaturated at build time rather than with a CSS filter. Blurring a bitmap
+that size on every paint costs a full composited layer, and a pre-blurred file compresses far
+harder — the three together deploy at about 106 KB, against 6 MB of originals. Regenerate with
+[sharp](https://sharp.pixelplumbing.com), already a dependency:
+
+```js
+sharp(src).resize({ width: 1672 }).blur(3.5)
+  .modulate({ saturation: 0.85 })
+  .jpeg({ quality: 62, mozjpeg: true })
+  .toFile(out)
+```
+
+The green wash over each photograph sits in the same `background-image` stack as the picture,
+earliest layer on top, rather than in a pseudo-element above it. The hero keeps its wash in CSS
+because it is weighted to the left to carry the headline and has to follow the crop. The other
+two sit behind centred text, so their wash is even and is composited into the file instead —
+`#1B4332` then `#0B1F15`, at `.20`/`.58` for the closing band and `.18`/`.60` for the header:
+
+```js
+sharp(src).resize({ width: 1672, height: 941, fit: 'cover' }).blur(3.5)
+  .modulate({ saturation: 0.85 })
+  .composite([{ input: greenLayer }, { input: darkLayer }])
+  .jpeg({ quality: 66, mozjpeg: true })
+  .toFile(out)
+```
+
+Swapping a source means rechecking contrast: white text should clear 4.5:1 against the brightest
+point it covers. The current files measure 4.5:1 or better at their worst, and above 10:1 on
+average.
+
+The hero and closing-band images are set through the CMS, so either can be changed without
+touching code — but an unprocessed upload will be sharp, heavy, and washed only by whatever the
+CSS provides. The **Mineral Owners** header is wired in `global.css`.
+
+---
 
 The people in `src/content/people/` render at the foot of the **About** page. About and Team were
 separate pages until About was down to a sentence that Team already said better; the methodology
