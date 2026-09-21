@@ -68,6 +68,7 @@ const telHref = settings.phone ? `tel:${settings.phone.replace(/[^\d+]/g, '')}` 
             <li class="stat">
               <span class="stat-value">{s.value}</span>
               <span class="stat-label">{s.label}</span>
+              {s.detail && <span class="stat-detail">{s.detail}</span>}
             </li>
           ))}
         </ul>

@@ -122,9 +122,12 @@ A few notes on the trickier fields:
 - The **Value Paragraph** supports basic formatting. Select text to get a toolbar for bold and
   italic.
 
-**Figures Under the Hero** is the short row of numbers below the headline. Each entry is a figure
-and a label. Only put numbers there you can stand behind, and if you change the coverage map,
-remember the states figure does not update itself. Empty the list to remove the row.
+**Figures Under the Hero** is the band below the headline. Each entry is a figure, a label, and a
+line saying **What it means**. Two entries read best there: a row of three or more turns into a
+scoreboard, and the coverage map already shows the footprint better than a count of states would.
+Use the **What it means** line to say what a figure actually is, the way the CPL entry explains the
+credential rather than leaving three letters on their own. Only put figures there you can stand
+behind. Empty the list to remove the band.
 
 **To add a testimonial:** scroll to **Testimonials**, click **Add**, and fill in the quote. The
 attribution is optional and a role works better than a name, for example *Operator, East Texas*.

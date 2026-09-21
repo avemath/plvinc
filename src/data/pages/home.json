@@ -145,15 +145,13 @@
   "stats": [
     {
       "value": "25+",
-      "label": "Years of land experience"
+      "label": "Years of land experience",
+      "detail": "Courthouse research, leasing and due diligence, worked start to finish by the person who reports it."
     },
     {
       "value": "CPL",
-      "label": "Certified Professional Landmen"
-    },
-    {
-      "value": "8",
-      "label": "States with completed work"
+      "label": "Certified Professional Landmen",
+      "detail": "The credential the American Association of Professional Landmen issues for title and leasing work. Both of our landmen hold it."
     }
   ],
   "testimonials_label": "From Clients",

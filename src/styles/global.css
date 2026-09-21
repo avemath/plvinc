@@ -1613,33 +1613,60 @@ a.contact-detail-value:hover { color: var(--green-dark); }
   padding: 0 0 3rem;
 }
 
+/* Two claims, not a scoreboard. A count of states undersold the coverage the
+   map already shows, so the band carries the two things that actually qualify
+   the firm and gives each one room to say what it means. */
 .stat-row-list {
   list-style: none;
   margin: 0;
   padding: 2.5rem 0 0;
   border-top: 1px solid rgba(255,255,255,.14);
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-  gap: 2rem;
-  text-align: center;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: 2rem 3.5rem;
 }
 
-.stat { color: var(--white); }
+.stat {
+  color: var(--white);
+  display: grid;
+  grid-template-columns: auto 1fr;
+  column-gap: 1.25rem;
+  align-items: baseline;
+}
 
 .stat-value {
-  display: block;
+  grid-row: 1 / span 2;
   font-family: var(--font-heading);
-  font-size: clamp(1.9rem, 4vw, 2.6rem);
+  font-size: clamp(2.6rem, 5vw, 3.4rem);
   font-weight: 700;
-  line-height: 1.1;
+  line-height: 1;
   color: var(--gold);
 }
 
 .stat-label {
-  display: block;
-  margin-top: .35rem;
-  font-size: .875rem;
-  color: rgba(255,255,255,.78);
+  font-size: 1.05rem;
+  font-weight: 600;
+  line-height: 1.3;
+  color: var(--white);
+}
+
+/* The credential is jargon to most visitors, so it gets a line that says what
+   it is rather than sitting there as three letters. */
+.stat-detail {
+  margin-top: .4rem;
+  font-size: .95rem;
+  line-height: 1.6;
+  color: rgba(255,255,255,.72);
+  max-width: 46ch;
+}
+
+@media (max-width: 560px) {
+  .stat {
+    grid-template-columns: 1fr;
+    column-gap: 0;
+  }
+  .stat-value { grid-row: auto; }
+  .stat-label { margin-top: .25rem; }
 }
 
 .projects-list {

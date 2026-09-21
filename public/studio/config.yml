@@ -329,7 +329,7 @@ collections:
             widget: list
             summary: "{{value}} {{label}}"
             required: false
-            hint: "The short row of figures below the hero. Only put numbers here you can stand behind, and update the states figure if the coverage map changes. Empty this list to hide the row."
+            hint: "The band below the hero. Two entries read best here, each with a line saying what it means. Only put figures here you can stand behind. Empty this list to hide the band."
             fields:
               - label: "Figure"
                 name: value
@@ -338,6 +338,11 @@ collections:
               - label: "Label"
                 name: label
                 widget: string
+              - label: "What it means"
+                name: detail
+                widget: text
+                required: false
+                hint: "One line saying what the figure means, for example what the credential is. Leave blank to show just the figure and label."
 
           - label: "Testimonials Section Label"
             name: testimonials_label
