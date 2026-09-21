@@ -1,6 +1,8 @@
 ---
 import Base from '../../layouts/Base.astro';
 import ServiceIcon from '../../components/ServiceIcon.astro';
+import SampleFeature from '../../components/SampleFeature.astro';
+import servicesPage from '../../data/pages/services.json';
 import { getCollection, render } from 'astro:content';
 import settings from '../../data/settings.json';
 
@@ -40,19 +42,6 @@ const { title, icon, show_sample_link } = entry.data;
         <Content />
       </div>
 
-      {show_sample_link && (
-        <aside class="sample-callout">
-          <h2 class="sample-callout-title">See what the deliverable looks like</h2>
-          <p class="sample-callout-text">
-            A fictional ownership report, runsheet, and lease acquisition report, laid out the
-            way we deliver them.
-          </p>
-          <a href="/sample-work" class="sample-callout-link">
-            View sample work <span aria-hidden="true">&rarr;</span>
-          </a>
-        </aside>
-      )}
-
       <div class="service-nav">
         <a href="/services" class="back-link">
           <span aria-hidden="true">←</span> All Services
@@ -61,4 +50,14 @@ const { title, icon, show_sample_link } = entry.data;
       </div>
     </div>
   </section>
+
+  {show_sample_link && servicesPage.sample_feature && (
+    <SampleFeature
+      label={servicesPage.sample_feature.label}
+      headline={servicesPage.sample_feature.headline}
+      text={servicesPage.sample_feature.text}
+      button={servicesPage.sample_feature.button}
+      tone="alt"
+    />
+  )}
 </Base>

@@ -3,6 +3,7 @@ import Base from '../layouts/Base.astro';
 import ServiceList from '../components/ServiceList.astro';
 import CoverageMap from '../components/CoverageMap.astro';
 import CallToAction from '../components/CallToAction.astro';
+import SampleFeature from '../components/SampleFeature.astro';
 import { getCollection } from 'astro:content';
 import { renderMarkdown } from '../utils/markdown';
 import { cssUrl } from '../utils/cssUrl';
@@ -106,6 +107,17 @@ const telHref = settings.phone ? `tel:${settings.phone.replace(/[^\d+]/g, '')}` 
       </p>
     </div>
   </section>
+
+  <!-- ─── Sample file ─── -->
+  {home.sample_feature && (
+    <SampleFeature
+      label={home.sample_feature.label}
+      headline={home.sample_feature.headline}
+      text={home.sample_feature.text}
+      button={home.sample_feature.button}
+      tone="alt"
+    />
+  )}
 
   <!-- ─── Testimonials, hidden until at least one is added ─── -->
   {home.testimonials?.length > 0 && (

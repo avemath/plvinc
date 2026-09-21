@@ -1,0 +1,42 @@
+---
+// A small stack of two sheets standing in for the sample file. The rows are read
+// from sample-work.json rather than copied, so the preview can never drift from
+// the page it links to. Decorative as a whole, but built from real markup.
+import sample from '../data/pages/sample-work.json';
+
+const rows = sample.runsheet.rows.slice(0, 3);
+const owners = sample.supplemental.owners;
+---
+
+<a href="/sample-work" class="sample-preview" aria-label="View the sample file">
+  <span class="sample-preview-stamp" aria-hidden="true">Sample</span>
+
+  <span class="sample-preview-sheet is-back" aria-hidden="true">
+    <span class="sample-preview-title">Runsheet</span>
+    <span class="sample-preview-table">
+      {rows.map((r) => (
+        <span class="sample-preview-row">
+          <span class="spr-book">{r.book} / {r.page}</span>
+          <span class="spr-type">{r.type}</span>
+          <span class="spr-date">{r.rec_date}</span>
+        </span>
+      ))}
+    </span>
+  </span>
+
+  <span class="sample-preview-sheet is-front" aria-hidden="true">
+    <span class="sample-preview-title">Resolved heirship</span>
+    <span class="sample-preview-table">
+      {owners.map((o) => (
+        <span class="sample-preview-row">
+          <span class="spr-name">{o.name}</span>
+          <span class="spr-interest">{o.interest}</span>
+        </span>
+      ))}
+      <span class="sample-preview-row is-total">
+        <span class="spr-name">Total</span>
+        <span class="spr-interest">{sample.supplemental.owners_totals.interest}</span>
+      </span>
+    </span>
+  </span>
+</a>

@@ -1,6 +1,7 @@
 ---
 import Base from '../layouts/Base.astro';
 import CallToAction from '../components/CallToAction.astro';
+import SampleFeature from '../components/SampleFeature.astro';
 import { renderMarkdown } from '../utils/markdown';
 import exp from '../data/pages/experience.json';
 import settings from '../data/settings.json';
@@ -64,14 +65,18 @@ const introHtml       = await renderMarkdown(exp.intro);
             <li>{p.label}</li>
           ))}
         </ul>
-
-        {exp.sample_link_text && (
-          <p class="section-aside">
-            <a href="/sample-work">{exp.sample_link_text}</a>
-          </p>
-        )}
       </div>
     </section>
+  )}
+
+  {exp.sample_feature && (
+    <SampleFeature
+      label={exp.sample_feature.label}
+      headline={exp.sample_feature.headline}
+      text={exp.sample_feature.text}
+      button={exp.sample_feature.button}
+      tone="alt"
+    />
   )}
 
   <!-- Selected projects, hidden until at least one is added -->

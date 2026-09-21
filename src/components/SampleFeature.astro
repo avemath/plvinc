@@ -1,0 +1,35 @@
+---
+// The full-width band that points at the sample file. The copy is passed in from
+// each page's own JSON so the wording can differ by audience, while the preview
+// and the link stay the same everywhere.
+import SamplePreview from './SamplePreview.astro';
+
+interface Props {
+  label?: string;
+  headline: string;
+  text: string;
+  button: string;
+  /** 'alt' tints the band, for pages that would otherwise run two white sections together. */
+  tone?: 'plain' | 'alt';
+}
+
+const { label, headline, text, button, tone = 'plain' } = Astro.props;
+---
+
+<section class:list={['sample-feature', tone === 'alt' && 'section-alt']} aria-labelledby="sample-feature-headline">
+  <div class="container">
+    <div class="sample-feature-inner">
+      <div class="sample-feature-copy">
+        {label && <span class="section-label">{label}</span>}
+        <h2 id="sample-feature-headline">{headline}</h2>
+        <p>{text}</p>
+        <a href="/sample-work" class="btn btn-primary">
+          {button} <span aria-hidden="true">→</span>
+        </a>
+      </div>
+      <div class="sample-feature-art">
+        <SamplePreview />
+      </div>
+    </div>
+  </div>
+</section>

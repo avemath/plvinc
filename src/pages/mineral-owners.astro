@@ -1,6 +1,7 @@
 ---
 import Base from '../layouts/Base.astro';
 import CallToAction from '../components/CallToAction.astro';
+import SampleFeature from '../components/SampleFeature.astro';
 import { renderMarkdown } from '../utils/markdown';
 import page from '../data/pages/mineral-owners.json';
 import settings from '../data/settings.json';
@@ -94,13 +95,18 @@ const faqSchema = faq.length > 0
 
         <p class="lease-closing">{page.lease_packet.closing}</p>
 
-        {page.sample_link_text && (
-          <p class="section-aside">
-            <a href="/sample-work">{page.sample_link_text}</a>
-          </p>
-        )}
       </div>
     </section>
+  )}
+
+  {page.sample_feature && (
+    <SampleFeature
+      label={page.sample_feature.label}
+      headline={page.sample_feature.headline}
+      text={page.sample_feature.text}
+      button={page.sample_feature.button}
+      tone="alt"
+    />
   )}
 
   {faq.length > 0 && (

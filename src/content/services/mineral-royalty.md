@@ -4,6 +4,7 @@ card_description: "Ongoing management of mineral and royalty interests: ownershi
 seo_title: "Mineral & Royalty Management | CPL Landmen"
 seo_description: "Division orders, suspense resolution, ownership records and reporting for mineral and royalty portfolios in Pennsylvania, Louisiana and East Texas."
 icon: "banknotes"
+show_sample_link: true
 sort_order: 4
 ---
 

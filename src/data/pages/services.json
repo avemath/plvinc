@@ -6,5 +6,11 @@
     "text": "Describe the project and we'll talk through how to approach it. No obligation.",
     "button": "Start a project"
   },
-  "page_title": "Land Services | Title, Leasing, Due Diligence & ROW"
+  "page_title": "Land Services | Title, Leasing, Due Diligence & ROW",
+  "sample_feature": {
+    "label": "Sample Work",
+    "headline": "See what the deliverable looks like",
+    "text": "A fictional file, start to finish, with notes on how to read it.",
+    "button": "View the sample file"
+  }
 }

@@ -97,7 +97,6 @@
     ],
     "closing": "We can check an offer against the record and explain what each clause does, so you know exactly what you own before you respond. Call us and we will walk through it with you."
   },
-  "sample_link_text": "See a fictional sample of the ownership report we prepare.",
   "faq_label": "Common Questions",
   "faq_headline": "Questions We Are Asked Often",
   "faq": [
@@ -135,5 +134,11 @@
     "text": "Tell us the county and what showed up in your mailbox. We will look at it with you.",
     "button": "Call or send it over"
   },
-  "page_title": "Mineral Owner Help | Pennsylvania & Appalachian Basin"
+  "page_title": "Mineral Owner Help | Pennsylvania & Appalachian Basin",
+  "sample_feature": {
+    "label": "Sample Work",
+    "headline": "See the Report Before You Call",
+    "text": "This is the kind of report you would get from us, with notes beside it that say what each part means for who signs and who gets paid.",
+    "button": "View the sample file"
+  }
 }

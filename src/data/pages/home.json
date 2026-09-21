@@ -158,5 +158,11 @@
   ],
   "testimonials_label": "From Clients",
   "testimonials_headline": "What They Say",
-  "testimonials": []
+  "testimonials": [],
+  "sample_feature": {
+    "label": "Sample Work",
+    "headline": "See the Work Before You Call",
+    "text": "We published a complete sample file: an ownership report, the runsheet behind it, a lease report, and a resolved heirship. It is fictional and annotated, so you can see how the work reads whether you run a land department or own forty acres.",
+    "button": "View the sample file"
+  }
 }

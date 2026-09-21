@@ -2182,39 +2182,6 @@ a.contact-detail-value:hover { color: var(--green-dark); }
 }
 
 /* ============================================================
-   Sample work callout on a service page
-   ============================================================ */
-.sample-callout {
-  margin: 2.5rem 0 0;
-  padding: 1.5rem 1.6rem;
-  background: var(--green-pale);
-  border-left: 3px solid var(--green-mid);
-  border-radius: var(--radius);
-}
-
-.sample-callout-title {
-  margin: 0 0 .4rem;
-  font-size: 1.05rem;
-  color: var(--green-dark);
-}
-
-.sample-callout-text {
-  margin: 0 0 .9rem;
-  font-size: .95rem;
-  line-height: 1.7;
-  color: var(--text-muted);
-}
-
-.sample-callout-link {
-  font-size: .95rem;
-  font-weight: 600;
-  color: var(--green-dark);
-  text-decoration: underline;
-  text-underline-offset: 3px;
-}
-.sample-callout-link:hover { color: var(--green-mid); }
-
-/* ============================================================
    Hero: two audience paths and a tappable number
    ============================================================ */
 .hero-paths {
@@ -2530,4 +2497,119 @@ a.contact-detail-value:hover { color: var(--green-dark); }
   .doc-row { grid-template-columns: 1fr; }
   .hard-files { display: block; }
   .hard-file { break-inside: avoid; margin-bottom: 1rem; }
+}
+
+/* ============================================================
+   Sample file feature band and its preview
+   ============================================================ */
+.sample-feature { padding: 4rem 0; }
+
+.sample-feature-inner {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 420px);
+  gap: 3rem;
+  align-items: center;
+}
+
+.sample-feature-copy h2 { margin-bottom: .75rem; }
+.sample-feature-copy p {
+  margin: 0 0 1.75rem;
+  font-size: 1.05rem;
+  line-height: 1.8;
+  color: var(--text-muted);
+  max-width: 54ch;
+}
+
+/* Two sheets on a slight angle, standing in for the file. Decorative, and built
+   from rows read out of the sample data so it cannot drift. */
+.sample-preview {
+  position: relative;
+  display: block;
+  padding: 1.5rem 1.25rem 2.5rem;
+  text-decoration: none;
+  color: inherit;
+}
+
+.sample-preview-stamp {
+  position: absolute;
+  top: 0;
+  right: .5rem;
+  z-index: 3;
+  font-family: var(--font-heading);
+  font-size: .62rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: .18em;
+  color: var(--green-mid);
+  background: var(--white);
+  border: 1px solid var(--green-light);
+  border-radius: 2px;
+  padding: .2rem .5rem;
+}
+
+.sample-preview-sheet {
+  display: block;
+  background: var(--white);
+  border: 1px solid var(--border);
+  border-top: 3px solid var(--green-dark);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow-md);
+  padding: .9rem 1rem;
+  transition: transform var(--transition);
+}
+
+.sample-preview-sheet.is-back {
+  transform: rotate(-2.5deg);
+  opacity: .85;
+}
+.sample-preview-sheet.is-front {
+  position: relative;
+  margin-top: -2.25rem;
+  margin-left: 1.5rem;
+  transform: rotate(1.5deg);
+}
+
+.sample-preview:hover .is-back  { transform: rotate(-4deg) translateY(-3px); }
+.sample-preview:hover .is-front { transform: rotate(2.5deg) translateY(3px); }
+
+.sample-preview-title {
+  display: block;
+  font-size: .62rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: .1em;
+  color: var(--green-mid);
+  margin-bottom: .5rem;
+}
+
+.sample-preview-table { display: block; }
+
+.sample-preview-row {
+  display: flex;
+  justify-content: space-between;
+  gap: .75rem;
+  padding: .3rem 0;
+  border-bottom: 1px solid var(--border);
+  font-size: .68rem;
+  line-height: 1.3;
+  color: var(--text-muted);
+}
+.sample-preview-row:last-child { border-bottom: none; }
+
+.spr-book, .spr-name { font-weight: 600; color: var(--text); }
+.spr-type { flex: 1; }
+.spr-date, .spr-interest {
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+}
+.sample-preview-row.is-total {
+  border-top: 1.5px solid var(--green-light);
+  font-weight: 700;
+  color: var(--green-dark);
+}
+.sample-preview-row.is-total .spr-name { color: var(--green-dark); }
+
+@media (max-width: 860px) {
+  .sample-feature-inner { grid-template-columns: 1fr; gap: 2rem; }
+  .sample-feature-art { max-width: 380px; }
 }
