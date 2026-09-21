@@ -1180,4 +1180,168 @@ collections:
                 name: button
                 widget: string
 
+  # ──────────────────────────────────────────────────────────────
+  # SERVICES
+  # ──────────────────────────────────────────────────────────────
+  # One file per service in src/content/services. Field names match the schema
+  # in src/content.config.ts: rename a label freely, but not a name.
+  - name: services
+    label: "🧭 Services"
+    label_singular: "Service"
+    folder: src/content/services
+    extension: md
+    format: yaml-frontmatter
+    create: true
+    slug: "{{slug}}"
+    summary: "{{sort_order}}. {{title}}"
+    sortable_fields: ["sort_order", "title"]
+    fields:
+      - label: "Service Title"
+        name: title
+        widget: string
+        hint: "The name shown on the site, on the card and at the top of its own page."
 
+      - label: "Card Description"
+        name: card_description
+        widget: text
+        hint: "The short summary on the main Services page. One or two sentences."
+
+      - label: "Icon / Symbol"
+        name: icon
+        widget: select
+        required: false
+        options: ["search", "pen", "list", "banknotes", "pin", "sun"]
+        hint: "The line drawing shown beside the title. Pick from the list: search is a magnifying glass, pen is a document, list is a clipboard, banknotes is money, pin is a map pin, sun is renewables."
+
+      - label: "Display Order"
+        name: sort_order
+        widget: number
+        value_type: int
+        default: 0
+        hint: "Controls the order services appear in. Lower numbers come first."
+
+      - label: "Show link to sample work"
+        name: show_sample_link
+        widget: boolean
+        required: false
+        default: false
+        hint: "Adds a box at the foot of this service page pointing to the sample work page. Only worth turning on for services the samples actually illustrate."
+
+      - label: "Page Title (search)"
+        name: seo_title
+        widget: string
+        required: false
+        hint: "What Google shows as the headline for this service. Leave blank to fall back to the service title."
+
+      - label: "Search Description"
+        name: seo_description
+        widget: text
+        required: false
+        hint: "What Google shows under the headline. Leave blank to fall back to the card description."
+
+      - label: "Full Description"
+        name: body
+        widget: markdown
+        hint: "The detailed text on this service's own page. Lists and formatting are supported."
+
+  # ──────────────────────────────────────────────────────────────
+  # TEAM / PEOPLE
+  # ──────────────────────────────────────────────────────────────
+  # Rendered near the foot of the About page. Empty the folder and that section
+  # disappears on its own.
+  - name: people
+    label: "👤 Team / People"
+    label_singular: "Person"
+    folder: src/content/people
+    extension: md
+    format: yaml-frontmatter
+    create: true
+    slug: "{{slug}}"
+    summary: "{{sort_order}}. {{name}}"
+    sortable_fields: ["sort_order", "name"]
+    fields:
+      - label: "Full Name"
+        name: name
+        widget: string
+        hint: "Shown as the heading for this person, credentials included (e.g., Jane Smith, CPL)."
+
+      - label: "Role / Title"
+        name: role
+        widget: string
+        required: false
+        hint: "The line under the name. Leave blank to hide it."
+
+      - label: "LinkedIn URL"
+        name: linkedin_url
+        widget: string
+        required: false
+        hint: "The full web address of this person's LinkedIn profile. Leave blank to hide the link."
+
+      - label: "Photo"
+        name: photo
+        widget: image
+        required: false
+        hint: "A headshot. Portrait crops work best. Leave blank to show the bio without a picture."
+
+      - label: "Display Order"
+        name: sort_order
+        widget: number
+        required: false
+        value_type: int
+        default: 0
+        hint: "Lower numbers appear first."
+
+      - label: "Work & Experience Details"
+        name: experience_details
+        widget: markdown
+        required: false
+        hint: "Optional extra detail shown under the bio. Leave blank to hide it."
+
+      - label: "Bio"
+        name: body
+        widget: markdown
+        hint: "The paragraphs about this person."
+
+  # ──────────────────────────────────────────────────────────────
+  # INSIGHTS
+  # ──────────────────────────────────────────────────────────────
+  # Dormant while the folder is empty: no index, no detail pages, no nav link.
+  # Publishing the first post brings all three into being.
+  - name: insights
+    label: "📝 Insights"
+    label_singular: "Insight"
+    folder: src/content/insights
+    extension: md
+    format: yaml-frontmatter
+    create: true
+    slug: "{{slug}}"
+    summary: "{{title}}"
+    sortable_fields: ["date", "title"]
+    fields:
+      - label: "Title"
+        name: title
+        widget: string
+
+      - label: "Date"
+        name: date
+        widget: datetime
+        date_format: "YYYY-MM-DD"
+        time_format: false
+        picker_utc: true
+        hint: "Controls the order. The newest appears first."
+
+      - label: "Summary"
+        name: summary
+        widget: text
+        hint: "One or two sentences shown in the list and used by search engines."
+
+      - label: "Image"
+        name: image
+        widget: image
+        required: false
+        hint: "Optional, shown beside the summary in the list."
+
+      - label: "Body"
+        name: body
+        widget: markdown
+        hint: "The article itself."
