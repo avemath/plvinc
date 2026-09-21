@@ -1552,6 +1552,16 @@ a.contact-detail-value:hover { color: var(--green-dark); }
   padding: 0 0 4rem;
 }
 
+/* State-specific background, set apart from the general help copy above it. */
+.owner-state-headline { margin-bottom: 1rem; }
+
+.owner-state-note {
+  font-size: 1.05rem;
+  line-height: 1.85;
+  color: var(--text-muted);
+}
+.owner-state-note p:last-child { margin-bottom: 0; }
+
 .owner-disclaimer {
   margin: 0;
   padding: 1.25rem 1.5rem;

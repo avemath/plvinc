@@ -6,6 +6,9 @@ import page from '../data/pages/mineral-owners.json';
 import settings from '../data/settings.json';
 
 const introHtml = await renderMarkdown(page.intro);
+const pennsylvaniaHtml = page.pennsylvania_note
+  ? await renderMarkdown(page.pennsylvania_note)
+  : '';
 
 const faq = (page.faq || []).filter((f) => f.question && f.answer);
 
@@ -76,6 +79,15 @@ const faqSchema = faq.length > 0
             </div>
           ))}
         </dl>
+      </div>
+    </section>
+  )}
+
+  {pennsylvaniaHtml && (
+    <section class="section-alt">
+      <div class="container container-narrow">
+        <h2 class="owner-state-headline">{page.pennsylvania_headline}</h2>
+        <div class="prose owner-state-note" set:html={pennsylvaniaHtml} />
       </div>
     </section>
   )}

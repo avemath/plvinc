@@ -779,6 +779,18 @@ collections:
                 name: answer
                 widget: text
 
+          - label: "State Section Heading"
+            name: pennsylvania_headline
+            widget: string
+            required: false
+            hint: "Heading for the state-specific section near the bottom of the page (e.g., Pennsylvania mineral owners)."
+
+          - label: "State Section Text"
+            name: pennsylvania_note
+            widget: markdown
+            required: false
+            hint: "Background on how ownership and leasing work in your home state. Leave blank to hide the whole section, heading included."
+
           - label: "Legal Note"
             name: disclaimer
             widget: text
