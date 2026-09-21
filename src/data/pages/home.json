@@ -12,6 +12,34 @@
   "regions_hint": "Shaded states mark completed project work — available nationwide",
   "regions": [
     {
+      "id": "appalachian",
+      "name": "Appalachian Basin",
+      "states": [
+        "Pennsylvania",
+        "Ohio",
+        "Tennessee"
+      ],
+      "summary": "Home basin for the firm. Stacked Marcellus and Utica development over some of the oldest and most fragmented mineral title in the country. Heirship research, record gaps, and century-old severances are common here.",
+      "plays": [
+        {
+          "name": "Marcellus Shale",
+          "definition": "The largest natural gas field in the United States, centered in Pennsylvania and West Virginia."
+        },
+        {
+          "name": "Utica Shale",
+          "definition": "A deeper play lying beneath the Marcellus, productive for gas, condensate, and oil, particularly in eastern Ohio."
+        },
+        {
+          "name": "Clinton / Medina",
+          "definition": "Shallow conventional sandstones across eastern Ohio and western Pennsylvania with more than a century of production history."
+        },
+        {
+          "name": "Chattanooga Shale",
+          "definition": "A Devonian shale across Tennessee and the southern Appalachians, developed both conventionally and unconventionally."
+        }
+      ]
+    },
+    {
       "id": "gulf-coast",
       "name": "Gulf Coast Basin",
       "states": [
@@ -19,7 +47,7 @@
         "Louisiana",
         "Mississippi"
       ],
-      "summary": "Primary working area for the firm. Deep gas development in the Haynesville and Bossier, oil in the Tuscaloosa Marine Shale, and long-established conventional production along the coast. Salt-dome geology and fragmented ownership are common.",
+      "summary": "Long-standing working area for the firm. Deep gas development in the Haynesville and Bossier, oil in the Tuscaloosa Marine Shale, and long-established conventional production along the coast. Salt-dome geology and fragmented ownership are common.",
       "plays": [
         {
           "name": "Haynesville Shale",
@@ -62,34 +90,6 @@
         {
           "name": "Delaware Sub-basin",
           "definition": "The deeper western half of the Permian, running into southeast New Mexico with thicker Bone Spring and Wolfcamp targets."
-        }
-      ]
-    },
-    {
-      "id": "appalachian",
-      "name": "Appalachian Basin",
-      "states": [
-        "Pennsylvania",
-        "Ohio",
-        "Tennessee"
-      ],
-      "summary": "Stacked Marcellus and Utica development over some of the oldest and most fragmented mineral title in the country. Heirship research, record gaps, and century-old severances are common here.",
-      "plays": [
-        {
-          "name": "Marcellus Shale",
-          "definition": "The largest natural gas field in the United States, centered in Pennsylvania and West Virginia."
-        },
-        {
-          "name": "Utica Shale",
-          "definition": "A deeper play lying beneath the Marcellus, productive for gas, condensate, and oil, particularly in eastern Ohio."
-        },
-        {
-          "name": "Clinton / Medina",
-          "definition": "Shallow conventional sandstones across eastern Ohio and western Pennsylvania with more than a century of production history."
-        },
-        {
-          "name": "Chattanooga Shale",
-          "definition": "A Devonian shale across Tennessee and the southern Appalachians, developed both conventionally and unconventionally."
         }
       ]
     },

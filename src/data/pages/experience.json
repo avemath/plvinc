@@ -1,7 +1,19 @@
 {
-  "intro": "Project work spans the Gulf Coast, Permian, Appalachian, and Michigan basins as well as the Pacific Northwest: deep gas development in northwest Louisiana and East Texas, oil-directed drilling in southern Mississippi, stacked Marcellus and Utica programs in Pennsylvania and Ohio, shallow biogenic gas across northern Michigan, and utility-scale renewable siting in eastern Washington.\n\nThe regions below are where files have already been worked, not the limit of where we take work. New basins and new jurisdictions are part of the job.",
+  "intro": "Project work spans the Appalachian, Gulf Coast, Permian, and Michigan basins as well as the Pacific Northwest: stacked Marcellus and Utica programs in Pennsylvania and Ohio, deep gas development in northwest Louisiana and East Texas, oil-directed drilling in southern Mississippi, shallow biogenic gas across northern Michigan, and utility-scale renewable siting in eastern Washington.\n\nThe regions below are where files have already been worked, not the limit of where we take work. New basins and new jurisdictions are part of the job.",
   "states_note": "Where files have already been worked. This is a record of experience, not a service boundary — engagements are taken nationwide.",
   "states_served": [
+    {
+      "state": "Pennsylvania",
+      "note": "Marcellus Shale, Appalachian Basin"
+    },
+    {
+      "state": "Ohio",
+      "note": "Utica Shale, Appalachian Basin, Clinton/Medina formations"
+    },
+    {
+      "state": "Tennessee",
+      "note": "Chattanooga Shale, conventional plays, Gulf Coast extension"
+    },
     {
       "state": "Texas",
       "note": "Permian Basin, Eagle Ford Shale, Haynesville/Bossier (East Texas), East Texas Basin"
@@ -15,20 +27,8 @@
       "note": "Tuscaloosa Marine Shale, southwest counties, Gulf Coast salt-dome trend"
     },
     {
-      "state": "Pennsylvania",
-      "note": "Marcellus Shale, Appalachian Basin"
-    },
-    {
       "state": "Michigan",
       "note": "Michigan Basin, Antrim Shale, Northern Michigan plays"
-    },
-    {
-      "state": "Ohio",
-      "note": "Utica Shale, Appalachian Basin, Clinton/Medina formations"
-    },
-    {
-      "state": "Tennessee",
-      "note": "Chattanooga Shale, conventional plays, Gulf Coast extension"
     },
     {
       "state": "Washington",
