@@ -151,7 +151,7 @@ collections:
             name: hero_image
             widget: image
             required: false
-            hint: "Optional background photo for the hero section. Landscape format works best. Leave blank for a solid green background."
+            hint: "Optional background photo for the hero section. Landscape format works best, with the right-hand side carrying the subject — the headline sits over the left. A dark green wash is laid over whatever you upload so the text stays readable. Leave blank for a solid green background."
 
           - label: "Hero Button Text"
             name: hero_cta_text
@@ -354,6 +354,11 @@ collections:
               - label: "Button Text"
                 name: button
                 widget: string
+              - label: "Background Image"
+                name: image
+                widget: image
+                required: false
+                hint: "Optional photo behind the closing band on the home page. A dark green wash is laid over it so the text stays readable. Leave blank for solid green."
 
       - name: about
         label: "About Page"

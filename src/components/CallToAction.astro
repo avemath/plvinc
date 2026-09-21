@@ -5,12 +5,19 @@
 //
 // `tone` alternates the background so a page does not open and close on the same
 // dark green band. Pages whose header is dark should pass tone="light".
+//
+// `image` is decorative only and applies to the dark tone, where the copy is
+// already reversed out of a green field. The light variant has dark text on a
+// pale background, so a photo behind it would not hold contrast.
+import { cssUrl } from '../utils/cssUrl';
+
 interface Props {
   headline: string;
   text?: string;
   button?: string;
   href?: string;
   tone?: 'dark' | 'light';
+  image?: string;
 }
 
 const {
@@ -19,10 +26,16 @@ const {
   button = 'Get in Touch',
   href = '/contact',
   tone = 'dark',
+  image,
 } = Astro.props;
+
+const showImage = Boolean(image) && tone === 'dark';
 ---
 
-<section class:list={['cta-band', tone === 'light' && 'cta-band-light']}>
+<section
+  class:list={['cta-band', tone === 'light' && 'cta-band-light', showImage && 'cta-band-image']}
+  style={showImage ? `--cta-image: ${cssUrl(image!)}` : undefined}
+>
   <div class="container">
     <h2>{headline}</h2>
     {text && <p>{text}</p>}

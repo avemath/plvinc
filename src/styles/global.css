@@ -336,22 +336,34 @@ hr.divider {
   overflow: hidden;
 }
 
-.hero::after {
-  content: '';
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(135deg, rgba(27,67,50,.92) 0%, rgba(27,67,50,.70) 100%);
-  pointer-events: none;
-  z-index: 1;
-}
+/* The photo and the wash over it are all background layers on the one element,
+   earliest layer on top: a left-weighted scrim that carries the headline, a
+   fade into the stat row's solid green so the two bands join with no visible
+   seam, a flat brand tint that pulls the photo's warm tones back toward the
+   site palette, and the picture itself underneath. --hero-image is set inline
+   from the CMS field; with no photo set, .hero keeps its plain green.
 
-.hero-bg-img {
-  position: absolute;
-  inset: 0;
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  z-index: 0;
+   The blur and the pull-down in saturation are baked into the file rather than
+   applied with a CSS filter: blurring a hero-sized bitmap on every paint costs
+   a full composited layer, and the pre-blurred file also compresses to a
+   fraction of the sharp one. See design/source-images/README.md. */
+.hero-image {
+  background-image:
+    linear-gradient(100deg,
+      rgba(11,31,21,.80) 0%,
+      rgba(11,31,21,.72) 28%,
+      rgba(11,31,21,.52) 52%,
+      rgba(11,31,21,.28) 76%,
+      rgba(11,31,21,.16) 100%),
+    linear-gradient(to bottom,
+      rgba(27,67,50,0) 58%,
+      rgba(27,67,50,.55) 86%,
+      var(--green-dark) 100%),
+    linear-gradient(rgba(27,67,50,.18), rgba(27,67,50,.18)),
+    var(--hero-image);
+  background-size: cover;
+  background-position: 62% 75%;
+  background-repeat: no-repeat;
 }
 
 .hero-content {
@@ -750,6 +762,21 @@ hr.divider {
 
 .cta-band-light h2 { color: var(--green-dark); }
 .cta-band-light p  { color: var(--text-muted); opacity: 1; }
+
+/* With a photo behind it the band closes the home page on the same device the
+   hero opens it with. The copy is centred rather than ranged left, so the wash
+   over the photo is even instead of weighted to one side — and because it is
+   even, it is composited into the file at build time rather than laid over it
+   with a pseudo-element. That also lets the photo ride as a background layer
+   over the band's existing green, so nothing has to be stacked above it.
+   Regenerate with sharp if the source changes: blur 3.5, saturation .85, then
+   #1B4332 at .20 and #0B1F15 at .58. */
+.cta-band-image {
+  background-image: var(--cta-image);
+  background-size: cover;
+  background-position: center 18%;
+  background-repeat: no-repeat;
+}
 
 /* ============================================================
    About page
@@ -1290,6 +1317,19 @@ a.contact-detail-value:hover { color: var(--green-dark); }
   margin: 1rem auto 1.1rem;
 }
 
+/* Photo variant of the header band. Mineral Owners is the one interior page
+   aimed at a public rather than a trade audience, and it is where a picture of
+   the actual work — an ownership map and a lease on the table — does more than
+   the flat green slab. The other headers stay plain so this one reads as
+   deliberate rather than as the start of a pattern. The green wash is
+   composited into the file — see the note on .cta-band-image. */
+.page-header-image {
+  background-image: url('/images/uploads/mineral-owners-desk.jpg');
+  background-size: cover;
+  background-position: center 72%;
+  background-repeat: no-repeat;
+}
+
 /* ============================================================
    Breadcrumb / back link
    ============================================================ */
@@ -1349,7 +1389,10 @@ a.contact-detail-value:hover { color: var(--green-dark); }
 /* ============================================================
    Hero — subtle texture overlay
    ============================================================ */
-.hero {
+/* Only for the plain green hero. When a photo is set, .hero-image owns the
+   background layers and this weave would both override them and be invisible
+   over a picture anyway. */
+.hero:not(.hero-image) {
   background-image:
     repeating-linear-gradient(
       -55deg,
@@ -1371,6 +1414,25 @@ a.contact-detail-value:hover { color: var(--green-dark); }
    Responsive
    ============================================================ */
 @media (max-width: 900px) {
+
+  /* The text runs the full width here, so the left-weighted scrim has nothing
+     to hug — swap it for an even one and crop toward the laptop, which is the
+     part of the scene that still reads at this size. */
+  .hero-image {
+    background-image:
+      linear-gradient(to bottom,
+        rgba(11,31,21,.62) 0%,
+        rgba(11,31,21,.58) 50%,
+        rgba(20,50,35,.78) 84%,
+        var(--green-dark) 100%),
+      linear-gradient(rgba(27,67,50,.18), rgba(27,67,50,.18)),
+      var(--hero-image);
+    background-position: 60% 36%;
+  }
+
+  /* A portrait-shaped band crops the width hard, and centring it loses the rig
+     on the horizon that the picture is there for. Pull the frame right. */
+  .cta-band-image { background-position: 85% center; }
 
   .contact-grid {
     grid-template-columns: 1fr;

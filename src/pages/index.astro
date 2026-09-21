@@ -5,6 +5,7 @@ import CoverageMap from '../components/CoverageMap.astro';
 import CallToAction from '../components/CallToAction.astro';
 import { getCollection } from 'astro:content';
 import { renderMarkdown } from '../utils/markdown';
+import { cssUrl } from '../utils/cssUrl';
 import home from '../data/pages/home.json';
 import settings from '../data/settings.json';
 
@@ -19,16 +20,11 @@ const valueParagraphHtml = await renderMarkdown(home.value_paragraph);
   image={settings.seo_share_image}
 >
   <!-- ─── Hero ─── -->
-  <section class="hero" aria-label="Introduction">
-    {home.hero_image && (
-      <img
-        src={home.hero_image}
-        alt=""
-        class="hero-bg-img"
-        loading="eager"
-        aria-hidden="true"
-      />
-    )}
+  <section
+    class:list={['hero', home.hero_image && 'hero-image']}
+    style={home.hero_image ? `--hero-image: ${cssUrl(home.hero_image)}` : undefined}
+    aria-label="Introduction"
+  >
     <div class="hero-content">
       <div class="hero-inner">
         <h1>{home.hero_headline}</h1>
@@ -120,5 +116,6 @@ const valueParagraphHtml = await renderMarkdown(home.value_paragraph);
     headline={home.cta.headline}
     text={home.cta.text}
     button={home.cta.button}
+    image={home.cta.image}
   />
 </Base>
