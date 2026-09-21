@@ -15,6 +15,10 @@ const sorted   = [...services].sort((a, b) => a.data.sort_order - b.data.sort_or
 const valueParagraphHtml = await renderMarkdown(home.value_paragraph);
 
 const telHref = settings.phone ? `tel:${settings.phone.replace(/[^\d+]/g, '')}` : '';
+
+// The registered name leads the hero. Falls back to the trading name so the hero
+// never renders a blank line if legal_name is cleared in Site Settings.
+const heroName = settings.legal_name || settings.professional_name;
 ---
 
 <Base
@@ -30,7 +34,10 @@ const telHref = settings.phone ? `tel:${settings.phone.replace(/[^\d+]/g, '')}` 
   >
     <div class="hero-content">
       <div class="hero-inner">
-        <h1>{home.hero_headline}</h1>
+        <h1>
+          <span class="hero-name">{heroName}</span>
+          {home.hero_headline}
+        </h1>
         <p class="hero-sub">{home.hero_subheadline}</p>
         <!-- Two paths, because the two audiences arrive with different questions. -->
         <div class="hero-paths">

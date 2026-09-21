@@ -7,6 +7,10 @@
   --green-light:   #40916C;
   --green-pale:    #EAF4EE;
   --gold:          #B7935A;
+  /* --gold is mixed for cream backgrounds; on the dark green hero it lands at
+     3.9:1, under the 4.5:1 AA floor for text this small. This lightened cut
+     clears it at 6.2:1 and reads as the same accent. */
+  --gold-light:    #D9BE8E;
   --cream:         #FAFAF8;
   --cream-dark:    #F3F1EC;
   --border:        #DDD8D0;
@@ -381,6 +385,27 @@ hr.divider {
 .hero h1 {
   color: var(--white);
   margin-bottom: 1.25rem;
+}
+
+/* The firm's name opens the H1, so the page says who it is before it says what it
+   does. It sits at label scale rather than headline scale on purpose: the sentence
+   beneath is still the line to read, and two display-sized lines would only fight
+   each other. The rule under it is sized to the text, which is what makes it read
+   as a letterhead rather than a stray caption. */
+.hero h1 .hero-name {
+  display: block;
+  width: max-content;
+  max-width: 100%;
+  font-size: clamp(.75rem, 1.2vw, .85rem);
+  font-weight: 700;
+  line-height: 1.35;
+  text-transform: uppercase;
+  /* h1 carries -.025em; a small uppercase line needs that won back and then some. */
+  letter-spacing: .16em;
+  color: var(--gold-light);
+  margin-bottom: 1.15rem;
+  padding-bottom: .85rem;
+  border-bottom: 1.5px solid rgba(217, 190, 142, .32);
 }
 
 .hero-sub {
@@ -1548,6 +1573,11 @@ a.contact-detail-value:hover { color: var(--green-dark); }
      number all land above the fold rather than below it. */
   .hero { padding: 2.25rem 0 2rem; }
   .hero h1 { margin-bottom: .85rem; }
+  .hero h1 .hero-name {
+    letter-spacing: .12em;
+    margin-bottom: .8rem;
+    padding-bottom: .6rem;
+  }
   .hero-sub {
     font-size: 1rem;
     line-height: 1.55;
