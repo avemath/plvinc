@@ -1,6 +1,7 @@
 ---
 import Base from '../layouts/Base.astro';
 import HowItWorks from '../components/HowItWorks.astro';
+import CallToAction from '../components/CallToAction.astro';
 import ContactForm from '../components/ContactForm.astro';
 import contact from '../data/pages/contact.json';
 import settings from '../data/settings.json';
@@ -8,6 +9,8 @@ import settings from '../data/settings.json';
 // Same rule as the footer: based_in first, then city and state if that is how it was filled in.
 const location = settings.based_in
   || (settings.city && settings.state ? `${settings.city}, ${settings.state}` : '');
+
+const ctaTelHref = settings.phone ? `tel:${settings.phone.replace(/[^\d+]/g, '')}` : '/contact';
 ---
 
 <Base
@@ -103,6 +106,17 @@ const location = settings.based_in
       headline={contact.how_it_works.headline}
       steps={contact.how_it_works.steps}
       tone="alt"
+    />
+  )}
+
+  {contact.cta && (
+    <CallToAction
+      headline={contact.cta.headline}
+      text={contact.cta.text}
+      button={contact.cta.button}
+      href={ctaTelHref}
+      phone={settings.phone}
+      phoneHref={ctaTelHref}
     />
   )}
 </Base>

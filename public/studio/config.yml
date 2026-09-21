@@ -704,6 +704,16 @@ collections:
             required: false
             hint: "A short line under the form heading. Leave blank to hide it."
 
+          - label: "Closing Call to Action"
+            name: cta
+            widget: object
+            required: false
+            hint: "The band at the bottom of the Contact page. Its button dials your number rather than opening a form."
+            fields:
+              - { label: "Headline", name: headline, widget: string }
+              - { label: "Text", name: text, widget: text, required: false }
+              - { label: "Button Text", name: button, widget: string }
+
           - label: "Short Note Form"
             name: short_form
             widget: object
@@ -1375,6 +1385,16 @@ collections:
             name: meta_description
             widget: text
             hint: "Search result description shown under the title. Aim for under 155 characters."
+
+          - label: "Closing Call to Action"
+            name: cta
+            widget: object
+            required: false
+            hint: "The band at the bottom of the Privacy page. Leave the headline blank to hide it."
+            fields:
+              - { label: "Headline", name: headline, widget: string }
+              - { label: "Text", name: text, widget: text, required: false }
+              - { label: "Button Text", name: button, widget: string }
 
           - label: "Policy Text"
             name: body

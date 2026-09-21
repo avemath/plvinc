@@ -84,5 +84,10 @@
     "county_label": "County and state",
     "button": "Send it over",
     "success": "Thanks. Your note reached Rickey and Shannon directly. We will get back to you."
+  },
+  "cta": {
+    "headline": "Would rather talk it through?",
+    "text": "Call and you will reach Rickey or Shannon, not a call centre.",
+    "button": "Call us"
   }
 }

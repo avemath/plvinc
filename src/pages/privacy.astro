@@ -1,5 +1,6 @@
 ---
 import Base from '../layouts/Base.astro';
+import CallToAction from '../components/CallToAction.astro';
 import { renderMarkdown } from '../utils/markdown';
 import page from '../data/pages/privacy.json';
 
@@ -22,4 +23,13 @@ const bodyHtml = await renderMarkdown(page.body);
       <div class="prose" set:html={bodyHtml} />
     </div>
   </section>
+
+  {page.cta && (
+    <CallToAction
+      headline={page.cta.headline}
+      text={page.cta.text}
+      button={page.cta.button}
+      tone="light"
+    />
+  )}
 </Base>

@@ -1,5 +1,6 @@
 ---
 import Base from '../../layouts/Base.astro';
+import CallToAction from '../../components/CallToAction.astro';
 import { getCollection } from 'astro:content';
 import page from '../../data/pages/insights.json';
 import settings from '../../data/settings.json';
@@ -66,4 +67,13 @@ const dateFormat = new Intl.DateTimeFormat('en-US', {
       </ul>
     </div>
   </section>
+
+  {page.cta && (
+    <CallToAction
+      headline={page.cta.headline}
+      text={page.cta.text}
+      button={page.cta.button}
+      tone="light"
+    />
+  )}
 </Base>
