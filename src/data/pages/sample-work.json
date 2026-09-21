@@ -1,9 +1,9 @@
 {
-  "page_title": "Sample Work Product",
-  "seo_title": "Sample Work Product | Ownership Report, Runsheet & LAR",
-  "meta_description": "A fictional mineral ownership report, runsheet, and lease acquisition report showing how Petro Land Ventures documents title and leasing work.",
-  "page_subtitle": "What you receive at the end of a file.",
-  "intro": "Most land work ends in three documents: a runsheet that lists every instrument in the chain, an ownership report that states who owns what and what stands in the way, and, once a lease is taken, an acquisition report that tells the client exactly what was bought.\n\nThe samples below follow one fictional tract through all three.",
+  "page_title": "A Sample File, Annotated",
+  "seo_title": "Sample Land Work | Annotated Ownership Report & Runsheet",
+  "meta_description": "A fictional land file from first deed to signed lease and resolved heirship, with reader's notes explaining what each part of the report decides.",
+  "page_subtitle": "One fictional tract, from the first deed to a signed lease and a resolved heirship.",
+  "intro": "Most land work ends in a few documents: a runsheet that lists every instrument in the chain, an ownership report that states who owns what and what stands in the way, and, once a lease is taken, an acquisition report that tells the client exactly what was bought. When the record leaves a question open, a supplemental report closes it.\n\nThe file below follows one fictional tract through all four, with reader's notes beside each document.",
   "fiction_notice": "Everything on this page is fictional. The county, township, people, companies, tract, dollar figures, and recording references were invented for illustration and do not describe any real property, owner, or transaction.",
   "format_note": "Formats vary by client and by state. We work in your templates or in ours. The content stays the same: every instrument accounted for, every open question stated as open.",
   "mor": {
@@ -78,7 +78,29 @@
       "The coal estate was severed in 1921 and was not examined."
     ],
     "prepared_by": "Prepared by: Petro Land Ventures",
-    "report_disclaimer": "This report is a landman's summary of the public record. It is not an attorney's title opinion and carries no warranty of title."
+    "report_disclaimer": "This report is a landman's summary of the public record. It is not an attorney's title opinion and carries no warranty of title.",
+    "annotations": [
+      {
+        "n": 1,
+        "anchor": "fields",
+        "text": "Every report states what was searched and what was not. This one was run from 1921 forward at the client's request, and it says so. A report that does not state its limits cannot be relied on."
+      },
+      {
+        "n": 2,
+        "anchor": "interest",
+        "text": "Ownership is carried as a decimal to six places because royalty is paid on it. 0.750000 of 62.40 acres is 46.80 net acres. The bonus check and every royalty payment follow that number."
+      },
+      {
+        "n": 3,
+        "anchor": "status",
+        "text": "\"Appears open\" means no lease of record is still holding the interest. It says \"appears\" because the record can only show what was filed."
+      },
+      {
+        "n": 4,
+        "anchor": "notes",
+        "text": "The notes are the part of a report that gets read most closely. Each one is a question the record raises, and what it would take to close it."
+      }
+    ]
   },
   "runsheet": {
     "title": "Runsheet: Chain of Title",
@@ -210,7 +232,24 @@
         "ownership_after": "No change"
       }
     ],
-    "key": "DB: Deed Book. RB: Record Book. WB: Will Book."
+    "key": "DB: Deed Book. RB: Record Book. WB: Will Book.",
+    "annotations": [
+      {
+        "n": 5,
+        "anchor": "rows",
+        "text": "A runsheet lists every instrument affecting the tract in the order it was recorded. Nothing is left out because it looks unrelated. The mortgage and the old leases are here because each one can change who has to sign and who gets paid."
+      },
+      {
+        "n": 6,
+        "anchor": "reservation",
+        "text": "This column is where ownership of the minerals separates from ownership of the surface. One sentence in a 1954 deed is the reason the person who owns this land today does not own all of the gas under it."
+      },
+      {
+        "n": 7,
+        "anchor": "ownership_after",
+        "text": "The last column carries ownership forward after every instrument, so anyone can check the arithmetic without repeating the search."
+      }
+    ]
   },
   "lar": {
     "title": "Lease Acquisition Report",
@@ -338,11 +377,193 @@
       "Copy of payment"
     ],
     "comments": "Lease covers lessor's 3/4 interest only. The remaining 1/4 stands in the heirs of Marian H. Oster and is unleased pending heirship (MOR Note 5). Releases of the 1968 and 2012 leases requested. Lender subordination requested.",
-    "prepared_by": "Prepared by: Petro Land Ventures. Date: 09/11/2026."
+    "prepared_by": "Prepared by: Petro Land Ventures. Date: 09/11/2026.",
+    "annotations": [
+      {
+        "n": 8,
+        "anchor": "terms",
+        "text": "This is what an operator receives after a lease is signed. It ties the lease to the title. The acres paid for are the 46.80 the ownership report supports, not the 62.40 on the tax record."
+      },
+      {
+        "n": 9,
+        "anchor": "comments",
+        "text": "What was not acquired is stated as plainly as what was. The open quarter is named, with the reason."
+      }
+    ]
+  },
+  "supplemental": {
+    "title": "Supplemental Report: Resolving the Open Quarter",
+    "fields": [
+      {
+        "label": "Report date",
+        "value": "10/02/2026"
+      },
+      {
+        "label": "Tract no.",
+        "value": "SP-014"
+      },
+      {
+        "label": "Subject",
+        "value": "0.250000 oil and gas interest of Marian H. Oster (MOR Note 5)"
+      },
+      {
+        "label": "Result",
+        "value": "Four present owners identified. Interest leasable once the items below are of record."
+      }
+    ],
+    "sources_headline": "Sources Outside the County Index",
+    "sources": [
+      "Estate of Marian H. Oster, Probate Court of Marlow County, Ohio. Will admitted 2011. No ancillary filing in Alder County.",
+      "Published obituaries, 2011 and 2019, used to identify family and confirm dates of death.",
+      "Affidavits of death and heirship from two family members, prepared for recording in Alder County.",
+      "Deed from Carol O. Deane to the Deane Family Trust, 2015, recorded in Ohio only.",
+      "Certification of trust naming the current trustee."
+    ],
+    "tree_headline": "How the Interest Passed",
+    "tree": {
+      "name": "Marian H. Oster",
+      "interest": "0.250000",
+      "detail": "Died 2011, resident of Ohio. Will leaves her residue to three children in equal shares.",
+      "children": [
+        {
+          "name": "Paul R. Oster",
+          "interest": "0.083333",
+          "detail": "Living. Holds his share directly."
+        },
+        {
+          "name": "Janet O. Whitlow",
+          "interest": "0.083333",
+          "detail": "Died 2019 without a will, not married at death, survived by two children.",
+          "children": [
+            {
+              "name": "Kevin M. Whitlow",
+              "interest": "0.041667",
+              "detail": "Living."
+            },
+            {
+              "name": "Erin W. Baird",
+              "interest": "0.041667",
+              "detail": "Living."
+            }
+          ]
+        },
+        {
+          "name": "Carol O. Deane",
+          "interest": "0.083333",
+          "detail": "Conveyed her share to the Deane Family Trust in 2015.",
+          "children": [
+            {
+              "name": "Deane Family Trust",
+              "interest": "0.083333",
+              "detail": "Present owner. Trustee signs."
+            }
+          ]
+        }
+      ]
+    },
+    "owners_headline": "Present Ownership of the Quarter",
+    "owners": [
+      {
+        "name": "Paul R. Oster",
+        "interest": "0.083333",
+        "net_acres": "5.20",
+        "status": "Unleased. Located."
+      },
+      {
+        "name": "Kevin M. Whitlow",
+        "interest": "0.041667",
+        "net_acres": "2.60",
+        "status": "Unleased. Located."
+      },
+      {
+        "name": "Erin W. Baird",
+        "interest": "0.041667",
+        "net_acres": "2.60",
+        "status": "Unleased. Located."
+      },
+      {
+        "name": "Deane Family Trust",
+        "interest": "0.083333",
+        "net_acres": "5.20",
+        "status": "Unleased. Trustee located."
+      }
+    ],
+    "owners_totals": {
+      "interest": "0.250000",
+      "net_acres": "15.60"
+    },
+    "curative_headline": "Curative Recommended",
+    "curative": [
+      "Record an exemplified copy of the Ohio will and probate proceedings in Alder County.",
+      "Record the affidavits of death and heirship for Janet O. Whitlow.",
+      "Record the 2015 deed into the Deane Family Trust in Alder County, with a certification of trust showing the trustee's authority to lease.",
+      "Take one lease in counterparts from all four owners, or four separate leases on identical terms."
+    ],
+    "curative_note": "Subject to the examining attorney's requirements.",
+    "prepared_by": "Prepared by: Petro Land Ventures",
+    "annotations": [
+      {
+        "n": 10,
+        "anchor": "sources",
+        "text": "Nothing in this section came from the county deed index. It came from an out-of-state probate file, published obituaries, and sworn statements from family members. That is where most hard title questions get answered."
+      },
+      {
+        "n": 11,
+        "anchor": "owners",
+        "text": "One quarter interest became four owners in three households. Each has to be found, each has to sign, and the decimals have to add back to 0.250000."
+      },
+      {
+        "n": 12,
+        "anchor": "curative",
+        "text": "A finding is not finished until it says what has to be recorded to make it hold. This list is what turns research into title an operator can pay on."
+      }
+    ]
+  },
+  "simple_note": "This file is short on purpose. One tract, eight instruments, one open question. That keeps the format easy to follow. Working files are longer, often much longer, and the method does not change. The last document shows what that method looks like when the record runs out.",
+  "how_to_read": [
+    {
+      "title": "If you own land or minerals",
+      "text": "Read the notes beside each document. They say what each part decides: who has to sign, who gets paid, and on what share. This is the same report an operator would receive. Nothing has been simplified."
+    },
+    {
+      "title": "If you run a land department",
+      "text": "Turn the notes off and read it as a deliverable. Check the limits stated in the header, how open items are carried, and whether the decimals tie from the runsheet to the ownership report to the lease report."
+    }
+  ],
+  "notes_toggle_label": "Reader's notes",
+  "hard_files": {
+    "headline": "What Makes a File Hard",
+    "intro": "The sample has one open question. Most files have several. These are the ones we see most, and none of them is unusual for us.",
+    "items": [
+      {
+        "title": "Heirs who never opened an estate",
+        "text": "An owner dies, the family keeps paying the taxes, and nothing is ever filed. The interest has to be traced through the family, across county and state lines, and put back on the record."
+      },
+      {
+        "title": "Minerals severed generations ago",
+        "text": "A reservation in an old deed can leave the minerals with a family that has not owned the surface in a century. They do not appear in the current owner's chain, so they have to be found from the other direction."
+      },
+      {
+        "title": "Old leases that were never released",
+        "text": "An expired lease with no release of record is still a question. The answer is in production records and unit filings, not in the deed books."
+      },
+      {
+        "title": "Interests that differ by depth or formation",
+        "text": "One tract can have different owners, and different leases, at different depths. Each horizon has to be run as its own chain."
+      },
+      {
+        "title": "Tax sales, quiet title actions, and court records",
+        "text": "Some of the chain sits in the prothonotary's office or the tax claim bureau and never reaches the deed index."
+      },
+      {
+        "title": "Royalty and overriding interests carved out along the way",
+        "text": "A non-participating royalty or an override does not change who signs the lease, but it changes who gets paid, and it has to be carried through every later conveyance."
+      }
+    ]
   },
   "cta": {
-    "headline": "Want This Level of Detail on Your Tract?",
-    "text": "Send the county, the tract, and the timing, and we will tell you what the work involves.",
-    "button": "Get in Touch"
+    "headline": "Have a File That Is Harder Than This One?",
+    "text": "Most are. Send us the county and what you know, and we will tell you what it would take.",
+    "button": "Send us the file"
   }
 }

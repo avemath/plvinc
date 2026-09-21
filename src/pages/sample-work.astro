@@ -3,18 +3,44 @@ import Base from '../layouts/Base.astro';
 import CallToAction from '../components/CallToAction.astro';
 import { renderMarkdown } from '../utils/markdown';
 import page from '../data/pages/sample-work.json';
+import settings from '../data/settings.json';
 
 const introHtml = await renderMarkdown(page.intro);
 
-const { mor, runsheet, lar } = page;
+const { mor, runsheet, lar, supplemental } = page;
 
-// The runsheet columns are declared in the data so the owner can relabel them in the
-// CMS. The cell order below is fixed to match, since a runsheet only reads correctly
-// left to right in recording order.
+const telHref = settings.phone ? `tel:${settings.phone.replace(/[^\d+]/g, '')}` : '';
+
+// Each note is tied to a part of the document by an anchor. The label is what the
+// note is headed with, so it still reads on its own if the marker is missed.
+const ANCHOR_LABELS: Record<string, string> = {
+  fields:          'Records examined',
+  interest:        'Interest column',
+  status:          'Lease status column',
+  notes:           'Notes',
+  rows:            'Row order',
+  reservation:     'Mineral reservation column',
+  ownership_after: 'Last column',
+  terms:           'Net acres and total bonus',
+  comments:        'Comments',
+  sources:         'Sources',
+  owners:          'Ownership table',
+  curative:        'Curative list',
+};
+
+type Annotation = { n: number; anchor: string; text: string };
+const noteFor = (doc: { annotations?: Annotation[] }, anchor: string) =>
+  doc.annotations?.find((a) => a.anchor === anchor);
+
+// The runsheet columns are declared in the data so the owner can relabel them. The cell
+// order is fixed to match, since a runsheet only reads correctly in recording order.
 const runsheetCells = (r: typeof runsheet.rows[number]) => [
   r.book, r.page, r.instrument_no, r.inst_date, r.rec_date, r.type,
   r.grantor, r.grantee, r.reservation, r.description, r.comments, r.ownership_after,
 ];
+
+type TreeNode = { name: string; interest: string; detail: string; children?: TreeNode[] };
+const tree = supplemental.tree as TreeNode;
 ---
 
 <Base
@@ -38,235 +64,577 @@ const runsheetCells = (r: typeof runsheet.rows[number]) => [
         <p class="fiction-notice-body">{page.fiction_notice}</p>
       </aside>
 
+      {page.simple_note && (
+        <aside class="simple-note" role="note">
+          <p>{page.simple_note}</p>
+        </aside>
+      )}
+
       <p class="sample-format-note">{page.format_note}</p>
-    </div>
-  </section>
 
-  <!-- ─── Mineral Ownership Report ─── -->
-  <section class="sample-section" aria-labelledby="mor-title">
-    <div class="container">
-      <article class="sample-sheet">
-        <span class="sample-stamp" aria-hidden="true">Sample</span>
-        <h2 class="sample-sheet-title" id="mor-title">{mor.title}</h2>
-
-        <dl class="sample-fields">
-          {mor.fields.map((f) => (
-            <div class="sample-field">
-              <dt>{f.label}</dt>
-              <dd>{f.value}</dd>
+      {page.how_to_read?.length > 0 && (
+        <div class="how-to-read">
+          {page.how_to_read.map((h) => (
+            <div class="how-to-read-card">
+              <h2 class="how-to-read-title">{h.title}</h2>
+              <p class="how-to-read-text">{h.text}</p>
             </div>
           ))}
-        </dl>
-
-        <h3 class="sample-block-title">{mor.mineral_headline}</h3>
-        <div class="sample-table-scroll">
-          <table class="sample-table">
-            <caption class="sr-only">{mor.mineral_headline}</caption>
-            <thead>
-              <tr>
-                <th scope="col">Owner</th>
-                <th scope="col">Address</th>
-                <th scope="col" class="is-num">Gross acres</th>
-                <th scope="col" class="is-num">Interest</th>
-                <th scope="col" class="is-num">Net acres</th>
-                <th scope="col">Lease status</th>
-              </tr>
-            </thead>
-            <tbody>
-              {mor.mineral_owners.map((o) => (
-                <tr>
-                  <th scope="row">{o.name}</th>
-                  <td>{o.address}</td>
-                  <td class="is-num">{o.gross_acres}</td>
-                  <td class="is-num">{o.interest}</td>
-                  <td class="is-num">{o.net_acres}</td>
-                  <td>{o.status}</td>
-                </tr>
-              ))}
-              <tr class="sample-total-row">
-                <th scope="row">Total</th>
-                <td>N/A</td>
-                <td class="is-num">N/A</td>
-                <td class="is-num">{mor.mineral_totals.interest}</td>
-                <td class="is-num">{mor.mineral_totals.net_acres}</td>
-                <td>N/A</td>
-              </tr>
-            </tbody>
-          </table>
         </div>
-
-        <h3 class="sample-block-title">{mor.surface_headline}</h3>
-        <div class="sample-table-scroll">
-          <table class="sample-table">
-            <caption class="sr-only">{mor.surface_headline}</caption>
-            <thead>
-              <tr>
-                <th scope="col">Owner</th>
-                <th scope="col">Address</th>
-                <th scope="col" class="is-num">Gross acres</th>
-                <th scope="col" class="is-num">Interest</th>
-                <th scope="col" class="is-num">Net acres</th>
-                <th scope="col">Comments</th>
-              </tr>
-            </thead>
-            <tbody>
-              {mor.surface_owners.map((o) => (
-                <tr>
-                  <th scope="row">{o.name}</th>
-                  <td>{o.address}</td>
-                  <td class="is-num">{o.gross_acres}</td>
-                  <td class="is-num">{o.interest}</td>
-                  <td class="is-num">{o.net_acres}</td>
-                  <td>{o.comments}</td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
-        </div>
-
-        <h3 class="sample-block-title">{mor.notes_headline}</h3>
-        <ol class="sample-notes">
-          {mor.notes.map((n) => <li>{n}</li>)}
-        </ol>
-
-        <p class="sample-prepared">{mor.prepared_by}</p>
-        <p class="sample-disclaimer">{mor.report_disclaimer}</p>
-      </article>
+      )}
     </div>
   </section>
 
-  <!-- ─── Runsheet ─── -->
-  <section class="sample-section" aria-labelledby="runsheet-title">
-    <div class="container">
-      <article class="sample-sheet">
-        <span class="sample-stamp" aria-hidden="true">Sample</span>
-        <h2 class="sample-sheet-title" id="runsheet-title">{runsheet.title}</h2>
+  <!--
+    The notes control is a bare checkbox so the sheets that follow are its siblings
+    and CSS alone can hide the notes column. No script, and it works from the
+    keyboard because the input itself takes focus.
+  -->
+  <div class="doc-set">
+    <input type="checkbox" id="notes-toggle" class="notes-toggle-input" checked />
 
-        <div class="sample-table-scroll">
-          <table class="sample-table is-runsheet">
-            <caption class="sr-only">{runsheet.title}</caption>
-            <thead>
-              <tr>
-                {runsheet.columns.map((c, i) => (
-                  <th scope="col" class:list={[i === 0 && 'is-sticky']}>{c}</th>
+    <div class="container notes-control-bar">
+      <label for="notes-toggle" class="notes-control">
+        <span class="notes-control-box" aria-hidden="true"></span>
+        <span>{page.notes_toggle_label || "Reader's notes"}</span>
+      </label>
+    </div>
+
+    <!-- ─── 1. Mineral Ownership Report ─── -->
+    <section class="sample-section" aria-labelledby="mor-title">
+      <div class="container">
+        <article class="sample-sheet">
+          <span class="sample-stamp" aria-hidden="true">Sample</span>
+          <h2 class="sample-sheet-title" id="mor-title">{mor.title}</h2>
+
+          <div class="doc-row">
+            <div class="doc-main">
+              <dl class="sample-fields">
+                {mor.fields.map((f) => (
+                  <div class="sample-field">
+                    <dt>
+                      {f.label}
+                      {f.label === 'Records examined' && noteFor(mor, 'fields') && (
+                        <span class="anno-marker" aria-hidden="true">{noteFor(mor, 'fields').n}</span>
+                      )}
+                    </dt>
+                    <dd>{f.value}</dd>
+                  </div>
                 ))}
-              </tr>
-            </thead>
-            <tbody>
-              {runsheet.rows.map((r) => (
-                <tr>
-                  {runsheetCells(r).map((cell, i) => (
-                    i === 0
-                      ? <th scope="row" class="is-sticky">{cell}</th>
-                      : <td>{cell}</td>
-                  ))}
-                </tr>
-              ))}
-            </tbody>
-          </table>
-        </div>
-
-        <p class="sample-key">{runsheet.key}</p>
-      </article>
-    </div>
-  </section>
-
-  <!-- ─── Lease Acquisition Report ─── -->
-  <section class="sample-section" aria-labelledby="lar-title">
-    <div class="container">
-      <article class="sample-sheet">
-        <span class="sample-stamp" aria-hidden="true">Sample</span>
-        <h2 class="sample-sheet-title" id="lar-title">{lar.title}</h2>
-
-        <dl class="sample-fields">
-          {lar.fields.map((f) => (
-            <div class="sample-field">
-              <dt>{f.label}</dt>
-              <dd>{f.value}</dd>
+              </dl>
             </div>
-          ))}
-        </dl>
+            {noteFor(mor, 'fields') && (
+              <aside class="doc-note">
+                <p class="doc-note-label">
+                  <span class="anno-marker" aria-hidden="true">{noteFor(mor, 'fields').n}</span>
+                  {ANCHOR_LABELS.fields}
+                </p>
+                <p class="doc-note-text">{noteFor(mor, 'fields').text}</p>
+              </aside>
+            )}
+          </div>
 
-        <h3 class="sample-block-title">Lease Type</h3>
-        <ul class="sample-checks" role="list">
-          {lar.lease_types.map((t) => (
-            <li class:list={['sample-check', t.checked && 'is-checked']}>
-              <span class="sample-check-box" aria-hidden="true"></span>
-              <span class="sample-check-label">{t.label}</span>
-              <span class="sr-only">{t.checked ? '(selected)' : '(not selected)'}</span>
+          <h3 class="sample-block-title">{mor.mineral_headline}</h3>
+          <div class="doc-row">
+            <div class="doc-main">
+              <div class="sample-table-scroll">
+                <table class="sample-table">
+                  <caption class="sr-only">{mor.mineral_headline}</caption>
+                  <thead>
+                    <tr>
+                      <th scope="col">Owner</th>
+                      <th scope="col">Address</th>
+                      <th scope="col" class="is-num">Gross acres</th>
+                      <th scope="col" class="is-num">
+                        Interest
+                        {noteFor(mor, 'interest') && (
+                          <span class="anno-marker" aria-hidden="true">{noteFor(mor, 'interest').n}</span>
+                        )}
+                      </th>
+                      <th scope="col" class="is-num">Net acres</th>
+                      <th scope="col">
+                        Lease status
+                        {noteFor(mor, 'status') && (
+                          <span class="anno-marker" aria-hidden="true">{noteFor(mor, 'status').n}</span>
+                        )}
+                      </th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {mor.mineral_owners.map((o) => (
+                      <tr>
+                        <th scope="row">{o.name}</th>
+                        <td>{o.address}</td>
+                        <td class="is-num">{o.gross_acres}</td>
+                        <td class="is-num">{o.interest}</td>
+                        <td class="is-num">{o.net_acres}</td>
+                        <td>{o.status}</td>
+                      </tr>
+                    ))}
+                    <tr class="sample-total-row">
+                      <th scope="row">Total</th>
+                      <td>N/A</td>
+                      <td class="is-num">N/A</td>
+                      <td class="is-num">{mor.mineral_totals.interest}</td>
+                      <td class="is-num">{mor.mineral_totals.net_acres}</td>
+                      <td>N/A</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+            <aside class="doc-note">
+              {['interest', 'status'].map((a) => noteFor(mor, a) && (
+                <div class="doc-note-item">
+                  <p class="doc-note-label">
+                    <span class="anno-marker" aria-hidden="true">{noteFor(mor, a).n}</span>
+                    {ANCHOR_LABELS[a]}
+                  </p>
+                  <p class="doc-note-text">{noteFor(mor, a).text}</p>
+                </div>
+              ))}
+            </aside>
+          </div>
+
+          <h3 class="sample-block-title">{mor.surface_headline}</h3>
+          <div class="doc-row">
+            <div class="doc-main">
+              <div class="sample-table-scroll">
+                <table class="sample-table">
+                  <caption class="sr-only">{mor.surface_headline}</caption>
+                  <thead>
+                    <tr>
+                      <th scope="col">Owner</th>
+                      <th scope="col">Address</th>
+                      <th scope="col" class="is-num">Gross acres</th>
+                      <th scope="col" class="is-num">Interest</th>
+                      <th scope="col" class="is-num">Net acres</th>
+                      <th scope="col">Comments</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {mor.surface_owners.map((o) => (
+                      <tr>
+                        <th scope="row">{o.name}</th>
+                        <td>{o.address}</td>
+                        <td class="is-num">{o.gross_acres}</td>
+                        <td class="is-num">{o.interest}</td>
+                        <td class="is-num">{o.net_acres}</td>
+                        <td>{o.comments}</td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              </div>
+            </div>
+            <aside class="doc-note" aria-hidden="true"></aside>
+          </div>
+
+          <h3 class="sample-block-title">
+            {mor.notes_headline}
+            {noteFor(mor, 'notes') && (
+              <span class="anno-marker" aria-hidden="true">{noteFor(mor, 'notes').n}</span>
+            )}
+          </h3>
+          <div class="doc-row">
+            <div class="doc-main">
+              <ol class="sample-notes">
+                {mor.notes.map((n) => <li>{n}</li>)}
+              </ol>
+            </div>
+            {noteFor(mor, 'notes') && (
+              <aside class="doc-note">
+                <p class="doc-note-label">
+                  <span class="anno-marker" aria-hidden="true">{noteFor(mor, 'notes').n}</span>
+                  {ANCHOR_LABELS.notes}
+                </p>
+                <p class="doc-note-text">{noteFor(mor, 'notes').text}</p>
+              </aside>
+            )}
+          </div>
+
+          <p class="sample-prepared">{mor.prepared_by}</p>
+          <p class="sample-disclaimer">{mor.report_disclaimer}</p>
+        </article>
+      </div>
+    </section>
+
+    <!-- ─── 2. Runsheet ─── -->
+    <section class="sample-section" aria-labelledby="runsheet-title">
+      <div class="container">
+        <article class="sample-sheet">
+          <span class="sample-stamp" aria-hidden="true">Sample</span>
+          <h2 class="sample-sheet-title" id="runsheet-title">{runsheet.title}</h2>
+
+          <div class="doc-row">
+            <div class="doc-main">
+              <div class="sample-table-scroll">
+                <table class="sample-table is-runsheet">
+                  <caption class="sr-only">{runsheet.title}</caption>
+                  <thead>
+                    <tr>
+                      {runsheet.columns.map((c, i) => (
+                        <th scope="col" class:list={[i === 0 && 'is-sticky']}>
+                          {c}
+                          {i === 8 && noteFor(runsheet, 'reservation') && (
+                            <span class="anno-marker" aria-hidden="true">{noteFor(runsheet, 'reservation').n}</span>
+                          )}
+                          {i === 11 && noteFor(runsheet, 'ownership_after') && (
+                            <span class="anno-marker" aria-hidden="true">{noteFor(runsheet, 'ownership_after').n}</span>
+                          )}
+                        </th>
+                      ))}
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {runsheet.rows.map((r) => (
+                      <tr>
+                        {runsheetCells(r).map((cell, i) => (
+                          i === 0
+                            ? <th scope="row" class="is-sticky">{cell}</th>
+                            : <td>{cell}</td>
+                        ))}
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              </div>
+              <p class="sample-key">{runsheet.key}</p>
+            </div>
+            <aside class="doc-note">
+              {['rows', 'reservation', 'ownership_after'].map((a) => noteFor(runsheet, a) && (
+                <div class="doc-note-item">
+                  <p class="doc-note-label">
+                    <span class="anno-marker" aria-hidden="true">{noteFor(runsheet, a).n}</span>
+                    {ANCHOR_LABELS[a]}
+                  </p>
+                  <p class="doc-note-text">{noteFor(runsheet, a).text}</p>
+                </div>
+              ))}
+            </aside>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <!-- ─── 3. Lease Acquisition Report ─── -->
+    <section class="sample-section" aria-labelledby="lar-title">
+      <div class="container">
+        <article class="sample-sheet">
+          <span class="sample-stamp" aria-hidden="true">Sample</span>
+          <h2 class="sample-sheet-title" id="lar-title">{lar.title}</h2>
+
+          <div class="doc-row">
+            <div class="doc-main">
+              <dl class="sample-fields">
+                {lar.fields.map((f) => (
+                  <div class="sample-field">
+                    <dt>{f.label}</dt>
+                    <dd>{f.value}</dd>
+                  </div>
+                ))}
+              </dl>
+
+              <h3 class="sample-block-title">Lease Type</h3>
+              <ul class="sample-checks" role="list">
+                {lar.lease_types.map((t) => (
+                  <li class:list={['sample-check', t.checked && 'is-checked']}>
+                    <span class="sample-check-box" aria-hidden="true"></span>
+                    <span class="sample-check-label">{t.label}</span>
+                    <span class="sr-only">{t.checked ? '(selected)' : '(not selected)'}</span>
+                  </li>
+                ))}
+              </ul>
+
+              <h3 class="sample-block-title">
+                Terms
+                {noteFor(lar, 'terms') && (
+                  <span class="anno-marker" aria-hidden="true">{noteFor(lar, 'terms').n}</span>
+                )}
+              </h3>
+              <dl class="sample-fields is-terms">
+                {lar.terms.map((t) => (
+                  <div class="sample-field">
+                    <dt>{t.label}</dt>
+                    <dd class="is-num">{t.value}</dd>
+                  </div>
+                ))}
+              </dl>
+            </div>
+            {noteFor(lar, 'terms') && (
+              <aside class="doc-note">
+                <p class="doc-note-label">
+                  <span class="anno-marker" aria-hidden="true">{noteFor(lar, 'terms').n}</span>
+                  {ANCHOR_LABELS.terms}
+                </p>
+                <p class="doc-note-text">{noteFor(lar, 'terms').text}</p>
+              </aside>
+            )}
+          </div>
+
+          <h3 class="sample-block-title">Tracts</h3>
+          <div class="doc-row">
+            <div class="doc-main">
+              <div class="sample-table-scroll">
+                <table class="sample-table">
+                  <caption class="sr-only">Tracts covered by this lease</caption>
+                  <thead>
+                    <tr>
+                      <th scope="col">Tract</th>
+                      <th scope="col">Description</th>
+                      <th scope="col">Record title</th>
+                      <th scope="col" class="is-num">Gross acres</th>
+                      <th scope="col" class="is-num">Interest</th>
+                      <th scope="col" class="is-num">Net acres</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {lar.tracts.map((t) => (
+                      <tr>
+                        <th scope="row">{t.tract}</th>
+                        <td>{t.description}</td>
+                        <td>{t.record_title}</td>
+                        <td class="is-num">{t.gross_acres}</td>
+                        <td class="is-num">{t.interest}</td>
+                        <td class="is-num">{t.net_acres}</td>
+                      </tr>
+                    ))}
+                    <tr class="sample-total-row">
+                      <th scope="row">Total</th>
+                      <td>N/A</td>
+                      <td>N/A</td>
+                      <td class="is-num">{lar.tract_totals.gross_acres}</td>
+                      <td class="is-num">N/A</td>
+                      <td class="is-num">{lar.tract_totals.net_acres}</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+            <aside class="doc-note" aria-hidden="true"></aside>
+          </div>
+
+          <h3 class="sample-block-title">{lar.documents_headline}</h3>
+          <ul class="sample-checks is-stacked" role="list">
+            {lar.documents.map((doc) => (
+              <li class="sample-check is-checked">
+                <span class="sample-check-box" aria-hidden="true"></span>
+                <span class="sample-check-label">{doc}</span>
+              </li>
+            ))}
+          </ul>
+
+          <h3 class="sample-block-title">
+            Comments
+            {noteFor(lar, 'comments') && (
+              <span class="anno-marker" aria-hidden="true">{noteFor(lar, 'comments').n}</span>
+            )}
+          </h3>
+          <div class="doc-row">
+            <div class="doc-main">
+              <p class="sample-comments">{lar.comments}</p>
+              <p class="sample-prepared">{lar.prepared_by}</p>
+            </div>
+            {noteFor(lar, 'comments') && (
+              <aside class="doc-note">
+                <p class="doc-note-label">
+                  <span class="anno-marker" aria-hidden="true">{noteFor(lar, 'comments').n}</span>
+                  {ANCHOR_LABELS.comments}
+                </p>
+                <p class="doc-note-text">{noteFor(lar, 'comments').text}</p>
+              </aside>
+            )}
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <!-- ─── 4. Supplemental Report: the hard part ─── -->
+    <section class="sample-section" aria-labelledby="supp-title">
+      <div class="container">
+        <article class="sample-sheet">
+          <span class="sample-stamp" aria-hidden="true">Sample</span>
+          <h2 class="sample-sheet-title" id="supp-title">{supplemental.title}</h2>
+
+          <dl class="sample-fields">
+            {supplemental.fields.map((f) => (
+              <div class="sample-field">
+                <dt>{f.label}</dt>
+                <dd>{f.value}</dd>
+              </div>
+            ))}
+          </dl>
+
+          <h3 class="sample-block-title">
+            {supplemental.sources_headline}
+            {noteFor(supplemental, 'sources') && (
+              <span class="anno-marker" aria-hidden="true">{noteFor(supplemental, 'sources').n}</span>
+            )}
+          </h3>
+          <div class="doc-row">
+            <div class="doc-main">
+              <ul class="sample-sources" role="list">
+                {supplemental.sources.map((s) => <li>{s}</li>)}
+              </ul>
+            </div>
+            {noteFor(supplemental, 'sources') && (
+              <aside class="doc-note">
+                <p class="doc-note-label">
+                  <span class="anno-marker" aria-hidden="true">{noteFor(supplemental, 'sources').n}</span>
+                  {ANCHOR_LABELS.sources}
+                </p>
+                <p class="doc-note-text">{noteFor(supplemental, 'sources').text}</p>
+              </aside>
+            )}
+          </div>
+
+          <h3 class="sample-block-title">{supplemental.tree_headline}</h3>
+          <div class="doc-row">
+            <div class="doc-main">
+              <!-- A nested list, not a picture, so it reads on a phone and in a screen reader. -->
+              <ul class="heir-tree" role="list">
+                <li>
+                  <div class="heir-node">
+                    <span class="heir-name">{tree.name}</span>
+                    <span class="heir-interest is-num">{tree.interest}</span>
+                    <span class="heir-detail">{tree.detail}</span>
+                  </div>
+                  {tree.children && (
+                    <ul role="list">
+                      {tree.children.map((c) => (
+                        <li>
+                          <div class="heir-node">
+                            <span class="heir-name">{c.name}</span>
+                            <span class="heir-interest is-num">{c.interest}</span>
+                            <span class="heir-detail">{c.detail}</span>
+                          </div>
+                          {c.children && (
+                            <ul role="list">
+                              {c.children.map((g) => (
+                                <li>
+                                  <div class="heir-node">
+                                    <span class="heir-name">{g.name}</span>
+                                    <span class="heir-interest is-num">{g.interest}</span>
+                                    <span class="heir-detail">{g.detail}</span>
+                                  </div>
+                                </li>
+                              ))}
+                            </ul>
+                          )}
+                        </li>
+                      ))}
+                    </ul>
+                  )}
+                </li>
+              </ul>
+            </div>
+            <aside class="doc-note" aria-hidden="true"></aside>
+          </div>
+
+          <h3 class="sample-block-title">
+            {supplemental.owners_headline}
+            {noteFor(supplemental, 'owners') && (
+              <span class="anno-marker" aria-hidden="true">{noteFor(supplemental, 'owners').n}</span>
+            )}
+          </h3>
+          <div class="doc-row">
+            <div class="doc-main">
+              <div class="sample-table-scroll">
+                <table class="sample-table">
+                  <caption class="sr-only">{supplemental.owners_headline}</caption>
+                  <thead>
+                    <tr>
+                      <th scope="col">Owner</th>
+                      <th scope="col" class="is-num">Interest</th>
+                      <th scope="col" class="is-num">Net acres</th>
+                      <th scope="col">Status</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {supplemental.owners.map((o) => (
+                      <tr>
+                        <th scope="row">{o.name}</th>
+                        <td class="is-num">{o.interest}</td>
+                        <td class="is-num">{o.net_acres}</td>
+                        <td>{o.status}</td>
+                      </tr>
+                    ))}
+                    <tr class="sample-total-row">
+                      <th scope="row">Total</th>
+                      <td class="is-num">{supplemental.owners_totals.interest}</td>
+                      <td class="is-num">{supplemental.owners_totals.net_acres}</td>
+                      <td>N/A</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+            {noteFor(supplemental, 'owners') && (
+              <aside class="doc-note">
+                <p class="doc-note-label">
+                  <span class="anno-marker" aria-hidden="true">{noteFor(supplemental, 'owners').n}</span>
+                  {ANCHOR_LABELS.owners}
+                </p>
+                <p class="doc-note-text">{noteFor(supplemental, 'owners').text}</p>
+              </aside>
+            )}
+          </div>
+
+          <h3 class="sample-block-title">
+            {supplemental.curative_headline}
+            {noteFor(supplemental, 'curative') && (
+              <span class="anno-marker" aria-hidden="true">{noteFor(supplemental, 'curative').n}</span>
+            )}
+          </h3>
+          <div class="doc-row">
+            <div class="doc-main">
+              <ol class="sample-notes">
+                {supplemental.curative.map((c) => <li>{c}</li>)}
+              </ol>
+              <p class="sample-disclaimer">{supplemental.curative_note}</p>
+              <p class="sample-prepared">{supplemental.prepared_by}</p>
+            </div>
+            {noteFor(supplemental, 'curative') && (
+              <aside class="doc-note">
+                <p class="doc-note-label">
+                  <span class="anno-marker" aria-hidden="true">{noteFor(supplemental, 'curative').n}</span>
+                  {ANCHOR_LABELS.curative}
+                </p>
+                <p class="doc-note-text">{noteFor(supplemental, 'curative').text}</p>
+              </aside>
+            )}
+          </div>
+        </article>
+      </div>
+    </section>
+  </div>
+
+  <!-- ─── What makes a file hard ─── -->
+  {page.hard_files && (
+    <section class="section-alt" aria-labelledby="hard-files-headline">
+      <div class="container">
+        <div class="section-header">
+          <h2 id="hard-files-headline">{page.hard_files.headline}</h2>
+          <p>{page.hard_files.intro}</p>
+        </div>
+        <ul class="hard-files" role="list">
+          {page.hard_files.items.map((i) => (
+            <li class="hard-file">
+              <h3 class="hard-file-title">{i.title}</h3>
+              <p class="hard-file-text">{i.text}</p>
             </li>
           ))}
         </ul>
-
-        <h3 class="sample-block-title">Terms</h3>
-        <dl class="sample-fields is-terms">
-          {lar.terms.map((t) => (
-            <div class="sample-field">
-              <dt>{t.label}</dt>
-              <dd class="is-num">{t.value}</dd>
-            </div>
-          ))}
-        </dl>
-
-        <h3 class="sample-block-title">Tracts</h3>
-        <div class="sample-table-scroll">
-          <table class="sample-table">
-            <caption class="sr-only">Tracts covered by this lease</caption>
-            <thead>
-              <tr>
-                <th scope="col">Tract</th>
-                <th scope="col">Description</th>
-                <th scope="col">Record title</th>
-                <th scope="col" class="is-num">Gross acres</th>
-                <th scope="col" class="is-num">Interest</th>
-                <th scope="col" class="is-num">Net acres</th>
-              </tr>
-            </thead>
-            <tbody>
-              {lar.tracts.map((t) => (
-                <tr>
-                  <th scope="row">{t.tract}</th>
-                  <td>{t.description}</td>
-                  <td>{t.record_title}</td>
-                  <td class="is-num">{t.gross_acres}</td>
-                  <td class="is-num">{t.interest}</td>
-                  <td class="is-num">{t.net_acres}</td>
-                </tr>
-              ))}
-              <tr class="sample-total-row">
-                <th scope="row">Total</th>
-                <td>N/A</td>
-                <td>N/A</td>
-                <td class="is-num">{lar.tract_totals.gross_acres}</td>
-                <td class="is-num">N/A</td>
-                <td class="is-num">{lar.tract_totals.net_acres}</td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-
-        <h3 class="sample-block-title">{lar.documents_headline}</h3>
-        <ul class="sample-checks is-stacked" role="list">
-          {lar.documents.map((doc) => (
-            <li class="sample-check is-checked">
-              <span class="sample-check-box" aria-hidden="true"></span>
-              <span class="sample-check-label">{doc}</span>
-            </li>
-          ))}
-        </ul>
-
-        <h3 class="sample-block-title">Comments</h3>
-        <p class="sample-comments">{lar.comments}</p>
-
-        <p class="sample-prepared">{lar.prepared_by}</p>
-      </article>
-    </div>
-  </section>
+      </div>
+    </section>
+  )}
 
   <CallToAction
     headline={page.cta.headline}
     text={page.cta.text}
     button={page.cta.button}
+    phone={settings.phone}
+    phoneHref={telHref}
     tone="light"
   />
 </Base>
