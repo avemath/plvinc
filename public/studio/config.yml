@@ -854,6 +854,219 @@ collections:
                 name: button
                 widget: string
 
+      - name: sample_work
+        label: "Sample Work Page"
+        file: src/data/pages/sample-work.json
+        format: json
+        hint: "Everything on this page must stay fictional. Never paste a real owner name, address, tract, or recording reference here."
+        fields:
+          - label: "Page Title"
+            name: page_title
+            widget: string
+            hint: "The heading at the top of the page."
+
+          - label: "Browser and Search Title"
+            name: seo_title
+            widget: string
+            hint: "The browser tab title and the blue headline in Google results. Keep it under about 60 characters."
+
+          - label: "Search Description"
+            name: meta_description
+            widget: text
+            hint: "Search result description shown under the title. Aim for under 155 characters."
+
+          - label: "Page Subtitle"
+            name: page_subtitle
+            widget: string
+            hint: "The line under the title."
+
+          - label: "Introduction"
+            name: intro
+            widget: markdown
+            hint: "The paragraphs above the samples, explaining what the three documents are."
+
+          - label: "Fiction Notice"
+            name: fiction_notice
+            widget: text
+            hint: "The highlighted box that says the samples are invented. It sits above every table. Do not remove it."
+
+          - label: "Format Note"
+            name: format_note
+            widget: text
+            hint: "The line about working in the client's templates or your own."
+
+          - label: "Mineral Ownership Report"
+            name: mor
+            widget: object
+            hint: "The first sample sheet."
+            fields:
+              - label: "Sheet Title"
+                name: title
+                widget: string
+              - label: "Header Fields"
+                name: fields
+                widget: list
+                hint: "The report date, county, tract and so on, shown down the head of the sheet."
+                fields:
+                  - { label: "Label", name: label, widget: string }
+                  - { label: "Value", name: value, widget: text }
+              - label: "Oil and Gas Heading"
+                name: mineral_headline
+                widget: string
+              - label: "Oil and Gas Owners"
+                name: mineral_owners
+                widget: list
+                hint: "One row per owner. Interests use six decimals, acres use two."
+                fields:
+                  - { label: "Owner", name: name, widget: string }
+                  - { label: "Address", name: address, widget: string }
+                  - { label: "Gross acres", name: gross_acres, widget: string }
+                  - { label: "Interest", name: interest, widget: string }
+                  - { label: "Net acres", name: net_acres, widget: string }
+                  - { label: "Lease status", name: status, widget: text }
+              - label: "Oil and Gas Totals"
+                name: mineral_totals
+                widget: object
+                fields:
+                  - { label: "Interest", name: interest, widget: string }
+                  - { label: "Net acres", name: net_acres, widget: string }
+              - label: "Surface Heading"
+                name: surface_headline
+                widget: string
+              - label: "Surface Owners"
+                name: surface_owners
+                widget: list
+                fields:
+                  - { label: "Owner", name: name, widget: string }
+                  - { label: "Address", name: address, widget: string }
+                  - { label: "Gross acres", name: gross_acres, widget: string }
+                  - { label: "Interest", name: interest, widget: string }
+                  - { label: "Net acres", name: net_acres, widget: string }
+                  - { label: "Comments", name: comments, widget: text }
+              - label: "Notes Heading"
+                name: notes_headline
+                widget: string
+              - label: "Notes"
+                name: notes
+                widget: list
+                hint: "The numbered notes. The tables refer to these by number, so check the numbering if you reorder them."
+                field: { label: "Note", name: note, widget: text }
+              - label: "Prepared By"
+                name: prepared_by
+                widget: string
+              - label: "Report Disclaimer"
+                name: report_disclaimer
+                widget: text
+                hint: "The small print saying this is not an attorney's title opinion."
+
+          - label: "Runsheet"
+            name: runsheet
+            widget: object
+            hint: "The second sample sheet, the chain of title."
+            fields:
+              - label: "Sheet Title"
+                name: title
+                widget: string
+              - label: "Column Headings"
+                name: columns
+                widget: list
+                hint: "Twelve headings, in the order the columns appear. Renaming one is fine. Removing one will leave a column without a heading."
+                field: { label: "Heading", name: heading, widget: string }
+              - label: "Rows"
+                name: rows
+                widget: list
+                hint: "One row per instrument, oldest first."
+                fields:
+                  - { label: "Book", name: book, widget: string }
+                  - { label: "Page", name: page, widget: string }
+                  - { label: "Instrument No.", name: instrument_no, widget: string }
+                  - { label: "Instrument date", name: inst_date, widget: string }
+                  - { label: "Recording date", name: rec_date, widget: string }
+                  - { label: "Instrument type", name: type, widget: string }
+                  - { label: "Grantor", name: grantor, widget: text }
+                  - { label: "Grantee", name: grantee, widget: text }
+                  - { label: "Mineral reservation", name: reservation, widget: string }
+                  - { label: "Description", name: description, widget: text }
+                  - { label: "Comments", name: comments, widget: text }
+                  - { label: "Oil and gas ownership after", name: ownership_after, widget: text }
+              - label: "Abbreviation Key"
+                name: key
+                widget: string
+
+          - label: "Lease Acquisition Report"
+            name: lar
+            widget: object
+            hint: "The third sample sheet."
+            fields:
+              - label: "Sheet Title"
+                name: title
+                widget: string
+              - label: "Header Fields"
+                name: fields
+                widget: list
+                fields:
+                  - { label: "Label", name: label, widget: string }
+                  - { label: "Value", name: value, widget: text }
+              - label: "Lease Type"
+                name: lease_types
+                widget: list
+                hint: "Drawn as a row of tick boxes. Tick the one that applies."
+                fields:
+                  - { label: "Label", name: label, widget: string }
+                  - { label: "Ticked", name: checked, widget: boolean, default: false }
+              - label: "Terms"
+                name: terms
+                widget: list
+                fields:
+                  - { label: "Label", name: label, widget: string }
+                  - { label: "Value", name: value, widget: string }
+              - label: "Tracts"
+                name: tracts
+                widget: list
+                fields:
+                  - { label: "Tract", name: tract, widget: string }
+                  - { label: "Description", name: description, widget: text }
+                  - { label: "Record title", name: record_title, widget: string }
+                  - { label: "Gross acres", name: gross_acres, widget: string }
+                  - { label: "Interest", name: interest, widget: string }
+                  - { label: "Net acres", name: net_acres, widget: string }
+              - label: "Tract Totals"
+                name: tract_totals
+                widget: object
+                fields:
+                  - { label: "Gross acres", name: gross_acres, widget: string }
+                  - { label: "Net acres", name: net_acres, widget: string }
+              - label: "Documents Heading"
+                name: documents_headline
+                widget: string
+              - label: "Documents Included"
+                name: documents
+                widget: list
+                hint: "Each one is drawn as a ticked box."
+                field: { label: "Document", name: document, widget: string }
+              - label: "Comments"
+                name: comments
+                widget: text
+              - label: "Prepared By"
+                name: prepared_by
+                widget: string
+
+          - label: "Closing Call to Action"
+            name: cta
+            widget: object
+            hint: "The band at the bottom of this page."
+            fields:
+              - label: "Headline"
+                name: headline
+                widget: string
+              - label: "Text"
+                name: text
+                widget: text
+                required: false
+              - label: "Button Text"
+                name: button
+                widget: string
+
       - name: privacy
         label: "Privacy Page"
         file: src/data/pages/privacy.json
