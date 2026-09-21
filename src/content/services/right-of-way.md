@@ -1,8 +1,8 @@
 ---
 title: "Right-of-Way & Surface Use"
 card_description: "Negotiation and acquisition of pipeline rights-of-way, surface use agreements, and access easements for energy and infrastructure projects."
-seo_title: "Right-of-Way & Surface Use | Gulf Coast Landmen"
-seo_description: "Pipeline right-of-way, surface use agreements and access easements negotiated and acquired for energy and infrastructure projects."
+seo_title: "Right-of-Way & Surface Use | Appalachian & Gulf Coast"
+seo_description: "Pipeline right-of-way, surface use agreements and access easements negotiated across the Marcellus, Utica and Gulf Coast for energy projects."
 icon: "pin"
 sort_order: 5
 ---
