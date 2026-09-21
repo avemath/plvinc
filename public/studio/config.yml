@@ -653,6 +653,16 @@ collections:
             required: false
             hint: "A short line under the form heading. Leave blank to hide it."
 
+          - label: "Form Success Message"
+            name: form_success
+            widget: text
+            hint: "Shown in place of the form once a message sends. Avoid promising a reply time unless you are sure you can keep to it."
+
+          - label: "Form Error Message"
+            name: form_error
+            widget: text
+            hint: "Shown if the message fails to send. Point people at the phone or email instead."
+
           - label: "Form Field Labels"
             name: form_labels
             widget: object

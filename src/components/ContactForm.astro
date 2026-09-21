@@ -198,10 +198,10 @@ const stateNames = (states as { name: string }[]).map((s) => s.name);
     <button type="submit" class="btn btn-primary">Send Message</button>
 
     <div id="form-success" class="form-success" role="status" aria-live="polite" hidden>
-      <p>Thank you — your message has been sent. We'll be in touch within one business day.</p>
+      <p>{contact.form_success}</p>
     </div>
     <div id="form-error" class="form-error" role="alert" aria-live="polite" hidden>
-      <p>Something went wrong. Please try again, or reach out directly by phone or email.</p>
+      <p>{contact.form_error}</p>
     </div>
   </form>
 </div>
