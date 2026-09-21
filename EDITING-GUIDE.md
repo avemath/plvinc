@@ -33,7 +33,7 @@ The left sidebar lists everything you can edit:
 | Section | What it controls |
 |---|---|
 | **Site Settings** | Your name, logos, phone, email, city, LinkedIn, site description |
-| **Pages** | The content on Home, About, Services, Mineral Owners, Experience, Insights, Contact and Privacy |
+| **Pages** | The content on Home, About, Services, Mineral Owners, Experience, Insights, Contact, Sample Work and Privacy |
 | **Services** | Each of the six service pages |
 | **Team / People** | The people shown at the foot of the About page |
 | **Insights** | Short articles. Empty to begin with. |
@@ -262,6 +262,32 @@ though it is the kind of thing an owner remembers you for.
 
 **Legal Note** is the line at the bottom about not giving legal advice. Leave it blank to hide it,
 though it is worth keeping.
+
+---
+
+## The Sample Work Page
+
+This page shows three specimen documents: an ownership report, the runsheet behind it, and a lease
+acquisition report for a lease on the same tract. It is what someone reads when they want to know
+what they are actually buying, and it is linked from Title Research, Lease Acquisition, Experience
+and the Mineral Owners page.
+
+**Everything on it is invented, and it has to stay that way.** The county, the township, the
+people, the companies, the tract, the dollar figures and the recording references were all made up
+for illustration. Never paste a real owner name, address, tract, or recording reference into these
+fields, not even with the name changed. The repository is public, and a real chain of title is a
+client's business, not a sample.
+
+1. Click **Pages**, then **Sample Work Page**.
+2. Edit any field. The tables are lists, so you can add or remove rows.
+3. Click **Save**.
+
+**Fiction Notice** is the highlighted box that tells the reader the samples are invented. It sits
+above every table on purpose. Do not delete it.
+
+The numbers are meant to agree with each other: a three-quarter interest in 62.40 acres is 46.80
+net acres, and a bonus of $1,500.00 an acre on 46.80 acres is $70,200.00. The notes are referred to
+by number from inside the tables, so check those references if you reorder them.
 
 ---
 
