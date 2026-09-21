@@ -73,6 +73,31 @@ plvinc/
 
 ---
 
+## Site icon
+
+`public/favicon.svg` is the droplet from the PETROLAND wordmark, drawn as a path rather than traced
+from the logo so it stays crisp at 16px, where the leaf veins in the real mark turn to mud. The
+green is `#44C119`, sampled from the logo artwork.
+
+The three PNGs are rendered from that SVG, so the SVG is the only file to edit:
+
+```js
+const svg = fs.readFileSync('public/favicon.svg')
+await sharp(svg, { density: 900 }).resize(16, 16).png().toFile('public/favicon-16.png')
+await sharp(svg, { density: 900 }).resize(32, 32).png().toFile('public/favicon-32.png')
+// iOS ignores transparency and draws its own rounded corners, so this one is
+// inset on an opaque white field.
+const inner = await sharp(svg, { density: 900 }).resize(124, 124).png().toBuffer()
+await sharp({ create: { width: 180, height: 180, channels: 4, background: '#FFFFFF' } })
+  .composite([{ input: inner, gravity: 'center' }]).png().toFile('public/apple-touch-icon.png')
+```
+
+The `<link>` tags in `src/layouts/Base.astro` carry a `?v=` query. Browsers hold on to a favicon
+far longer than any cache header asks them to, so bump that number whenever the icon changes or
+people keep seeing the old one.
+
+---
+
 ## Motion
 
 Two effects, both opt-in and both harmless if they never run.
