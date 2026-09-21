@@ -124,6 +124,32 @@ Both check `prefers-reduced-motion: reduce` and do nothing at all when it is set
 dumping the DOM under `--force-prefers-reduced-motion`: no classes are added and no attributes
 change.
 
+### Do not trust a screenshot while the reveal is running
+
+The reveal has one practical consequence that will waste your time if you do not know about it: a
+screenshot taken mid-transition shows revealed blocks as missing. Cards look blank, headshots look
+broken, a whole grid looks like it failed to render. It has read as a bug on the services page, on
+the About page headshots and on the sample file more than once, and each time the page was fine.
+
+Two things make it worse. Headless Chrome defaults to an 800x600 window, so anything below that
+fold legitimately has not revealed yet and never will without scrolling. And
+`--run-all-compositor-stages-before-draw` can capture the frame before the transition has settled,
+which produces an entirely empty band.
+
+Check the DOM instead. A block that has arrived carries `is-visible`:
+
+```bash
+chrome-headless-shell --headless --disable-gpu --no-sandbox \
+  --window-size=1280,2600 --virtual-time-budget=10000 \
+  --dump-dom http://localhost:PORT/services.html \
+  | grep -o 'class="service-card[^"]*"'
+```
+
+Every card should come back with `is-visible` on it. If the class is there and the pixels are not,
+the page is fine and the screenshot is not. If you do want a usable screenshot, make the window
+tall enough to hold the whole page and take it more than once, because the first pass often lands
+before the images have decoded.
+
 ---
 
 ## Photography
