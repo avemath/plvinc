@@ -1,32 +1,29 @@
 ---
 import ServiceIcon from './ServiceIcon.astro';
 
-// A compact index of the services, used on the home page.
+// The home page index of the services.
 //
-// Home and /services previously rendered the same ServiceCard grid, byte for byte, so
-// anyone who followed the nav from one to the other saw the identical block twice. The
-// cards stay on /services where they are the page; here the same six read as a list, which
-// is quicker to scan and gives the home page its own texture.
+// /services carries the full preview cards, with a description under each title.
+// Repeating them here made the two pages read as the same block twice, so the
+// home page shows the icon and the name only. Six tiles are scannable at a
+// glance and still take you straight to the page that explains the work.
 interface Props {
-  services: { title: string; card_description: string; icon?: string; slug: string }[];
+  services: { title: string; icon?: string; slug: string }[];
 }
 
 const { services } = Astro.props;
 ---
 
-<ul class="services-list" role="list">
+<ul class="service-tiles" role="list">
   {services.map((svc) => (
-    <li class="service-item">
-      <a href={`/services/${svc.slug}`} class="service-item-link">
+    <li>
+      <a href={`/services/${svc.slug}`} class="service-tile">
         {svc.icon && (
-          <span class="service-item-icon" aria-hidden="true">
-            <ServiceIcon name={svc.icon} size={24} />
+          <span class="service-tile-icon" aria-hidden="true">
+            <ServiceIcon name={svc.icon} size={28} />
           </span>
         )}
-        <span class="service-item-body">
-          <span class="service-item-title">{svc.title}</span>
-          <span class="service-item-desc">{svc.card_description}</span>
-        </span>
+        <span class="service-tile-title">{svc.title}</span>
       </a>
     </li>
   ))}

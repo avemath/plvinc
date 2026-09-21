@@ -97,7 +97,6 @@ const telHref = settings.phone ? `tel:${settings.phone.replace(/[^\d+]/g, '')}` 
       <ServiceList
         services={sorted.map((svc) => ({
           title: svc.data.title,
-          card_description: svc.data.card_description,
           icon: svc.data.icon,
           slug: svc.id,
         }))}
