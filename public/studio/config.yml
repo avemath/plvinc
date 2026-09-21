@@ -758,6 +758,52 @@ collections:
                 name: description
                 widget: text
 
+          - label: "Lease Offer Section"
+            name: lease_packet
+            widget: object
+            required: false
+            hint: "The section explaining what arrives in a lease offer. It sits above the questions and answers."
+            fields:
+              - label: "Section Label"
+                name: label
+                widget: string
+                hint: "Small uppercase label above the headline (e.g., Lease Offers)."
+              - label: "Headline"
+                name: headline
+                widget: string
+              - label: "Introduction"
+                name: intro
+                widget: text
+              - label: "The Documents"
+                name: documents
+                widget: list
+                summary: "{{title}}"
+                hint: "The documents that arrive with an offer. Shown as a numbered list in this order."
+                fields:
+                  - { label: "Title", name: title, widget: string }
+                  - { label: "Text", name: text, widget: text }
+              - label: "Terms Heading"
+                name: terms_headline
+                widget: string
+              - label: "Terms"
+                name: terms
+                widget: list
+                summary: "{{title}}"
+                hint: "The clauses an owner should read first. Put the ones that decide the money near the top."
+                fields:
+                  - { label: "Title", name: title, widget: string }
+                  - { label: "Text", name: text, widget: text }
+              - label: "Closing Line"
+                name: closing
+                widget: text
+                hint: "The line about checking an offer against the record and speaking to an attorney."
+
+          - label: "Sample Work Link"
+            name: sample_link_text
+            widget: string
+            required: false
+            hint: "One sentence under the lease offer section, linking to the sample work page. Leave blank to hide the link."
+
           - label: "FAQ Section Label"
             name: faq_label
             widget: string

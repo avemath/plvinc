@@ -64,6 +64,45 @@ const faqSchema = faq.length > 0
     </section>
   )}
 
+  {page.lease_packet && (
+    <section aria-labelledby="lease-packet-headline">
+      <div class="container container-narrow">
+        <div class="section-header">
+          <span class="section-label">{page.lease_packet.label}</span>
+          <h2 id="lease-packet-headline">{page.lease_packet.headline}</h2>
+          <p>{page.lease_packet.intro}</p>
+        </div>
+
+        <ol class="lease-docs" role="list">
+          {page.lease_packet.documents.map((doc) => (
+            <li class="lease-doc">
+              <h3 class="lease-doc-title">{doc.title}</h3>
+              <p class="lease-doc-text">{doc.text}</p>
+            </li>
+          ))}
+        </ol>
+
+        <h3 class="lease-terms-headline">{page.lease_packet.terms_headline}</h3>
+        <dl class="lease-terms">
+          {page.lease_packet.terms.map((t) => (
+            <div class="lease-term">
+              <dt>{t.title}</dt>
+              <dd>{t.text}</dd>
+            </div>
+          ))}
+        </dl>
+
+        <p class="lease-closing">{page.lease_packet.closing}</p>
+
+        {page.sample_link_text && (
+          <p class="section-aside">
+            <a href="/sample-work">{page.sample_link_text}</a>
+          </p>
+        )}
+      </div>
+    </section>
+  )}
+
   {faq.length > 0 && (
     <section>
       <div class="container container-narrow">

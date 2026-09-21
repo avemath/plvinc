@@ -30,6 +30,74 @@
       "description": "Reviewing solar and wind land offers, which usually run far longer than an oil and gas lease and cover more of your surface."
     }
   ],
+  "lease_packet": {
+    "label": "Lease Offers",
+    "headline": "What Is in a Lease Offer",
+    "intro": "A lease offer usually arrives as three documents. Here is what each one does and which terms to read first.",
+    "documents": [
+      {
+        "title": "The lease",
+        "text": "The printed form. It names the parties, grants the right to explore and produce, and sets the term and the royalty. Most offers today are paid-up leases, which means the bonus paid at signing covers the whole primary term and no yearly rentals follow."
+      },
+      {
+        "title": "The exhibit or addendum",
+        "text": "This carries the legal description and the negotiated terms. It usually says that it controls wherever it conflicts with the printed form, so read it first."
+      },
+      {
+        "title": "The memorandum of lease",
+        "text": "A short version recorded at the courthouse in place of the full lease. It gives public notice that the lease exists without putting the bonus and royalty into the public record."
+      }
+    ],
+    "terms_headline": "Terms to Read First",
+    "terms": [
+      {
+        "title": "Acreage",
+        "text": "The bonus is paid per net mineral acre. The acreage stated in the lease and the interest you are credited with decide the size of the check."
+      },
+      {
+        "title": "Primary term and option to extend",
+        "text": "The primary term is how long the company can hold the lease without drilling. An option lets the company add years for a set payment without coming back to you."
+      },
+      {
+        "title": "Royalty",
+        "text": "Look at the fraction, and at whether the costs of processing and moving the gas are taken out before your share is calculated."
+      },
+      {
+        "title": "Pooling",
+        "text": "This sets how large a unit your acreage can be combined into. Your share of unit production follows your share of the acreage in the unit."
+      },
+      {
+        "title": "Shut-in clause",
+        "text": "This lets the company hold the lease with a small yearly payment while a well can produce but is not selling."
+      },
+      {
+        "title": "Pugh clause",
+        "text": "This releases acreage, and sometimes depths, that are not in a producing unit when the primary term ends. Without one, a single well can hold the whole lease."
+      },
+      {
+        "title": "Continuous operations",
+        "text": "This defines what activity keeps the lease alive after the primary term, and how long a gap between operations is allowed."
+      },
+      {
+        "title": "Surface use and damages",
+        "text": "This covers what the company may build on the surface and what it pays for damage. Some leases bar surface operations entirely."
+      },
+      {
+        "title": "Warranty of title",
+        "text": "This is whether you are promising that you own what the lease says you own."
+      },
+      {
+        "title": "Preferential right",
+        "text": "Some leases give the company the right to match a later offer from a competitor before you can accept it."
+      },
+      {
+        "title": "Indemnity",
+        "text": "This says who is responsible if the company's operations lead to a claim."
+      }
+    ],
+    "closing": "We can check an offer against the record and explain what each clause does. For advice on whether to sign, talk to an oil and gas attorney."
+  },
+  "sample_link_text": "See a fictional sample of the ownership report we prepare.",
   "faq_label": "Common Questions",
   "faq_headline": "Questions We Are Asked Often",
   "faq": [
