@@ -2771,3 +2771,120 @@ a.contact-detail-value:hover { color: var(--green-dark); }
 /* Only the chosen panel is in the page, so nothing is submitted from the other. */
 #path-short:checked   ~ .form-panel-project,
 #path-project:checked ~ .form-panel-short { display: none; }
+
+/* ============================================================
+   Sticky contact bar, small screens only
+   Two shortcuts, nothing hidden behind them.
+   ============================================================ */
+.sticky-contact { display: none; }
+
+@media (max-width: 768px) {
+  .sticky-contact {
+    position: fixed;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 150;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1px;
+    background: rgba(255,255,255,.14);
+    border-top: 1px solid rgba(255,255,255,.14);
+    box-shadow: 0 -2px 18px rgba(0,0,0,.18);
+    padding-bottom: env(safe-area-inset-bottom, 0);
+  }
+
+  .sticky-contact a {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: .5rem;
+    min-height: 52px;
+    font-size: 1rem;
+    font-weight: 600;
+    text-decoration: none;
+    color: var(--white);
+    background: var(--green-dark);
+  }
+  .sticky-contact-write { background: var(--green-mid); }
+  .sticky-contact a:active { background: #123326; }
+
+  /* Room for the bar so it never covers the last line of a page. */
+  .site-footer { padding-bottom: 4.5rem; }
+}
+
+/* A plain statement of where work is taken, not a claim about past projects. */
+.service-area-line {
+  margin: 1.5rem 0 0;
+  padding-top: 1.25rem;
+  border-top: 1px solid var(--border);
+  font-size: 1rem;
+  line-height: 1.75;
+  color: var(--text-muted);
+}
+
+/* ============================================================
+   Readability
+   Body copy at 18px. Labels, table cells, captions and fine
+   print stay smaller, because they are not read continuously.
+   ============================================================ */
+body { font-size: 1.125rem; }
+
+.prose p,
+.prose li,
+.value-section .value-text,
+.owner-intro,
+.owner-state-note,
+.section-header p,
+.reason,
+.reasons-closing,
+.lease-doc-text,
+.lease-term dd,
+.lease-closing,
+.hiw-step-text,
+.hard-file-text,
+.how-to-read-text,
+.service-area-line,
+.sample-feature-copy p,
+.simple-note p,
+.fiction-notice-body,
+.sample-format-note,
+.owner-faq dd,
+.cta-band p {
+  font-size: 1.125rem;
+  line-height: 1.75;
+}
+
+.hero-sub { font-size: 1.15rem; }
+
+/* Cards and list items keep their own measure but not their own small type. */
+.lease-term dt,
+.hiw-step-title,
+.hard-file-title,
+.how-to-read-title { font-size: 1.05rem; }
+
+@media (max-width: 560px) {
+  /* 17px on a phone keeps the same lines from wrapping three words to a line. */
+  .prose p,
+  .prose li,
+  .value-section .value-text,
+  .owner-intro,
+  .section-header p,
+  .reason,
+  .reasons-closing,
+  .lease-doc-text,
+  .lease-term dd,
+  .hiw-step-text,
+  .hard-file-text,
+  .how-to-read-text,
+  .service-area-line,
+  .sample-feature-copy p,
+  .cta-band p { font-size: 1.0625rem; }
+}
+
+/* The nav carries seven links. Between 769px and 1010px the number collapses to
+   its icon through that band so the row never has to wrap or shrink. */
+@media (max-width: 1010px) and (min-width: 769px) {
+  .nav-phone-number { display: none; }
+  .nav-links a { padding-left: .7rem; padding-right: .7rem; }
+}
