@@ -4,9 +4,9 @@
   "logo": "/images/uploads/logo-full.png",
   "phone": "(504) 382-7479",
   "email": "rickey@plvinc.com",
-  "service_area_summary": "Appalachian · Gulf Coast · Permian · Michigan · Pacific Northwest",
+  "service_area_summary": "Appalachian \u00b7 Gulf Coast \u00b7 Permian \u00b7 Michigan \u00b7 Pacific Northwest",
   "footer_name": "Petro Land Ventures",
-  "seo_title": "Certified Professional Landmen | Appalachian & Gulf Coast",
+  "seo_title": "Petro Land Ventures | Certified Professional Landmen",
   "seo_description": "Certified Professional Landmen handling title research, lease acquisition and due diligence across the Appalachian Basin, Pennsylvania, Louisiana and Texas.",
   "seo_share_image": "/images/og-default.png",
   "web3forms_key": "f40768a7-12c0-433f-b5f3-60fcefdcc365",
@@ -16,5 +16,6 @@
   "state": "Pennsylvania",
   "linkedin_url": "",
   "based_in": "Duncansville, Pennsylvania",
-  "footer_scope_line": "What we do is research and report the public record. If your situation calls for more, we will say so when we talk."
+  "footer_scope_line": "What we do is research and report the public record. If your situation calls for more, we will say so when we talk.",
+  "legal_name": "Petro Land Ventures, Inc."
 }

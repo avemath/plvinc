@@ -1,7 +1,7 @@
 ---
 title: "Right-of-Way & Surface Use"
 card_description: "Negotiation and acquisition of pipeline rights-of-way, surface use agreements, and access easements for energy and infrastructure projects."
-seo_title: "Right-of-Way & Surface Use | Appalachian & Gulf Coast"
+seo_title: "Right-of-Way & Surface Use"
 seo_description: "Pipeline right-of-way, surface use agreements and access easements negotiated across the Marcellus, Utica and Gulf Coast for energy projects."
 icon: "pin"
 cta_headline: "Planning a right-of-way or surface project? Get in touch."

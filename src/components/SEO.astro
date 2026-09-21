@@ -33,6 +33,12 @@ const abs = (u: string) =>
 // a shared link is never a bare text card.
 const ogImage = abs(image || settings.seo_share_image || '/images/og-default.png');
 
+// The brand belongs in the tab, the bookmark and the search result, so every title carries it.
+// Appending centrally means a title written later in the CMS picks it up without anyone
+// remembering to type it, and the guard keeps the Privacy page from saying the name twice.
+const brand = siteName.trim();
+const fullTitle = brand && !title.includes(brand) ? `${title} | ${brand}` : title;
+
 const s = settings as Record<string, string>;
 
 // A PostalAddress needs at least a region to say anything useful. A locality on its own is
@@ -43,6 +49,7 @@ const business = {
   '@context': 'https://schema.org',
   '@type': 'ProfessionalService',
   name: siteName,
+  ...(s.legal_name ? { legalName: s.legal_name } : {}),
   description,
   url: new URL('/', Astro.site ?? SITE_FALLBACK).toString(),
   image: ogImage,
@@ -65,7 +72,7 @@ const business = {
 };
 ---
 
-<title>{title}</title>
+<title>{fullTitle}</title>
 <meta name="description" content={description} />
 {noindex
   ? <meta name="robots" content="noindex, nofollow" />

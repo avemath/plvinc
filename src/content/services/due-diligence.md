@@ -1,7 +1,7 @@
 ---
 title: "Due Diligence"
 card_description: "A&D due diligence support for acquisitions, divestitures, and financings: leasehold review, title, contracts, and land obligations assessed on a deal timeline."
-seo_title: "A&D Due Diligence | Certified Professional Landmen"
+seo_title: "A&D Due Diligence"
 seo_description: "Acquisition and divestiture due diligence on a deal timeline: leasehold review, title, contracts and land obligations across Appalachia and the Gulf Coast."
 icon: "list"
 show_sample_link: true
