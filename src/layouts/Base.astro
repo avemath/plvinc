@@ -111,9 +111,12 @@ const { title, description, image, noindex = false, schema } = Astro.props;
       )
       .forEach((el) => { el.classList.add('reveal'); obs.observe(el); });
 
-    // Opacity-only reveal for elements that own a hover transform
+    // Opacity-only reveal for elements that own a hover transform.
+    // The sample preview is deliberately not in here: it is the only thing in
+    // its band, so a band that arrives without it reads as broken rather than
+    // as animating.
     document
-      .querySelectorAll('.service-card, .coverage-map, .coverage-detail, .service-tile, .sample-preview')
+      .querySelectorAll('.service-card, .coverage-map, .coverage-detail, .service-tile')
       .forEach((el) => { el.classList.add('reveal-fade'); obs.observe(el); });
 
     // ── Nav shadow on scroll ──────────────────────────────────

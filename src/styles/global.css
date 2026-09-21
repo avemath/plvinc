@@ -1114,10 +1114,9 @@ a.contact-detail-value:hover { color: var(--green-dark); }
 }
 
 .service-nav {
-  padding: 2rem 0;
+  padding: 1.75rem 0 0;
   border-top: 1px solid var(--border);
   display: flex;
-  justify-content: space-between;
   align-items: center;
   flex-wrap: wrap;
   gap: 1rem;
