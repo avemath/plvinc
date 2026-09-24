@@ -499,7 +499,7 @@ const tree = supplemental.tree as TreeNode;
                     <span class="heir-interest is-num">{tree.interest}</span>
                     <span class="heir-detail">{tree.detail}</span>
                   </div>
-                  {tree.children && (
+                  {tree.children?.length > 0 && (
                     <ul role="list">
                       {tree.children.map((c) => (
                         <li>
@@ -508,7 +508,7 @@ const tree = supplemental.tree as TreeNode;
                             <span class="heir-interest is-num">{c.interest}</span>
                             <span class="heir-detail">{c.detail}</span>
                           </div>
-                          {c.children && (
+                          {c.children?.length > 0 && (
                             <ul role="list">
                               {c.children.map((g) => (
                                 <li>

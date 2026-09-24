@@ -7,6 +7,21 @@ backend:
 media_folder: public/images/uploads
 public_folder: /images/uploads
 
+# Uploads are resized and converted in the browser before they are committed, so a photo
+# straight off a phone lands at a sensible size without anyone having to shrink it first.
+# Filenames are cleaned up too, which matters because /images/ is cached for a day and a
+# replacement photo has to arrive under a new name to show up straight away.
+media_libraries:
+  default:
+    config:
+      slugify_filename: true
+      transformations:
+        raster_image:
+          format: webp
+          quality: 85
+          width: 1600
+          height: 1600
+
 site_url: https://plvinc.com
 locale: en
 
@@ -31,6 +46,12 @@ collections:
             name: professional_name
             widget: string
             hint: "Your full name and credentials as shown in the browser tab and footer (e.g., Jane Smith, CPL)."
+
+          - label: "Registered Business Name"
+            name: legal_name
+            widget: string
+            required: false
+            hint: "The company's full registered name (e.g., Petro Land Ventures, Inc.). Shown large at the top of the home page and given to search engines. Leave blank to use the Professional Name there instead."
 
           - label: "Tagline"
             name: tagline
@@ -1306,6 +1327,34 @@ collections:
                 widget: list
                 field: { label: "Source", name: source, widget: text }
               - { label: "Tree Heading", name: tree_headline, widget: string }
+              - label: "Heirship Tree"
+                name: tree
+                widget: object
+                hint: "How the interest passed, three generations deep: the original owner, who inherited from them, and who inherited from those. Each person's interest should add up to their parent's."
+                fields:
+                  - { label: "Name", name: name, widget: string }
+                  - { label: "Interest", name: interest, widget: string }
+                  - { label: "Detail", name: detail, widget: text }
+                  - label: "Heirs"
+                    name: children
+                    widget: list
+                    required: false
+                    label_singular: "Heir"
+                    summary: "{{name}} ({{interest}})"
+                    fields:
+                      - { label: "Name", name: name, widget: string }
+                      - { label: "Interest", name: interest, widget: string }
+                      - { label: "Detail", name: detail, widget: text }
+                      - label: "Their Heirs"
+                        name: children
+                        widget: list
+                        required: false
+                        label_singular: "Heir"
+                        summary: "{{name}} ({{interest}})"
+                        fields:
+                          - { label: "Name", name: name, widget: string }
+                          - { label: "Interest", name: interest, widget: string }
+                          - { label: "Detail", name: detail, widget: text }
               - { label: "Owners Heading", name: owners_headline, widget: string }
               - label: "Present Owners"
                 name: owners
@@ -1567,7 +1616,7 @@ collections:
         name: photo
         widget: image
         required: false
-        hint: "A headshot. Portrait crops work best. Leave blank to show the bio without a picture."
+        hint: "A headshot, shown as a square. A square photo with the face centred and a little space above the head works best; a taller photo is fine too and gets trimmed from the bottom. Upload it under a new file name when replacing a photo, or the old one can linger for a day. Leave blank to show the bio without a picture."
 
       - label: "Display Order"
         name: sort_order

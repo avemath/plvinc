@@ -76,6 +76,7 @@ These apply across the whole site.
 | Field | What to put here |
 |---|---|
 | Professional Name | Your full name and credentials, for example *Jane Smith, CPL* |
+| Registered Business Name | The company's full registered name, for example *Petro Land Ventures, Inc.* It's the large name at the top of the home page. Leave blank to use Professional Name there. |
 | Tagline | One short line for the footer, for example *Certified Professional Landman* |
 | Logo | The main logo, shown in the header on desktop. Leave blank to show your name as text. |
 | Logo (narrow) | A narrower version of the logo, used in the header on phones. |
@@ -274,7 +275,7 @@ page carries on as normal.
    - **Full Name**, required
    - **Role / Title**, optional
    - **LinkedIn URL**, optional. Leave blank to hide the link.
-   - **Photo**, optional
+   - **Photo**, optional. See the note on headshots below.
    - **Display Order**, optional. Lower numbers appear first.
    - **Bio**, required
    - **Work & Experience Details**, optional
@@ -283,6 +284,12 @@ page carries on as normal.
 The About page updates within a minute or two.
 
 **To remove someone:** open their entry and click **Delete**.
+
+**Headshots.** Photos show as a square, so a square crop with the face centred and a bit of room
+above the head looks best, and it keeps the two headshots side by side looking like a set. A taller
+photo still works; it gets trimmed from the bottom, never the top of the head. When replacing
+someone's photo, upload it under a different file name from the old one (adding the year is
+enough). Images are cached for a day, and a new name makes the change show up right away.
 
 ---
 
@@ -365,6 +372,9 @@ the top, and the sheets then read as a plain deliverable.
 **Supplemental Report** is the fourth document, where the open quarter interest is traced to four
 living owners. It is the one that shows hard work rather than easy work. The interests must still
 add back to 0.250000 and the net acres to 15.60.
+**Heirship Tree** inside it is the family tree showing how that interest passed down: the original
+owner, their heirs, and their heirs' heirs. It goes three generations deep and no further. Each
+person's interest should equal the total of the heirs listed under them.
 
 **What Makes a File Hard** is the section after the documents. Only list work the service pages
 already describe, and never describe a real past project.
@@ -417,7 +427,8 @@ disappear again.
    media library.
 4. Click **Choose selected**, then save the page.
 
-Use JPG or PNG, and keep files under about 2 MB so pages stay quick to load.
+JPG, PNG and WebP all work. There's no need to shrink photos first: the editor resizes anything
+large and converts it to a lighter format as it uploads, so a photo straight off a phone is fine.
 
 ---
 

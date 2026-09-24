@@ -1240,6 +1240,8 @@ a.contact-detail-value:hover { color: var(--green-dark); }
   width: 100%;
   aspect-ratio: 1 / 1;
   object-fit: cover;
+  /* A portrait uploaded as-is keeps the top of the head and loses the bottom instead. */
+  object-position: 50% 20%;
 }
 
 .person-photo-placeholder {

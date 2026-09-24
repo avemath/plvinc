@@ -2,7 +2,7 @@
 name: "Shannon Matherne, CPL"
 role: "Certified Professional Landman"
 linkedin_url: "https://www.linkedin.com/in/shannon-a-matherne-6b256b253/"
-photo: "/images/uploads/shannon-matherne-3.jpg"
+photo: "/images/uploads/shannon-matherne-4.jpg"
 sort_order: 2
 experience_details: ""
 ---
