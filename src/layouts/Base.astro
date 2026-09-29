@@ -15,9 +15,13 @@ interface Props {
   noindex?: boolean;
   /** Extra JSON-LD for this page, passed straight through to SEO. */
   schema?: unknown;
+  /** An above-the-fold image set in CSS, such as the home hero. The browser only finds a
+      CSS background once the stylesheet has parsed, which left the hero, the largest
+      thing on the page, waiting behind it. Preloading it starts the download at once. */
+  preloadImage?: string;
 }
 
-const { title, description, image, noindex = false, schema } = Astro.props;
+const { title, description, image, noindex = false, schema, preloadImage } = Astro.props;
 
 // Fonts are self-hosted (src/styles/fonts.css). They used to come from
 // fonts.googleapis.com, which put a render-blocking stylesheet on one third-party origin
@@ -58,6 +62,9 @@ const { title, description, image, noindex = false, schema } = Astro.props;
       type="font/woff2"
       crossorigin
     />
+    {preloadImage && (
+      <link rel="preload" href={preloadImage} as="image" fetchpriority="high" />
+    )}
     <SEO
       title={title || settings.seo_title}
       description={description || settings.seo_description}
@@ -68,8 +75,9 @@ const { title, description, image, noindex = false, schema } = Astro.props;
     />
   </head>
   <body>
+    <a href="#main-content" class="skip-link">Skip to content</a>
     <Nav settings={settings} />
-    <main id="main-content">
+    <main id="main-content" tabindex="-1">
       <slot />
     </main>
     <Footer settings={settings} />
