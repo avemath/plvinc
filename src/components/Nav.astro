@@ -21,7 +21,8 @@ try {
 const path = Astro.url.pathname;
 
 function isActive(href: string) {
-  if (href === '/') return path === '/';
+  // build.format is 'file', so the home page arrives as /index.html rather than /.
+  if (href === '/') return path === '/' || path === '/index.html';
   return path.startsWith(href);
 }
 

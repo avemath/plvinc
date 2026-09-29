@@ -137,7 +137,7 @@ const tree = supplemental.tree as TreeNode;
           <h3 class="sample-block-title">{mor.mineral_headline}</h3>
           <div class="doc-row">
             <div class="doc-main">
-              <div class="sample-table-scroll">
+              <div class="sample-table-scroll" tabindex="0" role="region" aria-label={mor.mineral_headline}>
                 <table class="sample-table">
                   <caption class="sr-only">{mor.mineral_headline}</caption>
                   <thead>
@@ -199,7 +199,7 @@ const tree = supplemental.tree as TreeNode;
           <h3 class="sample-block-title">{mor.surface_headline}</h3>
           <div class="doc-row">
             <div class="doc-main">
-              <div class="sample-table-scroll">
+              <div class="sample-table-scroll" tabindex="0" role="region" aria-label={mor.surface_headline}>
                 <table class="sample-table">
                   <caption class="sr-only">{mor.surface_headline}</caption>
                   <thead>
@@ -268,7 +268,7 @@ const tree = supplemental.tree as TreeNode;
 
           <div class="doc-row">
             <div class="doc-main">
-              <div class="sample-table-scroll">
+              <div class="sample-table-scroll" tabindex="0" role="region" aria-label={`${runsheet.title}, entries`}>
                 <table class="sample-table is-runsheet">
                   <caption class="sr-only">{runsheet.title}</caption>
                   <thead>
@@ -375,7 +375,7 @@ const tree = supplemental.tree as TreeNode;
           <h3 class="sample-block-title">Tracts</h3>
           <div class="doc-row">
             <div class="doc-main">
-              <div class="sample-table-scroll">
+              <div class="sample-table-scroll" tabindex="0" role="region" aria-label="Tracts covered by this lease">
                 <table class="sample-table">
                   <caption class="sr-only">Tracts covered by this lease</caption>
                   <thead>
@@ -539,7 +539,7 @@ const tree = supplemental.tree as TreeNode;
           </h3>
           <div class="doc-row">
             <div class="doc-main">
-              <div class="sample-table-scroll">
+              <div class="sample-table-scroll" tabindex="0" role="region" aria-label={supplemental.owners_headline}>
                 <table class="sample-table">
                   <caption class="sr-only">{supplemental.owners_headline}</caption>
                   <thead>
