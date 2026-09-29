@@ -10,6 +10,7 @@
 // already reversed out of a green field. The light variant has dark text on a
 // pale background, so a photo behind it would not hold contrast.
 import { cssUrl } from '../utils/cssUrl';
+import { needsTint } from '../utils/images';
 
 interface Props {
   headline: string;
@@ -39,7 +40,7 @@ const showImage = Boolean(image) && tone === 'dark';
 ---
 
 <section
-  class:list={['cta-band', tone === 'light' && 'cta-band-light', showImage && 'cta-band-image']}
+  class:list={['cta-band', tone === 'light' && 'cta-band-light', showImage && 'cta-band-image', showImage && needsTint(image) && 'has-tint']}
   style={showImage ? `--cta-image: ${cssUrl(image!)}` : undefined}
 >
   <div class="container">

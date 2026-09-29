@@ -1,4 +1,6 @@
 {
+  "page_heading": "Mineral Owners",
+  "header_image": "/images/uploads/mineral-owners-lease-map.jpg",
   "page_subtitle": "Plain answers about what you own and what you have been offered.",
   "meta_description": "Help for Pennsylvania mineral owners with lease offers, inherited mineral rights, division orders and royalty questions, from Certified Professional Landmen.",
   "intro": "If someone has approached you about leasing your minerals, crossing your land, or signing a division order, you do not have to work out what it means on your own.\n\nWe are Certified Professional Landmen. We read the public record for a living. We can tell you what the record shows about your ownership, what a document in front of you actually says, and, just as importantly, what the record does not settle.",
@@ -31,6 +33,7 @@
     }
   ],
   "reasons_to_call": {
+    "headline": "Common Reasons People Call Us",
     "intro": "Most people call us about one of these.",
     "items": [
       {

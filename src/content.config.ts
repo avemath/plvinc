@@ -18,6 +18,7 @@ const services = defineCollection({
     // Optional per-service closing CTA. Empty falls back to the shared one on
     // the Services page, so a new service still ends on a call to action.
     cta_headline: z.string().optional(),
+    cta_text: z.string().optional(),
     cta_button: z.string().optional(),
   }),
 });

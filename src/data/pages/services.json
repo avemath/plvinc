@@ -1,4 +1,5 @@
 {
+  "page_heading": "Services",
   "page_subtitle": "Full-service land consulting across the complete project lifecycle, from courthouse research through executed agreements and ongoing portfolio management.",
   "meta_description": "Full-service land consulting across the Appalachian Basin, Pennsylvania, Louisiana and East Texas, from courthouse research through executed agreements.",
   "cta": {
@@ -12,5 +13,7 @@
     "headline": "See what the deliverable looks like",
     "text": "A fictional file, start to finish, with notes on how to read it.",
     "button": "View the sample file"
-  }
+  },
+  "card_link_label": "Learn more",
+  "back_link_label": "All Services"
 }

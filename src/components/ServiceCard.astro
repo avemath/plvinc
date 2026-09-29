@@ -1,5 +1,9 @@
 ---
 import ServiceIcon from './ServiceIcon.astro';
+import servicesPage from '../data/pages/services.json';
+import { text } from '../utils/labels';
+
+const linkLabel = text((servicesPage as { card_link_label?: string }).card_link_label, 'Learn more');
 
 interface Props {
   title: string;
@@ -20,7 +24,7 @@ const { title, card_description, icon, slug } = Astro.props;
   <h2>{title}</h2>
   <p class="service-card-desc">{card_description}</p>
   <a href={`/services/${slug}`} class="service-card-link">
-    Learn more<span class="sr-only"> about {title}</span>
+    {linkLabel}<span class="sr-only"> about {title}</span>
     <span aria-hidden="true">→</span>
   </a>
 </article>

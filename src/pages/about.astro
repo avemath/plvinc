@@ -3,6 +3,7 @@ import Base from '../layouts/Base.astro';
 import CallToAction from '../components/CallToAction.astro';
 import { getCollection, render } from 'astro:content';
 import { renderMarkdown } from '../utils/markdown';
+import { text } from '../utils/labels';
 import about from '../data/pages/about.json';
 import settings from '../data/settings.json';
 import LinkedInIcon from '../components/LinkedInIcon.astro';
@@ -77,7 +78,7 @@ const schema = sorted.length > 0
 >
   <div class="page-header">
     <div class="container">
-      <h1>{about.page_heading || 'About'}</h1>
+      <h1>{text(about.page_heading, 'About')}</h1>
       <p>{about.page_subtitle}</p>
     </div>
   </div>
@@ -155,7 +156,7 @@ const schema = sorted.length > 0
 
                 {person.data.experience_details && (
                   <div class="person-experience">
-                    <span class="person-experience-label">{about.background_label || 'Background'}</span>
+                    <span class="person-experience-label">{text(about.background_label, 'Background')}</span>
                     <div
                       class="person-experience-body"
                       set:html={experienceHtml}
@@ -175,7 +176,7 @@ const schema = sorted.length > 0
   {about.credentials?.length > 0 && (
     <section class="affiliations-band affiliations-band-credentials">
       <div class="container container-narrow">
-        <h2 class="affiliations-heading">{about.credentials_heading || 'Credentials'}</h2>
+        <h2 class="affiliations-heading">{text(about.credentials_heading, 'Credentials')}</h2>
         <ul class="affiliations-list" role="list">
           {about.credentials.map((c) => (
             <li>
@@ -194,7 +195,7 @@ const schema = sorted.length > 0
   {about.affiliations.length > 0 && (
     <section class="affiliations-band">
       <div class="container container-narrow">
-        <h2 class="affiliations-heading">{about.affiliations_heading || 'Affiliations'}</h2>
+        <h2 class="affiliations-heading">{text(about.affiliations_heading, 'Affiliations')}</h2>
         <ul class="affiliations-list" role="list">
           {about.affiliations.map((a) => (
             <li>

@@ -1,9 +1,12 @@
 ---
 import Base from '../layouts/Base.astro';
+import { text } from '../utils/labels';
 import CallToAction from '../components/CallToAction.astro';
 import SampleFeature from '../components/SampleFeature.astro';
 import HowItWorks from '../components/HowItWorks.astro';
 import { renderMarkdown } from '../utils/markdown';
+import { cssUrl } from '../utils/cssUrl';
+import { needsTint } from '../utils/images';
 import page from '../data/pages/mineral-owners.json';
 import settings from '../data/settings.json';
 
@@ -13,6 +16,10 @@ const pennsylvaniaHtml = page.pennsylvania_note
   : '';
 
 const faq = (page.faq || []).filter((f) => f.question && f.answer);
+
+// The header photo is set in the editor. With none set, the band is plain green like the
+// other pages.
+const headerImage = page.header_image || '';
 
 const telHref = settings.phone ? `tel:${settings.phone.replace(/[^\d+]/g, '')}` : '';
 
@@ -36,9 +43,12 @@ const faqSchema = faq.length > 0
   description={page.meta_description}
   schema={faqSchema}
 >
-  <div class="page-header page-header-image">
+  <div
+    class:list={['page-header', headerImage && 'page-header-image', needsTint(headerImage) && 'has-tint']}
+    style={headerImage ? `--header-image: ${cssUrl(headerImage)}` : undefined}
+  >
     <div class="container">
-      <h1>Mineral Owners</h1>
+      <h1>{text(page.page_heading, 'Mineral Owners')}</h1>
       <p>{page.page_subtitle}</p>
     </div>
   </div>
@@ -76,7 +86,7 @@ const faqSchema = faq.length > 0
     <section class="section-alt" aria-labelledby="reasons-headline">
       <div class="container container-narrow">
         <div class="section-header">
-          <h2 id="reasons-headline">Common reasons people call us</h2>
+          <h2 id="reasons-headline">{text(page.reasons_to_call.headline, 'Common Reasons People Call Us')}</h2>
           <p>{page.reasons_to_call.intro}</p>
         </div>
         <ul class="reasons-list" role="list">
@@ -141,7 +151,7 @@ const faqSchema = faq.length > 0
     <HowItWorks headline={page.how_it_works.headline} steps={page.how_it_works.steps} />
   )}
 
-  {page.sample_feature && (
+  {page.sample_feature?.headline && (
     <SampleFeature
       label={page.sample_feature.label}
       headline={page.sample_feature.headline}
@@ -173,7 +183,7 @@ const faqSchema = faq.length > 0
   {pennsylvaniaHtml && (
     <section class="section-alt">
       <div class="container container-narrow">
-        <h2 class="owner-state-headline">{page.pennsylvania_headline}</h2>
+        {page.pennsylvania_headline && <h2 class="owner-state-headline">{page.pennsylvania_headline}</h2>}
         <div class="prose owner-state-note" set:html={pennsylvaniaHtml} />
       </div>
     </section>

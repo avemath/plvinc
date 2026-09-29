@@ -2,6 +2,7 @@
 import { getCollection } from 'astro:content';
 import LinkedInIcon from './LinkedInIcon.astro';
 import { getLinkedInProfiles } from '../utils/people';
+import { navLabels, footerLabels, NAV_PAGES } from '../utils/labels';
 
 interface Props {
   settings: {
@@ -59,7 +60,7 @@ const location = settings.based_in
     </div>
 
     <div>
-      <span class="footer-col-label">Contact</span>
+      <span class="footer-col-label">{footerLabels.contact_heading}</span>
       <div class="footer-contact">
         {settings.phone && (
           <a
@@ -105,15 +106,11 @@ const location = settings.based_in
     </div>
 
     <div>
-      <span class="footer-col-label">Navigation</span>
+      <span class="footer-col-label">{footerLabels.navigation_heading}</span>
       <nav class="footer-nav-links" aria-label="Footer navigation">
-        <a href="/about">About</a>
-        <a href="/services">Services</a>
-        <a href="/mineral-owners">Mineral Owners</a>
-        <a href="/experience">Experience</a>
-        <a href="/sample-work">Sample Work</a>
-        {hasInsights && <a href="/insights">Insights</a>}
-        <a href="/contact">Contact</a>
+        {NAV_PAGES.filter((p) => p.key !== 'home' && (p.key !== 'insights' || hasInsights)).map((p) => (
+          <a href={p.href}>{navLabels[p.key]}</a>
+        ))}
       </nav>
     </div>
   </div>
@@ -123,7 +120,7 @@ const location = settings.based_in
   )}
 
   <div class="footer-bottom">
-    <p>&copy; {year} {name}. All rights reserved.</p>
-    <a href="/privacy">Privacy</a>
+    <p>&copy; {year} {name}. {footerLabels.rights}</p>
+    <a href="/privacy">{footerLabels.privacy_link}</a>
   </div>
 </footer>
