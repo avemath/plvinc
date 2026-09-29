@@ -107,6 +107,7 @@ section { padding: 5rem 0; }
 .container-narrow { max-width: 760px; }
 
 /* A quiet pointer to related material, set below a section's main content. */
+.section-aside > p:last-child { margin-bottom: 0; }
 .section-aside {
   margin-top: 2.5rem;
   text-align: center;

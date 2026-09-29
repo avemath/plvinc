@@ -579,6 +579,7 @@ collections:
           - label: "Affiliations & Memberships"
             name: affiliations
             widget: list
+            required: false
             hint: "Professional associations and industry memberships."
             fields:
               - label: "Organization Name"
@@ -648,6 +649,7 @@ collections:
           - label: "Where We've Worked"
             name: states_served
             widget: list
+            required: false
             hint: "States and basins where you have active experience. Each entry appears as a highlighted card. No count is shown anywhere, so this list can grow freely."
             fields:
               - label: "State"
@@ -668,6 +670,7 @@ collections:
           - label: "Project Types"
             name: project_types
             widget: list
+            required: false
             hint: "Types of projects you have completed. Shown as a bulleted list."
             fields:
               - label: "Project Type"
@@ -1017,6 +1020,7 @@ collections:
           - label: "\"I am a\" Options"
             name: inquirer_types
             widget: list
+            required: false
             summary: "{{label}}"
             hint: "The choices in the \"I am a\" dropdown. Add, remove or reorder them. Empty this list to remove the question from the form."
             fields:
@@ -1027,6 +1031,7 @@ collections:
           - label: "Timeline Options"
             name: timelines
             widget: list
+            required: false
             summary: "{{label}}"
             hint: "The choices in the Timeline dropdown. Empty this list to remove the question from the form."
             fields:
@@ -1084,6 +1089,7 @@ collections:
           - label: "What You Can Bring to Us"
             name: services
             widget: list
+            required: false
             summary: "{{title}}"
             hint: "Each entry becomes a card. Empty this list to hide the whole section."
             fields:
@@ -1195,6 +1201,7 @@ collections:
           - label: "Questions and Answers"
             name: faq
             widget: list
+            required: false
             summary: "{{question}}"
             hint: "These also tell Google what this page answers, so write the question the way someone would actually ask it. Empty this list to hide the section."
             fields:

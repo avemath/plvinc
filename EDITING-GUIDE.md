@@ -126,10 +126,12 @@ These apply across the whole site.
 
 ### Describing where you work
 
-The basins are named the same way everywhere: **Appalachian Basin, Gulf Coast, Permian Basin,
-Michigan Basin, Pacific Northwest**, the names on the home page coverage map. When you write a new
-Google Description or change the Service Area Summary, use those names so the site never seems to
-disagree with itself. A page about one service can name just the basins where that service is done.
+The regions are named the same way everywhere: **Appalachian Basin, Gulf Coast, Permian Basin,
+Michigan Basin, Pacific Northwest**, the names on the home page coverage map. The footer's Service
+Area Summary lists all five. Google Descriptions are short, so they name the four oil and gas
+basins (*the Appalachian, Gulf Coast, Permian and Michigan basins*) and leave out the Pacific
+Northwest, where the work is renewables. A page about one service can name just the basins where
+that service is done. Using these names keeps the site from seeming to disagree with itself.
 
 ### The footer scope line
 

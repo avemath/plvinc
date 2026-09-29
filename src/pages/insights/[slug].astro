@@ -39,7 +39,7 @@ const schema = {
 <Base
   title={`${post.data.title} | ${settings.professional_name}`}
   description={post.data.summary}
-  image={post.data.image}
+  image={post.data.image ?? undefined}
   schema={schema}
 >
   <div class="page-header">
