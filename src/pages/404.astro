@@ -1,0 +1,44 @@
+---
+// Without a 404.html, Cloudflare Pages treats the site as a single-page app and answers
+// every unknown path with the home page and a 200. Search engines then index mistyped
+// and retired URLs as copies of the home page. With this file present, Pages serves it
+// with a real 404 status instead.
+import Base from '../layouts/Base.astro';
+import settings from '../data/settings.json';
+
+const telHref = settings.phone ? `tel:${settings.phone.replace(/[^\d+]/g, '')}` : '';
+---
+
+<Base
+  title="Page Not Found"
+  description="The page you were looking for is not on this site."
+  noindex
+>
+  <div class="page-header">
+    <div class="container">
+      <h1>Page Not Found</h1>
+      <p>That address is not on this site. It may have moved, or the link may have a typo.</p>
+    </div>
+  </div>
+
+  <section>
+    <div class="container container-narrow">
+      <div class="prose">
+        <p>These pages are the usual places to start:</p>
+        <ul>
+          <li><a href="/">Home</a></li>
+          <li><a href="/services">Services</a></li>
+          <li><a href="/mineral-owners">Mineral Owners</a></li>
+          <li><a href="/sample-work">Sample Work</a></li>
+          <li><a href="/contact">Contact</a></li>
+        </ul>
+        {settings.phone && (
+          <p>
+            If you were looking for something specific, call <a href={telHref}>{settings.phone}</a>
+            and we will point you to it.
+          </p>
+        )}
+      </div>
+    </div>
+  </section>
+</Base>
