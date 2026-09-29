@@ -29,7 +29,7 @@ const base   = states.filter((s) => !regionsByState.has(s.name));
     <div class="coverage-layout">
       <!-- ── Map ── -->
       <div class="coverage-map">
-        <svg viewBox="0 0 960 600" class="us-map" role="img" aria-labelledby="us-map-title">
+        <svg viewBox="0 0 960 600" class="us-map" role="group" aria-labelledby="us-map-title">
           <title id="us-map-title">
             Map of the contiguous United States. States with completed project
             experience are shaded: {worked.map((s) => s.name).join(', ')}.

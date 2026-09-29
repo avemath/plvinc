@@ -96,10 +96,10 @@ const stateNames = (states as { name: string }[]).map((s) => s.name);
 
           <button type="submit" class="btn btn-primary">{shortForm.button}</button>
 
-          <div id="short-success" class="form-success" role="status" aria-live="polite" hidden>
+          <div id="short-success" tabindex="-1" class="form-success" role="status" aria-live="polite" hidden>
             <p>{shortForm.success}</p>
           </div>
-          <div id="short-error" class="form-error" role="alert" aria-live="polite" hidden>
+          <div id="short-error" tabindex="-1" class="form-error" role="alert" hidden>
             <p>{contact.form_error}</p>
           </div>
         </form>
@@ -270,10 +270,10 @@ const stateNames = (states as { name: string }[]).map((s) => s.name);
 
     <button type="submit" class="btn btn-primary">Send Message</button>
 
-    <div id="form-success" class="form-success" role="status" aria-live="polite" hidden>
+    <div id="form-success" tabindex="-1" class="form-success" role="status" aria-live="polite" hidden>
       <p>{contact.form_success}</p>
     </div>
-    <div id="form-error" class="form-error" role="alert" aria-live="polite" hidden>
+    <div id="form-error" tabindex="-1" class="form-error" role="alert" hidden>
       <p>{contact.form_error}</p>
     </div>
   </form>
@@ -281,6 +281,13 @@ const stateNames = (states as { name: string }[]).map((s) => s.name);
 </div>
 
 <style>
+  /* The result message takes focus so a screen reader reads it and a phone scrolls to
+     it. It is not a control, so it does not need the focus ring. */
+  .form-success:focus,
+  .form-error:focus {
+    outline: none;
+  }
+
   /* Keep the honeypot out of sight and out of the tab order for real users. */
   .botcheck-field {
     display: none !important;
@@ -349,9 +356,11 @@ const stateNames = (states as { name: string }[]).map((s) => s.name);
       for (const c of SHORT_CHECKS) setShortError(c.id, null);
       shortSuccess.hidden = false;
       shortError.hidden = true;
+      shortSuccess.focus();
     } catch {
       shortError.hidden = false;
       shortSuccess.hidden = true;
+      shortError.focus();
     } finally {
       shortBtn.disabled = false;
       shortBtn.textContent = shortLabel;
@@ -471,12 +480,14 @@ const stateNames = (states as { name: string }[]).map((s) => s.name);
         for (const check of CHECKS) setFieldError(check.id, null);
         success.hidden = false;
         error.hidden   = true;
+        success.focus();
       } else {
         throw new Error(json.message || 'Submission failed');
       }
     } catch {
       error.hidden   = false;
       success.hidden = true;
+      error.focus();
     } finally {
       btn.disabled    = false;
       btn.textContent = 'Send Message';
