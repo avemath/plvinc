@@ -58,7 +58,7 @@ plvinc/
 │   │   ├── og-default.png       # 1200x630 default share image
 │   │   └── uploads/             # Media uploaded through the CMS, incl. logos
 │   ├── fonts/                   # Self-hosted woff2
-│   ├── _headers                 # Cache-Control for hashed assets
+│   ├── _headers                 # Security headers, cache rules, pages.dev noindex
 │   ├── favicon.svg
 │   ├── favicon-16.png
 │   ├── favicon-32.png

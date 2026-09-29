@@ -4,6 +4,23 @@
 # owner expects the change to be live in a minute or two; caching pages at the edge
 # would break that expectation for the sake of very little.
 
+# Security headers for every response. Cloudflare already adds nosniff and a referrer
+# policy; these cover the rest. HSTS is left without includeSubDomains so a subdomain
+# that is not on HTTPS (mail, a verification host) is never locked out.
+/*
+  Strict-Transport-Security: max-age=31536000
+  X-Frame-Options: DENY
+  Content-Security-Policy: frame-ancestors 'none'; base-uri 'self'; object-src 'none'
+  Permissions-Policy: camera=(), microphone=(), geolocation=(), payment=(), usb=()
+
+# The same site is also served at plvinc.pages.dev and at a preview address for every
+# deploy. The canonical tag already names plvinc.com, but telling crawlers not to index
+# those hosts at all keeps duplicate copies out of search results.
+https://:project.pages.dev/*
+  X-Robots-Tag: noindex
+https://:version.:project.pages.dev/*
+  X-Robots-Tag: noindex
+
 # Astro fingerprints these filenames, so the content behind a given URL never changes.
 /_astro/*
   Cache-Control: public, max-age=31536000, immutable
