@@ -31,6 +31,21 @@ const people = defineCollection({
     sort_order: z.number().optional().default(0),
     linkedin_url: z.string().optional(),
     experience_details: z.string().optional(),
+    // Each person's own licences and designations. They show on the person's card and are
+    // what tells search engines this person holds them, so nobody is described as a CPL
+    // unless their own entry says so. The CMS saves a blank year or number as an empty
+    // string or a number, so both are accepted and turned into text.
+    credentials: z
+      .array(
+        z.object({
+          name: z.string(),
+          issuer: z.string().optional(),
+          year: z.union([z.string(), z.number()]).optional().transform((v) => (v == null ? '' : String(v))),
+          number: z.union([z.string(), z.number()]).optional().transform((v) => (v == null ? '' : String(v))),
+        })
+      )
+      .optional()
+      .default([]),
   }),
 });
 

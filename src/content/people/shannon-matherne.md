@@ -5,6 +5,11 @@ linkedin_url: "https://www.linkedin.com/in/shannon-a-matherne-6b256b253/"
 photo: "/images/uploads/shannon-matherne-4.jpg"
 sort_order: 2
 experience_details: ""
+credentials:
+  - name: "Certified Professional Landman (CPL)"
+    issuer: "American Association of Professional Landmen (AAPL)"
+    year: ""
+    number: ""
 ---
 
 Shannon Matherne, CPL, brings focused professional expertise in title examination, lease acquisition, mineral and royalty management, and land administration, work that demands precision, meticulous organization, and close attention to the details that determine whether a project is sound.

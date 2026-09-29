@@ -75,6 +75,11 @@ const { title, description, image, noindex = false, schema, preloadImage } = Ast
     />
   </head>
   <body>
+    <!-- Cloudflare's Email Address Obfuscation rewrites every address on the page into
+         "[email protected]" and relies on a script to put it back. Anyone without that
+         script (link previews, reader modes, search engines, some screen readers) never
+         sees the address. These markers tell Cloudflare to leave the page as written. -->
+    <!--email_off-->
     <a href="#main-content" class="skip-link">Skip to content</a>
     <Nav settings={settings} />
     <main id="main-content" tabindex="-1">
@@ -83,6 +88,7 @@ const { title, description, image, noindex = false, schema, preloadImage } = Ast
     <Footer settings={settings} />
     <StickyContactBar phone={settings.phone} />
     <CountUp />
+    <!--/email_off-->
   </body>
 
   <script>

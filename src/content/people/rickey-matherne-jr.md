@@ -5,6 +5,11 @@ linkedin_url: "https://www.linkedin.com/in/rickey-t-matherne-jr-63914b4b/"
 photo: "/images/uploads/rickey-matherne-jr-3.jpg"
 sort_order: 1
 experience_details: ""
+credentials:
+  - name: "Certified Professional Landman (CPL)"
+    issuer: "American Association of Professional Landmen (AAPL)"
+    year: ""
+    number: ""
 ---
 
 Rickey Matherne, Jr., CPL, brings 25+ years of hands-on land experience to every project, from courthouse-level title research and lease negotiation across the prolific plays of East Texas and Louisiana to complex A&D due diligence, right-of-way acquisition, and renewable energy land work spanning the Gulf Coast and Appalachian Basin.
