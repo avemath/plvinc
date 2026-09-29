@@ -1876,6 +1876,8 @@ a.contact-detail-value:hover { color: var(--green-dark); }
   line-height: 1.5;
 }
 .person-credentials li + li { margin-top: .35rem; }
+/* Straight after the role, the credential details read as part of the same block. */
+.person-role + .person-credentials { margin-top: -.8rem; }
 .person-credential-name { display: block; font-weight: 600; color: var(--text); }
 .person-credential-meta { display: block; color: var(--text-muted); }
 

@@ -35,6 +35,15 @@ const rendered = await Promise.all(
 
 // A credential reads as one line: the name, then who issued it, the year and the number
 // when those are filled in. Blank parts are left out rather than shown empty.
+// A credential that just restates the person's role (the role "Certified Professional
+// Landman" and the credential "Certified Professional Landman (CPL)") would print the same
+// words twice. In that case only its details (issuer, year, number) are shown, right under
+// the role, which already names it.
+const plain = (s: string) => s.replace(/\(.*?\)/g, '').replace(/\s+/g, ' ').trim().toLowerCase();
+function restatesRole(credentialName: string, role?: string) {
+  return Boolean(role) && plain(credentialName) === plain(role!);
+}
+
 function credentialLine(c: { name: string; issuer?: string; year?: string; number?: string }) {
   return [
     c.issuer,
@@ -128,12 +137,17 @@ const schema = sorted.length > 0
 
                 {person.data.credentials.length > 0 && (
                   <ul class="person-credentials" role="list">
-                    {person.data.credentials.map((c) => (
-                      <li>
-                        <span class="person-credential-name">{c.name}</span>
-                        {credentialLine(c) && <span class="person-credential-meta">{credentialLine(c)}</span>}
-                      </li>
-                    ))}
+                    {person.data.credentials.map((c) => {
+                      const sameAsRole = restatesRole(c.name, person.data.role);
+                      const details = credentialLine(c);
+                      if (sameAsRole && !details) return null;
+                      return (
+                        <li>
+                          {!sameAsRole && <span class="person-credential-name">{c.name}</span>}
+                          {details && <span class="person-credential-meta">{details}</span>}
+                        </li>
+                      );
+                    })}
                   </ul>
                 )}
 
