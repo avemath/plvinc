@@ -5,37 +5,38 @@
 // with a real 404 status instead.
 import Base from '../layouts/Base.astro';
 import settings from '../data/settings.json';
+import page from '../data/pages/not-found.json';
+import { navLabels, NAV_PAGES, text } from '../utils/labels';
 
 const telHref = settings.phone ? `tel:${settings.phone.replace(/[^\d+]/g, '')}` : '';
+const heading = text(page.page_heading, 'Page Not Found');
+
+// The same pages, and the same wording, as the menu.
+const starts = NAV_PAGES.filter((p) => ['home', 'services', 'mineral_owners', 'sample_work', 'contact'].includes(p.key));
 ---
 
 <Base
-  title="Page Not Found"
+  title={heading}
   description="The page you were looking for is not on this site."
   noindex
 >
   <div class="page-header">
     <div class="container">
-      <h1>Page Not Found</h1>
-      <p>That address is not on this site. It may have moved, or the link may have a typo.</p>
+      <h1>{heading}</h1>
+      {page.page_subtitle && <p>{page.page_subtitle}</p>}
     </div>
   </div>
 
   <section>
     <div class="container container-narrow">
       <div class="prose">
-        <p>These pages are the usual places to start:</p>
+        {page.links_intro && <p>{page.links_intro}</p>}
         <ul>
-          <li><a href="/">Home</a></li>
-          <li><a href="/services">Services</a></li>
-          <li><a href="/mineral-owners">Mineral Owners</a></li>
-          <li><a href="/sample-work">Sample Work</a></li>
-          <li><a href="/contact">Contact</a></li>
+          {starts.map((p) => <li><a href={p.href}>{navLabels[p.key]}</a></li>)}
         </ul>
-        {settings.phone && (
+        {settings.phone && page.phone_line && (
           <p>
-            If you were looking for something specific, call <a href={telHref}>{settings.phone}</a>
-            and we will point you to it.
+            {page.phone_line} <a href={telHref}>{settings.phone}</a>
           </p>
         )}
       </div>

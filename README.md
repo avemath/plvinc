@@ -49,7 +49,10 @@ plvinc/
 │   ├── styles/
 │   │   ├── fonts.css            # Self-hosted @font-face rules
 │   │   └── global.css           # Design system
-│   └── utils/markdown.ts        # Renders markdown held in JSON fields
+│   └── utils/                   # markdown.ts renders markdown held in JSON fields;
+│                                #   labels.ts holds fallback wording for editable labels;
+│                                #   people.ts lists LinkedIn profiles; images.ts decides
+│                                #   which banner photos need a tint
 ├── public/
 │   ├── studio/
 │   │   ├── index.html           # CMS shell, served at /studio

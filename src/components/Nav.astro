@@ -1,5 +1,6 @@
 ---
 import { getCollection } from 'astro:content';
+import { navLabels, NAV_PAGES } from '../utils/labels';
 
 interface Props {
   settings: {
@@ -66,16 +67,9 @@ const telHref = settings.phone ? `tel:${settings.phone.replace(/[^\d+]/g, '')}` 
     </a>
 
     <ul class="nav-links" id="nav-links" role="list">
-      <li><a href="/"           aria-current={isActive('/')           ? 'page' : undefined}>Home</a></li>
-      <li><a href="/about"      aria-current={isActive('/about')      ? 'page' : undefined}>About</a></li>
-      <li><a href="/services"   aria-current={isActive('/services')   ? 'page' : undefined}>Services</a></li>
-      <li><a href="/mineral-owners" aria-current={isActive('/mineral-owners') ? 'page' : undefined}>Mineral Owners</a></li>
-      <li><a href="/experience" aria-current={isActive('/experience') ? 'page' : undefined}>Experience</a></li>
-      <li><a href="/sample-work" aria-current={isActive('/sample-work') ? 'page' : undefined}>Sample Work</a></li>
-      {hasInsights && (
-        <li><a href="/insights" aria-current={isActive('/insights')   ? 'page' : undefined}>Insights</a></li>
-      )}
-      <li><a href="/contact"    aria-current={isActive('/contact')    ? 'page' : undefined}>Contact</a></li>
+      {NAV_PAGES.filter((p) => p.key !== 'insights' || hasInsights).map((p) => (
+        <li><a href={p.href} aria-current={isActive(p.href) ? 'page' : undefined}>{navLabels[p.key]}</a></li>
+      ))}
       {settings.phone && (
         <li class="nav-links-phone">
           <a href={telHref}>{settings.phone}</a>

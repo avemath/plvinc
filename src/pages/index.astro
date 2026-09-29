@@ -1,5 +1,6 @@
 ---
 import Base from '../layouts/Base.astro';
+import { text } from '../utils/labels';
 import ServiceList from '../components/ServiceList.astro';
 import CoverageMap from '../components/CoverageMap.astro';
 import CallToAction from '../components/CallToAction.astro';
@@ -111,13 +112,13 @@ const heroName = settings.legal_name || settings.professional_name;
       />
 
       <p class="section-aside">
-        <a href="/services">See what each service covers →</a>
+        <a href="/services">{text(home.services_link_text, 'See what each service covers')} <span aria-hidden="true">→</span></a>
       </p>
     </div>
   </section>
 
   <!-- ─── Sample file ─── -->
-  {home.sample_feature && (
+  {home.sample_feature?.headline && (
     <SampleFeature
       label={home.sample_feature.label}
       headline={home.sample_feature.headline}

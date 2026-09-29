@@ -79,11 +79,13 @@ collections:
           - label: "Phone Number"
             name: phone
             widget: string
+            pattern: ['^[0-9()+.\- ]{7,}$', "Numbers, spaces, brackets and dashes only, e.g. (555) 555-5555"]
             hint: "Your business phone number (e.g., (555) 555-5555). Used everywhere the site shows a phone number: the top of every page, the phone bar on mobile, the Contact page, the footer and the call buttons."
 
           - label: "Email Address"
             name: email
             widget: string
+            pattern: ['^[^\s@]+@[^\s@]+\.[^\s@]+$', "This does not look like an email address"]
             hint: "The email address shown publicly on the site: the Contact page, the footer and the privacy policy. This should be your business address at your own domain, not a personal one."
 
           - label: "Based In"
@@ -96,7 +98,7 @@ collections:
             name: city
             widget: string
             required: false
-            hint: "Optional. Only used to tell search engines where you are, never shown on the page. Leave blank if you would rather not publish a town."
+            hint: "Mainly used to tell search engines where you are. It is only shown on the page (with State) if Based In above is left blank."
 
           - label: "State"
             name: state
@@ -108,13 +110,13 @@ collections:
             name: linkedin_url
             widget: string
             required: false
-            hint: "The full web address of the company LinkedIn page. Leave blank to hide the LinkedIn link everywhere."
+            pattern: ['^(https://(www\.)?linkedin\.com/.+)?$', "Paste the full address, starting with https://www.linkedin.com/"]
+            hint: "The company LinkedIn page, if there is one. Personal profiles go on each person under Team / People. Leave blank to hide it."
 
           - label: "Service Area Summary"
             name: service_area_summary
             widget: string
-            hint: "The region line in the footer. Keep it in step with the basins on the home page
-              coverage map, which is where these names come from."
+            hint: "The region line in the footer, with the regions separated by a middle dot ( · ), e.g. Appalachian · Gulf Coast. The dots matter: search engines are given each region separately. Keep it in step with the home page coverage map."
 
           - label: "Footer Scope Line"
             name: footer_scope_line
@@ -127,13 +129,48 @@ collections:
             widget: string
             hint: "Name or company shown in the copyright line at the bottom of every page."
 
-          - label: "Default Page Title"
+          - label: "Menu Wording"
+            name: nav_labels
+            widget: object
+            collapsed: true
+            hint: "What each page is called in the menu at the top and in the footer. Only the wording changes; the pages themselves stay where they are. A blank box keeps the original wording."
+            fields:
+              - { label: "Home", name: home, widget: string, required: false }
+              - { label: "About", name: about, widget: string, required: false }
+              - { label: "Services", name: services, widget: string, required: false }
+              - { label: "Mineral Owners", name: mineral_owners, widget: string, required: false }
+              - { label: "Experience", name: experience, widget: string, required: false }
+              - { label: "Sample Work", name: sample_work, widget: string, required: false }
+              - { label: "Insights", name: insights, widget: string, required: false, hint: "Only shows once there is at least one Insight." }
+              - { label: "Contact", name: contact, widget: string, required: false }
+
+          - label: "Footer Wording"
+            name: footer_labels
+            widget: object
+            collapsed: true
+            hint: "The small headings and links in the dark footer at the bottom of every page. A blank box keeps the original wording."
+            fields:
+              - { label: "Contact column heading", name: contact_heading, widget: string, required: false }
+              - { label: "Menu column heading", name: navigation_heading, widget: string, required: false }
+              - { label: "Words after the copyright name", name: rights, widget: string, required: false, hint: "e.g. All rights reserved." }
+              - { label: "Privacy link", name: privacy_link, widget: string, required: false }
+
+          - label: "Phone Bar Wording (mobile)"
+            name: mobile_bar_labels
+            widget: object
+            collapsed: true
+            hint: "The two buttons pinned to the bottom of the screen on phones. A blank box keeps the original wording."
+            fields:
+              - { label: "Call button", name: call, widget: string, required: false }
+              - { label: "Note button", name: note, widget: string, required: false, hint: "Opens the Contact page." }
+
+          - label: "Home Page Google Title (browser tab)"
             name: seo_title
             widget: string
             maxlength: 60
             hint: "The home page's browser tab title and Google headline, business name included. The counter stops at 60 characters."
 
-          - label: "Default Meta Description"
+          - label: "Home Page Google Description"
             name: seo_description
             widget: text
             maxlength: 160
@@ -180,7 +217,7 @@ collections:
             name: hero_image
             widget: image
             required: false
-            hint: "Optional background photo for the hero section. Landscape format works best, with the right-hand side carrying the subject. The headline sits over the left. A dark green wash is laid over whatever you upload so the text stays readable. Leave blank for a solid green background."
+            hint: "Optional background photo for the hero section. Landscape format works best, with the right-hand side carrying the subject. The headline sits over the left. A dark green wash is laid over whatever you upload so the text stays readable. The current photo was also softened (blurred) before upload; a sharp, busy photo will compete with the headline, so a calm one works best. Leave blank for a solid green background."
 
           - label: "Hero Button Text"
             name: hero_cta_text
@@ -189,7 +226,14 @@ collections:
 
           - label: "Hero Button Link"
             name: hero_cta_href
-            widget: string
+            widget: select
+            options:
+              - { label: "Mineral Owners page", value: "/mineral-owners" }
+              - { label: "Contact page", value: "/contact" }
+              - { label: "Services page", value: "/services" }
+              - { label: "About page", value: "/about" }
+              - { label: "Experience page", value: "/experience" }
+              - { label: "Sample Work page", value: "/sample-work" }
             required: false
             hint: "Where the first hero button goes. Defaults to the Mineral Owners page."
 
@@ -201,7 +245,14 @@ collections:
 
           - label: "Second Hero Button Link"
             name: hero_secondary_cta_href
-            widget: string
+            widget: select
+            options:
+              - { label: "Mineral Owners page", value: "/mineral-owners" }
+              - { label: "Contact page", value: "/contact" }
+              - { label: "Services page", value: "/services" }
+              - { label: "About page", value: "/about" }
+              - { label: "Experience page", value: "/experience" }
+              - { label: "Sample Work page", value: "/sample-work" }
             required: false
             hint: "Where the second hero button goes. Defaults to the Contact page."
 
@@ -238,7 +289,7 @@ collections:
           - label: "Map Caption"
             name: regions_hint
             widget: string
-            hint: "Caption under the map, shown until a state is hovered. Avoid counts here. They date quickly and make the coverage look smaller than it is."
+            hint: "Rarely seen: shown under the map only while the page is still loading or if a browser has scripts turned off, after which the name of the selected region takes its place. Avoid counts here."
 
           - label: "Basins & Regions"
             name: regions
@@ -347,6 +398,12 @@ collections:
             widget: text
             hint: "A sentence or two below the services headline, before the service cards."
 
+          - label: "Link Under the Service Cards"
+            name: services_link_text
+            widget: string
+            required: false
+            hint: "The link to the Services page under the cards. Blank shows \"See what each service covers\"."
+
           - label: "Figures Under the Hero"
             name: stats
             widget: list
@@ -398,7 +455,7 @@ collections:
             hint: "The band that points at the sample file on the home page. Leave the headline blank to hide the band."
             fields:
               - { label: "Small Label", name: label, widget: string, required: false }
-              - { label: "Headline", name: headline, widget: string }
+              - { label: "Headline", name: headline, widget: string, required: false }
               - { label: "Text", name: text, widget: text }
               - { label: "Button Text", name: button, widget: string }
 
@@ -421,7 +478,7 @@ collections:
                 name: image
                 widget: image
                 required: false
-                hint: "Optional photo behind the closing band on the home page. A dark green wash is laid over it so the text stays readable. Leave blank for solid green."
+                hint: "Optional photo behind the closing band on the home page. A dark green tint is laid over any new photo so the white text stays readable; wide landscape photos work best. Upload replacements under a new file name. Leave blank for solid green."
 
       - name: about
         label: "About Page"
@@ -431,20 +488,21 @@ collections:
           - label: "Page Heading"
             name: page_heading
             widget: string
-            hint: "The large heading in the green band at the top of the page."
+            required: false
+            hint: "The large heading in the green band at the top of the page. Blank shows \"About\"."
 
           - label: "Page Subtitle"
             name: page_subtitle
             widget: text
             hint: "The line under the page title in the green band at the top of the About page."
 
-          - label: "Page Title"
+          - label: "Google Title (browser tab)"
             name: page_title
             widget: string
             maxlength: 40
             hint: "The browser tab title and the headline in Google results. \"| Petro Land Ventures\" is added to the end automatically, so this can be short. The counter stops at 40 characters."
 
-          - label: "Search Description"
+          - label: "Google Description"
             name: meta_description
             widget: text
             maxlength: 160
@@ -504,6 +562,7 @@ collections:
                 name: year
                 widget: string
                 required: false
+                pattern: ['^([0-9]{4})?$', "A four-digit year, e.g. 2005"]
                 hint: "e.g., 2005. Leave blank to leave it off."
               - label: "Number"
                 name: number
@@ -529,6 +588,7 @@ collections:
                 name: url
                 widget: string
                 required: false
+                pattern: ['^(https?://.+)?$', "Paste the full address, starting with https://"]
                 hint: "e.g., https://www.landman.org. Leave blank if you do not want a link."
 
           - label: "Closing Call to Action"
@@ -552,18 +612,24 @@ collections:
         file: src/data/pages/experience.json
         format: json
         fields:
+          - label: "Page Heading"
+            name: page_heading
+            widget: string
+            required: false
+            hint: "The large heading in the green band at the top of the page. Blank shows \"Experience\"."
+
           - label: "Page Subtitle"
             name: page_subtitle
             widget: text
             hint: "The line under the page title in the green band at the top of the Experience page."
 
-          - label: "Page Title"
+          - label: "Google Title (browser tab)"
             name: page_title
             widget: string
             maxlength: 40
             hint: "The browser tab title and the headline in Google results. \"| Petro Land Ventures\" is added to the end automatically, so this can be short. The counter stops at 40 characters."
 
-          - label: "Search Description"
+          - label: "Google Description"
             name: meta_description
             widget: text
             maxlength: 160
@@ -593,6 +659,12 @@ collections:
                 widget: string
                 hint: "e.g., Permian Basin, Eagle Ford, Haynesville"
 
+          - label: "Where We've Worked: Line Under the Cards"
+            name: states_aside
+            widget: markdown
+            required: false
+            hint: "A short line under the state cards. It can include a link, e.g. to the home page coverage map. Leave blank to hide it."
+
           - label: "Project Types"
             name: project_types
             widget: list
@@ -610,7 +682,7 @@ collections:
             hint: "The band that points at the sample file on the Experience page. Leave the headline blank to hide the band."
             fields:
               - { label: "Small Label", name: label, widget: string, required: false }
-              - { label: "Headline", name: headline, widget: string }
+              - { label: "Headline", name: headline, widget: string, required: false }
               - { label: "Text", name: text, widget: text }
               - { label: "Button Text", name: button, widget: string }
 
@@ -693,6 +765,12 @@ collections:
                 required: false
                 hint: "What it produced for the client. Leave blank to omit."
 
+          - label: "Project Outcome Label"
+            name: outcome_label
+            widget: string
+            required: false
+            hint: "The small heading in front of each project's Outcome. Blank shows \"Outcome\"."
+
           - label: "Closing Call to Action"
             name: cta
             widget: object
@@ -714,13 +792,19 @@ collections:
         file: src/data/pages/contact.json
         format: json
         fields:
-          - label: "Page Title"
+          - label: "Page Heading"
+            name: page_heading
+            widget: string
+            required: false
+            hint: "The large heading in the green band at the top of the page. Blank shows \"Contact\"."
+
+          - label: "Google Title (browser tab)"
             name: page_title
             widget: string
             maxlength: 40
             hint: "The browser tab title and the headline in Google results. \"| Petro Land Ventures\" is added to the end automatically, so this can be short. The counter stops at 40 characters."
 
-          - label: "Search Description"
+          - label: "Google Description"
             name: meta_description
             widget: text
             maxlength: 160
@@ -768,6 +852,20 @@ collections:
               - { label: "Text", name: text, widget: text, required: false }
               - { label: "Button Text", name: button, widget: string }
 
+          - label: "Contact Detail Labels"
+            name: detail_labels
+            widget: object
+            collapsed: true
+            required: false
+            hint: "The small grey labels above the phone, email and other details on the left of the Contact page. The details themselves come from Site Settings and Team / People. A blank box keeps the original wording."
+            fields:
+              - { label: "Phone", name: phone, widget: string, required: false }
+              - { label: "Email", name: email, widget: string, required: false }
+              - { label: "Based In", name: based_in, widget: string, required: false }
+              - { label: "LinkedIn", name: linkedin, widget: string, required: false }
+              - { label: "Service Area", name: service_area, widget: string, required: false }
+              - { label: "Mailing Address", name: mailing_address, widget: string, required: false }
+
           - label: "Short Note Form"
             name: short_form
             widget: object
@@ -781,8 +879,21 @@ collections:
               - { label: "Contact Field Label", name: contact_label, widget: string }
               - { label: "County Field Label", name: county_label, widget: string }
               - { label: "What Showed Up Label", name: what_label, widget: string }
+              - { label: "Name Field Label", name: name_label, widget: string, required: false }
               - { label: "Button Text", name: button, widget: string }
-              - { label: "Success Message", name: success, widget: text }
+              - { label: "Success Message", name: success, widget: text, hint: "Shown under the button once the note has sent." }
+              - { label: "Email Subject", name: subject, widget: string, required: false, hint: "The subject line of the email you receive when someone sends this form." }
+              - label: "Error Messages"
+                name: errors
+                widget: object
+                collapsed: true
+                required: false
+                hint: "Shown under a box when someone leaves it empty. A blank box keeps the original wording."
+                fields:
+                  - { label: "Name missing", name: name, widget: string, required: false }
+                  - { label: "Phone or email missing", name: contact, widget: string, required: false }
+                  - { label: "County and state missing", name: county, widget: string, required: false }
+                  - { label: "What showed up missing", name: what, widget: string, required: false }
 
           - label: "What Happens Next"
             name: how_it_works
@@ -802,7 +913,7 @@ collections:
           - label: "Form Success Message"
             name: form_success
             widget: text
-            hint: "Shown in place of the form once a message sends. Avoid promising a reply time unless you are sure you can keep to it."
+            hint: "Shown under the Send button once a message has gone through. Avoid promising a reply time unless you are sure you can keep to it."
 
           - label: "Form Error Message"
             name: form_error
@@ -812,8 +923,16 @@ collections:
           - label: "Form Field Labels"
             name: form_labels
             widget: object
-            hint: "The wording shown beside each box on the form. Changing these does not change what the form collects."
+            hint: "The wording shown beside each box on the project form. Changing these does not change what the form collects."
             fields:
+              - label: "Name field"
+                name: name
+                widget: string
+                required: false
+              - label: "Email field"
+                name: email
+                widget: string
+                required: false
               - label: "Phone field"
                 name: phone
                 widget: string
@@ -832,6 +951,68 @@ collections:
               - label: "Timeline field"
                 name: timeline
                 widget: string
+              - label: "Message field"
+                name: message
+                widget: string
+                required: false
+
+          - label: "Form Hints Inside the Boxes"
+            name: form_placeholders
+            widget: object
+            collapsed: true
+            required: false
+            hint: "The light grey example text shown inside an empty box on the project form. A blank box keeps the original wording."
+            fields:
+              - { label: "Name", name: name, widget: string, required: false }
+              - { label: "Email", name: email, widget: string, required: false }
+              - { label: "Phone", name: phone, widget: string, required: false }
+              - { label: "County or parish", name: county, widget: string, required: false }
+              - { label: "Message", name: message, widget: string, required: false }
+
+          - label: "Dropdown Prompt"
+            name: choose_prompt
+            widget: string
+            required: false
+            hint: "The first line of every dropdown before a choice is made, e.g. Please choose."
+
+          - label: "\"Not Sure\" Service Option"
+            name: service_not_sure
+            widget: string
+            required: false
+            hint: "The last choice in the Service dropdown, after the services themselves (which come from the Services list automatically)."
+
+          - label: "Send Button"
+            name: form_button
+            widget: string
+            required: false
+
+          - label: "Button While Sending"
+            name: form_sending
+            widget: string
+            required: false
+            hint: "What the button says for the second or two while a message is on its way."
+
+          - label: "Email Subject"
+            name: form_subject
+            widget: string
+            required: false
+            hint: "The subject line of the email you receive when someone sends the project form."
+
+          - label: "Form Error Messages"
+            name: form_errors
+            widget: object
+            collapsed: true
+            required: false
+            hint: "Shown under a box when someone leaves it empty or types an email address that cannot be right. A blank box keeps the original wording."
+            fields:
+              - { label: "Name missing", name: name, widget: string, required: false }
+              - { label: "Email missing", name: email_missing, widget: string, required: false }
+              - { label: "Email not valid", name: email_invalid, widget: string, required: false }
+              - { label: "\"I am a\" not chosen", name: role, widget: string, required: false }
+              - { label: "State not chosen", name: state, widget: string, required: false }
+              - { label: "County missing", name: county, widget: string, required: false }
+              - { label: "Service not chosen", name: service, widget: string, required: false }
+              - { label: "Message missing", name: message, widget: string, required: false }
 
           - label: "\"I am a\" Options"
             name: inquirer_types
@@ -858,18 +1039,30 @@ collections:
         file: src/data/pages/mineral-owners.json
         format: json
         fields:
+          - label: "Page Heading"
+            name: page_heading
+            widget: string
+            required: false
+            hint: "The large heading in the green band at the top of the page. Blank shows \"Mineral Owners\"."
+
+          - label: "Header Photo"
+            name: header_image
+            widget: image
+            required: false
+            hint: "The photo behind the green band at the top of this page. A dark green tint is laid over any new photo so the white heading stays readable. Upload replacements under a new file name. Leave blank for plain green."
+
           - label: "Page Subtitle"
             name: page_subtitle
             widget: text
             hint: "The line under the page title in the green band at the top."
 
-          - label: "Page Title"
+          - label: "Google Title (browser tab)"
             name: page_title
             widget: string
             maxlength: 40
             hint: "The browser tab title and the headline in Google results. \"| Petro Land Ventures\" is added to the end automatically, so this can be short. The counter stops at 40 characters."
 
-          - label: "Search Description"
+          - label: "Google Description"
             name: meta_description
             widget: text
             maxlength: 160
@@ -913,6 +1106,7 @@ collections:
             required: false
             hint: "The list of reasons a landowner gets in touch, written in their words rather than yours."
             fields:
+              - { label: "Headline", name: headline, widget: string, required: false, hint: "Blank shows \"Common Reasons People Call Us\"." }
               - { label: "Introduction", name: intro, widget: string }
               - label: "Reasons"
                 name: items
@@ -986,7 +1180,7 @@ collections:
             hint: "The band that points at the sample file on the Mineral Owners page. Leave the headline blank to hide the band."
             fields:
               - { label: "Small Label", name: label, widget: string, required: false }
-              - { label: "Headline", name: headline, widget: string }
+              - { label: "Headline", name: headline, widget: string, required: false }
               - { label: "Text", name: text, widget: text }
               - { label: "Button Text", name: button, widget: string }
 
@@ -1056,18 +1250,30 @@ collections:
         file: src/data/pages/insights.json
         format: json
         fields:
+          - label: "Page Heading"
+            name: page_heading
+            widget: string
+            required: false
+            hint: "The large heading in the green band at the top of the page. Blank shows \"Insights\"."
+
           - label: "Page Subtitle"
             name: page_subtitle
             widget: text
             hint: "The line under the title on the Insights index. Only visible once you have written a post."
 
-          - label: "Page Title"
+          - label: "Back Link on Each Post"
+            name: back_link_label
+            widget: string
+            required: false
+            hint: "The link back to the list from each post. Blank shows \"All insights\"."
+
+          - label: "Google Title (browser tab)"
             name: page_title
             widget: string
             maxlength: 40
             hint: "The browser tab title and the headline in Google results. \"| Petro Land Ventures\" is added to the end automatically, so this can be short. The counter stops at 40 characters."
 
-          - label: "Search Description"
+          - label: "Google Description"
             name: meta_description
             widget: text
             maxlength: 160
@@ -1076,7 +1282,7 @@ collections:
           - label: "Closing Call to Action"
             name: cta
             widget: object
-            hint: "The band at the bottom of each individual post."
+            hint: "The band at the bottom of the Insights list and of each individual post."
             fields:
               - label: "Headline"
                 name: headline
@@ -1095,18 +1301,18 @@ collections:
         format: json
         hint: "Everything on this page must stay fictional. Never paste a real owner name, address, tract, or recording reference here."
         fields:
-          - label: "Page Title"
+          - label: "Page Heading"
             name: page_title
             widget: string
             hint: "The heading at the top of the page."
 
-          - label: "Browser and Search Title"
+          - label: "Google Title (browser tab)"
             name: seo_title
             widget: string
             maxlength: 40
             hint: "The browser tab title and the headline in Google results. \"| Petro Land Ventures\" is added to the end automatically, so this can be short. The counter stops at 40 characters."
 
-          - label: "Search Description"
+          - label: "Google Description"
             name: meta_description
             widget: text
             maxlength: 160
@@ -1221,7 +1427,7 @@ collections:
                 hint: "The notes shown beside this document. Anchor picks which part the note sits next to."
                 fields:
                   - { label: "Number", name: n, widget: number, value_type: int }
-                  - { label: "Anchor", name: anchor, widget: string }
+                  - { label: "Sits Next To", name: anchor, widget: select, options: [{ label: "Records examined (header box)", value: "fields" }, { label: "Interest column", value: "interest" }, { label: "Lease status column", value: "status" }, { label: "Notes", value: "notes" }], hint: "Which part of the document this note explains." }
                   - { label: "Note", name: text, widget: text }
 
               - label: "Report Disclaimer"
@@ -1240,7 +1446,7 @@ collections:
               - label: "Column Headings"
                 name: columns
                 widget: list
-                hint: "Twelve headings, in the order the columns appear. Renaming one is fine. Removing one will leave a column without a heading."
+                hint: "Twelve headings, in the order the columns appear. Renaming one is fine. Do not add, remove or reorder them: every row's cells, and reader's notes 6 and 7, are tied to these twelve positions."
                 field: { label: "Heading", name: heading, widget: string }
               - label: "Rows"
                 name: rows
@@ -1267,7 +1473,7 @@ collections:
                 hint: "The notes shown beside this document. Anchor picks which part the note sits next to."
                 fields:
                   - { label: "Number", name: n, widget: number, value_type: int }
-                  - { label: "Anchor", name: anchor, widget: string }
+                  - { label: "Sits Next To", name: anchor, widget: select, options: [{ label: "Row order", value: "rows" }, { label: "Mineral reservation column", value: "reservation" }, { label: "Last column", value: "ownership_after" }], hint: "Which part of the document this note explains." }
                   - { label: "Note", name: text, widget: text }
 
               - label: "Abbreviation Key"
@@ -1340,7 +1546,7 @@ collections:
                 hint: "The notes shown beside this document. Anchor picks which part the note sits next to."
                 fields:
                   - { label: "Number", name: n, widget: number, value_type: int }
-                  - { label: "Anchor", name: anchor, widget: string }
+                  - { label: "Sits Next To", name: anchor, widget: select, options: [{ label: "Net acres and total bonus", value: "terms" }, { label: "Comments", value: "comments" }], hint: "Which part of the document this note explains." }
                   - { label: "Note", name: text, widget: text }
 
           - label: "Supplemental Report"
@@ -1419,7 +1625,7 @@ collections:
                 summary: "{{n}}. {{anchor}}"
                 fields:
                   - { label: "Number", name: n, widget: number, value_type: int }
-                  - { label: "Anchor", name: anchor, widget: string }
+                  - { label: "Sits Next To", name: anchor, widget: select, options: [{ label: "Sources", value: "sources" }, { label: "Ownership table", value: "owners" }, { label: "Curative list", value: "curative" }], hint: "Which part of the document this note explains." }
                   - { label: "Note", name: text, widget: text }
 
           - label: "What Makes a File Hard"
@@ -1459,18 +1665,24 @@ collections:
         file: src/data/pages/privacy.json
         format: json
         fields:
+          - label: "Page Heading"
+            name: page_heading
+            widget: string
+            required: false
+            hint: "The large heading in the green band at the top of the page. Blank shows \"Privacy\"."
+
           - label: "Page Subtitle"
             name: page_subtitle
             widget: text
             hint: "The line under the title at the top of the privacy page."
 
-          - label: "Page Title"
+          - label: "Google Title (browser tab)"
             name: page_title
             widget: string
             maxlength: 40
             hint: "The browser tab title and the headline in Google results. \"| Petro Land Ventures\" is added to the end automatically, so this can be short. The counter stops at 40 characters."
 
-          - label: "Search Description"
+          - label: "Google Description"
             name: meta_description
             widget: text
             maxlength: 160
@@ -1482,32 +1694,75 @@ collections:
             required: false
             hint: "The band at the bottom of the Privacy page. Leave the headline blank to hide it."
             fields:
-              - { label: "Headline", name: headline, widget: string }
+              - { label: "Headline", name: headline, widget: string, required: false }
               - { label: "Text", name: text, widget: text, required: false }
               - { label: "Button Text", name: button, widget: string }
 
           - label: "Policy Text"
             name: body
             widget: markdown
-            hint: "The policy itself. If you change how the contact form works, or start using analytics, update this to match."
+            hint: "The policy itself. If you change how the contact form works or what analytics the site uses, update this to match, and change the Last updated date at the end."
+
+      - name: not_found
+        label: "Page Not Found (404)"
+        file: src/data/pages/not-found.json
+        format: json
+        fields:
+          - label: "Page Heading"
+            name: page_heading
+            widget: string
+            required: false
+            hint: "Shown when someone follows a broken or mistyped link. Blank shows \"Page Not Found\"."
+          - label: "Line Under the Heading"
+            name: page_subtitle
+            widget: text
+            required: false
+          - label: "Line Above the Page Links"
+            name: links_intro
+            widget: string
+            required: false
+            hint: "The links themselves (Home, Services, Mineral Owners, Sample Work, Contact) use the Menu Wording from Site Settings."
+          - label: "Phone Line"
+            name: phone_line
+            widget: string
+            required: false
+            hint: "Shown just before the phone number from Site Settings. Leave blank to leave the phone number off."
 
       - name: services_page
         label: "Services Page"
         file: src/data/pages/services.json
         format: json
         fields:
+          - label: "Page Heading"
+            name: page_heading
+            widget: string
+            required: false
+            hint: "The large heading in the green band at the top of the page. Blank shows \"Services\"."
+
           - label: "Page Subtitle"
             name: page_subtitle
             widget: text
             hint: "The line under the page title in the green band at the top of the Services page."
 
-          - label: "Page Title"
+          - label: "Service Card Link"
+            name: card_link_label
+            widget: string
+            required: false
+            hint: "The link at the foot of each service card, here and on the home page. Blank shows \"Learn more\"."
+
+          - label: "Back Link on Each Service"
+            name: back_link_label
+            widget: string
+            required: false
+            hint: "The link back to this page from each individual service. Blank shows \"All Services\"."
+
+          - label: "Google Title (browser tab)"
             name: page_title
             widget: string
             maxlength: 40
             hint: "The browser tab title and the headline in Google results. \"| Petro Land Ventures\" is added to the end automatically, so this can be short. The counter stops at 40 characters."
 
-          - label: "Search Description"
+          - label: "Google Description"
             name: meta_description
             widget: text
             maxlength: 160
@@ -1520,7 +1775,7 @@ collections:
             hint: "The band shown at the foot of every service page that has Show link to sample work turned on."
             fields:
               - { label: "Small Label", name: label, widget: string, required: false }
-              - { label: "Headline", name: headline, widget: string }
+              - { label: "Headline", name: headline, widget: string, required: false }
               - { label: "Text", name: text, widget: text }
               - { label: "Button Text", name: button, widget: string }
 
@@ -1528,7 +1783,7 @@ collections:
           - label: "Closing Call to Action"
             name: cta
             widget: object
-            hint: "The band at the bottom of the Services page."
+            hint: "The band at the bottom of the Services page. It is also used at the foot of every individual service, unless that service has its own closing wording."
             fields:
               - label: "Headline"
                 name: headline
@@ -1594,20 +1849,26 @@ collections:
         required: false
         hint: "The headline on the band at the foot of this service page. Leave blank to use the shared one from the Services page."
 
+      - label: "Closing Text"
+        name: cta_text
+        widget: text
+        required: false
+        hint: "The sentence under that headline. Leave blank to use the shared one from the Services page."
+
       - label: "Closing Button Text"
         name: cta_button
         widget: string
         required: false
         hint: "The button on that band. Leave blank to use the shared one."
 
-      - label: "Page Title (search)"
+      - label: "Google Title (browser tab)"
         name: seo_title
         widget: string
         required: false
         maxlength: 40
         hint: "What Google shows as the headline for this service. \"| Petro Land Ventures\" is added automatically, so this can be short. Leave blank to use the service title."
 
-      - label: "Search Description"
+      - label: "Google Description"
         name: seo_description
         widget: text
         required: false
@@ -1673,6 +1934,7 @@ collections:
             name: year
             widget: string
             required: false
+            pattern: ['^([0-9]{4})?$', "A four-digit year, e.g. 2003"]
             hint: "e.g., 2003"
           - label: "Certificate Number"
             name: number
