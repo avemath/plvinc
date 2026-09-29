@@ -1060,6 +1060,12 @@ hr.divider {
 }
 a.contact-detail-value:hover { color: var(--green-dark); }
 
+/* LinkedIn profiles: the mark beside each name, one per line. */
+.contact-linkedin-list { list-style: none; padding: 0; margin: 0; display: grid; gap: .35rem; }
+.contact-linkedin { display: inline-flex; align-items: center; gap: .5rem; }
+.contact-linkedin .linkedin-icon { color: #0A66C2; flex-shrink: 0; }
+.footer-linkedin { display: inline-flex; align-items: center; gap: .45rem; }
+
 /* <address> italicises by default, and the CMS field is multi-line. */
 .contact-address {
   font-style: normal;
@@ -1848,11 +1854,30 @@ a.contact-detail-value:hover { color: var(--green-dark); }
   .insight-thumb { width: 100%; }
 }
 
+/* Each credential on its own line: the designation, then issuer, year and number. */
+.person-credentials {
+  list-style: none;
+  padding: 0;
+  margin: -.5rem 0 1rem;
+  font-size: .85rem;
+  line-height: 1.5;
+}
+.person-credentials li + li { margin-top: .35rem; }
+.person-credential-name { display: block; font-weight: 600; color: var(--text); }
+.person-credential-meta { display: block; color: var(--text-muted); }
+
+/* Two stacked bands (credentials, then affiliations) share the padding between them. */
+.affiliations-band-credentials + .affiliations-band { padding-top: 0; }
+.affiliation-tag-meta { font-weight: 400; }
+
 .person-linkedin {
   margin: -.5rem 0 1rem;
   font-size: .875rem;
 }
 .person-linkedin a {
+  display: inline-flex;
+  align-items: center;
+  gap: .4rem;
   color: var(--green-mid);
   text-decoration: underline;
   text-underline-offset: 2px;

@@ -5,6 +5,10 @@ import CallToAction from '../components/CallToAction.astro';
 import ContactForm from '../components/ContactForm.astro';
 import contact from '../data/pages/contact.json';
 import settings from '../data/settings.json';
+import LinkedInIcon from '../components/LinkedInIcon.astro';
+import { getLinkedInProfiles } from '../utils/people';
+
+const profiles = await getLinkedInProfiles();
 
 // Same rule as the footer: based_in first, then city and state if that is how it was filled in.
 const location = settings.based_in
@@ -32,27 +36,29 @@ const ctaTelHref = settings.phone ? `tel:${settings.phone.replace(/[^\d+]/g, '')
         <div>
           <h2>{contact.details_headline}</h2>
           <div class="contact-details">
-            {contact.phone && (
+            {/* Phone and email come from Site Settings, so changing them there updates
+                this page, the header, the footer and the call buttons together. */}
+            {settings.phone && (
               <div>
                 <span class="contact-detail-label">Phone</span>
                 <a
-                  href={`tel:${contact.phone.replace(/[^\d+]/g, '')}`}
+                  href={ctaTelHref}
                   class="contact-detail-value"
-                  aria-label={`Call ${contact.phone}`}
+                  aria-label={`Call ${settings.phone}`}
                 >
-                  {contact.phone}
+                  {settings.phone}
                 </a>
               </div>
             )}
 
-            {contact.email && (
+            {settings.email && (
               <div>
                 <span class="contact-detail-label">Email</span>
                 <a
-                  href={`mailto:${contact.email}`}
+                  href={`mailto:${settings.email}`}
                   class="contact-detail-value"
                 >
-                  {contact.email}
+                  {settings.email}
                 </a>
               </div>
             )}
@@ -75,6 +81,28 @@ const ctaTelHref = settings.phone ? `tel:${settings.phone.replace(/[^\d+]/g, '')
                 >
                   {settings.professional_name} on LinkedIn
                 </a>
+              </div>
+            )}
+
+            {profiles.length > 0 && (
+              <div>
+                <span class="contact-detail-label">LinkedIn</span>
+                <ul class="contact-linkedin-list" role="list">
+                  {profiles.map((p) => (
+                    <li>
+                      <a
+                        href={p.url}
+                        class="contact-detail-value contact-linkedin"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        aria-label={`${p.name} on LinkedIn (opens in a new tab)`}
+                      >
+                        <LinkedInIcon size={18} />
+                        <span>{p.name}</span>
+                      </a>
+                    </li>
+                  ))}
+                </ul>
               </div>
             )}
 

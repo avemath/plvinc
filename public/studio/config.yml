@@ -79,12 +79,12 @@ collections:
           - label: "Phone Number"
             name: phone
             widget: string
-            hint: "Your business phone number (e.g., (555) 555-5555). Shown in the navigation and contact page."
+            hint: "Your business phone number (e.g., (555) 555-5555). Used everywhere the site shows a phone number: the top of every page, the phone bar on mobile, the Contact page, the footer and the call buttons."
 
           - label: "Email Address"
             name: email
             widget: string
-            hint: "The email address shown publicly on the site. This should be your business address at your own domain, not a personal one."
+            hint: "The email address shown publicly on the site: the Contact page, the footer and the privacy policy. This should be your business address at your own domain, not a personal one."
 
           - label: "Based In"
             name: based_in
@@ -130,12 +130,14 @@ collections:
           - label: "Default Page Title"
             name: seo_title
             widget: string
-            hint: "Browser tab title and search result headline. Aim for under 60 characters."
+            maxlength: 60
+            hint: "The home page's browser tab title and Google headline, business name included. The counter stops at 60 characters."
 
           - label: "Default Meta Description"
             name: seo_description
             widget: text
-            hint: "Search result description shown under your site title. Aim for under 155 characters."
+            maxlength: 160
+            hint: "Search result description shown under your site title. The counter stops at 160 characters, about what Google shows."
 
           - label: "Default Share Image"
             name: seo_share_image
@@ -426,6 +428,11 @@ collections:
         file: src/data/pages/about.json
         format: json
         fields:
+          - label: "Page Heading"
+            name: page_heading
+            widget: string
+            hint: "The large heading in the green band at the top of the page."
+
           - label: "Page Subtitle"
             name: page_subtitle
             widget: text
@@ -434,12 +441,14 @@ collections:
           - label: "Page Title"
             name: page_title
             widget: string
-            hint: "The browser tab title and the blue headline in Google results. Keep it under about 60 characters."
+            maxlength: 40
+            hint: "The browser tab title and the headline in Google results. \"| Petro Land Ventures\" is added to the end automatically, so this can be short. The counter stops at 40 characters."
 
           - label: "Search Description"
             name: meta_description
             widget: text
-            hint: "The sentence shown under this page's title in Google results. Around 155 characters."
+            maxlength: 160
+            hint: "The sentence shown under this page's title in Google results. The counter stops at 160 characters, about what Google shows."
 
           - label: "Introduction"
             name: intro
@@ -465,23 +474,48 @@ collections:
             name: team_headline
             widget: string
 
-          - label: "Credentials & Certifications"
+          - label: "Background Label"
+            name: background_label
+            widget: string
+            required: false
+            hint: "The small heading above a person's Work & Experience Details, when they have any. Blank shows \"Background\"."
+
+          - label: "Company Credentials Heading"
+            name: credentials_heading
+            widget: string
+            required: false
+            hint: "The small heading above the company credentials below. Blank shows \"Credentials\"."
+
+          - label: "Company Credentials"
             name: credentials
             widget: list
-            hint: "Professional licenses, certifications, and designations. Your CPL should appear first. Add others as needed."
+            required: false
+            hint: "Licences or registrations that belong to the company, shown as tags near the bottom of the page. A person's own CPL goes on their card instead: open Team / People and edit that person. Leave empty to hide this row."
             fields:
               - label: "Credential Name"
                 name: name
                 widget: string
-                hint: "e.g., Certified Professional Landman (CPL)"
+                hint: "e.g., Registered in Pennsylvania"
               - label: "Issuing Organization"
                 name: issuer
                 widget: string
-                hint: "e.g., American Association of Professional Landmen (AAPL)"
-              - label: "Year Earned"
+                required: false
+              - label: "Year"
                 name: year
                 widget: string
-                hint: "e.g., 2003"
+                required: false
+                hint: "e.g., 2005. Leave blank to leave it off."
+              - label: "Number"
+                name: number
+                widget: string
+                required: false
+                hint: "A licence or registration number. Leave blank to leave it off."
+
+          - label: "Affiliations Heading"
+            name: affiliations_heading
+            widget: string
+            required: false
+            hint: "The small heading above the memberships below. Blank shows \"Affiliations\"."
 
           - label: "Affiliations & Memberships"
             name: affiliations
@@ -526,12 +560,14 @@ collections:
           - label: "Page Title"
             name: page_title
             widget: string
-            hint: "The browser tab title and the blue headline in Google results. Keep it under about 60 characters."
+            maxlength: 40
+            hint: "The browser tab title and the headline in Google results. \"| Petro Land Ventures\" is added to the end automatically, so this can be short. The counter stops at 40 characters."
 
           - label: "Search Description"
             name: meta_description
             widget: text
-            hint: "The sentence shown under this page's title in Google results. Around 155 characters."
+            maxlength: 160
+            hint: "The sentence shown under this page's title in Google results. The counter stops at 160 characters, about what Google shows."
 
           - label: "Introduction"
             name: intro
@@ -681,12 +717,14 @@ collections:
           - label: "Page Title"
             name: page_title
             widget: string
-            hint: "The browser tab title and the blue headline in Google results. Keep it under about 60 characters."
+            maxlength: 40
+            hint: "The browser tab title and the headline in Google results. \"| Petro Land Ventures\" is added to the end automatically, so this can be short. The counter stops at 40 characters."
 
           - label: "Search Description"
             name: meta_description
             widget: text
-            hint: "The sentence shown under this page's title in Google results. Around 155 characters."
+            maxlength: 160
+            hint: "The sentence shown under this page's title in Google results. The counter stops at 160 characters, about what Google shows."
 
           - label: "Contact Details Headline"
             name: details_headline
@@ -697,16 +735,6 @@ collections:
             name: intro
             widget: string
             hint: "Short invitation text at the top of the contact page."
-
-          - label: "Phone"
-            name: phone
-            widget: string
-            hint: "Phone number shown on the contact page."
-
-          - label: "Email"
-            name: email
-            widget: string
-            hint: "Email address shown on the contact page."
 
           - label: "Service Area Note"
             name: service_area_note
@@ -838,12 +866,14 @@ collections:
           - label: "Page Title"
             name: page_title
             widget: string
-            hint: "The browser tab title and the blue headline in Google results. Keep it under about 60 characters."
+            maxlength: 40
+            hint: "The browser tab title and the headline in Google results. \"| Petro Land Ventures\" is added to the end automatically, so this can be short. The counter stops at 40 characters."
 
           - label: "Search Description"
             name: meta_description
             widget: text
-            hint: "The sentence shown under this page's title in Google results. Around 155 characters."
+            maxlength: 160
+            hint: "The sentence shown under this page's title in Google results. The counter stops at 160 characters, about what Google shows."
 
           - label: "Introduction"
             name: intro
@@ -1034,11 +1064,14 @@ collections:
           - label: "Page Title"
             name: page_title
             widget: string
-            hint: "The browser tab title and the blue headline in Google results. Keep it under about 60 characters."
+            maxlength: 40
+            hint: "The browser tab title and the headline in Google results. \"| Petro Land Ventures\" is added to the end automatically, so this can be short. The counter stops at 40 characters."
 
           - label: "Search Description"
             name: meta_description
             widget: text
+            maxlength: 160
+            hint: "The sentence shown under this page's title in Google results. The counter stops at 160 characters, about what Google shows."
 
           - label: "Closing Call to Action"
             name: cta
@@ -1070,12 +1103,14 @@ collections:
           - label: "Browser and Search Title"
             name: seo_title
             widget: string
-            hint: "The browser tab title and the blue headline in Google results. Keep it under about 60 characters."
+            maxlength: 40
+            hint: "The browser tab title and the headline in Google results. \"| Petro Land Ventures\" is added to the end automatically, so this can be short. The counter stops at 40 characters."
 
           - label: "Search Description"
             name: meta_description
             widget: text
-            hint: "Search result description shown under the title. Aim for under 155 characters."
+            maxlength: 160
+            hint: "Search result description shown under the title. The counter stops at 160 characters, about what Google shows."
 
           - label: "Page Subtitle"
             name: page_subtitle
@@ -1432,12 +1467,14 @@ collections:
           - label: "Page Title"
             name: page_title
             widget: string
-            hint: "The browser tab title and the blue headline in Google results. Keep it under about 60 characters."
+            maxlength: 40
+            hint: "The browser tab title and the headline in Google results. \"| Petro Land Ventures\" is added to the end automatically, so this can be short. The counter stops at 40 characters."
 
           - label: "Search Description"
             name: meta_description
             widget: text
-            hint: "Search result description shown under the title. Aim for under 155 characters."
+            maxlength: 160
+            hint: "Search result description shown under the title. The counter stops at 160 characters, about what Google shows."
 
           - label: "Closing Call to Action"
             name: cta
@@ -1467,12 +1504,14 @@ collections:
           - label: "Page Title"
             name: page_title
             widget: string
-            hint: "The browser tab title and the blue headline in Google results. Keep it under about 60 characters."
+            maxlength: 40
+            hint: "The browser tab title and the headline in Google results. \"| Petro Land Ventures\" is added to the end automatically, so this can be short. The counter stops at 40 characters."
 
           - label: "Search Description"
             name: meta_description
             widget: text
-            hint: "The sentence shown under this page's title in Google results. Around 155 characters."
+            maxlength: 160
+            hint: "The sentence shown under this page's title in Google results. The counter stops at 160 characters, about what Google shows."
 
           - label: "Sample Work Band"
             name: sample_feature
@@ -1565,13 +1604,15 @@ collections:
         name: seo_title
         widget: string
         required: false
-        hint: "What Google shows as the headline for this service. Leave blank to fall back to the service title."
+        maxlength: 40
+        hint: "What Google shows as the headline for this service. \"| Petro Land Ventures\" is added automatically, so this can be short. Leave blank to use the service title."
 
       - label: "Search Description"
         name: seo_description
         widget: text
         required: false
-        hint: "What Google shows under the headline. Leave blank to fall back to the card description."
+        maxlength: 160
+        hint: "What Google shows under the headline. Leave blank to fall back to the card description. The counter stops at 160 characters, about what Google shows."
 
       - label: "Full Description"
         name: body
@@ -1609,7 +1650,35 @@ collections:
         name: linkedin_url
         widget: string
         required: false
-        hint: "The full web address of this person's LinkedIn profile. Leave blank to hide the link."
+        pattern: ['^(https://(www\.)?linkedin\.com/.+)?$', "Paste the full address, starting with https://www.linkedin.com/"]
+        hint: "The full web address of this person's LinkedIn profile. It shows on their About card, on the Contact page and in the footer. Leave blank to hide it."
+
+      - label: "Credentials"
+        name: credentials
+        widget: list
+        required: false
+        summary: "{{fields.name}}"
+        hint: "Licences and designations this person holds, such as the CPL. Each one shows on their card on the About page. Fill in the year and number when you have them; blank ones are left off."
+        fields:
+          - label: "Credential Name"
+            name: name
+            widget: string
+            hint: "e.g., Certified Professional Landman (CPL)"
+          - label: "Issuing Organization"
+            name: issuer
+            widget: string
+            required: false
+            hint: "e.g., American Association of Professional Landmen (AAPL)"
+          - label: "Year Earned"
+            name: year
+            widget: string
+            required: false
+            hint: "e.g., 2003"
+          - label: "Certificate Number"
+            name: number
+            widget: string
+            required: false
+            hint: "The CPL number from the AAPL. Leave blank to leave it off."
 
       - label: "Photo"
         name: photo

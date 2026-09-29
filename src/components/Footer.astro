@@ -1,5 +1,7 @@
 ---
 import { getCollection } from 'astro:content';
+import LinkedInIcon from './LinkedInIcon.astro';
+import { getLinkedInProfiles } from '../utils/people';
 
 interface Props {
   settings: {
@@ -19,6 +21,7 @@ interface Props {
 }
 
 const { settings } = Astro.props;
+const profiles = await getLinkedInProfiles();
 const year = new Date().getFullYear();
 const name = settings.footer_name || settings.professional_name;
 
@@ -86,6 +89,18 @@ const location = settings.based_in
             LinkedIn
           </a>
         )}
+        {profiles.map((p) => (
+          <a
+            href={p.url}
+            class="footer-link footer-linkedin"
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label={`${p.name} on LinkedIn (opens in a new tab)`}
+          >
+            <LinkedInIcon size={14} />
+            <span>{p.name}</span>
+          </a>
+        ))}
       </div>
     </div>
 

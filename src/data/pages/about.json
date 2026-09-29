@@ -1,5 +1,6 @@
 {
-  "page_title": "About | Certified Professional Landmen",
+  "page_heading": "About",
+  "page_title": "About Our Landmen",
   "meta_description": "Based in Duncansville, Pennsylvania. Title, leasing and due diligence across the Appalachian Basin and the Gulf Coast, and the landmen who do the work.",
   "page_subtitle": "How we work, and who does the work.",
   "intro": "Clients include operators, exploration companies, independent producers, mineral and royalty owners, and institutional investors. Engagements range from single-tract curative work to multi-county leasing programs, A&D packages, and portfolio-scale due diligence.",
@@ -7,7 +8,10 @@
   "approach": "Title work is run to the end of the chain rather than to the first clean deed. Defects frequently sit several conveyances back, in probate and heirship records filed outside the expected county or index.\n\nWhere the record is unclear, it is reported as unclear rather than resolved by assumption. Reports state what was found, what it means, and what the options are, and are written to be handed directly to counsel, a lender, or a buyer's diligence team.\n\nThe same standard applies to every project, regardless of size.",
   "team_label": "The Team",
   "team_headline": "Who Does the Work",
+  "background_label": "Background",
+  "credentials_heading": "Credentials",
   "credentials": [],
+  "affiliations_heading": "Affiliations",
   "affiliations": [
     {
       "name": "American Association of Professional Landmen (AAPL)",
