@@ -1311,7 +1311,6 @@ collections:
           - label: "Supplemental Report"
             name: supplemental
             widget: object
-            required: false
             hint: "The fourth document, where the open quarter interest gets resolved. This is the one that shows hard work."
             fields:
               - { label: "Sheet Title", name: title, widget: string }
