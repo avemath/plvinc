@@ -1,6 +1,6 @@
 {
   "page_subtitle": "Plain answers about what you own and what you have been offered.",
-  "meta_description": "Help for Pennsylvania mineral owners: understanding an oil and gas lease offer, inherited mineral rights, division orders, and royalty questions, from Certified Professional Landmen in Duncansville.",
+  "meta_description": "Help for Pennsylvania mineral owners with lease offers, inherited mineral rights, division orders and royalty questions, from Certified Professional Landmen.",
   "intro": "If someone has approached you about leasing your minerals, crossing your land, or signing a division order, you do not have to work out what it means on your own.\n\nWe are Certified Professional Landmen. We read the public record for a living. We can tell you what the record shows about your ownership, what a document in front of you actually says, and, just as importantly, what the record does not settle.",
   "services_label": "How We Help",
   "services_headline": "What You Can Bring to Us",
@@ -23,7 +23,7 @@
     },
     {
       "title": "Right-of-way and surface use offers",
-      "description": "Reading what is being asked for across your surface and what the document would actually grant, which is not always the same thing."
+      "description": "Reading what is being asked for across your surface and what the document itself describes, which is not always the same thing."
     },
     {
       "title": "Solar and renewable lease offers",
@@ -120,7 +120,7 @@
         "text": "This says who is responsible if the company's operations lead to a claim."
       }
     ],
-    "closing": "We can check an offer against the record and explain what each clause does, so you know exactly what you own before you respond. Call us and we will walk through it with you."
+    "closing": "We can check an offer against the record and explain what each clause does, so you know what the record shows you own before you respond. Call us and we will walk through it with you."
   },
   "how_it_works": {
     "headline": "What Happens When You Contact Us",
@@ -139,7 +139,7 @@
       },
       {
         "title": "You decide the next step, with us.",
-        "text": "If the work calls for more, we will tell you. Either way you are talking to Petro Land Ventures."
+        "text": "If a question needs an attorney, we will tell you, and we are glad to work alongside yours."
       }
     ]
   },
@@ -172,11 +172,11 @@
     }
   ],
   "pennsylvania_headline": "Pennsylvania mineral owners",
-  "pennsylvania_note": "In Pennsylvania the surface and the minerals are often owned separately, and severed oil, gas, and coal estates are common. Deeds and oil and gas leases are recorded with the county Recorder of Deeds, and a decedent's estate is handled through the county Register of Wills and the Orphans' Court. Under the Dunham Rule, reaffirmed in Butler v. Charles Powers Estate (2013), a deed that reserves \"minerals\" does not by itself include oil and gas unless the instrument says so. Pennsylvania has no general forced pooling for the Marcellus, and the Guaranteed Minimum Royalty Act (58 P.S. section 33.3) requires an oil and gas lease to guarantee the owner at least a one-eighth royalty.",
+  "pennsylvania_note": "In Pennsylvania the surface and the minerals are often owned separately, and severed oil, gas, and coal estates are common. Deeds and oil and gas leases are recorded with the county Recorder of Deeds, and a decedent's estate is handled through the county Register of Wills and the Orphans' Court. Under the Dunham Rule, reaffirmed in Butler v. Charles Powers Estate (2013), a deed that reserves \"minerals\" does not by itself include oil and gas unless the instrument says so. Pennsylvania has no general forced pooling for the Marcellus, and the Guaranteed Minimum Royalty Act (58 P.S. § 33.3) requires an oil and gas lease to guarantee the owner at least a one-eighth royalty. This is general information, not legal advice; an attorney can tell you how it applies to your own deed or lease.",
   "conflict_note": "We also acquire leases for operators. Under the AAPL Code of Ethics and Standards of Practice, which require a land professional to disclose any interest that may conflict with a client, we will not review your offer on a tract where we are already working for the other side, and we will tell you up front if that is the case.",
-  "disclaimer": "What we do is research and report the public record: what you own, what it shows, and where the exposure sits. If your situation ever calls for more than that, we will say so when we talk. Many owners keep their own attorney in the loop, and we work alongside one comfortably. Either way, the next step is a conversation with Petro Land Ventures.",
+  "disclaimer": "What we do is research and report the public record: what you own, what it shows, and where the exposure sits. If your situation ever calls for more than that, we will say so when we talk. We are landmen, not attorneys, and nothing on this site is legal advice. Many owners keep their own attorney in the loop, and we work alongside one comfortably.",
   "cta": {
-    "headline": "Send us the letter or the offer. We will tell you what it means.",
+    "headline": "Send us the letter or the offer. We will tell you what the record shows.",
     "text": "Tell us the county and what showed up in your mailbox. We will look at it with you.",
     "button": "Call or send it over"
   },
