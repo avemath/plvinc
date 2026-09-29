@@ -40,17 +40,22 @@ const rendered = await Promise.all(
 // words twice. In that case only its details (issuer, year, number) are shown, right under
 // the role, which already names it.
 const plain = (s: string) => s.replace(/\(.*?\)/g, '').replace(/\s+/g, ' ').trim().toLowerCase();
-function restatesRole(credentialName: string, role?: string) {
+function restatesRole(credentialName: string, role?: string | null) {
   return Boolean(role) && plain(credentialName) === plain(role!);
 }
 
-function credentialLine(c: { name: string; issuer?: string; year?: string; number?: string }) {
+function credentialLine(c: { name: string; issuer?: string | null; year?: string; number?: string }) {
   return [
     c.issuer,
     c.year && `since ${c.year}`,
     c.number && `No. ${c.number}`,
   ].filter(Boolean).join(' · ');
 }
+
+// The company-wide list. Typed here because the file ships with it empty, which would
+// otherwise leave TypeScript thinking it can never hold anything.
+type Credential = { name: string; issuer?: string | null; year?: string; number?: string };
+const companyCredentials = (about.credentials ?? []) as Credential[];
 
 // One Person entry per landman. Credentials come from each person's own list, so someone
 // added without a CPL is never described to search engines as holding one. Only emitted
@@ -135,21 +140,27 @@ const schema = sorted.length > 0
                   <p class="person-role">{person.data.role}</p>
                 )}
 
-                {person.data.credentials.length > 0 && (
-                  <ul class="person-credentials" role="list">
-                    {person.data.credentials.map((c) => {
-                      const sameAsRole = restatesRole(c.name, person.data.role);
-                      const details = credentialLine(c);
-                      if (sameAsRole && !details) return null;
-                      return (
+                {(() => {
+                  // A credential that only restates the role, with no details, adds nothing
+                  // to show; if that leaves none, no list is drawn at all.
+                  const items = person.data.credentials
+                    .map((c) => ({
+                      c,
+                      sameAsRole: restatesRole(c.name, person.data.role),
+                      details: credentialLine(c),
+                    }))
+                    .filter((i) => !i.sameAsRole || i.details);
+                  return items.length > 0 && (
+                    <ul class="person-credentials" role="list">
+                      {items.map(({ c, sameAsRole, details }) => (
                         <li>
                           {!sameAsRole && <span class="person-credential-name">{c.name}</span>}
                           {details && <span class="person-credential-meta">{details}</span>}
                         </li>
-                      );
-                    })}
-                  </ul>
-                )}
+                      ))}
+                    </ul>
+                  );
+                })()}
 
                 {person.data.linkedin_url && (
                   <p class="person-linkedin">
@@ -187,12 +198,12 @@ const schema = sorted.length > 0
 
   <!-- ─── Firm-wide credentials, then affiliations. Personal credentials live on each
        person's card; this list is for anything that belongs to the company itself. ─── -->
-  {about.credentials?.length > 0 && (
+  {companyCredentials.length > 0 && (
     <section class="affiliations-band affiliations-band-credentials">
       <div class="container container-narrow">
         <h2 class="affiliations-heading">{text(about.credentials_heading, 'Credentials')}</h2>
         <ul class="affiliations-list" role="list">
-          {about.credentials.map((c) => (
+          {companyCredentials.map((c) => (
             <li>
               <span class="affiliation-tag">
                 {c.name}{credentialLine(c) && <span class="affiliation-tag-meta"> · {credentialLine(c)}</span>}
@@ -206,7 +217,7 @@ const schema = sorted.length > 0
 
   <!-- ─── Affiliations. A membership with an outbound link, not a restatement of the
        credential each person card already carries. ─── -->
-  {about.affiliations.length > 0 && (
+  {about.affiliations?.length > 0 && (
     <section class="affiliations-band">
       <div class="container container-narrow">
         <h2 class="affiliations-heading">{text(about.affiliations_heading, 'Affiliations')}</h2>

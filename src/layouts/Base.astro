@@ -65,6 +65,13 @@ const { title, description, image, noindex = false, schema, preloadImage } = Ast
     {preloadImage && (
       <link rel="preload" href={preloadImage} as="image" fetchpriority="high" />
     )}
+    <!-- Cloudflare's Email Address Obfuscation rewrites every address on the page into
+         "[email protected]" and relies on a script to put it back. Anyone without that
+         script (link previews, reader modes, search engines, some screen readers) never
+         sees the address. These markers tell Cloudflare to leave the page as written. The
+         pair opens here so the structured data below, which carries the email, is covered
+         too, and closes at the end of the body. -->
+    <!--email_off-->
     <SEO
       title={title || settings.seo_title}
       description={description || settings.seo_description}
@@ -75,11 +82,6 @@ const { title, description, image, noindex = false, schema, preloadImage } = Ast
     />
   </head>
   <body>
-    <!-- Cloudflare's Email Address Obfuscation rewrites every address on the page into
-         "[email protected]" and relies on a script to put it back. Anyone without that
-         script (link previews, reader modes, search engines, some screen readers) never
-         sees the address. These markers tell Cloudflare to leave the page as written. -->
-    <!--email_off-->
     <a href="#main-content" class="skip-link">Skip to content</a>
     <Nav settings={settings} />
     <main id="main-content" tabindex="-1">
