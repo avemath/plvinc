@@ -17,9 +17,9 @@ jobs:
       contents: read
 
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
 
-      - uses: actions/setup-node@v4
+      - uses: actions/setup-node@v7
         with:
           node-version: '22'
           cache: 'npm'
@@ -30,6 +30,8 @@ jobs:
       - name: Build site
         run: npm run build
 
+      # Wrangler is a pinned dev dependency, so npm ci installs the same version every time
+      # instead of npx fetching whatever is newest on each deploy.
       - name: Deploy to Cloudflare Pages
         run: npx wrangler pages deploy dist --project-name plvinc --branch main
         env:
