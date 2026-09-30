@@ -1,0 +1,45 @@
+---
+// Without a 404.html, Cloudflare Pages treats the site as a single-page app and answers
+// every unknown path with the home page and a 200. Search engines then index mistyped
+// and retired URLs as copies of the home page. With this file present, Pages serves it
+// with a real 404 status instead.
+import Base from '../layouts/Base.astro';
+import settings from '../data/settings.json';
+import page from '../data/pages/not-found.json';
+import { navLabels, NAV_PAGES, text } from '../utils/labels';
+
+const telHref = settings.phone ? `tel:${settings.phone.replace(/[^\d+]/g, '')}` : '';
+const heading = text(page.page_heading, 'Page Not Found');
+
+// The same pages, and the same wording, as the menu.
+const starts = NAV_PAGES.filter((p) => ['home', 'services', 'mineral_owners', 'sample_work', 'contact'].includes(p.key));
+---
+
+<Base
+  title={heading}
+  description="The page you were looking for is not on this site."
+  noindex
+>
+  <div class="page-header">
+    <div class="container">
+      <h1>{heading}</h1>
+      {page.page_subtitle && <p>{page.page_subtitle}</p>}
+    </div>
+  </div>
+
+  <section>
+    <div class="container container-narrow">
+      <div class="prose">
+        {page.links_intro && <p>{page.links_intro}</p>}
+        <ul>
+          {starts.map((p) => <li><a href={p.href}>{navLabels[p.key]}</a></li>)}
+        </ul>
+        {settings.phone && page.phone_line && (
+          <p>
+            {page.phone_line} <a href={telHref}>{settings.phone}</a>
+          </p>
+        )}
+      </div>
+    </div>
+  </section>
+</Base>

@@ -1,5 +1,6 @@
 ---
 import Base from '../../layouts/Base.astro';
+import { text } from '../../utils/labels';
 import ServiceCard from '../../components/ServiceCard.astro';
 import CallToAction from '../../components/CallToAction.astro';
 import { getCollection } from 'astro:content';
@@ -16,7 +17,7 @@ const sorted   = [...services].sort((a, b) => a.data.sort_order - b.data.sort_or
 >
   <div class="page-header">
     <div class="container">
-      <h1>Services</h1>
+      <h1>{text(page.page_heading, 'Services')}</h1>
       <p>{page.page_subtitle}</p>
     </div>
   </div>

@@ -1,10 +1,26 @@
 ---
 import Base from '../layouts/Base.astro';
+import { text } from '../utils/labels';
 import HowItWorks from '../components/HowItWorks.astro';
 import CallToAction from '../components/CallToAction.astro';
 import ContactForm from '../components/ContactForm.astro';
 import contact from '../data/pages/contact.json';
 import settings from '../data/settings.json';
+import LinkedInIcon from '../components/LinkedInIcon.astro';
+import { getLinkedInProfiles } from '../utils/people';
+
+const profiles = await getLinkedInProfiles();
+
+// The small grey labels above each contact detail. Blank ones keep their original wording.
+const dl = (contact as { detail_labels?: Record<string, string> }).detail_labels ?? {};
+const label = {
+  phone: text(dl.phone, 'Phone'),
+  email: text(dl.email, 'Email'),
+  based_in: text(dl.based_in, 'Based In'),
+  linkedin: text(dl.linkedin, 'LinkedIn'),
+  service_area: text(dl.service_area, 'Service Area'),
+  mailing_address: text(dl.mailing_address, 'Mailing Address'),
+};
 
 // Same rule as the footer: based_in first, then city and state if that is how it was filled in.
 const location = settings.based_in
@@ -19,7 +35,7 @@ const ctaTelHref = settings.phone ? `tel:${settings.phone.replace(/[^\d+]/g, '')
 >
   <div class="page-header">
     <div class="container">
-      <h1>Contact</h1>
+      <h1>{text(contact.page_heading, 'Contact')}</h1>
       <p>{contact.intro}</p>
     </div>
   </div>
@@ -32,41 +48,43 @@ const ctaTelHref = settings.phone ? `tel:${settings.phone.replace(/[^\d+]/g, '')
         <div>
           <h2>{contact.details_headline}</h2>
           <div class="contact-details">
-            {contact.phone && (
+            {/* Phone and email come from Site Settings, so changing them there updates
+                this page, the header, the footer and the call buttons together. */}
+            {settings.phone && (
               <div>
-                <span class="contact-detail-label">Phone</span>
+                <span class="contact-detail-label">{label.phone}</span>
                 <a
-                  href={`tel:${contact.phone.replace(/[^\d+]/g, '')}`}
+                  href={ctaTelHref}
                   class="contact-detail-value"
-                  aria-label={`Call ${contact.phone}`}
+                  aria-label={`Call ${settings.phone}`}
                 >
-                  {contact.phone}
+                  {settings.phone}
                 </a>
               </div>
             )}
 
-            {contact.email && (
+            {settings.email && (
               <div>
-                <span class="contact-detail-label">Email</span>
+                <span class="contact-detail-label">{label.email}</span>
                 <a
-                  href={`mailto:${contact.email}`}
+                  href={`mailto:${settings.email}`}
                   class="contact-detail-value"
                 >
-                  {contact.email}
+                  {settings.email}
                 </a>
               </div>
             )}
 
             {location && (
               <div>
-                <span class="contact-detail-label">Based In</span>
+                <span class="contact-detail-label">{label.based_in}</span>
                 <address class="contact-detail-value contact-address">{location}</address>
               </div>
             )}
 
             {settings.linkedin_url && (
               <div>
-                <span class="contact-detail-label">LinkedIn</span>
+                <span class="contact-detail-label">{label.linkedin}</span>
                 <a
                   href={settings.linkedin_url}
                   class="contact-detail-value"
@@ -78,16 +96,38 @@ const ctaTelHref = settings.phone ? `tel:${settings.phone.replace(/[^\d+]/g, '')
               </div>
             )}
 
+            {profiles.length > 0 && (
+              <div>
+                <span class="contact-detail-label">{label.linkedin}</span>
+                <ul class="contact-linkedin-list" role="list">
+                  {profiles.map((p) => (
+                    <li>
+                      <a
+                        href={p.url}
+                        class="contact-detail-value contact-linkedin"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        aria-label={`${p.name} on LinkedIn (opens in a new tab)`}
+                      >
+                        <LinkedInIcon size={18} />
+                        <span>{p.name}</span>
+                      </a>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            )}
+
             {contact.service_area_note && (
               <div>
-                <span class="contact-detail-label">Service Area</span>
+                <span class="contact-detail-label">{label.service_area}</span>
                 <span class="contact-detail-value">{contact.service_area_note}</span>
               </div>
             )}
 
             {contact.mailing_address && (
               <div>
-                <span class="contact-detail-label">Mailing Address</span>
+                <span class="contact-detail-label">{label.mailing_address}</span>
                 <address class="contact-detail-value contact-address">
                   {contact.mailing_address}
                 </address>
@@ -109,7 +149,7 @@ const ctaTelHref = settings.phone ? `tel:${settings.phone.replace(/[^\d+]/g, '')
     />
   )}
 
-  {contact.cta && (
+  {contact.cta?.headline && (
     <CallToAction
       headline={contact.cta.headline}
       text={contact.cta.text}

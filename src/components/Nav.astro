@@ -1,5 +1,6 @@
 ---
 import { getCollection } from 'astro:content';
+import { navLabels, NAV_PAGES } from '../utils/labels';
 
 interface Props {
   settings: {
@@ -21,7 +22,8 @@ try {
 const path = Astro.url.pathname;
 
 function isActive(href: string) {
-  if (href === '/') return path === '/';
+  // build.format is 'file', so the home page arrives as /index.html rather than /.
+  if (href === '/') return path === '/' || path === '/index.html';
   return path.startsWith(href);
 }
 
@@ -65,16 +67,9 @@ const telHref = settings.phone ? `tel:${settings.phone.replace(/[^\d+]/g, '')}` 
     </a>
 
     <ul class="nav-links" id="nav-links" role="list">
-      <li><a href="/"           aria-current={isActive('/')           ? 'page' : undefined}>Home</a></li>
-      <li><a href="/about"      aria-current={isActive('/about')      ? 'page' : undefined}>About</a></li>
-      <li><a href="/services"   aria-current={isActive('/services')   ? 'page' : undefined}>Services</a></li>
-      <li><a href="/mineral-owners" aria-current={isActive('/mineral-owners') ? 'page' : undefined}>Mineral Owners</a></li>
-      <li><a href="/experience" aria-current={isActive('/experience') ? 'page' : undefined}>Experience</a></li>
-      <li><a href="/sample-work" aria-current={isActive('/sample-work') ? 'page' : undefined}>Sample Work</a></li>
-      {hasInsights && (
-        <li><a href="/insights" aria-current={isActive('/insights')   ? 'page' : undefined}>Insights</a></li>
-      )}
-      <li><a href="/contact"    aria-current={isActive('/contact')    ? 'page' : undefined}>Contact</a></li>
+      {NAV_PAGES.filter((p) => p.key !== 'insights' || hasInsights).map((p) => (
+        <li><a href={p.href} aria-current={isActive(p.href) ? 'page' : undefined}>{navLabels[p.key]}</a></li>
+      ))}
       {settings.phone && (
         <li class="nav-links-phone">
           <a href={telHref}>{settings.phone}</a>
@@ -121,9 +116,25 @@ const telHref = settings.phone ? `tel:${settings.phone.replace(/[^\d+]/g, '')}` 
   const toggle = document.querySelector<HTMLButtonElement>('.nav-toggle');
   const links  = document.querySelector<HTMLElement>('#nav-links');
 
+  const closeMenu = () => {
+    links?.classList.remove('is-open');
+    toggle?.setAttribute('aria-expanded', 'false');
+  };
+
   toggle?.addEventListener('click', () => {
     const isOpen = links?.classList.toggle('is-open');
     toggle.setAttribute('aria-expanded', String(!!isOpen));
+    // The list comes before the button in the page, so after opening the menu the next
+    // Tab would skip past it. Move focus into the menu instead.
+    if (isOpen) links?.querySelector<HTMLAnchorElement>('a')?.focus();
+  });
+
+  // Close the menu once focus leaves both the menu and its button.
+  links?.addEventListener('focusout', (e) => {
+    const next = e.relatedTarget as Node | null;
+    if (links.classList.contains('is-open') && next && !links.contains(next) && next !== toggle) {
+      closeMenu();
+    }
   });
 
   document.addEventListener('keydown', (e) => {

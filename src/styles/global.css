@@ -16,7 +16,9 @@
   --border:        #DDD8D0;
   --text:          #1A1A1A;
   --text-muted:    #5C5C5C;
-  --text-light:    #8A8A8A;
+  /* #8A8A8A measured 3.3:1 on --cream and 3.45:1 on white, under the 4.5:1 AA floor
+     for the small labels that use it. This clears 4.5:1 on both. */
+  --text-light:    #6E6E6E;
   --white:         #FFFFFF;
 
   --font-heading: 'Manrope', system-ui, -apple-system, sans-serif;
@@ -105,6 +107,7 @@ section { padding: 5rem 0; }
 .container-narrow { max-width: 760px; }
 
 /* A quiet pointer to related material, set below a section's main content. */
+.section-aside > p:last-child { margin-bottom: 0; }
 .section-aside {
   margin-top: 2.5rem;
   text-align: center;
@@ -842,6 +845,14 @@ hr.divider {
   background-repeat: no-repeat;
 }
 
+/* A photo uploaded in the editor has no tint built in, so it gets one here. See
+   src/utils/images.ts for the files that are already tinted. */
+.cta-band-image.has-tint {
+  background-image:
+    linear-gradient(rgba(11,31,21,.66), rgba(11,31,21,.66)),
+    var(--cta-image);
+}
+
 /* ============================================================
    About page
    ============================================================ */
@@ -1058,6 +1069,12 @@ hr.divider {
 }
 a.contact-detail-value:hover { color: var(--green-dark); }
 
+/* LinkedIn profiles: the mark beside each name, one per line. */
+.contact-linkedin-list { list-style: none; padding: 0; margin: 0; display: grid; gap: .35rem; }
+.contact-linkedin { display: inline-flex; align-items: center; gap: .5rem; }
+.contact-linkedin .linkedin-icon { color: #0A66C2; flex-shrink: 0; }
+.footer-linkedin { display: inline-flex; align-items: center; gap: .45rem; }
+
 /* <address> italicises by default, and the CMS field is multi-line. */
 .contact-address {
   font-style: normal;
@@ -1105,7 +1122,8 @@ a.contact-detail-value:hover { color: var(--green-dark); }
 .form-group textarea:focus {
   outline: none;
   border-color: var(--green-mid);
-  box-shadow: 0 0 0 3px rgba(45,106,79,.12);
+  /* A solid ring rather than a 12% tint, which was close to invisible on white. */
+  box-shadow: 0 0 0 2px var(--green-mid);
 }
 
 .form-group textarea { resize: vertical; min-height: 140px; }
@@ -1345,7 +1363,8 @@ a.contact-detail-value:hover { color: var(--green-dark); }
   font-weight: 700;
   text-transform: uppercase;
   letter-spacing: .09em;
-  opacity: .4;
+  /* .4 on the near-black footer came out at 3.8:1; .6 clears the 4.5:1 AA floor. */
+  opacity: .6;
   margin-bottom: .75rem;
   display: block;
 }
@@ -1366,7 +1385,7 @@ a.contact-detail-value:hover { color: var(--green-dark); }
 
 .footer-bottom p {
   font-size: .78rem;
-  opacity: .4;
+  opacity: .6;
   margin: 0;
 }
 
@@ -1410,10 +1429,15 @@ a.contact-detail-value:hover { color: var(--green-dark); }
    deliberate rather than as the start of a pattern. The green wash is
    composited into the file. See the note on .cta-band-image. */
 .page-header-image {
-  background-image: url('/images/uploads/mineral-owners-lease-map.jpg');
+  background-image: var(--header-image);
   background-size: cover;
   background-position: center 72%;
   background-repeat: no-repeat;
+}
+.page-header-image.has-tint {
+  background-image:
+    linear-gradient(rgba(11,31,21,.66), rgba(11,31,21,.66)),
+    var(--header-image);
 }
 
 /* ============================================================
@@ -1844,11 +1868,32 @@ a.contact-detail-value:hover { color: var(--green-dark); }
   .insight-thumb { width: 100%; }
 }
 
+/* Each credential on its own line: the designation, then issuer, year and number. */
+.person-credentials {
+  list-style: none;
+  padding: 0;
+  margin: -.5rem 0 1rem;
+  font-size: .85rem;
+  line-height: 1.5;
+}
+.person-credentials li + li { margin-top: .35rem; }
+/* Straight after the role, the credential details read as part of the same block. */
+.person-role + .person-credentials { margin-top: -.8rem; }
+.person-credential-name { display: block; font-weight: 600; color: var(--text); }
+.person-credential-meta { display: block; color: var(--text-muted); }
+
+/* Two stacked bands (credentials, then affiliations) share the padding between them. */
+.affiliations-band-credentials + .affiliations-band { padding-top: 0; }
+.affiliation-tag-meta { font-weight: 400; }
+
 .person-linkedin {
   margin: -.5rem 0 1rem;
   font-size: .875rem;
 }
 .person-linkedin a {
+  display: inline-flex;
+  align-items: center;
+  gap: .4rem;
   color: var(--green-mid);
   text-decoration: underline;
   text-underline-offset: 2px;
@@ -1943,7 +1988,7 @@ a.contact-detail-value:hover { color: var(--green-dark); }
   border: 1px solid var(--green-light);
   border-radius: 2px;
   padding: .2rem .5rem;
-  opacity: .8;
+  /* Full strength: at .8 the small label measured 4.1:1, under the 4.5:1 AA floor. */
 }
 
 .sample-sheet-title {
@@ -2006,6 +2051,8 @@ a.contact-detail-value:hover { color: var(--green-dark); }
   border: 1px solid var(--border);
   border-radius: var(--radius);
 }
+/* The wrapper takes focus so a keyboard can scroll a table wider than the screen. */
+.sample-table-scroll:focus-visible { outline: 2px solid var(--green-mid); outline-offset: 2px; }
 
 .sample-table {
   width: 100%;
@@ -3002,4 +3049,40 @@ body { font-size: 1.125rem; }
 @media (max-width: 1010px) and (min-width: 769px) {
   .nav-phone-number { display: none; }
   .nav-links a { padding-left: .7rem; padding-right: .7rem; }
+}
+
+/* ============================================================
+   Keyboard focus and the skip link
+   ============================================================ */
+/* One visible ring for anything that does not style its own. The dark bands get the
+   light gold so the ring holds up against the green and the near-black footer. */
+:focus-visible {
+  outline: 2px solid var(--green-mid);
+  outline-offset: 2px;
+}
+.hero :focus-visible,
+.page-header :focus-visible,
+.cta-band:not(.cta-band-light) :focus-visible,
+.site-footer :focus-visible {
+  outline-color: var(--gold-light);
+}
+#main-content:focus { outline: none; }
+
+.skip-link {
+  position: absolute;
+  top: .5rem;
+  left: .5rem;
+  z-index: 1000;
+  padding: .6rem 1rem;
+  background: var(--green-dark);
+  color: var(--white);
+  font-weight: 600;
+  border-radius: var(--radius);
+  text-decoration: none;
+  transform: translateY(-200%);
+}
+.skip-link:focus { transform: none; }
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
 }

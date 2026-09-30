@@ -1,5 +1,6 @@
 ---
 import Base from '../layouts/Base.astro';
+import { text } from '../utils/labels';
 import CallToAction from '../components/CallToAction.astro';
 import SampleFeature from '../components/SampleFeature.astro';
 import { renderMarkdown } from '../utils/markdown';
@@ -8,6 +9,11 @@ import settings from '../data/settings.json';
 
 const hasTestimonials = exp.testimonials && exp.testimonials.length > 0;
 const introHtml       = await renderMarkdown(exp.intro);
+const statesAsideHtml = await renderMarkdown(
+  typeof exp.states_aside === 'string'
+    ? exp.states_aside
+    : 'The [coverage map](/#coverage) breaks these down by basin and play.'
+);
 ---
 
 <Base
@@ -16,7 +22,7 @@ const introHtml       = await renderMarkdown(exp.intro);
 >
   <div class="page-header">
     <div class="container">
-      <h1>Experience</h1>
+      <h1>{text(exp.page_heading, 'Experience')}</h1>
       <p>{exp.page_subtitle}</p>
     </div>
   </div>
@@ -29,7 +35,7 @@ const introHtml       = await renderMarkdown(exp.intro);
   </section>
 
   <!-- States served -->
-  {exp.states_served.length > 0 && (
+  {exp.states_served?.length > 0 && (
     <section class="section-alt">
       <div class="container">
         <div class="section-header">
@@ -45,15 +51,13 @@ const introHtml       = await renderMarkdown(exp.intro);
             </div>
           ))}
         </div>
-        <p class="section-aside">
-          The <a href="/#coverage">coverage map</a> breaks these down by basin and play.
-        </p>
+        {statesAsideHtml && <div class="section-aside" set:html={statesAsideHtml} />}
       </div>
     </section>
   )}
 
   <!-- Project types -->
-  {exp.project_types.length > 0 && (
+  {exp.project_types?.length > 0 && (
     <section>
       <div class="container">
         <div class="section-header">
@@ -69,7 +73,7 @@ const introHtml       = await renderMarkdown(exp.intro);
     </section>
   )}
 
-  {exp.sample_feature && (
+  {exp.sample_feature?.headline && (
     <SampleFeature
       label={exp.sample_feature.label}
       headline={exp.sample_feature.headline}
@@ -95,7 +99,7 @@ const introHtml       = await renderMarkdown(exp.intro);
               {p.scope && <p class="project-scope">{p.scope}</p>}
               {p.outcome && (
                 <p class="project-outcome">
-                  <span class="project-outcome-label">Outcome</span>
+                  <span class="project-outcome-label">{text(exp.outcome_label, 'Outcome')}</span>
                   {p.outcome}
                 </p>
               )}

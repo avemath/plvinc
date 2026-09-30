@@ -2,7 +2,7 @@
 title: "Title Research & Curative"
 card_description: "Courthouse-level mineral and surface title examination, chain of title analysis, and targeted curative work to confirm ownership and clear defects before they become problems."
 seo_title: "Title Research & Curative"
-seo_description: "Courthouse title examination and curative work across Pennsylvania, the Appalachian Basin, Louisiana and East Texas, run by Certified Professional Landmen."
+seo_description: "Courthouse title examination and curative work in the Appalachian and Gulf Coast basins, from Pennsylvania to Louisiana and East Texas."
 icon: "search"
 show_sample_link: true
 cta_headline: "Need title run on a tract? Send us the details."
