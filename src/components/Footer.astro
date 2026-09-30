@@ -1,5 +1,5 @@
 ---
-import { getCollection } from 'astro:content';
+import { hasInsightFiles } from '../utils/insight-files';
 import LinkedInIcon from './LinkedInIcon.astro';
 import { getLinkedInProfiles } from '../utils/people';
 import { navLabels, footerLabels, NAV_PAGES } from '../utils/labels';
@@ -26,12 +26,7 @@ const profiles = await getLinkedInProfiles();
 const year = new Date().getFullYear();
 const name = settings.footer_name || settings.professional_name;
 
-let hasInsights = false;
-try {
-  hasInsights = (await getCollection('insights')).length > 0;
-} catch {
-  hasInsights = false;
-}
+const hasInsights = hasInsightFiles();
 
 // based_in is what visitors read, and it can be a region rather than a town. Falling back
 // to city and state keeps working for anyone who fills those in instead.

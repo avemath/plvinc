@@ -1,5 +1,6 @@
 import { defineCollection, z } from 'astro:content';
 import { glob } from 'astro/loaders';
+import { hasInsightFiles } from './utils/insight-files';
 
 // The editor saves an optional field that was cleared as null (a number) or an empty string
 // (text). Either must build, or one cleared box would stop every deploy after it. Optional
@@ -60,7 +61,11 @@ const people = defineCollection({
 // Dormant by design. With no files in the folder the index redirects, no detail pages are
 // generated, and the nav link is not rendered, exactly as the people collection behaves.
 const insights = defineCollection({
-  loader: glob({ pattern: '**/*.md', base: './src/content/insights' }),
+  // With no articles yet, an empty loader stands in so the build does not warn that the
+  // folder has nothing in it. Writing the first article switches the real one on.
+  loader: hasInsightFiles()
+    ? glob({ pattern: '**/*.md', base: './src/content/insights' })
+    : { name: 'insights-none-yet', load: async () => {} },
   schema: z.object({
     title: z.string(),
     date: z.coerce.date(),
