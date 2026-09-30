@@ -2,16 +2,11 @@
 import Base from '../../layouts/Base.astro';
 import { text } from '../../utils/labels';
 import CallToAction from '../../components/CallToAction.astro';
-import { getCollection } from 'astro:content';
+import { getInsights } from '../../utils/insights';
 import page from '../../data/pages/insights.json';
 import settings from '../../data/settings.json';
 
-let insights: Awaited<ReturnType<typeof getCollection<'insights'>>> = [];
-try {
-  insights = await getCollection('insights');
-} catch {
-  insights = [];
-}
+const insights = await getInsights();
 
 // Same behaviour as the Team page: with nothing written, this page sends visitors home
 // and the nav never links here in the first place.

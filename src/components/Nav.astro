@@ -1,5 +1,5 @@
 ---
-import { getCollection } from 'astro:content';
+import { hasInsightFiles } from '../utils/insight-files';
 import { navLabels, NAV_PAGES } from '../utils/labels';
 
 interface Props {
@@ -13,12 +13,7 @@ interface Props {
 
 const { settings } = Astro.props;
 // Insights is dormant until something is written, so the link only appears then.
-let hasInsights = false;
-try {
-  hasInsights = (await getCollection('insights')).length > 0;
-} catch {
-  hasInsights = false;
-}
+const hasInsights = hasInsightFiles();
 const path = Astro.url.pathname;
 
 function isActive(href: string) {

@@ -406,7 +406,7 @@ for illustration. Never paste a real owner name, address, tract, or recording re
 fields, not even with the name changed. The repository is public, and a real chain of title is a
 client's business, not a sample.
 
-1. Click **Pages**, then **Sample Work Page**.
+1. Click **Pages**, then **Sample Work Page (fictional only)**.
 2. Edit any field. The tables are lists, so you can add or remove rows.
 3. Click **Save**.
 
