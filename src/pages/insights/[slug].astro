@@ -2,17 +2,13 @@
 import Base from '../../layouts/Base.astro';
 import { text } from '../../utils/labels';
 import CallToAction from '../../components/CallToAction.astro';
-import { getCollection, render } from 'astro:content';
+import { render } from 'astro:content';
+import { getInsights } from '../../utils/insights';
 import page from '../../data/pages/insights.json';
 import settings from '../../data/settings.json';
 
 export async function getStaticPaths() {
-  let insights: Awaited<ReturnType<typeof getCollection<'insights'>>> = [];
-  try {
-    insights = await getCollection('insights');
-  } catch {
-    insights = [];
-  }
+  const insights = await getInsights();
   // An empty collection yields no paths, so no detail pages are built.
   return insights.map((post) => ({ params: { slug: post.id }, props: { post } }));
 }
