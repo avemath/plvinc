@@ -13,8 +13,8 @@ Live at [plvinc.com](https://plvinc.com). Non-technical editing instructions liv
 
 | | |
 |---|---|
-| Framework | Astro 6.4.4, static output |
-| CMS | Sveltia CMS 0.166.0, loaded from CDN at a pinned version |
+| Framework | Astro 7.3.5, static output |
+| CMS | Sveltia CMS 0.224.0, loaded from CDN at a pinned version with an integrity hash |
 | Hosting | Cloudflare Pages, project `plvinc` |
 | Deploys | GitHub Actions, on push to `main` |
 | Contact form | Web3Forms |
@@ -30,7 +30,7 @@ plvinc/
 │   ├── deploy.yml               # Build and deploy on push to main
 │   └── domain-doctor.yml        # Read-only report on the domain wiring
 ├── src/
-│   ├── content.config.ts        # Collection schemas (Astro 6 glob loader)
+│   ├── content.config.ts        # Collection schemas (Astro glob loader)
 │   ├── content/
 │   │   ├── services/            # One .md per service (6 of them)
 │   │   ├── people/              # One .md per team member
@@ -379,8 +379,10 @@ Sveltia CMS is a drop-in replacement for Decap CMS and reads the same `config.ym
 ever unavailable, swap the script tag in `public/studio/index.html`:
 
 ```html
-<script src="https://unpkg.com/decap-cms@^3/dist/decap-cms.js"></script>
+<script src="https://unpkg.com/decap-cms@3.16.3/dist/decap-cms.js"></script>
 ```
+
+Pin an exact version, as above, and check it is current before relying on it.
 
 No configuration changes are needed.
 
@@ -393,5 +395,14 @@ Versions are pinned deliberately: exact numbers in `package.json`, a committed
 rather than a floating tag. The CMS is the one most worth keeping pinned, since it loads in the
 browser at runtime and a bad release would break editing with no deploy to roll back.
 
-To move Sveltia forward, change the version in the `<script>` tag in `public/studio/index.html`
-and check that the editor still loads before pushing.
+To move Sveltia forward, change the version in the `<script>` tag in `public/studio/index.html`,
+replace its `integrity` hash, and check that the editor still loads before pushing. The hash
+comes from the published file:
+
+```sh
+V=0.224.0
+echo "sha384-$(curl -sL https://unpkg.com/@sveltia/cms@$V/dist/sveltia-cms.js | openssl dgst -sha384 -binary | openssl base64 -A)"
+```
+
+Wrangler, which deploys the site, is a pinned dev dependency for the same reason: every deploy
+uses the version in the lockfile rather than whatever is newest that day.
