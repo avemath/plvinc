@@ -1,5 +1,6 @@
 ---
 import Base from '../../layouts/Base.astro';
+import { text } from '../../utils/labels';
 import ServiceIcon from '../../components/ServiceIcon.astro';
 import SampleFeature from '../../components/SampleFeature.astro';
 import CallToAction from '../../components/CallToAction.astro';
@@ -17,7 +18,7 @@ export async function getStaticPaths() {
 
 const { entry }       = Astro.props;
 const { Content }     = await render(entry);
-const { title, icon, show_sample_link, cta_headline, cta_button } = entry.data;
+const { title, icon, show_sample_link, cta_headline, cta_text, cta_button } = entry.data;
 ---
 
 <Base
@@ -47,13 +48,13 @@ const { title, icon, show_sample_link, cta_headline, cta_button } = entry.data;
            second button to /contact three blocks above it was noise. -->
       <div class="service-nav">
         <a href="/services" class="back-link">
-          <span aria-hidden="true">←</span> All Services
+          <span aria-hidden="true">←</span> {text(servicesPage.back_link_label, 'All Services')}
         </a>
       </div>
     </div>
   </section>
 
-  {show_sample_link && servicesPage.sample_feature && (
+  {show_sample_link && servicesPage.sample_feature?.headline && (
     <SampleFeature
       label={servicesPage.sample_feature.label}
       headline={servicesPage.sample_feature.headline}
@@ -65,7 +66,7 @@ const { title, icon, show_sample_link, cta_headline, cta_button } = entry.data;
 
   <CallToAction
     headline={cta_headline || servicesPage.cta.headline}
-    text={servicesPage.cta.text}
+    text={cta_text || servicesPage.cta.text}
     button={cta_button || servicesPage.cta.button}
     tone="light"
   />

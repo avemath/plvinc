@@ -40,14 +40,34 @@ The left sidebar lists everything you can edit:
 
 Click a section name to open it.
 
-Three things worth knowing about **Pages**. Every page has a **Page Title**, which shows in the
-browser tab and as the blue headline in Google results, and a **Search Description**, the sentence
-Google shows underneath it. Every page also has a **Page Subtitle**, the line under the title in the
-green band at the top. Every page except Contact has a **Closing Call to Action**, the band at the
-very bottom, with its own headline, text and button label.
+### Where do I change…?
 
-Keep page titles under about 60 characters and search descriptions under about 160. Past those
-lengths Google cuts them off mid sentence.
+| I want to change… | Go to |
+|---|---|
+| The phone number or email, anywhere on the site | **Site Settings** → Phone Number / Email Address. One change updates the header, the phone bar on mobile, the Contact page, the footer and every call button. |
+| What the pages are called in the menu | **Site Settings** → Menu Wording |
+| The small headings, copyright words or Privacy link in the footer | **Site Settings** → Footer Wording |
+| The two buttons pinned to the bottom of the screen on phones | **Site Settings** → Phone Bar Wording |
+| The big heading at the top of a page | That page under **Pages** → Page Heading |
+| A person's CPL number or year, or their LinkedIn | **Team / People** → open the person → Credentials / LinkedIn URL. Their LinkedIn shows on the About page, the Contact page and the footer. |
+| Any wording on the contact forms: labels, grey hints inside the boxes, the button, the error messages, the subject line of the email you receive | **Pages** → Contact Page |
+| The photo at the top of Mineral Owners | **Pages** → Mineral Owners Page → Header Photo |
+| The page people see after following a broken link | **Pages** → Page Not Found (404) |
+
+Some boxes (the menu wording, the form messages and a few small headings) say **"A blank box keeps
+the original wording."** Emptying one of those never leaves a blank button or link on the site. It
+simply puts the original words back.
+
+Three things worth knowing about **Pages**. Every page has a **Page Heading**, the large heading in
+the green band at the top, and a **Page Subtitle**, the line under it. Separately, every page has a
+**Google Title (browser tab)**, which shows in the browser tab and as the headline in Google
+results, and a **Google Description**, the sentence Google shows underneath it. Every page except
+Contact has a **Closing Call to Action**, the band at the very bottom, with its own headline, text
+and button label.
+
+The Google title and description boxes show a counter and stop you at the length Google shows (40
+characters for a page title, because *| Petro Land Ventures* is added to the end automatically, and
+160 for a description), so nothing gets cut off mid sentence.
 
 Those closing bands are separate on purpose. It's worth making them say different things; a visitor
 who reads three pages shouldn't meet the same sentence three times.
@@ -62,6 +82,13 @@ That applies to the figures under the hero, the home page testimonials, Selected
 Experience page, the questions on the Mineral Owners page, the people on the About page, and
 Insights. Emptying a list is a normal way to turn a section off, and filling it again turns it
 back on.
+
+The "See the sample file" bands and the Privacy page's closing band work the same way with their
+headline: clear the headline and the band disappears.
+
+The editor also stops the mistakes that would break something. A phone number, email address, web
+address or year that can't be right is flagged before you can save. The home page button links and
+the reader's-note positions on the sample file are chosen from a list rather than typed.
 
 ---
 
@@ -81,18 +108,30 @@ These apply across the whole site.
 | Logo | The main logo, shown in the header on desktop. Leave blank to show your name as text. |
 | Logo (narrow) | A narrower version of the logo, used in the header on phones. |
 | Logo (light, for dark backgrounds) | A white version, used in the dark footer. |
-| Phone Number | Your business phone, written exactly as you want it displayed |
-| Email Address | Your primary business email |
-| Service Area Summary | A short geography note for the footer |
+| Phone Number | Your business phone, written exactly as you want it displayed. Used everywhere the site shows a phone number. |
+| Email Address | Your primary business email. Used on the Contact page and in the footer. |
+| Based In | Where you are based, as visitors should read it. Shown in the footer and on the Contact page. |
+| City and State | Mainly for search engines. Only shown on the page if Based In is blank. |
+| LinkedIn URL | The company LinkedIn page, if there is one. Personal profiles go under **Team / People**. |
+| Service Area Summary | The region line in the footer, with the regions separated by a middle dot ( · ) |
 | Footer Name / Company | The name in the copyright line at the bottom |
-| Default Page Title | What appears in browser tabs and Google results |
-| Default Meta Description | The sentence under your name in Google results, around 155 characters |
+| Menu Wording | What each page is called in the top menu and the footer |
+| Footer Wording | The small headings in the footer, the words after the copyright name, and the Privacy link |
+| Phone Bar Wording (mobile) | The Call and Send a note buttons pinned to the bottom of the screen on phones |
+| Home Page Google Title / Description | What Google shows for the home page |
 | Default Share Image | The image shown when the site is shared on social media |
-| City and State | Where you are based. Both must be filled in before either one appears. |
-| LinkedIn URL | Your company LinkedIn page. Leave blank to hide the link everywhere. |
 | Contact Form Access Key | The Web3Forms key. The contact form won't send without it. |
 
 ---
+
+### Describing where you work
+
+The regions are named the same way everywhere: **Appalachian Basin, Gulf Coast, Permian Basin,
+Michigan Basin, Pacific Northwest**, the names on the home page coverage map. The footer's Service
+Area Summary lists all five. Google Descriptions are short, so they name the four oil and gas
+basins (*the Appalachian, Gulf Coast, Permian and Michigan basins*) and leave out the Pacific
+Northwest, where the work is renewables. A page about one service can name just the basins where
+that service is done. Using these names keeps the site from seeming to disagree with itself.
 
 ### The footer scope line
 
@@ -171,9 +210,13 @@ section below it, and it is the strongest writing on the site, so it is worth ke
 **Team Section Label** and **Team Section Headline** are the small heading above the people. Adding
 or removing a person happens under **Team / People**, not here.
 
-**To add a credential:** scroll to **Credentials & Certifications**, click **Add**, and fill in the
-name, issuing organization, and year. This list is empty, because both landmen already show their
-CPL on their own cards. Anything you add appears above the Affiliations line.
+**Credentials.** Each person's CPL (and anything else they hold) is edited on that person, under
+**Team / People**, and shows on their card. The **Company Credentials** list here is only for things
+that belong to the company itself, such as a state registration. It is empty to begin with, and
+anything you add shows as a tag just above the Affiliations line.
+
+**Page Heading**, **Background Label**, **Company Credentials Heading** and **Affiliations
+Heading** let you reword the small fixed headings on this page.
 
 **To add an affiliation:** same process, under **Affiliations & Memberships**. These show as small
 tags at the foot of the page, and link out if you give them a web address.
@@ -200,9 +243,16 @@ permission. The section is hidden until you add the first project.
 ## Editing the Contact Page
 
 1. Click **Pages**, then **Contact Page**.
-2. Update the phone, email, and any notes.
+2. Edit the wording and any notes. The phone number and email shown here come from **Site
+   Settings**, and the LinkedIn links come from **Team / People**, so they are changed there.
 3. **Mailing Address** is optional. Leave it blank to hide it.
 4. Click **Save**.
+
+**Contact Detail Labels** rewords the small grey labels (Phone, Email, Based In and so on).
+Everything else a visitor reads on the forms is here too: **Form Hints Inside the Boxes** (the grey
+example text), **Dropdown Prompt**, **Send Button**, **Button While Sending**, and **Form Error
+Messages** (what shows under a box someone left empty). **Email Subject** is the subject line of
+the email you receive, so you can tell the two forms apart in your inbox.
 
 The form asks for more than a name and a message, so that a first reply can be useful. You control
 two of the dropdowns:
@@ -227,8 +277,8 @@ The contact page offers two paths. The visitor picks one with the buttons above 
   have to fill in a project brief.
 - **I have a project** is the longer form, unchanged.
 
-Under **Short Note Form** you can edit every label, the button, and the **Success Message**. Keep a
-response time out of the success message.
+Under **Short Note Form** you can edit every label, the button, the **Success Message**, its own
+**Email Subject** and its own **Error Messages**. Keep a response time out of the success message.
 
 **What Happens Next** on this page is the same four steps as on Mineral Owners.
 
@@ -250,10 +300,10 @@ Each service has its own page, and there are six to start with.
    - **Display Order**, which controls the order services appear in. Lower numbers come first.
    - **Show link to sample work**, which adds the sample file band at the foot of this service
      page. It is on for Title Research, Lease Acquisition, Due Diligence and Mineral & Royalty.
-   - **Closing Headline** and **Closing Button Text**, which are the call to action at the very
-     bottom of this service page. Leave them blank to fall back to the shared one from the Services
-     page.
-   - **Page Title (search)** and **Search Description**, which are what Google shows for this
+   - **Closing Headline**, **Closing Text** and **Closing Button Text**, which are the call to
+     action at the very bottom of this service page. Leave them blank to fall back to the shared
+     one from the Services page.
+   - **Google Title (browser tab)** and **Google Description**, which are what Google shows for this
      service. Leave them blank to fall back to the service title and card description.
 3. Click **Save**.
 
@@ -274,7 +324,11 @@ page carries on as normal.
 2. Fill in:
    - **Full Name**, required
    - **Role / Title**, optional
-   - **LinkedIn URL**, optional. Leave blank to hide the link.
+   - **LinkedIn URL**, optional. Paste the whole address from LinkedIn. It shows on this person's
+     About card, on the Contact page and in the footer. Leave blank to hide it.
+   - **Credentials**, optional. Click **Add** for each one: the name (for example *Certified
+     Professional Landman (CPL)*), who issued it, the year and the certificate number. Blank parts
+     are simply left off. These show on the person's card and tell search engines what they hold.
    - **Photo**, optional. See the note on headshots below.
    - **Display Order**, optional. Lower numbers appear first.
    - **Bio**, required
@@ -429,6 +483,10 @@ disappear again.
 
 JPG, PNG and WebP all work. There's no need to shrink photos first: the editor resizes anything
 large and converts it to a lighter format as it uploads, so a photo straight off a phone is fine.
+
+**Banner photos** (the home page hero, the home page closing band and the Mineral Owners header)
+sit behind white text. The site lays a dark green tint over any new photo you upload there, so the
+text stays readable without you editing the picture. Calm, wide, landscape photos work best.
 
 ---
 

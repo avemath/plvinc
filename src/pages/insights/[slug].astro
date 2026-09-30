@@ -1,5 +1,6 @@
 ---
 import Base from '../../layouts/Base.astro';
+import { text } from '../../utils/labels';
 import CallToAction from '../../components/CallToAction.astro';
 import { getCollection, render } from 'astro:content';
 import page from '../../data/pages/insights.json';
@@ -38,7 +39,7 @@ const schema = {
 <Base
   title={`${post.data.title} | ${settings.professional_name}`}
   description={post.data.summary}
-  image={post.data.image}
+  image={post.data.image ?? undefined}
   schema={schema}
 >
   <div class="page-header">
@@ -54,7 +55,7 @@ const schema = {
 
   <section>
     <div class="container container-narrow">
-      <a href="/insights" class="back-link">← All insights</a>
+      <a href="/insights" class="back-link"><span aria-hidden="true">←</span> {text(page.back_link_label, 'All insights')}</a>
       <div class="prose insight-prose">
         <Content />
       </div>

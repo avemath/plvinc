@@ -1,5 +1,6 @@
 ---
 import Base from '../layouts/Base.astro';
+import { text } from '../utils/labels';
 import CallToAction from '../components/CallToAction.astro';
 import { renderMarkdown } from '../utils/markdown';
 import page from '../data/pages/privacy.json';
@@ -13,7 +14,7 @@ const bodyHtml = await renderMarkdown(page.body);
 >
   <div class="page-header">
     <div class="container">
-      <h1>Privacy</h1>
+      <h1>{text(page.page_heading, 'Privacy')}</h1>
       <p>{page.page_subtitle}</p>
     </div>
   </div>
@@ -24,7 +25,7 @@ const bodyHtml = await renderMarkdown(page.body);
     </div>
   </section>
 
-  {page.cta && (
+  {page.cta?.headline && (
     <CallToAction
       headline={page.cta.headline}
       text={page.cta.text}

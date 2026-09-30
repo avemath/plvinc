@@ -4,6 +4,12 @@ on:
   push:
     branches: [main]
 
+# Two quick saves in the CMS start two runs. Queue them instead of running both at
+# once, so an older build can never finish last and replace the newer one.
+concurrency:
+  group: deploy-main
+  cancel-in-progress: false
+
 jobs:
   deploy:
     runs-on: ubuntu-latest

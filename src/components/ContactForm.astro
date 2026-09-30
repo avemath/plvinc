@@ -3,6 +3,7 @@ import { getCollection } from 'astro:content';
 import settings from '../data/settings.json';
 import contact from '../data/pages/contact.json';
 import states from '../data/us-states.json';
+import { text } from '../utils/labels';
 
 interface Props {
   recipientEmail?: string;
@@ -16,6 +17,45 @@ const email = recipientEmail || settings.email || '';
 // `message` keep their original names because Web3Forms treats those specially.
 const labels = contact.form_labels;
 const shortForm = contact.short_form;
+
+// Everything a visitor reads on the forms comes from the Contact page in the editor. Each
+// piece falls back to its original wording if the field is left blank, so clearing a box
+// can never leave a button or an error message empty.
+const c = contact as Record<string, any>;
+const fl = labels as Record<string, string>;
+const ph = c.form_placeholders ?? {};
+const fe = c.form_errors ?? {};
+const se = shortForm?.errors ?? {};
+const t = {
+  nameLabel:      text(fl.name, 'Name'),
+  emailLabel:     text(fl.email, 'Email'),
+  messageLabel:   text(fl.message, 'Message'),
+  choose:         text(c.choose_prompt, 'Please choose'),
+  notSure:        text(c.service_not_sure, 'Not sure yet'),
+  button:         text(c.form_button, 'Send Message'),
+  sending:        text(c.form_sending, 'Sending…'),
+  subject:        text(c.form_subject, 'New inquiry from website contact form'),
+  shortSubject:   text(shortForm?.subject, 'New note from a landowner'),
+  shortName:      text(shortForm?.name_label, 'Name'),
+  shortButton:    text(shortForm?.button, 'Send it over'),
+  phName:         text(ph.name, 'Your name'),
+  phEmail:        text(ph.email, 'your@email.com'),
+  phPhone:        text(ph.phone, '(555) 555-5555'),
+  phCounty:       text(ph.county, 'Where the tract sits'),
+  phMessage:      text(ph.message, 'Tell us about your project…'),
+  errName:        text(fe.name, 'Please enter your name.'),
+  errEmail:       text(fe.email_missing, 'Please enter your email address.'),
+  errEmailBad:    text(fe.email_invalid, 'Please enter a valid email address.'),
+  errRole:        text(fe.role, 'Please choose the option that fits you best.'),
+  errState:       text(fe.state, 'Please choose a state.'),
+  errCounty:      text(fe.county, 'Please enter the county or parish.'),
+  errService:     text(fe.service, 'Please choose a service.'),
+  errMessage:     text(fe.message, 'Please enter a message.'),
+  errShortName:   text(se.name, 'Please enter your name.'),
+  errShortContact:text(se.contact, 'Please give us a phone number or an email address.'),
+  errShortCounty: text(se.county, 'Please tell us the county and state.'),
+  errShortWhat:   text(se.what, 'Please tell us what showed up.'),
+};
 const inquirerTypes = (contact.inquirer_types || []).map((t) => t.label).filter(Boolean);
 const timelines = (contact.timelines || []).map((t) => t.label).filter(Boolean);
 
@@ -53,7 +93,7 @@ const stateNames = (states as { name: string }[]).map((s) => s.name);
 
         <form id="short-form" action="https://api.web3forms.com/submit" method="POST" novalidate>
           <input type="hidden" name="access_key" value={settings.web3forms_key} />
-          <input type="hidden" name="subject" value="New note from a landowner" />
+          <input type="hidden" name="subject" value={t.shortSubject} />
           <input type="hidden" name="redirect" value="false" />
 
           <label class="botcheck-field" aria-hidden="true">
@@ -61,8 +101,8 @@ const stateNames = (states as { name: string }[]).map((s) => s.name);
           </label>
 
           <div class="form-group">
-            <label for="short-name">Name <span class="required-mark" aria-hidden="true">*</span></label>
-            <input type="text" id="short-name" name="name" autocomplete="name" required
+            <label for="short-name">{t.shortName} <span class="required-mark" aria-hidden="true">*</span></label>
+            <input type="text" id="short-name" data-msg={t.errShortName} name="name" autocomplete="name" required
                    aria-describedby="short-name-error" />
             <p class="field-error" id="short-name-error" hidden></p>
           </div>
@@ -71,7 +111,7 @@ const stateNames = (states as { name: string }[]).map((s) => s.name);
             <label for="short-contact">
               {shortForm.contact_label} <span class="required-mark" aria-hidden="true">*</span>
             </label>
-            <input type="text" id="short-contact" name="Phone or email" required
+            <input type="text" id="short-contact" data-msg={t.errShortContact} name="Phone or email" required
                    aria-describedby="short-contact-error" />
             <p class="field-error" id="short-contact-error" hidden></p>
           </div>
@@ -80,7 +120,7 @@ const stateNames = (states as { name: string }[]).map((s) => s.name);
             <label for="short-county">
               {shortForm.county_label} <span class="required-mark" aria-hidden="true">*</span>
             </label>
-            <input type="text" id="short-county" name="County and state" required
+            <input type="text" id="short-county" data-msg={t.errShortCounty} name="County and state" required
                    aria-describedby="short-county-error" />
             <p class="field-error" id="short-county-error" hidden></p>
           </div>
@@ -89,17 +129,17 @@ const stateNames = (states as { name: string }[]).map((s) => s.name);
             <label for="short-message">
               {shortForm.what_label} <span class="required-mark" aria-hidden="true">*</span>
             </label>
-            <textarea id="short-message" name="message" rows="5" required
+            <textarea id="short-message" data-msg={t.errShortWhat} name="message" rows="5" required
                       aria-describedby="short-message-error"></textarea>
             <p class="field-error" id="short-message-error" hidden></p>
           </div>
 
-          <button type="submit" class="btn btn-primary">{shortForm.button}</button>
+          <button type="submit" class="btn btn-primary" data-sending={t.sending}>{t.shortButton}</button>
 
-          <div id="short-success" class="form-success" role="status" aria-live="polite" hidden>
+          <div id="short-success" tabindex="-1" class="form-success" role="status" aria-live="polite" hidden>
             <p>{shortForm.success}</p>
           </div>
-          <div id="short-error" class="form-error" role="alert" aria-live="polite" hidden>
+          <div id="short-error" tabindex="-1" class="form-error" role="alert" hidden>
             <p>{contact.form_error}</p>
           </div>
         </form>
@@ -118,7 +158,7 @@ const stateNames = (states as { name: string }[]).map((s) => s.name);
     novalidate
   >
     <input type="hidden" name="access_key"  value={settings.web3forms_key} />
-    <input type="hidden" name="subject"     value="New inquiry from website contact form" />
+    <input type="hidden" name="subject"     value={t.subject} />
     <input type="hidden" name="redirect"    value="false" />
     {email && <input type="hidden" name="from_name" value={settings.professional_name} />}
 
@@ -130,13 +170,13 @@ const stateNames = (states as { name: string }[]).map((s) => s.name);
 
     <div class="form-group">
       <label for="contact-name">
-        Name <span class="required-mark" aria-hidden="true">*</span>
+        {t.nameLabel} <span class="required-mark" aria-hidden="true">*</span>
       </label>
       <input
         type="text"
-        id="contact-name"
+        id="contact-name" data-msg={t.errName}
         name="name"
-        placeholder="Your name"
+        placeholder={t.phName}
         autocomplete="name"
         required
         aria-describedby="contact-name-error"
@@ -147,13 +187,13 @@ const stateNames = (states as { name: string }[]).map((s) => s.name);
     <div class="form-row">
       <div class="form-group">
         <label for="contact-email">
-          Email <span class="required-mark" aria-hidden="true">*</span>
+          {t.emailLabel} <span class="required-mark" aria-hidden="true">*</span>
         </label>
         <input
           type="email"
-          id="contact-email"
+          id="contact-email" data-msg={t.errEmail} data-msg-invalid={t.errEmailBad}
           name="email"
-          placeholder="your@email.com"
+          placeholder={t.phEmail}
           required
           autocomplete="email"
           aria-describedby="contact-email-error"
@@ -167,7 +207,7 @@ const stateNames = (states as { name: string }[]).map((s) => s.name);
           type="tel"
           id="contact-phone"
           name="Phone"
-          placeholder="(555) 555-5555"
+          placeholder={t.phPhone}
           autocomplete="tel"
         />
       </div>
@@ -179,12 +219,12 @@ const stateNames = (states as { name: string }[]).map((s) => s.name);
           {labels.inquirer_type} <span class="required-mark" aria-hidden="true">*</span>
         </label>
         <select
-          id="contact-role"
+          id="contact-role" data-msg={t.errRole}
           name="I am a"
           required
           aria-describedby="contact-role-error"
         >
-          <option value="">Please choose</option>
+          <option value="">{t.choose}</option>
           {inquirerTypes.map((t) => <option value={t}>{t}</option>)}
         </select>
         <p class="field-error" id="contact-role-error" hidden></p>
@@ -197,12 +237,12 @@ const stateNames = (states as { name: string }[]).map((s) => s.name);
           {labels.state} <span class="required-mark" aria-hidden="true">*</span>
         </label>
         <select
-          id="contact-state"
+          id="contact-state" data-msg={t.errState}
           name="State"
           required
           aria-describedby="contact-state-error"
         >
-          <option value="">Please choose</option>
+          <option value="">{t.choose}</option>
           {stateNames.map((s) => <option value={s}>{s}</option>)}
         </select>
         <p class="field-error" id="contact-state-error" hidden></p>
@@ -214,9 +254,9 @@ const stateNames = (states as { name: string }[]).map((s) => s.name);
         </label>
         <input
           type="text"
-          id="contact-county"
+          id="contact-county" data-msg={t.errCounty}
           name="County or parish"
-          placeholder="Where the tract sits"
+          placeholder={t.phCounty}
           required
           aria-describedby="contact-county-error"
         />
@@ -230,14 +270,14 @@ const stateNames = (states as { name: string }[]).map((s) => s.name);
           {labels.service} <span class="required-mark" aria-hidden="true">*</span>
         </label>
         <select
-          id="contact-service"
+          id="contact-service" data-msg={t.errService}
           name="Service needed"
           required
           aria-describedby="contact-service-error"
         >
-          <option value="">Please choose</option>
+          <option value="">{t.choose}</option>
           {serviceNames.map((s) => <option value={s}>{s}</option>)}
-          <option value="Not sure yet">Not sure yet</option>
+          <option value={t.notSure}>{t.notSure}</option>
         </select>
         <p class="field-error" id="contact-service-error" hidden></p>
       </div>
@@ -247,7 +287,7 @@ const stateNames = (states as { name: string }[]).map((s) => s.name);
       <div class="form-group">
         <label for="contact-timeline">{labels.timeline}</label>
         <select id="contact-timeline" name="Timeline">
-          <option value="">Please choose</option>
+          <option value="">{t.choose}</option>
           {timelines.map((t) => <option value={t}>{t}</option>)}
         </select>
       </div>
@@ -255,25 +295,25 @@ const stateNames = (states as { name: string }[]).map((s) => s.name);
 
     <div class="form-group">
       <label for="contact-message">
-        Message <span class="required-mark" aria-hidden="true">*</span>
+        {t.messageLabel} <span class="required-mark" aria-hidden="true">*</span>
       </label>
       <textarea
-        id="contact-message"
+        id="contact-message" data-msg={t.errMessage}
         name="message"
         rows="6"
-        placeholder="Tell us about your project…"
+        placeholder={t.phMessage}
         required
         aria-describedby="contact-message-error"
       ></textarea>
       <p class="field-error" id="contact-message-error" hidden></p>
     </div>
 
-    <button type="submit" class="btn btn-primary">Send Message</button>
+    <button type="submit" class="btn btn-primary" data-sending={t.sending}>{t.button}</button>
 
-    <div id="form-success" class="form-success" role="status" aria-live="polite" hidden>
+    <div id="form-success" tabindex="-1" class="form-success" role="status" aria-live="polite" hidden>
       <p>{contact.form_success}</p>
     </div>
-    <div id="form-error" class="form-error" role="alert" aria-live="polite" hidden>
+    <div id="form-error" tabindex="-1" class="form-error" role="alert" hidden>
       <p>{contact.form_error}</p>
     </div>
   </form>
@@ -281,6 +321,13 @@ const stateNames = (states as { name: string }[]).map((s) => s.name);
 </div>
 
 <style>
+  /* The result message takes focus so a screen reader reads it and a phone scrolls to
+     it. It is not a control, so it does not need the focus ring. */
+  .form-success:focus,
+  .form-error:focus {
+    outline: none;
+  }
+
   /* Keep the honeypot out of sight and out of the tab order for real users. */
   .botcheck-field {
     display: none !important;
@@ -299,14 +346,14 @@ const stateNames = (states as { name: string }[]).map((s) => s.name);
   const shortSuccess = document.getElementById('short-success') as HTMLElement | null;
   const shortError   = document.getElementById('short-error')   as HTMLElement | null;
   const shortBtn     = shortForm?.querySelector<HTMLButtonElement>('button[type="submit"]');
-  const shortLabel   = shortBtn?.textContent ?? 'Send it over';
+  const shortLabel   = shortBtn?.textContent ?? '';
+
+  // The wording of each message is set on the field itself (data-msg), from the editor.
+  const msg = (id: string, key = 'msg') => document.getElementById(id)?.dataset[key] ?? '';
 
   const SHORT_CHECKS: { id: string; message: string }[] = [
-    { id: 'short-name',    message: 'Please enter your name.' },
-    { id: 'short-contact', message: 'Please give us a phone number or an email address.' },
-    { id: 'short-county',  message: 'Please tell us the county and state.' },
-    { id: 'short-message', message: 'Please tell us what showed up.' },
-  ];
+    'short-name', 'short-contact', 'short-county', 'short-message',
+  ].map((id) => ({ id, message: msg(id) }));
 
   function setShortError(id: string, message: string | null) {
     const field = document.getElementById(id) as HTMLInputElement | HTMLTextAreaElement | null;
@@ -337,7 +384,7 @@ const stateNames = (states as { name: string }[]).map((s) => s.name);
     }
 
     shortBtn.disabled = true;
-    shortBtn.textContent = 'Sending…';
+    shortBtn.textContent = shortBtn.dataset.sending || shortLabel;
     try {
       const res  = await fetch('https://api.web3forms.com/submit', {
         method: 'POST',
@@ -349,9 +396,11 @@ const stateNames = (states as { name: string }[]).map((s) => s.name);
       for (const c of SHORT_CHECKS) setShortError(c.id, null);
       shortSuccess.hidden = false;
       shortError.hidden = true;
+      shortSuccess.focus();
     } catch {
       shortError.hidden = false;
       shortSuccess.hidden = true;
+      shortError.focus();
     } finally {
       shortBtn.disabled = false;
       shortBtn.textContent = shortLabel;
@@ -362,6 +411,7 @@ const stateNames = (states as { name: string }[]).map((s) => s.name);
   const success = document.getElementById('form-success') as HTMLElement | null;
   const error   = document.getElementById('form-error')   as HTMLElement | null;
   const btn     = form?.querySelector<HTMLButtonElement>('button[type="submit"]');
+  const btnLabel = btn?.textContent ?? '';
 
   type FieldCheck = {
     id: string;
@@ -376,19 +426,19 @@ const stateNames = (states as { name: string }[]).map((s) => s.name);
   // Only fields actually rendered are checked, so a list emptied in the CMS cannot
   // leave the form permanently invalid.
   const CHECKS: FieldCheck[] = [
-    { id: 'contact-name',    validate: required('Please enter your name.') },
+    { id: 'contact-name',    validate: required(msg('contact-name')) },
     {
       id: 'contact-email',
       validate: (v) => {
-        if (!v) return 'Please enter your email address.';
-        return EMAIL_RE.test(v) ? null : 'Please enter a valid email address.';
+        if (!v) return msg('contact-email');
+        return EMAIL_RE.test(v) ? null : msg('contact-email', 'msgInvalid');
       },
     },
-    { id: 'contact-role',    validate: required('Please choose the option that fits you best.') },
-    { id: 'contact-state',   validate: required('Please choose a state.') },
-    { id: 'contact-county',  validate: required('Please enter the county or parish.') },
-    { id: 'contact-service', validate: required('Please choose a service.') },
-    { id: 'contact-message', validate: required('Please enter a message.') },
+    { id: 'contact-role',    validate: required(msg('contact-role')) },
+    { id: 'contact-state',   validate: required(msg('contact-state')) },
+    { id: 'contact-county',  validate: required(msg('contact-county')) },
+    { id: 'contact-service', validate: required(msg('contact-service')) },
+    { id: 'contact-message', validate: required(msg('contact-message')) },
   ].filter((c) => document.getElementById(c.id));
 
   function setFieldError(id: string, message: string | null) {
@@ -457,7 +507,7 @@ const stateNames = (states as { name: string }[]).map((s) => s.name);
     }
 
     btn.disabled = true;
-    btn.textContent = 'Sending…';
+    btn.textContent = btn.dataset.sending || btnLabel;
 
     try {
       const res  = await fetch('https://api.web3forms.com/submit', {
@@ -471,15 +521,17 @@ const stateNames = (states as { name: string }[]).map((s) => s.name);
         for (const check of CHECKS) setFieldError(check.id, null);
         success.hidden = false;
         error.hidden   = true;
+        success.focus();
       } else {
         throw new Error(json.message || 'Submission failed');
       }
     } catch {
       error.hidden   = false;
       success.hidden = true;
+      error.focus();
     } finally {
       btn.disabled    = false;
-      btn.textContent = 'Send Message';
+      btn.textContent = btnLabel;
     }
   });
 </script>

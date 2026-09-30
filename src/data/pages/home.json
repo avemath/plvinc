@@ -1,6 +1,6 @@
 {
   "hero_headline": "Land title research and reporting you can act on.",
-  "hero_subheadline": "Petro Land Ventures, Inc. is a firm of Certified Professional Landmen based in Duncansville, Pennsylvania. We read the public record and tell you plainly what you own, what it shows, and where the risk sits, for operators, brokers, lenders and developers, and for landowners and heirs with a single tract or a single lease offer.",
+  "hero_subheadline": "Petro Land Ventures, Inc. is a firm of Certified Professional Landmen based in Duncansville, Pennsylvania. We read the public record and tell you plainly what you own, what the record shows, and where the risk sits, for operators, brokers, lenders and developers, and for landowners and heirs with a single tract or a single lease offer.",
   "hero_image": "/images/uploads/hero-office-monitors.jpg",
   "hero_cta_text": "I own minerals or land",
   "hero_cta_href": "/mineral-owners",
@@ -162,5 +162,6 @@
     "headline": "See the Work Before You Call",
     "text": "We published a complete sample file: an ownership report, the runsheet behind it, a lease report, and a resolved heirship. It is fictional and annotated, so you can see how the work reads whether you run a land department or own forty acres.",
     "button": "View the sample file"
-  }
+  },
+  "services_link_text": "See what each service covers"
 }
