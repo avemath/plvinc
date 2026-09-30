@@ -18,6 +18,10 @@ export default defineConfig({
   // /about to /about/, which contradicts trailingSlash: 'never' and meant every internal link,
   // canonical tag and sitemap entry pointed at a URL that redirected.
   build: { format: 'file' },
+  // Astro 7 switched the default to JSX whitespace rules, which drop the space between two
+  // tags written on separate lines ("Learn more" and its arrow, words either side of a
+  // link). The templates are written as ordinary HTML, so keep ordinary HTML whitespace.
+  compressHTML: true,
   integrations: [
     sitemap({
       filter: (page) =>

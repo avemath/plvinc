@@ -23,7 +23,6 @@ media_libraries:
           height: 1600
 
 site_url: https://plvinc.com
-locale: en
 
 slug:
   encoding: ascii
@@ -35,7 +34,6 @@ collections:
   # ──────────────────────────────────────────────────────────────
   - name: settings
     label: "⚙️ Site Settings"
-    delete: false
     files:
       - name: global
         label: "Global Settings"
@@ -195,7 +193,6 @@ collections:
   # ──────────────────────────────────────────────────────────────
   - name: pages
     label: "📄 Pages"
-    delete: false
     files:
 
       - name: home
@@ -1303,15 +1300,14 @@ collections:
                 widget: string
 
       - name: sample_work
-        label: "Sample Work Page"
+        label: "Sample Work Page (fictional only)"
         file: src/data/pages/sample-work.json
         format: json
-        hint: "Everything on this page must stay fictional. Never paste a real owner name, address, tract, or recording reference here."
         fields:
           - label: "Page Heading"
             name: page_title
             widget: string
-            hint: "The heading at the top of the page."
+            hint: "The heading at the top of the page. Everything on this page must stay fictional: never paste a real owner name, address, tract, or recording reference here."
 
           - label: "Google Title (browser tab)"
             name: seo_title
