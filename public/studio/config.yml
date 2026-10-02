@@ -227,6 +227,8 @@ collections:
             options:
               - { label: "Mineral Owners page", value: "/mineral-owners" }
               - { label: "Contact page", value: "/contact" }
+              - { label: "Contact page, opened on the project form", value: "/contact#project" }
+              - { label: "Contact page, opened on the landowner note", value: "/contact#note" }
               - { label: "Services page", value: "/services" }
               - { label: "About page", value: "/about" }
               - { label: "Experience page", value: "/experience" }
@@ -246,17 +248,43 @@ collections:
             options:
               - { label: "Mineral Owners page", value: "/mineral-owners" }
               - { label: "Contact page", value: "/contact" }
+              - { label: "Contact page, opened on the project form", value: "/contact#project" }
+              - { label: "Contact page, opened on the landowner note", value: "/contact#note" }
               - { label: "Services page", value: "/services" }
               - { label: "About page", value: "/about" }
               - { label: "Experience page", value: "/experience" }
               - { label: "Sample Work page", value: "/sample-work" }
             required: false
-            hint: "Where the second hero button goes. Defaults to the Contact page."
+            hint: "Where the second hero button goes. For the company button, \"Contact page, opened on the project form\" takes them straight to the right form."
 
           - label: "Value Paragraph"
             name: value_paragraph
             widget: markdown
             hint: "A paragraph below the hero that explains your value and what you offer. Plain writing is best. Skip the sales language."
+
+          - label: "Who You'll Talk To"
+            name: team_label
+            widget: string
+            required: false
+            hint: "Small uppercase label above the strip of photos of Rickey and Shannon on the home page. The photos, names and roles come from Team / People."
+
+          - label: "Who You'll Talk To: Headline"
+            name: team_headline
+            widget: string
+            required: false
+            hint: "Blank shows \"Who You'll Talk To\"."
+
+          - label: "Who You'll Talk To: Text"
+            name: team_intro
+            widget: text
+            required: false
+            hint: "One sentence under the headline. The point is that the owners do the work themselves."
+
+          - label: "Who You'll Talk To: Link"
+            name: team_link
+            widget: string
+            required: false
+            hint: "The link under the photos that goes to the About page. Blank shows \"Read their backgrounds\"."
 
           - label: "Coverage Section Label"
             name: regions_label
@@ -899,8 +927,9 @@ collections:
             name: how_it_works
             widget: object
             required: false
-            hint: "The four steps between a first call and a report. Do not promise a response time here."
+            hint: "The four steps between a first call and a report. These steps also appear on the home page, so keep step one general enough for landowners and companies alike. Do not promise a response time here."
             fields:
+              - { label: "Small Label", name: label, widget: string, required: false }
               - { label: "Headline", name: headline, widget: string }
               - label: "Steps"
                 name: steps
@@ -1058,6 +1087,18 @@ collections:
             widget: text
             hint: "The line under the page title in the green band at the top."
 
+          - label: "Header Call Button"
+            name: header_call_label
+            widget: string
+            required: false
+            hint: "The word before the phone number on the white button at the top of the page. Blank shows \"Call\"."
+
+          - label: "Header Note Button"
+            name: header_note_label
+            widget: string
+            required: false
+            hint: "The second button at the top. It opens the short landowner form on the Contact page. Blank shows \"Send us the letter\"."
+
           - label: "Google Title (browser tab)"
             name: page_title
             widget: string
@@ -1167,6 +1208,7 @@ collections:
             required: false
             hint: "The four steps between a first call and a report. Do not promise a response time here."
             fields:
+              - { label: "Small Label", name: label, widget: string, required: false }
               - { label: "Headline", name: headline, widget: string }
               - label: "Steps"
                 name: steps
@@ -1175,6 +1217,30 @@ collections:
                 fields:
                   - { label: "Step Title", name: title, widget: string }
                   - { label: "Step Text", name: text, widget: text }
+
+          - label: "Who You'll Talk To"
+            name: team_label
+            widget: string
+            required: false
+            hint: "Small uppercase label above the strip of photos of Rickey and Shannon on the Mineral Owners page. The photos, names and roles come from Team / People."
+
+          - label: "Who You'll Talk To: Headline"
+            name: team_headline
+            widget: string
+            required: false
+            hint: "Blank shows \"Who You'll Talk To\"."
+
+          - label: "Who You'll Talk To: Text"
+            name: team_intro
+            widget: text
+            required: false
+            hint: "One sentence under the headline. The point is that the owners do the work themselves."
+
+          - label: "Who You'll Talk To: Link"
+            name: team_link
+            widget: string
+            required: false
+            hint: "The link under the photos that goes to the About page. Blank shows \"Read their backgrounds\"."
 
           - label: "Sample Work Band"
             name: sample_feature
@@ -1336,16 +1402,28 @@ collections:
             widget: text
             hint: "The highlighted box that says the samples are invented. It sits above every table. Do not remove it."
 
+          - label: "Fiction Notice Title"
+            name: fiction_notice_title
+            widget: string
+            required: false
+            hint: "The bold line at the top of that box. Blank shows \"Fictional samples\"."
+
+          - label: "Document List Label"
+            name: jump_label
+            widget: string
+            required: false
+            hint: "The label on the row of links that jump down to each sample document. Blank shows \"The four documents\"."
+
           - label: "Format Note"
             name: format_note
             widget: text
-            hint: "The line about working in the client's templates or your own."
+            hint: "The line about working in the client's templates or your own. It sits below the samples."
 
           - label: "Simple File Note"
             name: simple_note
             widget: text
             required: false
-            hint: "The callout under the fiction notice saying this file is a short one on purpose."
+            hint: "The note below the samples saying this file is a short one on purpose."
 
           - label: "How To Read This"
             name: how_to_read
@@ -1759,6 +1837,30 @@ collections:
             required: false
             hint: "The link back to this page from each individual service. Blank shows \"All Services\"."
 
+          - label: "Other Services Heading"
+            name: related_heading
+            widget: string
+            required: false
+            hint: "The heading over the links to the other services, at the foot of each service page. Blank shows \"Other Services\"."
+
+          - label: "Note for Owners (Services page)"
+            name: owner_band
+            widget: object
+            required: false
+            hint: "The line near the top of the Services page that sends landowners to the Mineral Owners page. Leave the text blank to hide it."
+            fields:
+              - { label: "Text", name: text, widget: string, required: false }
+              - { label: "Link Text", name: link_label, widget: string, required: false }
+
+          - label: "Note for Owners (each service)"
+            name: owner_note
+            widget: object
+            required: false
+            hint: "The box on individual service pages that sends landowners to the Mineral Owners page. It only shows on services with \"Show note for owners\" turned on."
+            fields:
+              - { label: "Text", name: text, widget: text, required: false }
+              - { label: "Link Text", name: link_label, widget: string, required: false }
+
           - label: "Google Title (browser tab)"
             name: page_title
             widget: string
@@ -1846,6 +1948,13 @@ collections:
         default: false
         hint: "Adds a box at the foot of this service page pointing to the sample work page. Only worth turning on for services the samples actually illustrate."
 
+      - label: "Show note for owners"
+        name: show_owner_note
+        widget: boolean
+        required: false
+        default: false
+        hint: "Adds a short box pointing landowners to the Mineral Owners page. Turn it on for services a landowner might land on by mistake, such as leasing or right-of-way."
+
       - label: "Closing Headline"
         name: cta_headline
         widget: string
@@ -1863,6 +1972,17 @@ collections:
         widget: string
         required: false
         hint: "The button on that band. Leave blank to use the shared one."
+
+      - label: "Closing Button Goes To"
+        name: cta_link
+        widget: select
+        required: false
+        default: "/contact#project"
+        options:
+          - { label: "Contact page, opened on the project form (companies)", value: "/contact#project" }
+          - { label: "Contact page, opened on the short note (landowners)", value: "/contact#note" }
+          - { label: "Contact page, no form picked", value: "/contact" }
+        hint: "Pick the form that fits who usually reads this service. Most services are for companies."
 
       - label: "Google Title (browser tab)"
         name: seo_title
