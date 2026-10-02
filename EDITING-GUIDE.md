@@ -1,7 +1,7 @@
 # How to Edit Your Website
 
 This guide covers every part of the site you can change yourself, through the built-in editor. You
-don't need to know anything technical, and you can't break the site by using it.
+don't need to know anything technical. Nothing you do can take the site down, and every change can be undone.
 
 ---
 
@@ -35,7 +35,7 @@ The left sidebar lists everything you can edit:
 | **Site Settings** | Your name, logos, phone, email, city, LinkedIn, site description |
 | **Pages** | The content on Home, About, Services, Mineral Owners, Experience, Insights, Contact, Sample Work and Privacy |
 | **Services** | Each of the six service pages |
-| **Team / People** | The people shown at the foot of the About page |
+| **Team / People** | The people shown first on the About page, and in the Who You'll Talk To strip on Home and Mineral Owners |
 | **Insights** | Short articles. Empty to begin with. |
 
 Click a section name to open it.
@@ -61,9 +61,10 @@ simply puts the original words back.
 Three things worth knowing about **Pages**. Every page has a **Page Heading**, the large heading in
 the green band at the top, and a **Page Subtitle**, the line under it. Separately, every page has a
 **Google Title (browser tab)**, which shows in the browser tab and as the headline in Google
-results, and a **Google Description**, the sentence Google shows underneath it. Every page except
-Contact has a **Closing Call to Action**, the band at the very bottom, with its own headline, text
-and button label.
+results, and a **Google Description**, the sentence Google shows underneath it. (The home page's
+Google title and description are in **Site Settings**.) Every page except Page Not Found has a
+**Closing Call to Action**, the band at the very bottom, with its own headline, text and button
+label.
 
 The Google title and description boxes show a counter and stop you at the length Google shows (40
 characters for a page title, because *| Petro Land Ventures* is added to the end automatically, and
@@ -83,7 +84,7 @@ Experience page, the questions on the Mineral Owners page, the people on the Abo
 Insights. Emptying a list is a normal way to turn a section off, and filling it again turns it
 back on.
 
-The "See the sample file" bands and the Privacy page's closing band work the same way with their
+The **Sample Work Band** sections and the Privacy page's closing band work the same way with their
 headline: clear the headline and the band disappears.
 
 The editor also stops the mistakes that would break something. A phone number, email address, web
@@ -102,7 +103,7 @@ These apply across the whole site.
 
 | Field | What to put here |
 |---|---|
-| Professional Name | Your full name and credentials, for example *Jane Smith, CPL* |
+| Business Name | The short business name, Petro Land Ventures. It is added to every browser tab title, so change it only if the business is renamed |
 | Registered Business Name | The company's full registered name, for example *Petro Land Ventures, Inc.* It's the large name at the top of the home page. Leave blank to use Professional Name there. |
 | Tagline | One short line for the footer, for example *Certified Professional Landman* |
 | Logo | The main logo, shown in the header on desktop. Leave blank to show your name as text. |
@@ -162,15 +163,9 @@ A few notes on the trickier fields:
 - The **Value Paragraph** supports basic formatting. Select text to get a toolbar for bold and
   italic.
 
-**Figures Under the Hero** is the band below the headline. Each entry is a figure, a label, and a
-line saying **What it means**. A figure that is a number counts up from zero when the band comes
-into view; one that is letters, like CPL, simply appears. You do not have to do anything to turn
-that on or off, and a visitor who has asked their device for reduced motion sees the figures sit
-still. Two entries read best there: a row of three or more turns into a
-scoreboard, and the coverage map already shows the footprint better than a count of states would.
-Use the **What it means** line to say what a figure actually is, the way the CPL entry explains the
-credential rather than leaving three letters on their own. Only put figures there you can stand
-behind. Empty the list to remove the band.
+**Figures Under the Hero** is the band just below the top banner. Two entries look best. Each has a
+figure (like 45 or CPL), a label, and a line saying **What it means**. Only use figures you can
+stand behind. Empty the list to remove the band.
 
 **Who You'll Talk To** is the strip with Rickey's and Shannon's photos, names and roles, near the
 top of the page. It sits that high on purpose: a landowner decides whether to trust a person before
@@ -207,15 +202,15 @@ to hide the whole band.
 
 ## Editing the About Page
 
-About and Team used to be separate pages. They are one page now: it opens with how you work, then
-introduces the people who do the work. The wording for both lives here, while the people themselves
-are still edited under **Team / People**.
+The About page opens with the people, then **How We Work**, then a paragraph about who you work
+for. The wording lives here, while the people themselves are edited under **Team / People**.
 
 1. Click **Pages**, then **About Page**.
 2. Edit the fields and click **Save**.
 
-The **Introduction** is the short opening paragraph about who you serve. **How We Work** is the
-section below it, and it is the strongest writing on the site, so it is worth keeping sharp.
+**How We Work** comes right after the people. **Who We Work For** is the paragraph under it, about
+the clients and the kinds of work you take on. Each person's own bio belongs under **Team / People**,
+not here.
 
 **Team Section Label** and **Team Section Headline** are the small heading above the people. Adding
 or removing a person happens under **Team / People**, not here.
@@ -237,7 +232,7 @@ tags at the foot of the page, and link out if you give them a web address.
 
 1. Click **Pages**, then **Experience Page**.
 2. Edit the **Introduction** text.
-3. Add, remove, or reorder entries under **States & Regions Served**.
+3. Add, remove, or reorder entries under **Where We've Worked**.
 4. Edit the **Project Types** list.
 5. Add any client testimonials in the **Testimonials** section. Leave it empty and that section
    won't appear on the site at all.
@@ -287,11 +282,15 @@ The contact page offers two paths. The visitor picks one with the buttons above 
   have to fill in a project brief.
 - **I represent a company** is the longer project form.
 
-A link can open either form directly: `/contact#note` opens the short note and `/contact#project`
-opens the project form. The buttons on the Mineral Owners page and on each service already do
-this.
+Buttons elsewhere on the site can open either form directly. Where you choose a button's
+destination, pick "Contact page, opened on the short note" or "Contact page, opened on the project
+form". The buttons on the Mineral Owners page and on each service already do this.
 
-Under **Short Note Form** you can edit every label, the button, the **Success Message**, its own
+The project form's fields all start with **Project Form:** in the editor, so they are easy to tell
+apart from the landowner form. **Message If Sending Fails** and **Button While Sending** are used by
+both forms.
+
+Under **Landowner Note Form** you can edit every label, the button, the **Success Message**, its own
 **Email Subject** and its own **Error Messages**. Keep a response time out of the success message.
 
 **What Happens Next** on this page also appears on the home page, so keep step one general enough
@@ -339,8 +338,9 @@ and **Note for Owners (each service)**, the box described above.
 
 ## Adding or Editing Team Members
 
-Everyone in this section appears near the bottom of the **About** page. There is no separate Team
-page any more. Remove everyone and that part of About disappears on its own, while the rest of the
+Everyone in this section appears first on the **About** page, and their photos, names and roles
+also appear in the Who You'll Talk To strip on Home and Mineral Owners. There is no separate Team
+page. Remove everyone and that part of About disappears on its own, while the rest of the
 page carries on as normal.
 
 **To add someone:**
@@ -366,9 +366,8 @@ The About page updates within a minute or two.
 
 **Headshots.** Photos show as a square, so a square crop with the face centred and a bit of room
 above the head looks best, and it keeps the two headshots side by side looking like a set. A taller
-photo still works; it gets trimmed from the bottom, never the top of the head. When replacing
-someone's photo, upload it under a different file name from the old one (adding the year is
-enough). Images are cached for a day, and a new name makes the change show up right away.
+photo still works; it gets trimmed from the bottom, never the top of the head. The site makes
+smaller copies of each photo by itself, so upload the best version you have.
 
 ---
 
@@ -402,7 +401,7 @@ though it is worth keeping.
 
 ## Blocks on the Mineral Owners Page
 
-Three blocks were added for landowners who are not sure whether to call.
+The page runs top to bottom like this, and each block is in the same order in the editor.
 
 **Service Area Line** is one sentence naming the counties you take work in. Say where you are
 available, not where you have worked before, so it never reads as a claim about past projects.
@@ -420,6 +419,10 @@ time in it, here or anywhere else on the site.
 **Who You'll Talk To** is the same strip of photos as on the home page, with its own wording.
 
 **Sample Work Band** points at the sample file. Clear the headline to hide it.
+
+**Lease Offer Section** comes after the questions and answers. It is deliberately short: a line on
+what arrives in a lease offer and an offer to go through it on a call. Its two lists are empty on
+purpose, because explaining the terms is what the call is for.
 
 ---
 
@@ -452,7 +455,7 @@ land department does not mistake an easy example for the limit of the work.
 **How To Read This** is the two cards, one for a landowner and one for a land department.
 
 **Reader's Notes** are the numbered notes beside each document, under each document's own
-**Reader's Notes** list. **Anchor** decides which part of the document a note sits next to, so
+**Reader's Notes** list. **Sits Next To** decides which part of the document a note sits next to, so
 leave it alone unless you know the part name. Visitors can switch the notes off with the control at
 the top, and the sheets then read as a plain deliverable.
 
@@ -516,6 +519,10 @@ disappear again.
 
 JPG, PNG and WebP all work. There's no need to shrink photos first: the editor resizes anything
 large and converts it to a lighter format as it uploads, so a photo straight off a phone is fine.
+
+**Replacing any image** (a headshot, a logo, a banner): upload the new one under a different file
+name from the old one. Adding the year is enough. Images are cached for a day, and a new name makes
+the change show up right away.
 
 **Banner photos** (the home page hero, the home page closing band and the Mineral Owners header)
 sit behind white text. The site lays a dark green tint over any new photo you upload there, so the
