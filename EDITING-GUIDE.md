@@ -172,6 +172,15 @@ Use the **What it means** line to say what a figure actually is, the way the CPL
 credential rather than leaving three letters on their own. Only put figures there you can stand
 behind. Empty the list to remove the band.
 
+**Who You'll Talk To** is the strip with Rickey's and Shannon's photos, names and roles, near the
+top of the page. It sits that high on purpose: a landowner decides whether to trust a person before
+a firm. The four fields set the small label, the headline, the sentence under it and the link to
+About. The photos, names and roles themselves come from **Team / People**, so a change there shows
+up here too.
+
+The home page also shows **What Happens Next**, the four steps from the Contact page. Edit them
+there (**Pages** → Contact Page).
+
 **To add a testimonial:** scroll to **Testimonials**, click **Add**, and fill in the quote. The
 attribution is optional and a role works better than a name, for example *Operator, East Texas*.
 The section stays hidden until you add the first one.
@@ -186,7 +195,8 @@ project, and a landowner holding a letter.
 - **Hero Button Text** and **Hero Button Link** are the first path. It points at the Mineral Owners
   page.
 - **Second Hero Button** and **Second Hero Button Link** are the second path, for companies. It
-  points at Contact. Clear the text to show only one button.
+  points at Contact, opened on the project form, so a company never has to pick a tab. Clear the
+  text to show only one button.
 
 Under them sits your phone number, which is tappable on a phone. It comes from Site Settings.
 
@@ -272,15 +282,20 @@ collects, only what it is called.
 
 The contact page offers two paths. The visitor picks one with the buttons above the form.
 
-- **I own land or minerals** is the short form: name, phone or email, county and state, and what
+- **I own minerals or land** is the short form: name, phone or email, county and state, and what
   showed up. Four fields is deliberate. Somebody holding a letter they did not expect should not
   have to fill in a project brief.
-- **I have a project** is the longer form, unchanged.
+- **I represent a company** is the longer project form.
+
+A link can open either form directly: `/contact#note` opens the short note and `/contact#project`
+opens the project form. The buttons on the Mineral Owners page and on each service already do
+this.
 
 Under **Short Note Form** you can edit every label, the button, the **Success Message**, its own
 **Email Subject** and its own **Error Messages**. Keep a response time out of the success message.
 
-**What Happens Next** on this page is the same four steps as on Mineral Owners.
+**What Happens Next** on this page also appears on the home page, so keep step one general enough
+for a landowner and a company alike. Mineral Owners has its own copy of the steps.
 
 ---
 
@@ -300,15 +315,25 @@ Each service has its own page, and there are six to start with.
    - **Display Order**, which controls the order services appear in. Lower numbers come first.
    - **Show link to sample work**, which adds the sample file band at the foot of this service
      page. It is on for Title Research, Lease Acquisition, Due Diligence and Mineral & Royalty.
+   - **Show note for owners**, which adds a small box pointing landowners to the Mineral Owners
+     page. It is on for the services a landowner might reach by mistake: Lease Acquisition,
+     Mineral & Royalty, Right-of-Way and Solar.
    - **Closing Headline**, **Closing Text** and **Closing Button Text**, which are the call to
      action at the very bottom of this service page. Leave them blank to fall back to the shared
      one from the Services page.
+   - **Closing Button Goes To**, which picks the form that button opens: the project form for
+     companies, or the short note for landowners.
    - **Google Title (browser tab)** and **Google Description**, which are what Google shows for this
      service. Leave them blank to fall back to the service title and card description.
 3. Click **Save**.
 
 **To add a service:** click **New Service** at the top of the section, fill in the fields, and
-save.
+save. A new service appears by itself in the Services menu at the top of the site, in the footer,
+on the contact form and in the "Other Services" links at the foot of every service page.
+
+On **Pages** → Services Page you will also find **Other Services Heading**, and the two notes that
+point landowners to Mineral Owners: **Note for Owners (Services page)** near the top of that page,
+and **Note for Owners (each service)**, the box described above.
 
 ---
 
@@ -386,8 +411,13 @@ available, not where you have worked before, so it never reads as a claim about 
 somebody recognises their own situation and picks up the phone. Each entry is one sentence. Add or
 remove them freely.
 
+**Header Call Button** and **Header Note Button** are the two buttons in the green band at the
+top. The first dials your phone; the second opens the short landowner form on Contact.
+
 **What Happens Next** is the four steps between a first call and a report. Do not put a response
 time in it, here or anywhere else on the site.
+
+**Who You'll Talk To** is the same strip of photos as on the home page, with its own wording.
 
 **Sample Work Band** points at the sample file. Clear the headline to hide it.
 
@@ -395,10 +425,10 @@ time in it, here or anywhere else on the site.
 
 ## The Sample Work Page
 
-This page shows three specimen documents: an ownership report, the runsheet behind it, and a lease
-acquisition report for a lease on the same tract. It is what someone reads when they want to know
-what they are actually buying, and it is linked from Title Research, Lease Acquisition, Experience
-and the Mineral Owners page.
+This page shows four specimen documents: an ownership report, the runsheet behind it, a lease
+acquisition report for a lease on the same tract, and a supplemental report that resolves the open
+quarter. It is what someone reads when they want to know what they are actually buying, and it is
+linked from the home page, Services, most service pages, Experience and the Mineral Owners page.
 
 **Everything on it is invented, and it has to stay that way.** The county, the township, the
 people, the companies, the tract, the dollar figures and the recording references were all made up
@@ -412,6 +442,9 @@ client's business, not a sample.
 
 **Fiction Notice** is the highlighted box that tells the reader the samples are invented. It sits
 above every table on purpose. Do not delete it.
+
+**Fiction Notice Title** is the bold line at the top of that box, and **Document List Label** is
+the label on the row of links that jump down to each sample.
 
 **Simple File Note** is the line admitting the sample is a short file on purpose. It is there so a
 land department does not mistake an easy example for the limit of the work.

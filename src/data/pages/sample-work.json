@@ -4,7 +4,9 @@
   "meta_description": "A fictional land file from first deed to signed lease and resolved heirship, with reader's notes explaining what each part of the report decides.",
   "page_subtitle": "One fictional tract, from the first deed to a signed lease and a resolved heirship.",
   "intro": "Most land work ends in a few documents: a runsheet that lists every instrument in the chain, an ownership report that states who owns what and what stands in the way, and, once a lease is taken, an acquisition report that tells the client exactly what was bought. When the record leaves a question open, a supplemental report closes it.\n\nThe file below follows one fictional tract through all four, with reader's notes beside each document.",
+  "fiction_notice_title": "Fictional samples",
   "fiction_notice": "Everything on this page is fictional. The county, township, people, companies, tract, dollar figures, and recording references were invented for illustration and do not describe any real property, owner, or transaction.",
+  "jump_label": "The four documents",
   "format_note": "Formats vary by client and by state. We work in your templates or in ours. The content stays the same: every instrument accounted for, every open question stated as open.",
   "mor": {
     "title": "Mineral Ownership Report",
@@ -557,7 +559,7 @@
       },
       {
         "title": "Royalty and overriding interests carved out along the way",
-        "text": "A non-participating royalty or an override does not change who signs the lease, but it changes who gets paid, and it has to be carried through every later conveyance."
+        "text": "A non-participating royalty or an override (a share of production carved out of the lease) does not change who signs the lease, but it changes who gets paid, and it has to be carried through every later conveyance."
       }
     ]
   },

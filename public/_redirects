@@ -1,2 +1,5 @@
 # The Team page merged into About. Anything already linking to /people keeps working.
 /people  /about  301
+/people/  /about  301
+# Some tools look for the sitemap at the conventional name; the real one is an index.
+/sitemap.xml  /sitemap-index.xml  301

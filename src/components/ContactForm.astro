@@ -341,6 +341,23 @@ const stateNames = (states as { name: string }[]).map((s) => s.name);
 </style>
 
 <script>
+  // A link to /contact#project (the home page's "I represent a company" button) opens the
+  // project form; /contact#note opens the landowner note. Without a hash the landowner
+  // note shows, as before. Either way the form is scrolled into view, since on a phone the
+  // contact details above it fill the first screen.
+  function openFormFromHash() {
+    const which = location.hash === '#project' ? 'path-project'
+      : location.hash === '#note' ? 'path-short'
+      : null;
+    if (!which) return;
+    const radio = document.getElementById(which) as HTMLInputElement | null;
+    if (!radio) return;
+    radio.checked = true;
+    document.querySelector('.contact-form-block')?.scrollIntoView({ block: 'start' });
+  }
+  openFormFromHash();
+  window.addEventListener('hashchange', openFormFromHash);
+
   // The short path posts to the same endpoint with its own four checks.
   const shortForm    = document.getElementById('short-form') as HTMLFormElement | null;
   const shortSuccess = document.getElementById('short-success') as HTMLElement | null;

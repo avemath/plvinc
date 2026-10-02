@@ -5,17 +5,21 @@ import ServiceList from '../components/ServiceList.astro';
 import CoverageMap from '../components/CoverageMap.astro';
 import CallToAction from '../components/CallToAction.astro';
 import SampleFeature from '../components/SampleFeature.astro';
+import TeamStrip from '../components/TeamStrip.astro';
+import HowItWorks from '../components/HowItWorks.astro';
+import contact from '../data/pages/contact.json';
 import { getCollection } from 'astro:content';
 import { renderMarkdown } from '../utils/markdown';
 import { cssUrl } from '../utils/cssUrl';
 import home from '../data/pages/home.json';
 import settings from '../data/settings.json';
+import { telHref } from '../utils/phone';
 
 const services = await getCollection('services');
 const sorted   = [...services].sort((a, b) => a.data.sort_order - b.data.sort_order);
 const valueParagraphHtml = await renderMarkdown(home.value_paragraph);
 
-const telHref = settings.phone ? `tel:${settings.phone.replace(/[^\d+]/g, '')}` : '';
+const tel = telHref(settings.phone);
 
 // The registered name leads the hero. Falls back to the trading name so the hero
 // never renders a blank line if legal_name is cleared in Site Settings.
@@ -55,7 +59,7 @@ const heroName = settings.legal_name || settings.professional_name;
 
         {settings.phone && (
           <p class="hero-phone">
-            <a href={telHref} aria-label={`Call ${settings.phone}`}>
+            <a href={tel} aria-label={`Call ${settings.phone}`}>
               <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor"
                    stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
                 <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6A19.79 19.79 0 0 1 2.12 4.18 2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.9.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92Z" />
@@ -92,8 +96,24 @@ const heroName = settings.legal_name || settings.professional_name;
     </div>
   </section>
 
-  <!-- ─── Coverage map ─── -->
-  <CoverageMap />
+  <!-- ─── Who you'll talk to ─── -->
+  <TeamStrip
+    label={home.team_label}
+    headline={home.team_headline}
+    intro={home.team_intro}
+    link={home.team_link}
+  />
+
+  <!-- ─── Sample file ─── -->
+  {home.sample_feature?.headline && (
+    <SampleFeature
+      label={home.sample_feature.label}
+      headline={home.sample_feature.headline}
+      text={home.sample_feature.text}
+      button={home.sample_feature.button}
+      tone="alt"
+    />
+  )}
 
   <!-- ─── Services overview ─── -->
   <section>
@@ -116,17 +136,6 @@ const heroName = settings.legal_name || settings.professional_name;
       </p>
     </div>
   </section>
-
-  <!-- ─── Sample file ─── -->
-  {home.sample_feature?.headline && (
-    <SampleFeature
-      label={home.sample_feature.label}
-      headline={home.sample_feature.headline}
-      text={home.sample_feature.text}
-      button={home.sample_feature.button}
-      tone="alt"
-    />
-  )}
 
   <!-- ─── Testimonials, hidden until at least one is added ─── -->
   {home.testimonials?.length > 0 && (
@@ -154,11 +163,25 @@ const heroName = settings.legal_name || settings.professional_name;
     </section>
   )}
 
+  <!-- ─── What happens when you get in touch (the same steps as the Contact page) ─── -->
+  {contact.how_it_works?.headline && (
+    <HowItWorks
+      label={contact.how_it_works.label}
+      headline={contact.how_it_works.headline}
+      steps={contact.how_it_works.steps}
+    />
+  )}
+
+  <!-- ─── Coverage map ─── -->
+  <CoverageMap />
+
   <!-- ─── Closing CTA ─── -->
   <CallToAction
     headline={home.cta.headline}
     text={home.cta.text}
     button={home.cta.button}
     image={home.cta.image}
+    phone={settings.phone}
+    phoneHref={tel}
   />
 </Base>

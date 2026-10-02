@@ -18,16 +18,55 @@ export async function getStaticPaths() {
 
 const { entry }       = Astro.props;
 const { Content }     = await render(entry);
-const { title, icon, show_sample_link, cta_headline, cta_text, cta_button } = entry.data;
+const { title, icon, show_sample_link, show_owner_note, cta_headline, cta_text, cta_button, cta_link } = entry.data;
+
+// The other services, for the "related" links at the foot of the page.
+const others = (await getCollection('services'))
+  .filter((s) => s.id !== entry.id)
+  .sort((a, b) => a.data.sort_order - b.data.sort_order);
+
+const site = Astro.site ?? new URL('https://plvinc.com');
+const servicesLabel = text(settings.nav_labels?.services, 'Services');
+const ownerNote = (servicesPage as Record<string, any>).owner_note ?? {};
+
+// Breadcrumbs for search engines, matching the visible trail, plus the service itself.
+const schema = {
+  '@context': 'https://schema.org',
+  '@graph': [
+    {
+      '@type': 'BreadcrumbList',
+      itemListElement: [
+        { '@type': 'ListItem', position: 1, name: text(settings.nav_labels?.home, 'Home'), item: new URL('/', site).toString() },
+        { '@type': 'ListItem', position: 2, name: servicesLabel, item: new URL('/services', site).toString() },
+        { '@type': 'ListItem', position: 3, name: title },
+      ],
+    },
+    {
+      '@type': 'Service',
+      name: title,
+      description: entry.data.card_description,
+      provider: { '@id': new URL('/#org', site).toString() },
+      url: new URL(`/services/${entry.id}`, site).toString(),
+    },
+  ],
+};
 ---
 
 <Base
   title={entry.data.seo_title || `${title} | ${settings.professional_name}`}
   description={entry.data.seo_description || entry.data.card_description}
+  schema={schema}
 >
   <!-- Header -->
   <div class="service-detail-header">
     <div class="container">
+      <nav class="breadcrumb" aria-label="Breadcrumb">
+        <ol role="list">
+          <li><a href="/">{text(settings.nav_labels?.home, 'Home')}</a></li>
+          <li><a href="/services">{servicesLabel}</a></li>
+          <li><span aria-current="page">{title}</span></li>
+        </ol>
+      </nav>
       {icon && (
         <div class="service-detail-icon">
           <ServiceIcon name={icon} size={48} class="service-detail-svg" />
@@ -44,8 +83,24 @@ const { title, icon, show_sample_link, cta_headline, cta_text, cta_button } = en
         <Content />
       </div>
 
-      <!-- Just the way back. The page ends on its own call to action, and a
-           second button to /contact three blocks above it was noise. -->
+      {show_owner_note && (
+        <aside class="owner-note" aria-label="For landowners">
+          <p>
+            {text(ownerNote.text, 'Own the land or the minerals yourself? This page is written for the companies we work for. Our page for owners explains what to expect in plain terms.')}
+            {' '}<a href="/mineral-owners">{text(ownerNote.link_label, 'Start here')} <span aria-hidden="true">→</span></a>
+          </p>
+        </aside>
+      )}
+
+      {others.length > 0 && (
+        <nav class="related-services" aria-labelledby="related-services-heading">
+          <h2 id="related-services-heading">{text(servicesPage.related_heading, 'Other Services')}</h2>
+          <ul role="list">
+            {others.map((o) => <li><a href={`/services/${o.id}`}>{o.data.title}</a></li>)}
+          </ul>
+        </nav>
+      )}
+
       <div class="service-nav">
         <a href="/services" class="back-link">
           <span aria-hidden="true">←</span> {text(servicesPage.back_link_label, 'All Services')}
@@ -68,6 +123,7 @@ const { title, icon, show_sample_link, cta_headline, cta_text, cta_button } = en
     headline={cta_headline || servicesPage.cta.headline}
     text={cta_text || servicesPage.cta.text}
     button={cta_button || servicesPage.cta.button}
+    href={cta_link}
     tone="light"
   />
 </Base>
