@@ -27,6 +27,11 @@ const services = defineCollection({
     // the Services page, so a new service still ends on a call to action.
     cta_headline: optionalText,
     cta_text: optionalText,
+    // Where this page's closing button goes: most service visitors are companies, so the
+    // project form; a page written for owners can send them to the landowner note.
+    cta_link: z.enum(['/contact#project', '/contact#note', '/contact']).nullish().transform((v) => v ?? '/contact#project'),
+    // Shows a short "own land or minerals? start here" note linking to the owners page.
+    show_owner_note: z.boolean().nullish().transform((v) => v ?? false),
     cta_button: optionalText,
   }),
 });

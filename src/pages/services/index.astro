@@ -3,6 +3,7 @@ import Base from '../../layouts/Base.astro';
 import { text } from '../../utils/labels';
 import ServiceCard from '../../components/ServiceCard.astro';
 import CallToAction from '../../components/CallToAction.astro';
+import SampleFeature from '../../components/SampleFeature.astro';
 import { getCollection } from 'astro:content';
 import page from '../../data/pages/services.json';
 import settings from '../../data/settings.json';
@@ -24,6 +25,12 @@ const sorted   = [...services].sort((a, b) => a.data.sort_order - b.data.sort_or
 
   <section class="section-alt">
     <div class="container">
+      {page.owner_band?.text && (
+        <p class="owner-band">
+          {page.owner_band.text}{' '}
+          <a href="/mineral-owners">{text(page.owner_band.link_label, 'Start with our page for owners')} <span aria-hidden="true">→</span></a>
+        </p>
+      )}
       <div class="services-grid">
         {sorted.map((svc) => (
           <ServiceCard
@@ -37,10 +44,20 @@ const sorted   = [...services].sort((a, b) => a.data.sort_order - b.data.sort_or
     </div>
   </section>
 
+  {page.sample_feature?.headline && (
+    <SampleFeature
+      label={page.sample_feature.label}
+      headline={page.sample_feature.headline}
+      text={page.sample_feature.text}
+      button={page.sample_feature.button}
+    />
+  )}
+
   <CallToAction
     headline={page.cta.headline}
     text={page.cta.text}
     button={page.cta.button}
+    href="/contact#project"
     tone="light"
   />
 </Base>

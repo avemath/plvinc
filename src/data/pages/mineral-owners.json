@@ -1,7 +1,9 @@
 {
-  "page_heading": "Mineral Owners",
+  "page_heading": "Got a Lease Offer or a Letter About Your Minerals?",
   "header_image": "/images/uploads/mineral-owners-lease-map.jpg",
-  "page_subtitle": "Plain answers about what you own and what you have been offered.",
+  "page_subtitle": "Before you sign anything, we will read the record and tell you in plain English what you own and what the offer says.",
+  "header_call_label": "Call",
+  "header_note_label": "Send us the letter",
   "meta_description": "Help for Pennsylvania mineral owners with lease offers, inherited mineral rights, division orders and royalty questions, from Certified Professional Landmen.",
   "intro": "If someone has approached you about leasing your minerals, crossing your land, or signing a division order, you do not have to work out what it means on your own.\n\nWe are Certified Professional Landmen. We read the public record for a living. We can tell you what the record shows about your ownership, what a document in front of you actually says, and, just as importantly, what the record does not settle.",
   "services_label": "How We Help",
@@ -9,7 +11,7 @@
   "services": [
     {
       "title": "Mineral ownership reports",
-      "description": "A written report of what the public record shows you own, how that interest came to you, and where the chain of title is unclear or incomplete."
+      "description": "A written report of what the public record shows you own, how that interest came to you, and where the chain of title (every transfer from one owner to the next) is unclear or incomplete."
     },
     {
       "title": "Heirship and succession research",
@@ -33,17 +35,17 @@
     }
   ],
   "reasons_to_call": {
-    "headline": "Common Reasons People Call Us",
+    "headline": "Does One of These Sound Like You?",
     "intro": "Most people call us about one of these.",
     "items": [
       {
-        "text": "I got a lease offer and want to understand it before I respond."
+        "text": "I got a lease offer and want to understand it before I answer."
       },
       {
-        "text": "I inherited mineral rights and I am not sure what I own."
+        "text": "I inherited mineral rights and I'm not sure what I own."
       },
       {
-        "text": "A division order showed up and I do not know if the decimal is right."
+        "text": "A division order came in the mail and I don't know if the decimal is right."
       },
       {
         "text": "My royalty check stopped, dropped, or looks wrong."
@@ -52,7 +54,7 @@
         "text": "A pipeline, solar, or wind company contacted me about my land."
       },
       {
-        "text": "I am buying or selling land and need to know about the minerals."
+        "text": "I'm buying or selling land and need to know about the minerals."
       }
     ],
     "closing": "If any of these sound familiar, call us and we will look at it with you.",
@@ -80,7 +82,7 @@
     "terms": [
       {
         "title": "Acreage",
-        "text": "The bonus is paid per net mineral acre. The acreage stated in the lease and the interest you are credited with decide the size of the check."
+        "text": "The bonus is paid per net mineral acre. The acreage stated in the lease and the interest you are credited with decide the size of the check. If you own half the minerals under 40 acres, you have 20 net mineral acres."
       },
       {
         "title": "Primary term and option to extend",
@@ -126,6 +128,7 @@
     "closing": "We can check an offer against the record and explain what each clause does, so you know what the record shows you own before you respond. Call us and we will walk through it with you."
   },
   "how_it_works": {
+    "label": "How It Works",
     "headline": "What Happens When You Contact Us",
     "steps": [
       {
@@ -146,28 +149,36 @@
       }
     ]
   },
+  "team_label": "The Landmen",
+  "team_headline": "Who You'll Talk To",
+  "team_intro": "When you call, you reach one of the two Certified Professional Landmen who will do the work, not a call center.",
+  "team_link": "Read their backgrounds",
   "faq_label": "Common Questions",
   "faq_headline": "Questions We Are Asked Often",
   "faq": [
     {
-      "question": "What does a landman actually do?",
-      "answer": "A landman works out who owns what, using the public record. In practice that means going through deeds, leases, wills, probate files and court records at the county courthouse, tracing an interest back through every transfer it has been through, and writing up what the record shows. Certified Professional Landman is the credential the American Association of Professional Landmen issues for that work."
-    },
-    {
-      "question": "I inherited minerals and I am not sure what I own. Can you find out?",
-      "answer": "Usually, yes, and it is ordinary work for us. We trace the interest back through the deeds and the probate records and report what the record supports. Inherited interests often have gaps in them, where an estate was never settled or a transfer was never filed, sometimes several generations back and in a county nobody thought to look in. Those gaps are exactly what we go looking for."
-    },
-    {
-      "question": "Can you tell me whether the offer I received is a fair price?",
-      "answer": "We can tell you whether the offer describes the right tract, whether the interest it credits you with matches what the record shows, and which of the terms will matter most over the life of the agreement. Our job is to make sure any decision you make is based on an accurate picture of what you actually own and what the offer actually says. Send us the offer and we will go through it with you clause by clause."
+      "question": "What will it cost?",
+      "answer": "It depends on the scope: how many tracts are involved, how far back the title has to be run, and whether you need a written report you can hand to someone else or an informal read on what you are looking at. Send us the details and we will tell you what the work involves and what it costs before any of it starts."
     },
     {
       "question": "How long does this take?",
       "answer": "It depends on the county and on how far back the chain has to be run. Some counties have everything indexed and searchable online. Others mean a day at the courthouse and records filed under a name spelled three different ways. Once we know the tract and the county we can give you a realistic estimate, and we would rather do that at the start than halfway through."
     },
     {
-      "question": "What will it cost?",
-      "answer": "It depends on the scope: how many tracts are involved, how far back the title has to be run, and whether you need a written report you can hand to someone else or an informal read on what you are looking at. Send us the details and we will tell you what the work involves and what it costs before any of it starts."
+      "question": "I inherited minerals and I am not sure what I own. Can you find out?",
+      "answer": "Usually, yes, and it is ordinary work for us. We trace the interest back through the deeds and the probate records and report what the record supports. Inherited interests often have gaps in them, where an estate was never settled or a transfer was never filed, sometimes several generations back and in a county nobody thought to look in. Those gaps are exactly what we go looking for."
+    },
+    {
+      "question": "What is a division order?",
+      "answer": "The form an operator sends before royalty payments start. It states your share of the well as a decimal, and your checks follow that number, so it is worth checking against the record before you sign and return it. We can tell you how the decimal was worked out and whether it matches what the record shows you own."
+    },
+    {
+      "question": "What does a landman actually do?",
+      "answer": "A landman works out who owns what, using the public record. In practice that means going through deeds, leases, wills, probate files and court records at the county courthouse, tracing an interest back through every transfer it has been through, and writing up what the record shows. Certified Professional Landman is the credential the American Association of Professional Landmen issues for that work."
+    },
+    {
+      "question": "Can you tell me whether the offer I received is a fair price?",
+      "answer": "We can tell you whether the offer describes the right tract, whether the interest it credits you with matches what the record shows, and which of the terms will matter most over the life of the agreement. Our job is to make sure any decision you make is based on an accurate picture of what you actually own and what the offer actually says. Send us the offer and we will go through it with you clause by clause."
     },
     {
       "question": "What do you need from me to get started?",
@@ -175,7 +186,7 @@
     }
   ],
   "pennsylvania_headline": "Pennsylvania mineral owners",
-  "pennsylvania_note": "In Pennsylvania the surface and the minerals are often owned separately, and severed oil, gas, and coal estates are common. Deeds and oil and gas leases are recorded with the county Recorder of Deeds, and a decedent's estate is handled through the county Register of Wills and the Orphans' Court. Under the Dunham Rule, reaffirmed in Butler v. Charles Powers Estate (2013), a deed that reserves \"minerals\" does not by itself include oil and gas unless the instrument says so. Pennsylvania has no general forced pooling for the Marcellus, and the Guaranteed Minimum Royalty Act (58 P.S. § 33.3) requires an oil and gas lease to guarantee the owner at least a one-eighth royalty. This is general information, not legal advice; an attorney can tell you how it applies to your own deed or lease.",
+  "pennsylvania_note": "- Surface and minerals are often owned separately here, and old deeds often split off the oil, gas or coal.\n- Deeds and leases are filed with the county Recorder of Deeds; estates go through the county Register of Wills and the Orphans' Court.\n- A deed that reserves \"minerals\" does not by itself include oil and gas unless it says so (the Dunham Rule, reaffirmed in *Butler v. Charles Powers Estate*, 2013).\n- Pennsylvania has no general forced pooling for the Marcellus.\n- By law (the Guaranteed Minimum Royalty Act, 58 P.S. § 33.3), an oil and gas lease must guarantee the owner at least a one-eighth (12.5%) royalty.\n\nThis is general information, not legal advice; an attorney can tell you how it applies to your own deed or lease.",
   "conflict_note": "We also acquire leases for operators. Under the AAPL Code of Ethics and Standards of Practice, which require a land professional to disclose any interest that may conflict with a client, we will not review your offer on a tract where we are already working for the other side, and we will tell you up front if that is the case.",
   "disclaimer": "What we do is research and report the public record: what you own, what it shows, and where the exposure sits. If your situation ever calls for more than that, we will say so when we talk. We are landmen, not attorneys, and nothing on this site is legal advice. Many owners keep their own attorney in the loop, and we work alongside one comfortably.",
   "cta": {
