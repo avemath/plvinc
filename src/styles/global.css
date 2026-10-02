@@ -12,14 +12,21 @@
      clears it at 6.2:1 and reads as the same accent. */
   --gold-light:    #D9BE8E;
   --cream:         #FAFAF8;
-  --cream-dark:    #F3F1EC;
+  /* The alternate section background. #F3F1EC was 1.08:1 against cream, so the bands that
+     are meant to separate sections could not be told apart. This sand is visibly distinct. */
+  --cream-dark:    #ECE6DA;
   --border:        #DDD8D0;
   --text:          #1A1A1A;
   --text-muted:    #5C5C5C;
   /* #8A8A8A measured 3.3:1 on --cream and 3.45:1 on white, under the 4.5:1 AA floor
      for the small labels that use it. This clears 4.5:1 on both. */
-  --text-light:    #6E6E6E;
+  --text-light:    #606060;
   --white:         #FFFFFF;
+
+  /* The one colour that means "act here": primary buttons only. Green carries structure,
+     gold is ornament, terracotta is the action. White text on it is 4.99:1. */
+  --action:        #B4532A;
+  --action-hover:  #9A4423;
 
   --font-heading: 'Manrope', system-ui, -apple-system, sans-serif;
   --font-sans:  'Inter', system-ui, -apple-system, sans-serif;
@@ -125,7 +132,8 @@ section { padding: 5rem 0; }
   display: inline-flex;
   align-items: center;
   gap: .6rem;
-  font-size: .75rem;
+  /* 13px rather than 12: these small capitals were hard going for older readers. */
+  font-size: .8125rem;
   font-weight: 700;
   text-transform: uppercase;
   letter-spacing: .12em;
@@ -173,13 +181,28 @@ hr.divider {
 }
 
 .btn-primary {
-  background: var(--green-dark);
+  background: var(--action);
   color: var(--white);
-  border-color: var(--green-dark);
+  border-color: var(--action);
 }
 .btn-primary:hover {
-  background: var(--green-mid);
-  border-color: var(--green-mid);
+  background: var(--action-hover);
+  border-color: var(--action-hover);
+}
+
+/* The main action on a photo (home hero, the home closing band) takes the action colour
+   too. On the flat green bands the white button stays, since terracotta on that green is
+   too close in lightness to stand out. */
+.hero-paths .btn-white:first-child,
+.cta-band-image .btn-white {
+  background: var(--action);
+  border-color: var(--action);
+  color: var(--white);
+}
+.hero-paths .btn-white:first-child:hover,
+.cta-band-image .btn-white:hover {
+  background: var(--action-hover);
+  border-color: var(--action-hover);
 }
 
 .btn-outline {
@@ -1043,8 +1066,24 @@ hr.divider {
 .contact-grid {
   display: grid;
   grid-template-columns: 1fr 1.4fr;
-  gap: 5rem;
+  grid-template-areas:
+    "primary form"
+    "more    form";
+  grid-template-rows: auto 1fr;
+  column-gap: 5rem;
+  row-gap: 1.25rem;
   align-items: start;
+}
+.contact-primary   { grid-area: primary; }
+.contact-form-area { grid-area: form; }
+.contact-more      { grid-area: more; }
+@media (max-width: 900px) {
+  .contact-grid {
+    grid-template-columns: 1fr;
+    grid-template-areas: "primary" "form" "more";
+    grid-template-rows: auto;
+    row-gap: 2.5rem;
+  }
 }
 
 .contact-details { display: flex; flex-direction: column; gap: 1.25rem; }
@@ -1086,11 +1125,17 @@ a.contact-detail-value:hover { color: var(--green-dark); }
    ============================================================ */
 .contact-form-block h2 { margin-bottom: 1.5rem; }
 
-.contact-form {
+.contact-form,
+#short-form,
+#contact-form {
   display: flex;
   flex-direction: column;
-  gap: 1.2rem;
+  /* The forms never carried the .contact-form class, so their fields had no gap and each
+     label sat as close to the box above as to its own. */
+  gap: 1.25rem;
 }
+#short-form .btn,
+#contact-form .btn { align-self: flex-start; }
 
 .form-group { display: flex; flex-direction: column; gap: .4rem; }
 
@@ -1313,8 +1358,8 @@ a.contact-detail-value:hover { color: var(--green-dark); }
   margin: 0 auto;
   padding: 0 1.5rem 3.5rem;
   display: grid;
-  grid-template-columns: 2fr 1fr 1fr;
-  gap: 3rem;
+  grid-template-columns: 1.6fr 1fr 1.1fr .8fr;
+  gap: 2.5rem;
 }
 
 .footer-name {
@@ -1546,7 +1591,9 @@ a.contact-detail-value:hover { color: var(--green-dark); }
 
   .contact-grid {
     grid-template-columns: 1fr;
-    gap: 3rem;
+    grid-template-areas: "primary" "form" "more";
+    grid-template-rows: auto;
+    gap: 2.5rem;
   }
 
   .footer-inner {
@@ -2968,8 +3015,10 @@ a.contact-detail-value:hover { color: var(--green-dark); }
     color: var(--white);
     background: var(--green-dark);
   }
-  .sticky-contact-write { background: var(--green-mid); }
-  .sticky-contact a:active { background: #123326; }
+  .sticky-contact-call { background: var(--action); }
+  .sticky-contact-write { background: var(--green-dark); }
+  .sticky-contact-write:active { background: #123326; }
+  .sticky-contact-call:active { background: var(--action-hover); }
 
   /* Room for the bar so it never covers the last line of a page. */
   .site-footer { padding-bottom: 4.5rem; }
@@ -3086,3 +3135,188 @@ body { font-size: 1.125rem; }
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
 }
+
+/* ============================================================
+   Team strip (Home, Mineral Owners)
+   ============================================================ */
+.team-strip-list {
+  list-style: none;
+  padding: 0;
+  margin: 0 auto;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 2rem 3.5rem;
+}
+.team-strip-person {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  max-width: 220px;
+}
+.team-strip-photo {
+  width: 140px;
+  height: 140px;
+  border-radius: 50%;
+  object-fit: cover;
+  object-position: 50% 20%;
+  border: 3px solid var(--white);
+  box-shadow: var(--shadow-md);
+  margin-bottom: 1rem;
+}
+.team-strip-photo-empty { display: block; background: var(--green-pale); }
+.team-strip-name { font-family: var(--font-heading); font-weight: 700; font-size: 1.1rem; color: var(--text); }
+.team-strip-role { font-size: .9rem; color: var(--green-dark); margin-top: .2rem; }
+.team-strip .section-aside { margin-top: 2rem; }
+
+/* Lists written in markdown inside a short aside read as one line, not a block. */
+.section-aside > p:last-child { margin-bottom: 0; }
+
+/* Anchored jumps (#coverage, FAQ questions) land below the sticky header. */
+html { scroll-padding-top: calc(var(--nav-height) + 1rem); }
+
+/* Buttons inside a page header band (Mineral Owners). */
+.page-header-actions {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: .75rem 1rem;
+  margin-top: 1.75rem;
+}
+
+/* ============================================================
+   Services dropdown in the main menu
+   ============================================================ */
+.nav-has-sub { position: relative; display: flex; align-items: center; }
+.nav-has-sub > a { padding-right: .35rem; }
+.nav-has-sub > a::after { right: .35rem; }
+.nav-sub-toggle {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 24px;
+  height: 24px;
+  margin-right: .4rem;
+  padding: 0;
+  border: 0;
+  border-radius: var(--radius);
+  background: none;
+  color: var(--text-muted);
+  cursor: pointer;
+}
+.nav-sub-toggle:hover { color: var(--green-dark); }
+.nav-sub-toggle svg { transition: transform var(--transition); }
+.nav-has-sub.is-open .nav-sub-toggle svg { transform: rotate(180deg); }
+
+.nav-sub {
+  display: none;
+  list-style: none;
+  margin: 0;
+  padding: .5rem 0;
+}
+.nav-links .nav-sub a {
+  white-space: normal;
+  font-size: .9rem;
+}
+.nav-links .nav-sub a::after { display: none; }
+.nav-links .nav-sub a:hover,
+.nav-links .nav-sub a[aria-current="page"] { color: var(--green-dark); background: var(--green-pale); }
+
+@media (min-width: 769px) {
+  .nav-sub {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    z-index: 50;
+    min-width: 290px;
+    background: var(--white);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-lg);
+  }
+  .nav-sub a { padding: .55rem 1.1rem; border-radius: 0; }
+  .nav-has-sub:hover .nav-sub,
+  .nav-has-sub:focus-within .nav-sub,
+  .nav-has-sub.is-open .nav-sub { display: block; }
+}
+
+@media (max-width: 768px) {
+  .nav-has-sub { flex-wrap: wrap; }
+  .nav-has-sub > a { flex: 1; }
+  .nav-sub-toggle { width: 44px; height: 44px; margin-right: 1rem; }
+  .nav-has-sub.is-open .nav-sub { display: block; width: 100%; padding: 0 0 .4rem; }
+  .nav-links .nav-sub a { padding: .55rem 1.5rem .55rem 2.5rem; font-size: .95rem; }
+}
+
+/* ============================================================
+   Service pages: breadcrumb, owner note, related services
+   ============================================================ */
+.breadcrumb ol {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 1.5rem;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: .25rem .5rem;
+  font-size: .875rem;
+}
+.breadcrumb li { display: inline-flex; align-items: center; gap: .5rem; color: rgba(255,255,255,.85); }
+.breadcrumb li + li::before { content: '›'; color: var(--gold-light); }
+.breadcrumb a { color: rgba(255,255,255,.85); text-decoration: underline; text-underline-offset: 3px; }
+.breadcrumb a:hover { color: var(--white); }
+.breadcrumb [aria-current="page"] { color: var(--white); }
+
+.owner-note {
+  margin: 2rem 0 0;
+  padding: 1.1rem 1.25rem;
+  background: var(--green-pale);
+  border-left: 4px solid var(--green-mid);
+  border-radius: var(--radius);
+}
+.owner-note p { margin: 0; color: var(--text); font-size: 1rem; line-height: 1.6; }
+.owner-note a { color: var(--green-dark); font-weight: 600; }
+
+.related-services { margin: 2.5rem 0 0; }
+.related-services h2 { font-size: 1.15rem; margin-bottom: .75rem; }
+.related-services ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: .5rem 1.5rem;
+}
+.related-services a { color: var(--green-mid); text-decoration: underline; text-underline-offset: 2px; }
+.related-services a:hover { color: var(--green-dark); }
+.related-services + .service-nav { margin-top: 2rem; }
+
+.owner-band {
+  text-align: center;
+  margin: 0 auto 2rem;
+  font-size: 1rem;
+  color: var(--text);
+}
+.owner-band a { color: var(--green-dark); font-weight: 600; }
+
+/* Sample Work: links straight to each document. */
+.doc-jump {
+  margin: 2rem 0 0;
+  padding: 1.25rem 1.5rem;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  background: var(--white);
+}
+.doc-jump-label {
+  margin: 0 0 .6rem;
+  font-size: .8rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: .08em;
+  color: var(--green-dark);
+}
+.doc-jump ol { margin: 0; padding-left: 1.25rem; display: grid; gap: .35rem; }
+.doc-jump a { color: var(--green-mid); text-decoration: underline; text-underline-offset: 2px; }
+.doc-jump a:hover { color: var(--green-dark); }
+.sample-after-notes { padding-top: 0; }
