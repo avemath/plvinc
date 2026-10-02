@@ -29,7 +29,11 @@ const services = defineCollection({
     cta_text: optionalText,
     // Where this page's closing button goes: most service visitors are companies, so the
     // project form; a page written for owners can send them to the landowner note.
-    cta_link: z.enum(['/contact#project', '/contact#note', '/contact']).nullish().transform((v) => v ?? '/contact#project'),
+    // The Studio saves an emptied dropdown as "", so that counts as unset rather than
+    // failing the build.
+    cta_link: z
+      .preprocess((v) => (v === '' ? null : v), z.enum(['/contact#project', '/contact#note', '/contact']).nullish())
+      .transform((v) => v ?? '/contact#project'),
     // Shows a short "own land or minerals? start here" note linking to the owners page.
     show_owner_note: z.boolean().nullish().transform((v) => v ?? false),
     cta_button: optionalText,

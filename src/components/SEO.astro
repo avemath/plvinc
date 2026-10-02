@@ -34,6 +34,8 @@ const abs = (u: string) =>
 // Per-page image wins, then the image set in Site Settings, then the generated default so
 // a shared link is never a bare text card.
 const ogImage = abs(image || settings.seo_share_image || '/images/og-default.png');
+// Only the bundled card has a known size; Studio uploads are resized on the way in.
+const ogIsDefault = ogImage.endsWith('/images/og-default.png');
 
 // The brand belongs in the tab, the bookmark and the search result, so every title carries it.
 // Appending centrally means a title written later in the CMS picks it up without anyone
@@ -77,6 +79,7 @@ const business = {
           '@type': 'PostalAddress',
           ...(s.city ? { addressLocality: s.city } : {}),
           addressRegion: s.state,
+          ...(s.postal_code ? { postalCode: s.postal_code } : {}),
           addressCountry: 'US',
         },
       }
@@ -91,6 +94,10 @@ const business = {
     : {}),
   ...(s.linkedin_url ? { sameAs: [s.linkedin_url] } : {}),
 };
+
+// Studio text ends up inside these script tags, so "<" is escaped: a stray "</script>"
+// in an answer would otherwise end the block early and spill into the page.
+const jsonLd = (data: unknown) => JSON.stringify(data).replace(/</g, '\\u003c');
 ---
 
 <title>{fullTitle}</title>
@@ -101,25 +108,27 @@ const business = {
 }
 
 <meta property="og:type"        content="website" />
-<meta property="og:url"         content={canonicalURL} />
+<meta property="og:locale"      content="en_US" />
+{!noindex && <meta property="og:url" content={canonicalURL} />}
 <meta property="og:title"       content={title} />
 <meta property="og:description" content={description} />
 <meta property="og:site_name"   content={siteName} />
 <meta property="og:image"       content={ogImage} />
-<meta property="og:image:width"  content="1200" />
-<meta property="og:image:height" content="630" />
+<meta property="og:image:alt"   content={siteName} />
+{ogIsDefault && <meta property="og:image:width"  content="1200" />}
+{ogIsDefault && <meta property="og:image:height" content="630" />}
 
 <meta name="twitter:card"        content="summary_large_image" />
 <meta name="twitter:title"       content={title} />
 <meta name="twitter:description" content={description} />
 <meta name="twitter:image"       content={ogImage} />
 
-<script type="application/ld+json" set:html={JSON.stringify(business)} />
-<script type="application/ld+json" set:html={JSON.stringify({
+<script type="application/ld+json" set:html={jsonLd(business)} />
+<script type="application/ld+json" set:html={jsonLd({
   '@context': 'https://schema.org',
   '@type': 'WebSite',
   url: new URL('/', siteUrl).toString(),
   name: siteName,
   publisher: { '@id': orgId },
 })} />
-{schema && <script type="application/ld+json" set:html={JSON.stringify(schema)} />}
+{schema && <script type="application/ld+json" set:html={jsonLd(schema)} />}

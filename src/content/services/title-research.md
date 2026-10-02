@@ -1,7 +1,7 @@
 ---
 title: "Title Research & Curative"
 card_description: "Courthouse-level mineral and surface title examination, chain of title analysis, and curative work (fixing gaps in the title) to confirm ownership before defects become problems."
-seo_title: "Title Research & Curative"
+seo_title: "Mineral Title Research & Curative"
 seo_description: "Courthouse title examination and curative work in the Appalachian and Gulf Coast basins, from Pennsylvania to Louisiana and East Texas."
 icon: "search"
 show_sample_link: true
@@ -23,4 +23,4 @@ Services include:
 - Heirship affidavit preparation and procurement; recordation support
 - Severance history research (documenting when mineral and surface estates were severed)
 
-Scope ranges from single-tract ownership confirmation to multi-county title projects.
+We take on a single tract or a multi-county title project.

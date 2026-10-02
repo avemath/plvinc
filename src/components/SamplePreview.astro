@@ -8,7 +8,9 @@ const rows = sample.runsheet.rows.slice(0, 3);
 const owners = sample.supplemental.owners;
 ---
 
-<a href="/sample-work" class="sample-preview" aria-label="View the sample file">
+<!-- A picture of the sample, clickable for a mouse. Keyboard and screen reader users get
+     the text link beside it instead, so it is hidden from both rather than read twice. -->
+<a href="/sample-work" class="sample-preview" tabindex="-1" aria-hidden="true">
   <span class="sample-preview-stamp" aria-hidden="true">Sample</span>
 
   <span class="sample-preview-sheet is-back" aria-hidden="true">

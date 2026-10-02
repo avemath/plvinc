@@ -5,7 +5,7 @@ seo_title: "Mineral & Royalty Management"
 seo_description: "Division orders, suspense resolution, ownership records and reporting for mineral and royalty portfolios in the Appalachian and Gulf Coast basins."
 icon: "banknotes"
 show_owner_note: true
-cta_link: "/contact"
+cta_link: "/contact#note"
 show_sample_link: true
 cta_text: "Send the division order or the royalty statement that looks wrong, plus the county. We will check it against the record."
 cta_headline: "Questions about your minerals or royalties? Call us."

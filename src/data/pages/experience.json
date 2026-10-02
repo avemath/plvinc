@@ -1,7 +1,7 @@
 {
   "page_heading": "Experience by Basin and State",
-  "intro": "Project work spans the Appalachian, Gulf Coast, Permian, and Michigan basins as well as the Pacific Northwest: stacked Marcellus and Utica programs in Pennsylvania and Ohio, deep gas development in northwest Louisiana and East Texas, oil-directed drilling in southern Mississippi, shallow biogenic gas across northern Michigan, and utility-scale renewable siting in eastern Washington.",
-  "states_note": "Where files have already been worked. This is a record of experience, not a service boundary. Engagements are taken nationwide.",
+  "intro": "Our project work covers the Appalachian, Gulf Coast, Permian and Michigan basins and the Pacific Northwest. It runs from Marcellus and Utica leasing in Pennsylvania and Ohio to deep gas in northwest Louisiana and East Texas, and solar siting in eastern Washington.",
+  "states_note": "These are the states where we have already worked files. We take work in any state.",
   "states_served": [
     {
       "state": "Pennsylvania",
@@ -72,8 +72,8 @@
   "testimonials_label": "From Clients",
   "testimonials_headline": "What They Say",
   "cta": {
-    "headline": "Have similar work coming up? Let us talk.",
-    "text": "Reach out to discuss the scope and how we can work together.",
+    "headline": "Have similar work coming up? Let's talk.",
+    "text": "Tell us the basin, the scope and your timing.",
     "button": "Get in touch"
   },
   "projects_label": "Selected Work",

@@ -4,6 +4,7 @@ import CallToAction from '../components/CallToAction.astro';
 import { getCollection, render } from 'astro:content';
 import { renderMarkdown } from '../utils/markdown';
 import { text } from '../utils/labels';
+import { srcsetFor } from '../utils/images';
 import about from '../data/pages/about.json';
 import settings from '../data/settings.json';
 import LinkedInIcon from '../components/LinkedInIcon.astro';
@@ -60,12 +61,19 @@ const companyCredentials = (about.credentials ?? []) as Credential[];
 // One Person entry per landman. Credentials come from each person's own list, so someone
 // added without a CPL is never described to search engines as holding one. Only emitted
 // when there is somebody to describe.
+const personName = (full: string) => {
+  const m = full.match(/^(.*?),\s*(CPL|RPL|RL)$/);
+  return m ? { name: m[1], honorificSuffix: m[2] } : { name: full };
+};
+
 const schema = sorted.length > 0
   ? {
       '@context': 'https://schema.org',
       '@graph': sorted.map((person) => ({
         '@type': 'Person',
-        name: person.data.name,
+        // The credential goes in honorificSuffix, so search engines read the name as a name.
+        ...personName(person.data.name),
+        url: new URL('/about', Astro.site).toString(),
         ...(person.data.role ? { jobTitle: person.data.role } : {}),
         ...(person.data.credentials.length > 0
           ? {
@@ -107,16 +115,19 @@ const schema = sorted.length > 0
         </div>
 
         <div class="people-grid">
-          {rendered.map(({ person, Content, experienceHtml }) => (
+          {rendered.map(({ person, Content, experienceHtml }, i) => (
             <article class="person-card">
               {person.data.photo
                 ? <img
                     src={person.data.photo}
+                    srcset={srcsetFor(person.data.photo, 800)}
+                    sizes="(max-width: 768px) 90vw, 560px"
                     alt={`${person.data.name}, professional photo`}
                     class="person-photo"
                     width="800"
                     height="800"
-                    loading="lazy"
+                    loading={i === 0 ? 'eager' : 'lazy'}
+                    fetchpriority={i === 0 ? 'high' : undefined}
                     decoding="async"
                   />
                 : <div class="person-photo-placeholder" aria-hidden="true">👤</div>

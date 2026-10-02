@@ -27,7 +27,6 @@ const label = {
 const location = settings.based_in
   || (settings.city && settings.state ? `${settings.city}, ${settings.state}` : '');
 
-const ctaTelHref = telHref(settings.phone) || '/contact';
 ---
 
 <Base
@@ -57,7 +56,7 @@ const ctaTelHref = telHref(settings.phone) || '/contact';
               <div>
                 <span class="contact-detail-label">{label.phone}</span>
                 <a
-                  href={ctaTelHref}
+                  href={telHref(settings.phone)}
                   class="contact-detail-value"
                   aria-label={`Call ${settings.phone}`}
                 >
@@ -159,14 +158,14 @@ const ctaTelHref = telHref(settings.phone) || '/contact';
     />
   )}
 
-  {contact.cta?.headline && (
+  {/* The button already dials the number, so the band does not repeat it beside the
+      button, and there is no band at all without a phone to call. */}
+  {contact.cta?.headline && settings.phone && (
     <CallToAction
       headline={contact.cta.headline}
       text={contact.cta.text}
       button={contact.cta.button}
-      href={ctaTelHref}
-      phone={settings.phone}
-      phoneHref={ctaTelHref}
+      href={telHref(settings.phone)}
     />
   )}
 </Base>

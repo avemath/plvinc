@@ -155,12 +155,6 @@ section { padding: 5rem 0; }
 .section-header h2       { margin-bottom: .6rem; }
 .section-header p        { color: var(--text-muted); max-width: 600px; margin: 0 auto; }
 
-hr.divider {
-  border: none;
-  border-top: 1px solid var(--border);
-  margin: 0;
-}
-
 /* ============================================================
    Buttons
    ============================================================ */
@@ -205,15 +199,6 @@ hr.divider {
   border-color: var(--action-hover);
 }
 
-.btn-outline {
-  background: transparent;
-  color: var(--green-dark);
-  border-color: var(--green-dark);
-}
-.btn-outline:hover {
-  background: var(--green-dark);
-  color: var(--white);
-}
 
 .btn-white {
   background: var(--white);
@@ -257,9 +242,7 @@ hr.divider {
    stay legible; the narrow wordmark reads better in a cramped header, so it takes over on
    small screens. Both are in the markup with explicit width and height so neither swap nor
    load shifts the header. */
-.nav-logo-img { width: auto; display: block; }
-.nav-logo-img-wide   { height: 58px; }
-.nav-logo-img-narrow { height: 40px; display: none; }
+.nav-logo-img { width: auto; height: 58px; display: block; }
 
 .nav-actions {
   display: flex;
@@ -338,7 +321,6 @@ hr.divider {
 
 /* The number also sits in the mobile menu, where there is room to show it in full. */
 .nav-links-phone { display: none; }
-.nav-phone:hover { color: var(--green-dark); }
 
 .nav-toggle {
   display: none;
@@ -890,38 +872,6 @@ hr.divider {
 
 .about-intro { font-size: 1.05rem; color: var(--text-muted); margin-bottom: 2.5rem; }
 
-.about-bio { font-size: 1.05rem; color: var(--text-muted); line-height: 1.85; }
-.about-bio p { margin-bottom: 1.1rem; }
-
-.credentials-list {
-  list-style: none;
-  padding: 0;
-  margin: 0;
-  display: flex;
-  flex-direction: column;
-  gap: .65rem;
-}
-
-.credential-item {
-  padding: .9rem 1.2rem;
-  background: var(--cream-dark);
-  border-left: 3px solid var(--green-dark);
-  border-radius: 0 var(--radius) var(--radius) 0;
-}
-
-.credential-name {
-  font-weight: 600;
-  font-size: .93rem;
-  color: var(--text);
-  display: block;
-}
-
-.credential-meta {
-  font-size: .82rem;
-  color: var(--text-muted);
-  margin-top: .15rem;
-}
-
 .affiliations-list {
   list-style: none;
   padding: 0;
@@ -1125,7 +1075,6 @@ a.contact-detail-value:hover { color: var(--green-dark); }
    ============================================================ */
 .contact-form-block h2 { margin-bottom: 1.5rem; }
 
-.contact-form,
 #short-form,
 #contact-form {
   display: flex;
@@ -1301,7 +1250,8 @@ a.contact-detail-value:hover { color: var(--green-dark); }
 
 .person-photo {
   width: 100%;
-  aspect-ratio: 1 / 1;
+  /* Squares at full card width pushed both bios below the fold on a laptop. */
+  aspect-ratio: 4 / 3;
   object-fit: cover;
   /* A portrait uploaded as-is keeps the top of the head and loses the bottom instead. */
   object-position: 50% 20%;
@@ -1309,7 +1259,7 @@ a.contact-detail-value:hover { color: var(--green-dark); }
 
 .person-photo-placeholder {
   width: 100%;
-  aspect-ratio: 1 / 1;
+  aspect-ratio: 4 / 3;
   background: var(--green-pale);
   display: flex;
   align-items: center;
@@ -1589,13 +1539,6 @@ a.contact-detail-value:hover { color: var(--green-dark); }
      on the horizon that the picture is there for. Pull the frame right. */
   .cta-band-image { background-position: 85% center; }
 
-  .contact-grid {
-    grid-template-columns: 1fr;
-    grid-template-areas: "primary" "form" "more";
-    grid-template-rows: auto;
-    gap: 2.5rem;
-  }
-
   .footer-inner {
     grid-template-columns: 1fr 1fr;
     gap: 2.5rem;
@@ -1610,8 +1553,7 @@ a.contact-detail-value:hover { color: var(--green-dark); }
 
   /* The header is tight here, so the wordmark replaces the badge and the phone collapses
      to its icon. The full number moves into the menu instead of disappearing. */
-  .nav-logo-img-wide   { display: none; }
-  .nav-logo-img-narrow { display: block; }
+  .nav-logo-img { height: 40px; }
 
   .nav-phone-number { display: none; }
   .nav-phone {
@@ -1639,6 +1581,14 @@ a.contact-detail-value:hover { color: var(--green-dark); }
   }
 
   .nav-links.is-open { display: flex; }
+
+  /* The header is sticky, so a menu taller than the screen (Services expanded on a
+     small phone) has to scroll inside itself or its last links are out of reach. */
+  .nav-links {
+    max-height: calc(100dvh - var(--nav-height));
+    overflow-y: auto;
+    overscroll-behavior: contain;
+  }
 
   .nav-links a {
     padding: .7rem 1.5rem;
@@ -1711,8 +1661,8 @@ a.contact-detail-value:hover { color: var(--green-dark); }
 
 .owner-faq dt {
   font-family: var(--font-heading);
-  font-weight: 600;
-  font-size: 1.05rem;
+  font-weight: 700;
+  font-size: 1.2rem;
   color: var(--green-dark);
   margin-bottom: .45rem;
 }
@@ -2543,7 +2493,8 @@ a.contact-detail-value:hover { color: var(--green-dark); }
   padding-left: 1rem;
   border-left: 2px solid var(--green-light);
 }
-.doc-note:empty { border: none; padding: 0; }
+.doc-note:empty,
+.doc-note:not(:has(.doc-note-item, p)) { display: none; }
 
 .doc-note-item + .doc-note-item { margin-top: 1rem; }
 
@@ -2988,6 +2939,9 @@ a.contact-detail-value:hover { color: var(--green-dark); }
 .sticky-contact { display: none; }
 
 @media (max-width: 768px) {
+  /* Keyboard focus that scrolls into view has to stop above the bar, not behind it. */
+  html { scroll-padding-bottom: calc(4.5rem + env(safe-area-inset-bottom, 0px)); }
+
   .sticky-contact {
     position: fixed;
     left: 0;
@@ -3097,7 +3051,13 @@ body { font-size: 1.125rem; }
    its icon through that band so the row never has to wrap or shrink. */
 @media (max-width: 1010px) and (min-width: 769px) {
   .nav-phone-number { display: none; }
-  .nav-links a { padding-left: .7rem; padding-right: .7rem; }
+  .nav-links a { padding-left: .55rem; padding-right: .55rem; }
+  .nav-sub-toggle { margin-right: 0; }
+}
+
+/* The narrowest tablet widths still need a touch less, or the row runs off the edge. */
+@media (max-width: 860px) and (min-width: 769px) {
+  .nav-links a { font-size: .875rem; padding-left: .45rem; padding-right: .45rem; }
 }
 
 /* ============================================================
@@ -3170,8 +3130,6 @@ body { font-size: 1.125rem; }
 .team-strip-role { font-size: .9rem; color: var(--green-dark); margin-top: .2rem; }
 .team-strip .section-aside { margin-top: 2rem; }
 
-/* Lists written in markdown inside a short aside read as one line, not a block. */
-.section-aside > p:last-child { margin-bottom: 0; }
 
 /* Anchored jumps (#coverage, FAQ questions) land below the sticky header. */
 html { scroll-padding-top: calc(var(--nav-height) + 1rem); }
@@ -3236,9 +3194,11 @@ html { scroll-padding-top: calc(var(--nav-height) + 1rem); }
     box-shadow: var(--shadow-lg);
   }
   .nav-sub a { padding: .55rem 1.1rem; border-radius: 0; }
+  /* Hover opens it for a mouse; the chevron button opens it for keyboard and touch.
+     Escape adds is-dismissed, which keeps it shut until the pointer leaves. */
   .nav-has-sub:hover .nav-sub,
-  .nav-has-sub:focus-within .nav-sub,
   .nav-has-sub.is-open .nav-sub { display: block; }
+  .nav-has-sub.is-dismissed .nav-sub { display: none; }
 }
 
 @media (max-width: 768px) {

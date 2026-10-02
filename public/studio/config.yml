@@ -40,10 +40,10 @@ collections:
         file: src/data/settings.json
         format: json
         fields:
-          - label: "Professional Name"
+          - label: "Business Name"
             name: professional_name
             widget: string
-            hint: "Your full name and credentials as shown in the browser tab and footer (e.g., Jane Smith, CPL)."
+            hint: "The short business name, for example Petro Land Ventures. It is added to the end of every browser tab title, shown in the menu if there is no logo, and given to search engines. Change it only if the business itself is renamed."
 
           - label: "Registered Business Name"
             name: legal_name
@@ -103,6 +103,13 @@ collections:
             widget: string
             required: false
             hint: "The state you are based in, for example Pennsylvania. Used to tell search engines where you are."
+
+          - label: "ZIP Code"
+            name: postal_code
+            widget: string
+            required: false
+            pattern: ['^[0-9]{5}$', "Five digits, for example 16635"]
+            hint: "Not shown on the page. It helps search engines place you on the map."
 
           - label: "LinkedIn URL"
             name: linkedin_url
@@ -183,6 +190,7 @@ collections:
           - label: "Contact Form Access Key"
             name: web3forms_key
             widget: string
+            pattern: ['^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$', "Paste the whole key from web3forms.com, with no spaces. It looks like 0a1b2c3d-1234-5678-9abc-0123456789ab"]
             hint: "Where contact form submissions are delivered. The key decides the
               destination, not the Email Address field above, so changing your email does not
               move the form. To redirect it, get a new free key at web3forms.com using the
@@ -257,6 +265,26 @@ collections:
             required: false
             hint: "Where the second hero button goes. For the company button, \"Contact page, opened on the project form\" takes them straight to the right form."
 
+          - label: "Figures Under the Hero"
+            name: stats
+            widget: list
+            summary: "{{value}} {{label}}"
+            required: false
+            hint: "The band below the hero. Two entries read best here, each with a line saying what it means. Only put figures here you can stand behind. Empty this list to hide the band."
+            fields:
+              - label: "Figure"
+                name: value
+                widget: string
+                hint: "Keep it short, for example 25+ or CPL."
+              - label: "Label"
+                name: label
+                widget: string
+              - label: "What it means"
+                name: detail
+                widget: text
+                required: false
+                hint: "One line saying what the figure means, for example what the credential is. Leave blank to show just the figure and label."
+
           - label: "Value Paragraph"
             name: value_paragraph
             widget: markdown
@@ -285,6 +313,63 @@ collections:
             widget: string
             required: false
             hint: "The link under the photos that goes to the About page. Blank shows \"Read their backgrounds\"."
+
+          - label: "Sample Work Band"
+            name: sample_feature
+            widget: object
+            collapsed: true
+            required: false
+            hint: "The band that points at the sample file on the home page. Leave the headline blank to hide the band."
+            fields:
+              - { label: "Small Label", name: label, widget: string, required: false }
+              - { label: "Headline", name: headline, widget: string, required: false }
+              - { label: "Text", name: text, widget: text }
+              - { label: "Button Text", name: button, widget: string }
+
+          - label: "Services Section Label"
+            name: services_label
+            widget: string
+            hint: "Small uppercase label above the services headline (e.g., What We Do)."
+
+          - label: "Services Section Headline"
+            name: services_headline
+            widget: string
+            hint: "Headline for the services section on the home page (e.g., Land Services)."
+
+          - label: "Services Section Intro"
+            name: services_intro
+            widget: text
+            hint: "A sentence or two below the services headline, before the service cards."
+
+          - label: "Link Under the Service Cards"
+            name: services_link_text
+            widget: string
+            required: false
+            hint: "The link to the Services page under the cards. Blank shows \"See what each service covers\"."
+
+          - label: "Testimonials Section Label"
+            name: testimonials_label
+            widget: string
+
+          - label: "Testimonials Section Headline"
+            name: testimonials_headline
+            widget: string
+
+          - label: "Testimonials"
+            name: testimonials
+            widget: list
+            required: false
+            summary: "{{attribution}}"
+            hint: "Client quotes for the home page. Attribution can be a role rather than a name, for example \"Operator, East Texas\". The section stays hidden until you add one."
+            fields:
+              - label: "Quote"
+                name: quote
+                widget: text
+              - label: "Attribution"
+                name: attribution
+                widget: string
+                required: false
+                hint: "Who said it. A role and region is enough."
 
           - label: "Coverage Section Label"
             name: regions_label
@@ -319,6 +404,7 @@ collections:
           - label: "Basins & Regions"
             name: regions
             widget: list
+            collapsed: true
             summary: "{{name}}"
             hint: "Each entry becomes a tab beside the map. Selecting it highlights that basin's states. Add as many as you like. No count appears anywhere on the site, so this list can grow as your coverage does."
             fields:
@@ -408,82 +494,6 @@ collections:
                     widget: text
                     hint: "A plain-language sentence explaining what this play is and where it sits. Written for clients who are not landmen."
 
-          - label: "Services Section Label"
-            name: services_label
-            widget: string
-            hint: "Small uppercase label above the services headline (e.g., What We Do)."
-
-          - label: "Services Section Headline"
-            name: services_headline
-            widget: string
-            hint: "Headline for the services section on the home page (e.g., Land Services)."
-
-          - label: "Services Section Intro"
-            name: services_intro
-            widget: text
-            hint: "A sentence or two below the services headline, before the service cards."
-
-          - label: "Link Under the Service Cards"
-            name: services_link_text
-            widget: string
-            required: false
-            hint: "The link to the Services page under the cards. Blank shows \"See what each service covers\"."
-
-          - label: "Figures Under the Hero"
-            name: stats
-            widget: list
-            summary: "{{value}} {{label}}"
-            required: false
-            hint: "The band below the hero. Two entries read best here, each with a line saying what it means. Only put figures here you can stand behind. Empty this list to hide the band."
-            fields:
-              - label: "Figure"
-                name: value
-                widget: string
-                hint: "Keep it short, for example 25+ or CPL."
-              - label: "Label"
-                name: label
-                widget: string
-              - label: "What it means"
-                name: detail
-                widget: text
-                required: false
-                hint: "One line saying what the figure means, for example what the credential is. Leave blank to show just the figure and label."
-
-          - label: "Testimonials Section Label"
-            name: testimonials_label
-            widget: string
-
-          - label: "Testimonials Section Headline"
-            name: testimonials_headline
-            widget: string
-
-          - label: "Testimonials"
-            name: testimonials
-            widget: list
-            required: false
-            summary: "{{attribution}}"
-            hint: "Client quotes for the home page. Attribution can be a role rather than a name, for example \"Operator, East Texas\". The section stays hidden until you add one."
-            fields:
-              - label: "Quote"
-                name: quote
-                widget: text
-              - label: "Attribution"
-                name: attribution
-                widget: string
-                required: false
-                hint: "Who said it. A role and region is enough."
-
-          - label: "Sample Work Band"
-            name: sample_feature
-            widget: object
-            required: false
-            hint: "The band that points at the sample file on the home page. Leave the headline blank to hide the band."
-            fields:
-              - { label: "Small Label", name: label, widget: string, required: false }
-              - { label: "Headline", name: headline, widget: string, required: false }
-              - { label: "Text", name: text, widget: text }
-              - { label: "Button Text", name: button, widget: string }
-
           - label: "Closing Call to Action"
             name: cta
             widget: object
@@ -533,21 +543,6 @@ collections:
             maxlength: 160
             hint: "The sentence shown under this page's title in Google results. The counter stops at 160 characters, about what Google shows."
 
-          - label: "Introduction"
-            name: intro
-            widget: markdown
-            hint: "Your full professional biography. This is the main text on the About page."
-
-          - label: "Approach / Philosophy Headline"
-            name: approach_headline
-            widget: string
-            hint: "Headline for your working approach section (e.g., How I Work)."
-
-          - label: "Approach / Philosophy"
-            name: approach
-            widget: markdown
-            hint: "Describe your working philosophy, approach to projects, and what clients can expect."
-
           - label: "Team Section Label"
             name: team_label
             widget: string
@@ -562,6 +557,21 @@ collections:
             widget: string
             required: false
             hint: "The small heading above a person's Work & Experience Details, when they have any. Blank shows \"Background\"."
+
+          - label: "Approach / Philosophy Headline"
+            name: approach_headline
+            widget: string
+            hint: "Headline for your working approach section (e.g., How I Work)."
+
+          - label: "Approach / Philosophy"
+            name: approach
+            widget: markdown
+            hint: "Describe your working philosophy, approach to projects, and what clients can expect."
+
+          - label: "Who We Work For"
+            name: intro
+            widget: markdown
+            hint: "The paragraph under How We Work, about the clients and the kinds of work you take on. Each person's own bio is edited under Team / People."
 
           - label: "Company Credentials Heading"
             name: credentials_heading
@@ -826,6 +836,11 @@ collections:
             required: false
             hint: "The large heading in the green band at the top of the page. Blank shows \"Contact\"."
 
+          - label: "Line Under the Page Heading"
+            name: intro
+            widget: string
+            hint: "Short invitation text at the top of the contact page."
+
           - label: "Google Title (browser tab)"
             name: page_title
             widget: string
@@ -843,43 +858,6 @@ collections:
             widget: string
             hint: "Heading above your phone, email and service area (e.g., Reach Out Directly)."
 
-          - label: "Intro Text"
-            name: intro
-            widget: string
-            hint: "Short invitation text at the top of the contact page."
-
-          - label: "Service Area Note"
-            name: service_area_note
-            widget: string
-            hint: "Brief note about geographic coverage shown on the contact page."
-
-          - label: "Mailing Address (optional)"
-            name: mailing_address
-            widget: text
-            required: false
-            hint: "Optional mailing address. Leave blank to omit from the page."
-
-          - label: "Form Headline"
-            name: form_headline
-            widget: string
-            hint: "The heading above the contact form."
-
-          - label: "Form Intro"
-            name: form_intro
-            widget: text
-            required: false
-            hint: "A short line under the form heading. Leave blank to hide it."
-
-          - label: "Closing Call to Action"
-            name: cta
-            widget: object
-            required: false
-            hint: "The band at the bottom of the Contact page. Its button dials your number rather than opening a form."
-            fields:
-              - { label: "Headline", name: headline, widget: string }
-              - { label: "Text", name: text, widget: text, required: false }
-              - { label: "Button Text", name: button, widget: string }
-
           - label: "Contact Detail Labels"
             name: detail_labels
             widget: object
@@ -894,11 +872,12 @@ collections:
               - { label: "Service Area", name: service_area, widget: string, required: false }
               - { label: "Mailing Address", name: mailing_address, widget: string, required: false }
 
-          - label: "Short Note Form"
+          - label: "Landowner Note Form"
             name: short_form
             widget: object
+            collapsed: true
             required: false
-            hint: "The four field form for a landowner holding a letter. Do not promise a response time in the success message."
+            hint: "The short four-box form for a landowner holding a letter. It is the tab that opens first. Both tab names (this one and the project form's) are set here. Do not promise a response time in the success message."
             fields:
               - { label: "Landowner Tab Label", name: tab_label, widget: string }
               - { label: "Project Tab Label", name: project_tab_label, widget: string }
@@ -923,35 +902,21 @@ collections:
                   - { label: "County and state missing", name: county, widget: string, required: false }
                   - { label: "What showed up missing", name: what, widget: string, required: false }
 
-          - label: "What Happens Next"
-            name: how_it_works
-            widget: object
+          - label: "Project Form: Headline"
+            name: form_headline
+            widget: string
+            hint: "The heading above the contact form."
+
+          - label: "Project Form: Line Under the Headline"
+            name: form_intro
+            widget: text
             required: false
-            hint: "The four steps between a first call and a report. These steps also appear on the home page, so keep step one general enough for landowners and companies alike. Do not promise a response time here."
-            fields:
-              - { label: "Small Label", name: label, widget: string, required: false }
-              - { label: "Headline", name: headline, widget: string }
-              - label: "Steps"
-                name: steps
-                widget: list
-                summary: "{{title}}"
-                fields:
-                  - { label: "Step Title", name: title, widget: string }
-                  - { label: "Step Text", name: text, widget: text }
+            hint: "A short line under the form heading. Leave blank to hide it."
 
-          - label: "Form Success Message"
-            name: form_success
-            widget: text
-            hint: "Shown under the Send button once a message has gone through. Avoid promising a reply time unless you are sure you can keep to it."
-
-          - label: "Form Error Message"
-            name: form_error
-            widget: text
-            hint: "Shown if the message fails to send. Point people at the phone or email instead."
-
-          - label: "Form Field Labels"
+          - label: "Project Form: Box Labels"
             name: form_labels
             widget: object
+            collapsed: true
             hint: "The wording shown beside each box on the project form. Changing these does not change what the form collects."
             fields:
               - label: "Name field"
@@ -985,7 +950,7 @@ collections:
                 widget: string
                 required: false
 
-          - label: "Form Hints Inside the Boxes"
+          - label: "Project Form: Grey Example Text in the Boxes"
             name: form_placeholders
             widget: object
             collapsed: true
@@ -1003,45 +968,6 @@ collections:
             widget: string
             required: false
             hint: "The first line of every dropdown before a choice is made, e.g. Please choose."
-
-          - label: "\"Not Sure\" Service Option"
-            name: service_not_sure
-            widget: string
-            required: false
-            hint: "The last choice in the Service dropdown, after the services themselves (which come from the Services list automatically)."
-
-          - label: "Send Button"
-            name: form_button
-            widget: string
-            required: false
-
-          - label: "Button While Sending"
-            name: form_sending
-            widget: string
-            required: false
-            hint: "What the button says for the second or two while a message is on its way."
-
-          - label: "Email Subject"
-            name: form_subject
-            widget: string
-            required: false
-            hint: "The subject line of the email you receive when someone sends the project form."
-
-          - label: "Form Error Messages"
-            name: form_errors
-            widget: object
-            collapsed: true
-            required: false
-            hint: "Shown under a box when someone leaves it empty or types an email address that cannot be right. A blank box keeps the original wording."
-            fields:
-              - { label: "Name missing", name: name, widget: string, required: false }
-              - { label: "Email missing", name: email_missing, widget: string, required: false }
-              - { label: "Email not valid", name: email_invalid, widget: string, required: false }
-              - { label: "\"I am a\" not chosen", name: role, widget: string, required: false }
-              - { label: "State not chosen", name: state, widget: string, required: false }
-              - { label: "County missing", name: county, widget: string, required: false }
-              - { label: "Service not chosen", name: service, widget: string, required: false }
-              - { label: "Message missing", name: message, widget: string, required: false }
 
           - label: "\"I am a\" Options"
             name: inquirer_types
@@ -1064,6 +990,93 @@ collections:
               - label: "Option"
                 name: label
                 widget: string
+
+          - label: "\"Not Sure\" Service Option"
+            name: service_not_sure
+            widget: string
+            required: false
+            hint: "The last choice in the Service dropdown, after the services themselves (which come from the Services list automatically)."
+
+          - label: "Project Form: Send Button"
+            name: form_button
+            widget: string
+            required: false
+
+          - label: "Button While Sending (both forms)"
+            name: form_sending
+            widget: string
+            required: false
+            hint: "What the button says for the second or two while a message is on its way."
+
+          - label: "Project Form: Success Message"
+            name: form_success
+            widget: text
+            hint: "Shown under the Send button once a message has gone through. Avoid promising a reply time unless you are sure you can keep to it."
+
+          - label: "Message If Sending Fails (both forms)"
+            name: form_error
+            widget: text
+            hint: "Shown if the message fails to send. Point people at the phone or email instead."
+
+          - label: "Project Form: Error Messages"
+            name: form_errors
+            widget: object
+            collapsed: true
+            required: false
+            hint: "Shown under a box when someone leaves it empty or types an email address that cannot be right. A blank box keeps the original wording."
+            fields:
+              - { label: "Name missing", name: name, widget: string, required: false }
+              - { label: "Email missing", name: email_missing, widget: string, required: false }
+              - { label: "Email not valid", name: email_invalid, widget: string, required: false }
+              - { label: "\"I am a\" not chosen", name: role, widget: string, required: false }
+              - { label: "State not chosen", name: state, widget: string, required: false }
+              - { label: "County missing", name: county, widget: string, required: false }
+              - { label: "Service not chosen", name: service, widget: string, required: false }
+              - { label: "Message missing", name: message, widget: string, required: false }
+
+          - label: "Project Form: Email Subject"
+            name: form_subject
+            widget: string
+            required: false
+            hint: "The subject line of the email you receive when someone sends the project form."
+
+          - label: "Service Area Note"
+            name: service_area_note
+            widget: string
+            hint: "Brief note about geographic coverage shown on the contact page."
+
+          - label: "Mailing Address (optional)"
+            name: mailing_address
+            widget: text
+            required: false
+            hint: "Optional mailing address. Leave blank to omit from the page."
+
+          - label: "What Happens Next"
+            name: how_it_works
+            widget: object
+            collapsed: true
+            required: false
+            hint: "The four steps between a first call and a report. These steps also appear on the home page, so keep step one general enough for landowners and companies alike. Do not promise a response time here."
+            fields:
+              - { label: "Small Label", name: label, widget: string, required: false }
+              - { label: "Headline", name: headline, widget: string }
+              - label: "Steps"
+                name: steps
+                widget: list
+                summary: "{{title}}"
+                fields:
+                  - { label: "Step Title", name: title, widget: string }
+                  - { label: "Step Text", name: text, widget: text }
+
+          - label: "Closing Call to Action"
+            name: cta
+            widget: object
+            required: false
+            hint: "The band at the bottom of the Contact page. Its button dials your number rather than opening a form."
+            fields:
+              - { label: "Headline", name: headline, widget: string }
+              - { label: "Text", name: text, widget: text, required: false }
+              - { label: "Button Text", name: button, widget: string }
 
       - name: mineral_owners
         label: "Mineral Owners Page"
@@ -1116,28 +1129,6 @@ collections:
             widget: markdown
             hint: "The opening paragraphs. Write for someone who has never dealt with a landman before."
 
-          - label: "Services Section Label"
-            name: services_label
-            widget: string
-
-          - label: "Services Section Headline"
-            name: services_headline
-            widget: string
-
-          - label: "What You Can Bring to Us"
-            name: services
-            widget: list
-            required: false
-            summary: "{{title}}"
-            hint: "Each entry becomes a card. Empty this list to hide the whole section."
-            fields:
-              - label: "Title"
-                name: title
-                widget: string
-              - label: "Description"
-                name: description
-                widget: text
-
           - label: "Service Area Line"
             name: service_area_line
             widget: text
@@ -1147,6 +1138,7 @@ collections:
           - label: "Common Reasons People Call"
             name: reasons_to_call
             widget: object
+            collapsed: true
             required: false
             hint: "The list of reasons a landowner gets in touch, written in their words rather than yours."
             fields:
@@ -1162,49 +1154,10 @@ collections:
               - { label: "Closing Line", name: closing, widget: text }
               - { label: "Button Text", name: button, widget: string }
 
-          - label: "Lease Offer Section"
-            name: lease_packet
-            widget: object
-            required: false
-            hint: "The section explaining what arrives in a lease offer. It sits above the questions and answers."
-            fields:
-              - label: "Section Label"
-                name: label
-                widget: string
-                hint: "Small uppercase label above the headline (e.g., Lease Offers)."
-              - label: "Headline"
-                name: headline
-                widget: string
-              - label: "Introduction"
-                name: intro
-                widget: text
-              - label: "The Documents"
-                name: documents
-                widget: list
-                summary: "{{title}}"
-                hint: "The documents that arrive with an offer. Shown as a numbered list in this order."
-                fields:
-                  - { label: "Title", name: title, widget: string }
-                  - { label: "Text", name: text, widget: text }
-              - label: "Terms Heading"
-                name: terms_headline
-                widget: string
-              - label: "Terms"
-                name: terms
-                widget: list
-                summary: "{{title}}"
-                hint: "The clauses an owner should read first. Put the ones that decide the money near the top."
-                fields:
-                  - { label: "Title", name: title, widget: string }
-                  - { label: "Text", name: text, widget: text }
-              - label: "Closing Line"
-                name: closing
-                widget: text
-                hint: "The line that closes the section by inviting the reader to call us and walk through the offer."
-
           - label: "What Happens Next"
             name: how_it_works
             widget: object
+            collapsed: true
             required: false
             hint: "The four steps between a first call and a report. Do not promise a response time here."
             fields:
@@ -1242,6 +1195,28 @@ collections:
             required: false
             hint: "The link under the photos that goes to the About page. Blank shows \"Read their backgrounds\"."
 
+          - label: "Services Section Label"
+            name: services_label
+            widget: string
+
+          - label: "Services Section Headline"
+            name: services_headline
+            widget: string
+
+          - label: "What You Can Bring to Us"
+            name: services
+            widget: list
+            required: false
+            summary: "{{title}}"
+            hint: "Each entry becomes a card. Empty this list to hide the whole section."
+            fields:
+              - label: "Title"
+                name: title
+                widget: string
+              - label: "Description"
+                name: description
+                widget: text
+
           - label: "Sample Work Band"
             name: sample_feature
             widget: object
@@ -1275,6 +1250,47 @@ collections:
                 name: answer
                 widget: text
 
+          - label: "Lease Offer Section"
+            name: lease_packet
+            widget: object
+            collapsed: true
+            required: false
+            hint: "The short section about what arrives in a lease offer. It comes right after the questions and answers. The two lists inside are empty on purpose: explaining the terms is what a call is for."
+            fields:
+              - label: "Section Label"
+                name: label
+                widget: string
+                hint: "Small uppercase label above the headline (e.g., Lease Offers)."
+              - label: "Headline"
+                name: headline
+                widget: string
+              - label: "Introduction"
+                name: intro
+                widget: text
+              - label: "The Documents"
+                name: documents
+                widget: list
+                summary: "{{title}}"
+                hint: "The documents that arrive with an offer. Shown as a numbered list in this order."
+                fields:
+                  - { label: "Title", name: title, widget: string }
+                  - { label: "Text", name: text, widget: text }
+              - label: "Terms Heading"
+                name: terms_headline
+                widget: string
+              - label: "Terms"
+                name: terms
+                widget: list
+                summary: "{{title}}"
+                hint: "The clauses an owner should read first. Put the ones that decide the money near the top."
+                fields:
+                  - { label: "Title", name: title, widget: string }
+                  - { label: "Text", name: text, widget: text }
+              - label: "Closing Line"
+                name: closing
+                widget: text
+                hint: "The line that closes the section by inviting the reader to call us and walk through the offer."
+
           - label: "State Section Heading"
             name: pennsylvania_headline
             widget: string
@@ -1291,7 +1307,7 @@ collections:
             name: conflict_note
             widget: text
             required: false
-            hint: "The disclosure about also working for operators, shown beside the legal note at the bottom. Leave blank to hide it."
+            hint: "The note about also taking leases for companies. It sits just above the legal note near the foot of the page."
 
           - label: "Legal Note"
             name: disclaimer
@@ -1375,6 +1391,11 @@ collections:
             widget: string
             hint: "The heading at the top of the page. Everything on this page must stay fictional: never paste a real owner name, address, tract, or recording reference here."
 
+          - label: "Page Subtitle"
+            name: page_subtitle
+            widget: string
+            hint: "The line under the title."
+
           - label: "Google Title (browser tab)"
             name: seo_title
             widget: string
@@ -1387,43 +1408,10 @@ collections:
             maxlength: 160
             hint: "Search result description shown under the title. The counter stops at 160 characters, about what Google shows."
 
-          - label: "Page Subtitle"
-            name: page_subtitle
-            widget: string
-            hint: "The line under the title."
-
           - label: "Introduction"
             name: intro
             widget: markdown
-            hint: "The paragraphs above the samples, explaining what the three documents are."
-
-          - label: "Fiction Notice"
-            name: fiction_notice
-            widget: text
-            hint: "The highlighted box that says the samples are invented. It sits above every table. Do not remove it."
-
-          - label: "Fiction Notice Title"
-            name: fiction_notice_title
-            widget: string
-            required: false
-            hint: "The bold line at the top of that box. Blank shows \"Fictional samples\"."
-
-          - label: "Document List Label"
-            name: jump_label
-            widget: string
-            required: false
-            hint: "The label on the row of links that jump down to each sample document. Blank shows \"The four documents\"."
-
-          - label: "Format Note"
-            name: format_note
-            widget: text
-            hint: "The line about working in the client's templates or your own. It sits below the samples."
-
-          - label: "Simple File Note"
-            name: simple_note
-            widget: text
-            required: false
-            hint: "The note below the samples saying this file is a short one on purpose."
+            hint: "The paragraphs above the samples, explaining what the four documents are."
 
           - label: "How To Read This"
             name: how_to_read
@@ -1435,6 +1423,23 @@ collections:
               - { label: "Title", name: title, widget: string }
               - { label: "Text", name: text, widget: text }
 
+          - label: "Fiction Notice Title"
+            name: fiction_notice_title
+            widget: string
+            required: false
+            hint: "The bold line at the top of that box. Blank shows \"Fictional samples\"."
+
+          - label: "Fiction Notice"
+            name: fiction_notice
+            widget: text
+            hint: "The highlighted box that says the samples are invented. It sits above every table. Do not remove it."
+
+          - label: "Document List Label"
+            name: jump_label
+            widget: string
+            required: false
+            hint: "The label on the row of links that jump down to each sample document. Blank shows \"The four documents\"."
+
           - label: "Notes Control Label"
             name: notes_toggle_label
             widget: string
@@ -1444,6 +1449,7 @@ collections:
           - label: "Mineral Ownership Report"
             name: mor
             widget: object
+            collapsed: true
             hint: "The first sample sheet."
             fields:
               - label: "Sheet Title"
@@ -1519,6 +1525,7 @@ collections:
           - label: "Runsheet"
             name: runsheet
             widget: object
+            collapsed: true
             hint: "The second sample sheet, the chain of title."
             fields:
               - label: "Sheet Title"
@@ -1527,6 +1534,11 @@ collections:
               - label: "Column Headings"
                 name: columns
                 widget: list
+                min: 12
+                max: 12
+                allow_add: false
+                allow_remove: false
+                allow_reorder: false
                 hint: "Twelve headings, in the order the columns appear. Renaming one is fine. Do not add, remove or reorder them: every row's cells, and reader's notes 6 and 7, are tied to these twelve positions."
                 field: { label: "Heading", name: heading, widget: string }
               - label: "Rows"
@@ -1564,6 +1576,7 @@ collections:
           - label: "Lease Acquisition Report"
             name: lar
             widget: object
+            collapsed: true
             hint: "The third sample sheet."
             fields:
               - label: "Sheet Title"
@@ -1633,6 +1646,7 @@ collections:
           - label: "Supplemental Report"
             name: supplemental
             widget: object
+            collapsed: true
             hint: "The fourth document, where the open quarter interest gets resolved. This is the one that shows hard work."
             fields:
               - { label: "Sheet Title", name: title, widget: string }
@@ -1709,9 +1723,21 @@ collections:
                   - { label: "Sits Next To", name: anchor, widget: select, options: [{ label: "Sources", value: "sources" }, { label: "Ownership table", value: "owners" }, { label: "Curative list", value: "curative" }], hint: "Which part of the document this note explains." }
                   - { label: "Note", name: text, widget: text }
 
+          - label: "Simple File Note"
+            name: simple_note
+            widget: text
+            required: false
+            hint: "The note below the samples saying this file is a short one on purpose."
+
+          - label: "Format Note"
+            name: format_note
+            widget: text
+            hint: "The line about working in the client's templates or your own. It sits below the samples."
+
           - label: "What Makes a File Hard"
             name: hard_files
             widget: object
+            collapsed: true
             required: false
             hint: "The section after the documents. Only list work the service pages already describe, and never describe a real past project."
             fields:
@@ -1976,12 +2002,11 @@ collections:
       - label: "Closing Button Goes To"
         name: cta_link
         widget: select
-        required: false
         default: "/contact#project"
         options:
           - { label: "Contact page, opened on the project form (companies)", value: "/contact#project" }
           - { label: "Contact page, opened on the short note (landowners)", value: "/contact#note" }
-          - { label: "Contact page, no form picked", value: "/contact" }
+          - { label: "Contact page, top of the page (visitor picks a form)", value: "/contact" }
         hint: "Pick the form that fits who usually reads this service. Most services are for companies."
 
       - label: "Google Title (browser tab)"

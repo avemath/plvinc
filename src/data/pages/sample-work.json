@@ -3,7 +3,7 @@
   "seo_title": "Sample Land Work | Ownership Report",
   "meta_description": "A fictional land file from first deed to signed lease and resolved heirship, with reader's notes explaining what each part of the report decides.",
   "page_subtitle": "One fictional tract, from the first deed to a signed lease and a resolved heirship.",
-  "intro": "Most land work ends in a few documents: a runsheet that lists every instrument in the chain, an ownership report that states who owns what and what stands in the way, and, once a lease is taken, an acquisition report that tells the client exactly what was bought. When the record leaves a question open, a supplemental report closes it.\n\nThe file below follows one fictional tract through all four, with reader's notes beside each document.",
+  "intro": "Most land work ends in a few documents. A runsheet lists every recorded document in the chain of title. An ownership report states who owns what and what stands in the way. Once a lease is signed, a lease acquisition report tells the client exactly what it bought. When the record leaves a question open, a supplemental report closes it.\n\nThe file below follows one fictional tract through all four, with reader's notes beside each document.",
   "fiction_notice_title": "Fictional samples",
   "fiction_notice": "Everything on this page is fictional. The county, township, people, companies, tract, dollar figures, and recording references were invented for illustration and do not describe any real property, owner, or transaction.",
   "jump_label": "The four documents",
@@ -44,7 +44,7 @@
         "gross_acres": "62.40",
         "interest": "0.750000",
         "net_acres": "46.80",
-        "status": "Appears open. Last lease: Operator A, LLC, effective 05/01/2012, 5 year primary term, option to extend not exercised of record. Recorded RB 1388, Page 102. See Notes 3 and 4."
+        "status": "Appears open. Last lease: Operator A, LLC, effective 05/01/2012, 5-year primary term, option to extend not exercised of record. Recorded RB 1388, Page 102. See Notes 3 and 4."
       },
       {
         "name": "Heirs of Marian H. Oster",
@@ -529,7 +529,7 @@
     },
     {
       "title": "If you run a land department",
-      "text": "Turn the notes off and read it as a deliverable. Check the limits stated in the header, how open items are carried, and whether the decimals tie from the runsheet to the ownership report to the lease report."
+      "text": "Turn the notes off and read it as a deliverable. Check the limits stated in the header, how open items are carried, and whether the decimals tie from the runsheet to the ownership report to the lease acquisition report."
     }
   ],
   "notes_toggle_label": "Reader's notes",
@@ -555,16 +555,16 @@
       },
       {
         "title": "Tax sales, quiet title actions, and court records",
-        "text": "Some of the chain sits in the prothonotary's office or the tax claim bureau and never reaches the deed index."
+        "text": "Some of the chain sits with the prothonotary (the county's civil court clerk) or the tax claim bureau and never reaches the deed index."
       },
       {
         "title": "Royalty and overriding interests carved out along the way",
-        "text": "A non-participating royalty or an override (a share of production carved out of the lease) does not change who signs the lease, but it changes who gets paid, and it has to be carried through every later conveyance."
+        "text": "A non-participating royalty or an override (a share of production carved out of the lease) does not change who signs the lease. It does change who gets paid, so it has to be carried through every later transfer."
       }
     ]
   },
   "cta": {
-    "headline": "Have a File That Is Harder Than This One?",
+    "headline": "Have a file that is harder than this one?",
     "text": "Most are. Send us the county and what you know, and we will tell you what it would take.",
     "button": "Send us the file"
   }
