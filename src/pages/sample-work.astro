@@ -41,6 +41,13 @@ const runsheetCells = (r: typeof runsheet.rows[number]) => [
   r.grantor, r.grantee, r.reservation, r.description, r.comments, r.ownership_after,
 ];
 
+// Note 1 points at the field saying what was searched. Matched loosely so renaming the
+// label in the Studio does not drop the marker; failing that, it goes on the first field.
+const recordsField = (() => {
+  const i = mor.fields.findIndex((f) => /record|search|examin/i.test(f.label));
+  return i >= 0 ? i : 0;
+})();
+
 type TreeNode = { name: string; interest: string; detail: string; children?: TreeNode[] };
 const tree = supplemental.tree as TreeNode;
 ---
@@ -116,11 +123,11 @@ const tree = supplemental.tree as TreeNode;
           <div class="doc-row">
             <div class="doc-main">
               <dl class="sample-fields">
-                {mor.fields.map((f) => (
+                {mor.fields.map((f, i) => (
                   <div class="sample-field">
                     <dt>
                       {f.label}
-                      {f.label === 'Records examined' && noteFor(mor, 'fields') && (
+                      {i === recordsField && noteFor(mor, 'fields') && (
                         <span class="anno-marker" aria-hidden="true">{noteFor(mor, 'fields').n}</span>
                       )}
                     </dt>

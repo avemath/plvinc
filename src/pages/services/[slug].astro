@@ -1,6 +1,6 @@
 ---
 import Base from '../../layouts/Base.astro';
-import { text } from '../../utils/labels';
+import { navLabels, text } from '../../utils/labels';
 import ServiceIcon from '../../components/ServiceIcon.astro';
 import SampleFeature from '../../components/SampleFeature.astro';
 import CallToAction from '../../components/CallToAction.astro';
@@ -26,7 +26,7 @@ const others = (await getCollection('services'))
   .sort((a, b) => a.data.sort_order - b.data.sort_order);
 
 const site = Astro.site ?? new URL('https://plvinc.com');
-const servicesLabel = text(settings.nav_labels?.services, 'Services');
+const servicesLabel = navLabels.services;
 const ownerNote = (servicesPage as Record<string, any>).owner_note ?? {};
 
 // Breadcrumbs for search engines, matching the visible trail, plus the service itself.
@@ -36,7 +36,7 @@ const schema = {
     {
       '@type': 'BreadcrumbList',
       itemListElement: [
-        { '@type': 'ListItem', position: 1, name: text(settings.nav_labels?.home, 'Home'), item: new URL('/', site).toString() },
+        { '@type': 'ListItem', position: 1, name: navLabels.home, item: new URL('/', site).toString() },
         { '@type': 'ListItem', position: 2, name: servicesLabel, item: new URL('/services', site).toString() },
         { '@type': 'ListItem', position: 3, name: title },
       ],
@@ -62,7 +62,7 @@ const schema = {
     <div class="container">
       <nav class="breadcrumb" aria-label="Breadcrumb">
         <ol role="list">
-          <li><a href="/">{text(settings.nav_labels?.home, 'Home')}</a></li>
+          <li><a href="/">{navLabels.home}</a></li>
           <li><a href="/services">{servicesLabel}</a></li>
           <li><span aria-current="page">{title}</span></li>
         </ol>

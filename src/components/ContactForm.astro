@@ -5,13 +5,6 @@ import contact from '../data/pages/contact.json';
 import states from '../data/us-states.json';
 import { text } from '../utils/labels';
 
-interface Props {
-  recipientEmail?: string;
-}
-
-const { recipientEmail } = Astro.props;
-const email = recipientEmail || settings.email || '';
-
 // Web3Forms uses each field's name attribute as the label in the email it sends, so the
 // new fields are named in plain words rather than in code style. `name`, `email` and
 // `message` keep their original names because Web3Forms treats those specially.
@@ -160,7 +153,7 @@ const stateNames = (states as { name: string }[]).map((s) => s.name);
     <input type="hidden" name="access_key"  value={settings.web3forms_key} />
     <input type="hidden" name="subject"     value={t.subject} />
     <input type="hidden" name="redirect"    value="false" />
-    {email && <input type="hidden" name="from_name" value={settings.professional_name} />}
+    {settings.professional_name && <input type="hidden" name="from_name" value={settings.professional_name} />}
 
     <!-- Honeypot, hidden from people, left unchecked. Web3Forms silently
          rejects any submission where this arrives checked. -->
