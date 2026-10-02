@@ -1,10 +1,10 @@
 ---
 title: "Solar & Renewable Land Acquisition"
-card_description: "Land acquisition, lease negotiation, and title services for solar, wind, and renewable energy projects, adapted to the distinct requirements of long-term energy lease structures."
+card_description: "Land acquisition, lease negotiation and title work for solar and wind projects, built around long-term leases and option periods."
 seo_title: "Solar & Renewable Land Acquisition"
 seo_description: "Land acquisition, lease negotiation and title work for solar and wind projects, built around long-term renewable lease structures."
 icon: "sun"
-cta_headline: "Siting a solar or wind project? Let us talk land."
+cta_headline: "Siting a solar or wind project? Let's talk land."
 cta_button: "Discuss a project"
 sort_order: 6
 show_owner_note: true
