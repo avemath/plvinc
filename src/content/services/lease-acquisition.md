@@ -4,6 +4,7 @@ card_description: "Leasehold acquisition from initial prospect identification th
 seo_title: "Oil & Gas Lease Acquisition"
 seo_description: "Leasehold acquisition from prospect to executed lease across the Marcellus, Utica and Gulf Coast: landowner contact, negotiation, and title verification."
 icon: "pen"
+show_owner_note: true
 show_sample_link: true
 cta_headline: "Have a play to lease? Let us talk scope and timeline."
 cta_button: "Discuss a leasing project"

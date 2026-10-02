@@ -1,0 +1,52 @@
+---
+// A short "who you'll talk to" strip: each landman's photo, name and role, linking to
+// the full bios on About. A wary landowner decides to trust a person before a firm, so
+// this sits high on Home and Mineral Owners rather than only at the foot of About.
+// Hidden when nobody is listed under Team / People.
+import { getCollection } from 'astro:content';
+import { text } from '../utils/labels';
+
+interface Props {
+  label?: string;
+  headline?: string;
+  intro?: string;
+  link?: string;
+  tone?: 'plain' | 'alt';
+}
+
+const { label, headline, intro, link, tone = 'plain' } = Astro.props;
+
+let people: Awaited<ReturnType<typeof getCollection<'people'>>> = [];
+try {
+  people = await getCollection('people');
+} catch {
+  people = [];
+}
+const sorted = [...people].sort((a, b) => (a.data.sort_order ?? 0) - (b.data.sort_order ?? 0));
+---
+
+{sorted.length > 0 && (
+  <section class:list={['team-strip', tone === 'alt' && 'section-alt']} aria-labelledby="team-strip-headline">
+    <div class="container">
+      <div class="section-header">
+        {label && <span class="section-label">{label}</span>}
+        <h2 id="team-strip-headline">{text(headline, "Who You'll Talk To")}</h2>
+        {intro && <p>{intro}</p>}
+      </div>
+      <ul class="team-strip-list" role="list">
+        {sorted.map((p) => (
+          <li class="team-strip-person">
+            {p.data.photo
+              ? <img src={p.data.photo} alt="" width="160" height="160" loading="lazy" decoding="async" class="team-strip-photo" />
+              : <span class="team-strip-photo team-strip-photo-empty" aria-hidden="true"></span>}
+            <span class="team-strip-name">{p.data.name}</span>
+            {p.data.role && <span class="team-strip-role">{p.data.role}</span>}
+          </li>
+        ))}
+      </ul>
+      <p class="section-aside">
+        <a href="/about">{text(link, 'Read their backgrounds')} <span aria-hidden="true">→</span></a>
+      </p>
+    </div>
+  </section>
+)}

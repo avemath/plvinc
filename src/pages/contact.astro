@@ -8,6 +8,7 @@ import contact from '../data/pages/contact.json';
 import settings from '../data/settings.json';
 import LinkedInIcon from '../components/LinkedInIcon.astro';
 import { getLinkedInProfiles } from '../utils/people';
+import { telHref } from '../utils/phone';
 
 const profiles = await getLinkedInProfiles();
 
@@ -26,7 +27,7 @@ const label = {
 const location = settings.based_in
   || (settings.city && settings.state ? `${settings.city}, ${settings.state}` : '');
 
-const ctaTelHref = settings.phone ? `tel:${settings.phone.replace(/[^\d+]/g, '')}` : '/contact';
+const ctaTelHref = telHref(settings.phone) || '/contact';
 ---
 
 <Base
@@ -44,8 +45,10 @@ const ctaTelHref = settings.phone ? `tel:${settings.phone.replace(/[^\d+]/g, '')
     <div class="container">
       <div class="contact-grid">
 
-        <!-- Contact details -->
-        <div>
+        {/* Phone and email first, then the form, then the rest. On a wide screen the details
+            stack on the left of the form; on a phone the form now comes straight after the
+            phone and email instead of after a full screen of LinkedIn and service area. */}
+        <div class="contact-primary">
           <h2>{contact.details_headline}</h2>
           <div class="contact-details">
             {/* Phone and email come from Site Settings, so changing them there updates
@@ -75,6 +78,15 @@ const ctaTelHref = settings.phone ? `tel:${settings.phone.replace(/[^\d+]/g, '')
               </div>
             )}
 
+          </div>
+        </div>
+
+        <div class="contact-form-area">
+          <ContactForm />
+        </div>
+
+        <div class="contact-more">
+          <div class="contact-details">
             {location && (
               <div>
                 <span class="contact-detail-label">{label.based_in}</span>
@@ -135,14 +147,12 @@ const ctaTelHref = settings.phone ? `tel:${settings.phone.replace(/[^\d+]/g, '')
             )}
           </div>
         </div>
-
-        <!-- Form -->
-        <ContactForm />
       </div>
     </div>
   </section>
   {contact.how_it_works && (
     <HowItWorks
+      label={contact.how_it_works.label}
       headline={contact.how_it_works.headline}
       steps={contact.how_it_works.steps}
       tone="alt"

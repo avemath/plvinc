@@ -1,8 +1,10 @@
 ---
+import { getCollection } from 'astro:content';
 import { hasInsightFiles } from '../utils/insight-files';
 import LinkedInIcon from './LinkedInIcon.astro';
 import { getLinkedInProfiles } from '../utils/people';
 import { navLabels, footerLabels, NAV_PAGES } from '../utils/labels';
+import { telHref } from '../utils/phone';
 
 interface Props {
   settings: {
@@ -23,6 +25,11 @@ interface Props {
 
 const { settings } = Astro.props;
 const profiles = await getLinkedInProfiles();
+
+// Every service, so each one is a click away from the foot of any page.
+const services = (await getCollection('services'))
+  .sort((a, b) => a.data.sort_order - b.data.sort_order)
+  .map((s) => ({ href: `/services/${s.id}`, title: s.data.title }));
 const year = new Date().getFullYear();
 const name = settings.footer_name || settings.professional_name;
 
@@ -59,7 +66,7 @@ const location = settings.based_in
       <div class="footer-contact">
         {settings.phone && (
           <a
-            href={`tel:${settings.phone.replace(/[^\d+]/g, '')}`}
+            href={telHref(settings.phone)}
             class="footer-link"
             aria-label={`Call ${settings.phone}`}
           >
@@ -99,6 +106,15 @@ const location = settings.based_in
         ))}
       </div>
     </div>
+
+    {services.length > 0 && (
+      <div>
+        <span class="footer-col-label">{navLabels.services}</span>
+        <nav class="footer-nav-links" aria-label="Footer services">
+          {services.map((s) => <a href={s.href}>{s.title}</a>)}
+        </nav>
+      </div>
+    )}
 
     <div>
       <span class="footer-col-label">{footerLabels.navigation_heading}</span>

@@ -1,6 +1,6 @@
 {
-  "page_heading": "Contact",
-  "intro": "Tell us what you are working on: the tract, the basin, and when you need it.",
+  "page_heading": "Contact Our Landmen",
+  "intro": "Call, or send a short note. Landowners: the county and the letter you received are enough. Companies: tell us the tract, the basin and your timing.",
   "service_area_note": "Project experience covers the Appalachian Basin, Gulf Coast, Permian, Michigan, and Pacific Northwest. Available for engagements nationwide.",
   "mailing_address": "",
   "meta_description": "Tell us the tract, the basin and the timing. Certified Professional Landmen in Duncansville, PA, for the Appalachian, Gulf Coast, Permian and Michigan basins.",
@@ -56,11 +56,12 @@
   "form_success": "Thank you, your message has been sent. We will be in touch.",
   "form_error": "Something went wrong. Please try again, or reach out directly by phone or email.",
   "how_it_works": {
+    "label": "How It Works",
     "headline": "What Happens When You Contact Us",
     "steps": [
       {
         "title": "You reach out.",
-        "text": "Call, or send a short note. Tell us the county and what showed up in your mailbox."
+        "text": "Call, or send a short note. Tell us the county and what you need: a letter you received, a tract to run, or a project to staff."
       },
       {
         "title": "We look at the record.",
@@ -77,8 +78,8 @@
     ]
   },
   "short_form": {
-    "tab_label": "I own land or minerals",
-    "project_tab_label": "I have a project",
+    "tab_label": "I own minerals or land",
+    "project_tab_label": "I represent a company",
     "headline": "Send Us a Short Note",
     "intro": "Four details are enough to start. Tell us what showed up and where the land sits.",
     "what_label": "What showed up (a lease offer, a division order, a letter, a question)",

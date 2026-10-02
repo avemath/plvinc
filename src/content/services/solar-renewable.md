@@ -7,6 +7,7 @@ icon: "sun"
 cta_headline: "Siting a solar or wind project? Let us talk land."
 cta_button: "Discuss a project"
 sort_order: 6
+show_owner_note: true
 ---
 
 Land services for solar, wind, and transmission projects, where lease structures, option periods, and interconnection easements differ from mineral work.

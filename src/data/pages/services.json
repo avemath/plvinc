@@ -1,6 +1,6 @@
 {
-  "page_heading": "Services",
-  "page_subtitle": "Full-service land consulting across the complete project lifecycle, from courthouse research through executed agreements and ongoing portfolio management.",
+  "page_heading": "Land Services",
+  "page_subtitle": "Title, leasing, due diligence, royalty, right-of-way and renewable land work, researched and reported by the landmen who sign the report.",
   "meta_description": "Title, leasing, due diligence, royalty, right-of-way and renewable land work across the Appalachian, Gulf Coast, Permian and Michigan basins.",
   "cta": {
     "headline": "Have a project? Tell us the scope.",
@@ -10,10 +10,19 @@
   "page_title": "Land Services | Title, Leasing & ROW",
   "sample_feature": {
     "label": "Sample Work",
-    "headline": "See what the deliverable looks like",
+    "headline": "See What the Deliverable Looks Like",
     "text": "A fictional file, start to finish, with notes on how to read it.",
     "button": "View the sample file"
   },
   "card_link_label": "Learn more",
-  "back_link_label": "All Services"
+  "back_link_label": "All Services",
+  "owner_band": {
+    "text": "Own land or minerals and received a letter or an offer?",
+    "link_label": "Start with our page for owners"
+  },
+  "owner_note": {
+    "text": "Own the land or the minerals yourself? This page is written for the companies we work for. Our page for owners explains what to expect in plain terms.",
+    "link_label": "Start here"
+  },
+  "related_heading": "Other Services"
 }

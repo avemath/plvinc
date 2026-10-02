@@ -1,15 +1,17 @@
 ---
 import Base from '../layouts/Base.astro';
+import { text } from '../utils/labels';
 import CallToAction from '../components/CallToAction.astro';
 import { renderMarkdown } from '../utils/markdown';
 import page from '../data/pages/sample-work.json';
 import settings from '../data/settings.json';
+import { telHref } from '../utils/phone';
 
 const introHtml = await renderMarkdown(page.intro);
 
 const { mor, runsheet, lar, supplemental } = page;
 
-const telHref = settings.phone ? `tel:${settings.phone.replace(/[^\d+]/g, '')}` : '';
+const tel = telHref(settings.phone);
 
 // Each note is tied to a part of the document by an anchor. The label is what the
 // note is headed with, so it still reads on its own if the marker is missed.
@@ -58,20 +60,6 @@ const tree = supplemental.tree as TreeNode;
     <div class="container container-narrow">
       <div class="prose" set:html={introHtml} />
 
-      <!-- Stated before anything that could be mistaken for a real record. -->
-      <aside class="fiction-notice" role="note" aria-labelledby="fiction-notice-title">
-        <p class="fiction-notice-title" id="fiction-notice-title">Fictional samples</p>
-        <p class="fiction-notice-body">{page.fiction_notice}</p>
-      </aside>
-
-      {page.simple_note && (
-        <aside class="simple-note" role="note">
-          <p>{page.simple_note}</p>
-        </aside>
-      )}
-
-      <p class="sample-format-note">{page.format_note}</p>
-
       {page.how_to_read?.length > 0 && (
         <div class="how-to-read">
           {page.how_to_read.map((h) => (
@@ -82,6 +70,24 @@ const tree = supplemental.tree as TreeNode;
           ))}
         </div>
       )}
+
+      <!-- Stated before anything that could be mistaken for a real record. -->
+      <aside class="fiction-notice" role="note" aria-labelledby="fiction-notice-title">
+        <p class="fiction-notice-title" id="fiction-notice-title">{text(page.fiction_notice_title, 'Fictional samples')}</p>
+        <p class="fiction-notice-body">{page.fiction_notice}</p>
+      </aside>
+
+      {/* On a phone the first document used to start two screens down. These go straight
+          to each one. */}
+      <nav class="doc-jump" aria-label={text(page.jump_label, 'The four documents')}>
+        <p class="doc-jump-label">{text(page.jump_label, 'The four documents')}</p>
+        <ol role="list">
+          <li><a href="#mor-title">{mor.title}</a></li>
+          <li><a href="#runsheet-title">{runsheet.title}</a></li>
+          <li><a href="#lar-title">{lar.title}</a></li>
+          <li><a href="#supp-title">{supplemental.title}</a></li>
+        </ol>
+      </nav>
     </div>
   </section>
 
@@ -609,6 +615,19 @@ const tree = supplemental.tree as TreeNode;
     </section>
   </div>
 
+  {(page.simple_note || page.format_note) && (
+    <section class="sample-after-notes">
+      <div class="container container-narrow">
+        {page.simple_note && (
+          <aside class="simple-note" role="note">
+            <p>{page.simple_note}</p>
+          </aside>
+        )}
+        {page.format_note && <p class="sample-format-note">{page.format_note}</p>}
+      </div>
+    </section>
+  )}
+
   <!-- ─── What makes a file hard ─── -->
   {page.hard_files && (
     <section class="section-alt" aria-labelledby="hard-files-headline">
@@ -634,7 +653,7 @@ const tree = supplemental.tree as TreeNode;
     text={page.cta.text}
     button={page.cta.button}
     phone={settings.phone}
-    phoneHref={telHref}
+    phoneHref={tel}
     tone="light"
   />
 </Base>

@@ -7,6 +7,7 @@ icon: "pin"
 cta_headline: "Planning a right-of-way or surface project? Get in touch."
 cta_button: "Discuss a project"
 sort_order: 5
+show_owner_note: true
 ---
 
 Negotiation and acquisition of easements and surface agreements for pipeline and infrastructure projects, negotiated tract by tract.
