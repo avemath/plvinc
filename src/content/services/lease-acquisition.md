@@ -6,7 +6,7 @@ seo_description: "Leasehold acquisition from prospect to executed lease across t
 icon: "pen"
 show_owner_note: true
 show_sample_link: true
-cta_headline: "Have a play to lease? Let us talk scope and timeline."
+cta_headline: "Have a play to lease? Let's talk scope and timing."
 cta_button: "Discuss a leasing project"
 sort_order: 2
 ---

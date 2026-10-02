@@ -125,7 +125,7 @@ const { title, description, image, noindex = false, schema, preloadImage } = Ast
 
     document
       .querySelectorAll(
-        '.state-card, .testimonial-card, .person-card, .credential-item, .approach-section,' +
+        '.state-card, .testimonial-card, .person-card, .approach-section,' +
         '.stat, .hiw-step, .reason, .hard-file, .lease-doc, .how-to-read-card'
       )
       .forEach((el) => { el.classList.add('reveal'); obs.observe(el); });

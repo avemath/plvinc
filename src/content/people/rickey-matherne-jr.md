@@ -12,8 +12,8 @@ credentials:
     number: ""
 ---
 
-Rickey Matherne, Jr., CPL, brings 25+ years of hands-on land experience to every project, from courthouse-level title research and lease negotiation across the prolific plays of East Texas and Louisiana to complex A&D due diligence, right-of-way acquisition, and renewable energy land work spanning the Gulf Coast and Appalachian Basin.
+Rickey has more than 25 years of hands-on land experience. Much of it is courthouse title research and lease negotiation in East Texas and Louisiana. He has also handled acquisition and divestiture (A&D) due diligence, right-of-way acquisition, and solar and renewable land work across the Gulf Coast and the Appalachian Basin.
 
-Credentialed by the American Association of Professional Landmen (AAPL) as a Certified Professional Landman, Rickey has built his practice on a straightforward standard: deliver thorough, defensible work on time and communicate clearly at every step. He has worked with independent operators, major producers, and institutional investors across projects ranging from single-tract curative issues to multi-county acquisition packages and large-scale portfolio due diligence.
+He has worked with independent operators, major producers and institutional investors, on projects from curative work on a single tract to multi-county acquisition packages and large portfolio due diligence. His standard is simple: thorough work that holds up, and clear updates at every step.
 
-His experience spans title research and curative work, lease acquisition and negotiation, A&D due diligence, mineral and royalty management, right-of-way acquisition, and solar and renewable energy land work.
+His experience covers title research and curative work, lease acquisition and negotiation, A&D due diligence, mineral and royalty management, right-of-way acquisition, and solar and renewable land work.

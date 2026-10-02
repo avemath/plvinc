@@ -5,6 +5,7 @@ import LinkedInIcon from './LinkedInIcon.astro';
 import { getLinkedInProfiles } from '../utils/people';
 import { navLabels, footerLabels, NAV_PAGES } from '../utils/labels';
 import { telHref } from '../utils/phone';
+import { srcsetFor } from '../utils/images';
 
 interface Props {
   settings: {
@@ -47,6 +48,8 @@ const location = settings.based_in
       {settings.logo_small_light
         ? <img
             src={settings.logo_small_light}
+            srcset={srcsetFor(settings.logo_small_light, 465)}
+            sizes="110px"
             alt={name}
             class="footer-logo"
             width="465"

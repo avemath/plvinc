@@ -3,6 +3,7 @@ import { hasInsightFiles } from '../utils/insight-files';
 import { navLabels, NAV_PAGES } from '../utils/labels';
 import { getCollection } from 'astro:content';
 import { telHref } from '../utils/phone';
+import { srcsetFor } from '../utils/images';
 
 interface Props {
   settings: {
@@ -38,34 +39,31 @@ const services = (await getCollection('services'))
 const logoFull = settings.logo;
 const logoSmall = settings.logo_small || settings.logo;
 const tel = telHref(settings.phone);
+const desktopLogo = logoFull || logoSmall;
+const mobileLogo = logoSmall || logoFull;
 ---
 
 <header class="site-header">
   <nav class="nav-inner" aria-label="Main navigation">
     <a href="/" class="nav-logo" aria-label={`${settings.professional_name}, home`}>
-      {logoFull || logoSmall
+      {desktopLogo
         ? (
-          <>
-            {logoFull && (
-              <img
-                src={logoFull}
-                alt={settings.professional_name}
-                class="nav-logo-img nav-logo-img-wide"
-                width="245"
-                height="174"
-              />
+          // One <picture>, so a phone downloads only the wide mark and a desktop only the
+          // stacked logo. With just one of the two uploaded, it is used at every width.
+          <picture>
+            {mobileLogo !== desktopLogo && (
+              <source media="(max-width: 768px)" srcset={srcsetFor(mobileLogo, 465) || mobileLogo} sizes="150px" width="465" height="132" />
             )}
-            {logoSmall && (
-              <img
-                src={logoSmall}
-                alt={logoFull ? '' : settings.professional_name}
-                aria-hidden={logoFull ? 'true' : undefined}
-                class="nav-logo-img nav-logo-img-narrow"
-                width="465"
-                height="132"
-              />
-            )}
-          </>
+            <img
+              src={desktopLogo}
+              srcset={srcsetFor(desktopLogo, logoFull ? 245 : 465)}
+              sizes={logoFull ? '85px' : '210px'}
+              alt={settings.professional_name}
+              class="nav-logo-img"
+              width={logoFull ? 245 : 465}
+              height={logoFull ? 174 : 132}
+            />
+          </picture>
         )
         : <span class="nav-logo-text">{settings.professional_name}</span>
       }
@@ -150,6 +148,7 @@ const tel = telHref(settings.phone);
   const subToggle = document.querySelector<HTMLButtonElement>('.nav-sub-toggle');
   const subItem = subToggle?.closest('.nav-has-sub');
   subToggle?.addEventListener('click', () => {
+    subItem?.classList.remove('is-dismissed');
     const open = subItem?.classList.toggle('is-open');
     subToggle.setAttribute('aria-expanded', String(!!open));
   });
@@ -182,7 +181,20 @@ const tel = telHref(settings.phone);
     }
   });
 
+  // Escape also has to close a list that hover opened, so it stays shut until the
+  // pointer leaves the item.
+  subItem?.addEventListener('mouseleave', () => subItem.classList.remove('is-dismissed'));
+
   document.addEventListener('keydown', (e) => {
+    const subShown = subItem?.classList.contains('is-open') || subItem?.matches(':hover');
+    if (e.key === 'Escape' && subItem && subShown && window.matchMedia('(min-width: 769px)').matches) {
+      const hadFocus = subItem.contains(document.activeElement);
+      subItem.classList.remove('is-open');
+      if (subItem.matches(':hover')) subItem.classList.add('is-dismissed');
+      subToggle?.setAttribute('aria-expanded', 'false');
+      if (hadFocus) subToggle?.focus();
+      return;
+    }
     if (e.key === 'Escape' && subItem?.classList.contains('is-open')) {
       subItem.classList.remove('is-open');
       subToggle?.setAttribute('aria-expanded', 'false');

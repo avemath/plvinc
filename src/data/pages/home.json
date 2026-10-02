@@ -2,7 +2,7 @@
   "hero_headline": "Know who owns it, what the record shows, and where the risk sits.",
   "hero_subheadline": "Certified Professional Landmen in Duncansville, PA. Title, leasing and due diligence for companies, and plain answers for landowners and heirs.",
   "hero_image": "/images/uploads/hero-office-monitors.jpg",
-  "hero_cta_text": "I own minerals or land",
+  "hero_cta_text": "I own land or minerals",
   "hero_cta_href": "/mineral-owners",
   "hero_secondary_cta_text": "I represent a company",
   "hero_secondary_cta_href": "/contact#project",
@@ -13,7 +13,7 @@
   "team_link": "Read their backgrounds",
   "regions_label": "Coverage",
   "regions_headline": "Where We Work",
-  "regions_note": "Select a basin or a highlighted state to see the plays worked there. Shaded states mark completed project experience; we take on work nationwide.",
+  "regions_note": "Select a basin or a shaded state to see the plays worked there.",
   "regions_legend_worked": "Project experience",
   "regions_legend_available": "Available nationwide",
   "regions_hint": "Shaded states mark completed project work. Available nationwide.",
@@ -88,7 +88,7 @@
       "states": [
         "Texas"
       ],
-      "summary": "The largest oil-producing basin in the United States, covering more than 75,000 square miles across West Texas and southeast New Mexico. Stacked pay in the Midland and Delaware sub-basins makes depth severance and multi-horizon ownership routine title issues.",
+      "summary": "The largest oil-producing basin in the United States, covering more than 75,000 square miles across West Texas and southeast New Mexico. Oil sits in several stacked layers in the Midland and Delaware sub-basins, so ownership that changes with depth is a routine title issue here.",
       "plays": [
         {
           "name": "Midland Sub-basin",
@@ -106,7 +106,7 @@
       "states": [
         "Michigan"
       ],
-      "summary": "A circular intracratonic basin centered on the Lower Peninsula, producing from multiple stacked horizons. Shallow biogenic gas here was among the earliest commercial shale development in the country.",
+      "summary": "A bowl-shaped basin under Michigan's Lower Peninsula that produces from several stacked layers. Its shallow Antrim gas was some of the first shale gas developed commercially in the country.",
       "plays": [
         {
           "name": "Antrim Shale",
@@ -141,7 +141,7 @@
   "services_headline": "Land Services",
   "services_intro": "Six kinds of land work, from one family's inherited tract to multi-county leasing programs and acquisition due diligence.",
   "cta": {
-    "headline": "Not sure what you own? Let us find out.",
+    "headline": "Not sure what you own? We can find out.",
     "text": "Send the letter you received, or a county and a tract list. We will tell you what the record shows and what it will take.",
     "button": "Talk to a landman",
     "image": "/images/uploads/cta-rig-horizon.jpg"
@@ -150,7 +150,7 @@
     {
       "value": "45",
       "label": "Combined years in oil and gas",
-      "detail": "Petro Land Ventures has worked files since January 2005, with more than twenty years behind each principal."
+      "detail": "Petro Land Ventures has worked files since January 2005, and each of us has more than 20 years in the business."
     },
     {
       "value": "CPL",
@@ -164,7 +164,7 @@
   "sample_feature": {
     "label": "Sample Work",
     "headline": "See the Work Before You Call",
-    "text": "We published a complete sample file: an ownership report, the runsheet behind it (the list of every deed, will and lease in the chain), a lease report, and a resolved heirship. It is fictional and annotated, so you can see how the work reads whether you run a land department or own forty acres.",
+    "text": "We published a complete sample file: a runsheet (a list of every deed, will and lease in the chain), an ownership report, a lease acquisition report, and a supplemental report that resolves an heirship. It is fictional and annotated, so you can see how the work reads whether you run a land department or own forty acres.",
     "button": "View the sample file"
   },
   "services_link_text": "See what each service covers"
