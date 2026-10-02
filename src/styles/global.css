@@ -23,10 +23,13 @@
   --text-light:    #606060;
   --white:         #FFFFFF;
 
-  /* The one colour that means "act here": primary buttons only. Green carries structure,
-     gold is ornament, terracotta is the action. White text on it is 4.99:1. */
-  --action:        #B4532A;
-  --action-hover:  #9A4423;
+  /* "Act here", kept inside the brand palette. On light backgrounds the main button is the
+     deep green (white text 10.7:1); on the green bands and photos it is the light gold with
+     green text (7.5:1), the same gold as the rules and accents. */
+  --action:        var(--green-dark);
+  --action-hover:  var(--green-mid);
+  --action-on-dark:       #D9BE8E;
+  --action-on-dark-hover: #E8D4AE;
 
   --font-heading: 'Manrope', system-ui, -apple-system, sans-serif;
   --font-sans:  'Inter', system-ui, -apple-system, sans-serif;
@@ -184,19 +187,19 @@ section { padding: 5rem 0; }
   border-color: var(--action-hover);
 }
 
-/* The main action on a photo (home hero, the home closing band) takes the action colour
-   too. On the flat green bands the white button stays, since terracotta on that green is
-   too close in lightness to stand out. */
+/* The main action on a photo (home hero, the home closing band) is the light gold, so it
+   stands out from the green without bringing in a colour from outside the brand. */
 .hero-paths .btn-white:first-child,
 .cta-band-image .btn-white {
-  background: var(--action);
-  border-color: var(--action);
-  color: var(--white);
+  background: var(--action-on-dark);
+  border-color: var(--action-on-dark);
+  color: var(--green-dark);
 }
 .hero-paths .btn-white:first-child:hover,
 .cta-band-image .btn-white:hover {
-  background: var(--action-hover);
-  border-color: var(--action-hover);
+  background: var(--action-on-dark-hover);
+  border-color: var(--action-on-dark-hover);
+  color: var(--green-dark);
 }
 
 
@@ -2969,10 +2972,10 @@ a.contact-detail-value:hover { color: var(--green-dark); }
     color: var(--white);
     background: var(--green-dark);
   }
-  .sticky-contact-call { background: var(--action); }
+  .sticky-contact .sticky-contact-call { background: var(--action-on-dark); color: var(--green-dark); }
   .sticky-contact-write { background: var(--green-dark); }
   .sticky-contact-write:active { background: #123326; }
-  .sticky-contact-call:active { background: var(--action-hover); }
+  .sticky-contact .sticky-contact-call:active { background: var(--action-on-dark-hover); }
 
   /* Room for the bar so it never covers the last line of a page. */
   .site-footer { padding-bottom: 4.5rem; }
