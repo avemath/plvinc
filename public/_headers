@@ -7,11 +7,18 @@
 # Security headers for every response. Cloudflare already adds nosniff and a referrer
 # policy; these cover the rest. HSTS is left without includeSubDomains so a subdomain
 # that is not on HTTPS (mail, a verification host) is never locked out.
+# No Cross-Origin-Opener-Policy: the editor signs in through a GitHub popup that reports
+# back to the window that opened it, and that header would cut the link.
 /*
   Strict-Transport-Security: max-age=31536000
   X-Frame-Options: DENY
-  Content-Security-Policy: frame-ancestors 'none'; base-uri 'self'; object-src 'none'
+  Content-Security-Policy: frame-ancestors 'none'; base-uri 'self'; object-src 'none'; form-action 'self' https://api.web3forms.com; upgrade-insecure-requests
   Permissions-Policy: camera=(), microphone=(), geolocation=(), payment=(), usb=()
+
+# The editor is blocked in robots.txt, which also stops crawlers reading its noindex tag,
+# so the header says it as well.
+/studio/*
+  X-Robots-Tag: noindex, nofollow
 
 # The same site is also served at plvinc.pages.dev and at a preview address for every
 # deploy. The canonical tag already names plvinc.com, but telling crawlers not to index
