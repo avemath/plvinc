@@ -7,8 +7,9 @@ import Base from '../layouts/Base.astro';
 import settings from '../data/settings.json';
 import page from '../data/pages/not-found.json';
 import { navLabels, NAV_PAGES, text } from '../utils/labels';
+import { telHref } from '../utils/phone';
 
-const telHref = settings.phone ? `tel:${settings.phone.replace(/[^\d+]/g, '')}` : '';
+const tel = telHref(settings.phone);
 const heading = text(page.page_heading, 'Page Not Found');
 
 // The same pages, and the same wording, as the menu.
@@ -36,7 +37,7 @@ const starts = NAV_PAGES.filter((p) => ['home', 'services', 'mineral_owners', 's
         </ul>
         {settings.phone && page.phone_line && (
           <p>
-            {page.phone_line} <a href={telHref}>{settings.phone}</a>
+            {page.phone_line} <a href={tel}>{settings.phone}</a>
           </p>
         )}
       </div>

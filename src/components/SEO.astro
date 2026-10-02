@@ -1,5 +1,7 @@
 ---
 import settings from '../data/settings.json';
+import home from '../data/pages/home.json';
+import { e164 } from '../utils/phone';
 
 interface Props {
   title: string;
@@ -45,15 +47,29 @@ const s = settings as Record<string, string>;
 // ambiguous, so state is the one that gates it and city is added when there is one.
 const hasAddress = Boolean(s.state);
 
+const siteUrl = Astro.site ?? new URL(SITE_FALLBACK);
+const orgId = new URL('/#org', siteUrl).toString();
+
+// The states on the home page coverage map, as places search engines understand. The
+// region names in the footer line ("Appalachian Basin") are kept as well.
+const states = [...new Set(
+  ((home as { regions?: { states?: string[] }[] }).regions ?? []).flatMap((r) => r.states ?? [])
+)];
+
+// One business entity, the same on every page, with a stable @id that the people on the
+// About page and each service page point back to. Its description is the site-wide one
+// rather than whichever page it happens to sit on.
 const business = {
   '@context': 'https://schema.org',
   '@type': 'ProfessionalService',
+  '@id': orgId,
   name: siteName,
   ...(s.legal_name ? { legalName: s.legal_name } : {}),
-  description,
-  url: new URL('/', Astro.site ?? SITE_FALLBACK).toString(),
+  description: s.seo_description || description,
+  url: new URL('/', siteUrl).toString(),
   image: ogImage,
-  ...(s.phone ? { telephone: s.phone } : {}),
+  ...(s.logo ? { logo: new URL(s.logo, siteUrl).toString() } : {}),
+  ...(s.phone ? { telephone: e164(s.phone) } : {}),
   ...(s.email ? { email: s.email } : {}),
   ...(hasAddress
     ? {
@@ -65,8 +81,13 @@ const business = {
         },
       }
     : {}),
-  ...(s.service_area_summary
-    ? { areaServed: s.service_area_summary.split('·').map((a) => a.trim()).filter(Boolean) }
+  ...((states.length || s.service_area_summary)
+    ? {
+        areaServed: [
+          ...states.map((name) => ({ '@type': 'State', name })),
+          ...(s.service_area_summary || '').split('·').map((a) => a.trim()).filter(Boolean),
+        ],
+      }
     : {}),
   ...(s.linkedin_url ? { sameAs: [s.linkedin_url] } : {}),
 };
@@ -94,4 +115,11 @@ const business = {
 <meta name="twitter:image"       content={ogImage} />
 
 <script type="application/ld+json" set:html={JSON.stringify(business)} />
+<script type="application/ld+json" set:html={JSON.stringify({
+  '@context': 'https://schema.org',
+  '@type': 'WebSite',
+  url: new URL('/', siteUrl).toString(),
+  name: siteName,
+  publisher: { '@id': orgId },
+})} />
 {schema && <script type="application/ld+json" set:html={JSON.stringify(schema)} />}

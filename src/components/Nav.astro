@@ -1,6 +1,8 @@
 ---
 import { hasInsightFiles } from '../utils/insight-files';
 import { navLabels, NAV_PAGES } from '../utils/labels';
+import { getCollection } from 'astro:content';
+import { telHref } from '../utils/phone';
 
 interface Props {
   settings: {
@@ -16,18 +18,26 @@ const { settings } = Astro.props;
 const hasInsights = hasInsightFiles();
 const path = Astro.url.pathname;
 
-function isActive(href: string) {
-  // build.format is 'file', so the home page arrives as /index.html rather than /.
-  if (href === '/') return path === '/' || path === '/index.html';
-  return path.startsWith(href);
+// "page" for the page itself; "true" for a section the visitor is inside (a service page
+// marks Services as current, but Services is not the page they are on). build.format is
+// 'file', so pages arrive as /about.html and the home page as /index.html.
+function current(href: string): 'page' | 'true' | undefined {
+  if (href === '/') return path === '/' || path === '/index.html' ? 'page' : undefined;
+  if (path === href || path === `${href}.html`) return 'page';
+  return path.startsWith(`${href}/`) ? 'true' : undefined;
 }
+
+// The six services, in their display order, for the Services dropdown.
+const services = (await getCollection('services'))
+  .sort((a, b) => a.data.sort_order - b.data.sort_order)
+  .map((s) => ({ href: `/services/${s.id}`, title: s.data.title }));
 
 // The full logo is a badge, roughly square, so it needs height to stay legible. The narrow
 // wordmark reads better in a cramped header, so small screens get that instead. Both are
 // rendered and CSS picks one, which avoids a layout shift from swapping the src in script.
 const logoFull = settings.logo;
 const logoSmall = settings.logo_small || settings.logo;
-const telHref = settings.phone ? `tel:${settings.phone.replace(/[^\d+]/g, '')}` : '';
+const tel = telHref(settings.phone);
 ---
 
 <header class="site-header">
@@ -63,18 +73,41 @@ const telHref = settings.phone ? `tel:${settings.phone.replace(/[^\d+]/g, '')}` 
 
     <ul class="nav-links" id="nav-links" role="list">
       {NAV_PAGES.filter((p) => p.key !== 'insights' || hasInsights).map((p) => (
-        <li><a href={p.href} aria-current={isActive(p.href) ? 'page' : undefined}>{navLabels[p.key]}</a></li>
+        p.key === 'services' && services.length > 0
+          ? (
+            <li class="nav-has-sub">
+              <a href={p.href} aria-current={current(p.href)}>{navLabels[p.key]}</a>
+              <button
+                type="button"
+                class="nav-sub-toggle"
+                aria-expanded="false"
+                aria-controls="nav-sub-services"
+                aria-label={`Show each of the ${navLabels[p.key]}`}
+              >
+                <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor"
+                     stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                  <path d="m6 9 6 6 6-6" />
+                </svg>
+              </button>
+              <ul class="nav-sub" id="nav-sub-services" role="list">
+                {services.map((s) => (
+                  <li><a href={s.href} aria-current={current(s.href)}>{s.title}</a></li>
+                ))}
+              </ul>
+            </li>
+          )
+          : <li><a href={p.href} aria-current={current(p.href)}>{navLabels[p.key]}</a></li>
       ))}
       {settings.phone && (
         <li class="nav-links-phone">
-          <a href={telHref}>{settings.phone}</a>
+          <a href={tel}>{settings.phone}</a>
         </li>
       )}
     </ul>
 
     <div class="nav-actions">
       {settings.phone && (
-        <a href={telHref} class="nav-phone" aria-label={`Call ${settings.phone}`}>
+        <a href={tel} class="nav-phone" aria-label={`Call ${settings.phone}`}>
           <svg
             class="nav-phone-icon"
             viewBox="0 0 24 24"
@@ -111,6 +144,23 @@ const telHref = settings.phone ? `tel:${settings.phone.replace(/[^\d+]/g, '')}` 
   const toggle = document.querySelector<HTMLButtonElement>('.nav-toggle');
   const links  = document.querySelector<HTMLElement>('#nav-links');
 
+  // The Services sub-list. On a wide screen it also opens on hover and keyboard focus
+  // (CSS); the button makes it work by tap and by click, and is the only way in the
+  // phone menu.
+  const subToggle = document.querySelector<HTMLButtonElement>('.nav-sub-toggle');
+  const subItem = subToggle?.closest('.nav-has-sub');
+  subToggle?.addEventListener('click', () => {
+    const open = subItem?.classList.toggle('is-open');
+    subToggle.setAttribute('aria-expanded', String(!!open));
+  });
+  subItem?.addEventListener('focusout', (e) => {
+    const next = e.relatedTarget as Node | null;
+    if (next && !subItem.contains(next) && window.matchMedia('(min-width: 769px)').matches) {
+      subItem.classList.remove('is-open');
+      subToggle?.setAttribute('aria-expanded', 'false');
+    }
+  });
+
   const closeMenu = () => {
     links?.classList.remove('is-open');
     toggle?.setAttribute('aria-expanded', 'false');
@@ -133,6 +183,12 @@ const telHref = settings.phone ? `tel:${settings.phone.replace(/[^\d+]/g, '')}` 
   });
 
   document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && subItem?.classList.contains('is-open')) {
+      subItem.classList.remove('is-open');
+      subToggle?.setAttribute('aria-expanded', 'false');
+      subToggle?.focus();
+      return;
+    }
     if (e.key === 'Escape' && links?.classList.contains('is-open')) {
       links.classList.remove('is-open');
       toggle?.setAttribute('aria-expanded', 'false');

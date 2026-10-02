@@ -47,13 +47,15 @@ export const mobileBarLabels = withDefaults(MOBILE_BAR_DEFAULTS, s.mobile_bar_la
 
 // Every page in the menu, in menu order. The addresses are fixed; only the wording is
 // editable, because a changed address would break every link to that page.
+// The order puts what each audience came for first: companies look for Services, owners
+// for Mineral Owners, and both are helped by seeing the work before reading about the firm.
 export const NAV_PAGES: { key: keyof typeof NAV_DEFAULTS; href: string }[] = [
   { key: 'home', href: '/' },
-  { key: 'about', href: '/about' },
   { key: 'services', href: '/services' },
   { key: 'mineral_owners', href: '/mineral-owners' },
-  { key: 'experience', href: '/experience' },
   { key: 'sample_work', href: '/sample-work' },
+  { key: 'experience', href: '/experience' },
+  { key: 'about', href: '/about' },
   { key: 'insights', href: '/insights' },
   { key: 'contact', href: '/contact' },
 ];
