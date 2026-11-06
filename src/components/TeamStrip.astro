@@ -38,7 +38,7 @@ const sorted = [...people].sort((a, b) => (a.data.sort_order ?? 0) - (b.data.sor
         {sorted.map((p) => (
           <li class="team-strip-person">
             {p.data.photo
-              ? <img src={p.data.photo} srcset={srcsetFor(p.data.photo, 800)} sizes="140px" alt="" width="160" height="160" loading="lazy" decoding="async" class="team-strip-photo" />
+              ? <img src={p.data.photo} srcset={srcsetFor(p.data.photo, 800)} sizes="(max-width: 500px) 40vw, 200px" alt="" width="200" height="200" loading="lazy" decoding="async" class="team-strip-photo" />
               : <span class="team-strip-photo team-strip-photo-empty" aria-hidden="true"></span>}
             <span class="team-strip-name">{p.data.name}</span>
             {p.data.role && <span class="team-strip-role">{p.data.role}</span>}
