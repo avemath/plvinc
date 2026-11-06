@@ -23,4 +23,4 @@ Services include:
 - Top leasing and lease maintenance programs
 - Bulk leasehold acquisition coordination
 
-Bonus and royalty calculations, legal descriptions, execution, and recording are verified at each step.
+We verify bonus and royalty calculations, legal descriptions, execution, and recording at each step, so the lease you paid for is the lease on record.

@@ -24,4 +24,4 @@ Services include:
 - Decommissioning clause review and negotiation
 - Coordination with developers, utilities, and project counsel
 
-Option terms, encumbrance conflicts, and decommissioning provisions are reviewed before execution.
+We review option terms, encumbrance conflicts, and decommissioning provisions before anything is signed, so the site you option is a site you can build on.

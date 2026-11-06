@@ -25,4 +25,4 @@ Services include:
 - Operator communication and payment follow-up
 - Reporting for individual owners, estates, trusts, and institutional portfolios
 
-Records are maintained for holdings of any size, from inherited acreage to institutional portfolios.
+We keep records for holdings of any size, from one family's inherited acreage to institutional portfolios, so every payment can be traced back to the record.
