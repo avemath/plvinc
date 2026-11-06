@@ -1608,9 +1608,20 @@ a.contact-detail-value:hover { color: var(--green-dark); }
     overscroll-behavior: contain;
   }
 
+  /* The base rule centres the row on a wide screen. Stacked, every item lines up on
+     the left, so Services and its sub-list sit in the same column as the rest. */
+  .nav-links { align-items: stretch; }
+
   .nav-links a {
     padding: .7rem 1.5rem;
     border-radius: 0;
+  }
+  /* A full-width row would stretch the underline edge to edge, so the current page
+     is marked with a bar on the left instead. */
+  .nav-links a::after { display: none; }
+  .nav-links a[aria-current="page"] {
+    font-weight: 600;
+    box-shadow: inset 3px 0 0 var(--green-dark);
   }
 }
 
