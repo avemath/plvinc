@@ -1576,7 +1576,16 @@ a.contact-detail-value:hover { color: var(--green-dark); }
   .nav-phone-number { display: none; }
   .nav-phone {
     padding: .5rem;
+    min-width: 44px;
+    min-height: 44px;
+    justify-content: center;
     color: var(--green-dark);
+  }
+  .nav-toggle {
+    min-width: 44px;
+    min-height: 44px;
+    align-items: center;
+    justify-content: center;
   }
 
   .nav-links-phone { display: block; }
@@ -3246,7 +3255,7 @@ html { scroll-padding-top: calc(var(--nav-height) + 1rem); }
   .nav-has-sub > a { flex: 1; }
   .nav-sub-toggle { width: 44px; height: 44px; margin-right: 1rem; }
   .nav-has-sub.is-open .nav-sub { display: block; width: 100%; padding: 0 0 .4rem; }
-  .nav-links .nav-sub a { padding: .55rem 1.5rem .55rem 2.5rem; font-size: .95rem; }
+  .nav-links .nav-sub a { padding: .6rem 1.5rem .6rem 2.5rem; font-size: .95rem; }
 }
 
 /* ============================================================
@@ -3320,3 +3329,30 @@ html { scroll-padding-top: calc(var(--nav-height) + 1rem); }
 .doc-jump a { color: var(--green-mid); text-decoration: underline; text-underline-offset: 2px; }
 .doc-jump a:hover { color: var(--green-dark); }
 .sample-after-notes { padding-top: 0; }
+
+
+/* Touch targets on phones and tablets. A finger needs about 44px; the desktop sizes
+   stay as they were, since a mouse pointer does not. */
+@media (max-width: 768px) {
+  .region-tab { min-height: 44px; }
+  .footer-contact,
+  .footer-nav-links { gap: 0; }
+  .footer-link,
+  .footer-nav-links a {
+    display: inline-flex;
+    align-items: center;
+    min-height: 44px;
+  }
+  .footer-bottom a { display: inline-flex; align-items: center; min-height: 44px; }
+  .service-card-link,
+  .contact-linkedin,
+  .person-linkedin a,
+  .back-link,
+  .contact-detail-value { min-height: 44px; }
+  .contact-detail-value { display: flex; align-items: center; }
+  .breadcrumb a,
+  .related-services a,
+  .doc-jump a { display: inline-flex; align-items: center; min-height: 44px; }
+  .related-services ul { gap: 0 1.5rem; }
+  .doc-jump ol { gap: 0; }
+}
