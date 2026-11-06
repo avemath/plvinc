@@ -2091,6 +2091,15 @@ a.contact-detail-value:hover { color: var(--green-dark); }
    dropping below a readable size. */
 .sample-table.is-runsheet { min-width: 1900px; }
 
+/* On a phone the other tables scroll too. Without a floor on the text columns, the
+   lease status squeezed into a narrow column and stretched every row to several
+   times the height of its other cells. */
+@media (max-width: 560px) {
+  .sample-table:not(.is-runsheet) tbody th { min-width: 8.5rem; }
+  .sample-table:not(.is-runsheet) td:not(.is-num) { min-width: 10rem; }
+  .sample-table:not(.is-runsheet) td:last-child:not(.is-num) { min-width: 20rem; }
+}
+
 .sample-table caption { text-align: left; }
 
 .sample-table th,
