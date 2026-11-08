@@ -52,9 +52,63 @@
     "label": "Lease Offers",
     "headline": "What Is in a Lease Offer",
     "intro": "A lease offer usually comes as a printed lease, an addendum and a memorandum for recording. The addendum often overrides the printed form, and a few clauses decide most of what the lease is worth to you.",
-    "documents": [],
+    "documents": [
+      {
+        "title": "The printed lease form",
+        "text": "The company's standard lease, usually several pages of small print. It sets out what you grant, for how long, your royalty and what the company may do on your land, in wording the company drafted."
+      },
+      {
+        "title": "The addendum or exhibit",
+        "text": "Extra pages attached to the lease, sometimes called an addendum, rider or exhibit. They often change or override the printed form, so the terms that matter most are frequently here and the two have to be read together."
+      },
+      {
+        "title": "The memorandum of lease",
+        "text": "A short document signed with the lease and filed with the county Recorder of Deeds, so the public record shows the lease exists. It names the parties, the land and the term but usually not the money, so check that its description of your land matches the lease."
+      },
+      {
+        "title": "The bonus payment paperwork",
+        "text": "The draft, order or other paperwork for the bonus, the money paid up front for signing. Read when it pays and on what conditions, because some bonus drafts are paid only after the company has checked title."
+      }
+    ],
     "terms_headline": "Terms to Read First",
-    "terms": [],
+    "terms": [
+      {
+        "title": "Royalty rate",
+        "text": "Your share of production, written as a fraction or a percentage. Pennsylvania's Guaranteed Minimum Royalty Act sets the floor at one-eighth (12.5%), so check the exact figure and whether it applies to oil, gas and every other product the lease covers."
+      },
+      {
+        "title": "Post-production costs and deductions",
+        "text": "Whether the company may subtract the cost of gathering, processing, compressing and transporting gas before paying your royalty. Look at how the royalty is calculated and what may be deducted, because it can make a large difference to what you are actually paid."
+      },
+      {
+        "title": "Primary term and extension",
+        "text": "How long the company has to start drilling or producing before the lease ends on its own. Look for an option to extend or renew, which can add years on terms set today."
+      },
+      {
+        "title": "Bonus per acre",
+        "text": "The up-front payment for signing, usually figured per net mineral acre. Check the acreage it is based on against what the record shows you own, and when and how it is paid."
+      },
+      {
+        "title": "Pooling and unitization",
+        "text": "Whether the company may combine your acreage with neighboring tracts into one unit and share production by acreage. Look at any limits on unit size and how your share of the unit is worked out."
+      },
+      {
+        "title": "Pugh clause",
+        "text": "Releases the land or depths outside a producing unit once the primary term ends. Without one, a well on part of your tract can hold the whole lease."
+      },
+      {
+        "title": "Shut-in clause",
+        "text": "Lets the company keep the lease in force by paying a shut-in royalty while a well that could produce is not selling. Look at the amount and how long the lease can be held this way."
+      },
+      {
+        "title": "Depth limits",
+        "text": "Whether the lease covers every formation or only certain depths. Depths left out of the lease stay yours to lease separately."
+      },
+      {
+        "title": "Surface use and damages",
+        "text": "Where the company may put roads, well pads, pipelines and equipment, and what it pays for damage to crops, timber, fences and water. Look for setbacks from your house and water supply, and a duty to restore the land."
+      }
+    ],
     "closing": "We check the offer against the record and go through it with you, clause by clause, before you answer. Call us, or send it over."
   },
   "how_it_works": {

@@ -1255,7 +1255,7 @@ collections:
             widget: object
             collapsed: true
             required: false
-            hint: "The short section about what arrives in a lease offer. It comes right after the questions and answers. The two lists inside are empty on purpose: explaining the terms is what a call is for."
+            hint: "The section about what arrives in a lease offer. It comes right after the questions and answers. The two lists say what each document is and what to look for in each clause. Keep them general and educational, and leave the advice for the call. Empty a list to hide it."
             fields:
               - label: "Section Label"
                 name: label

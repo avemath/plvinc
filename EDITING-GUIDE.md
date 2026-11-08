@@ -420,9 +420,11 @@ time in it, here or anywhere else on the site.
 
 **Sample Work Band** points at the sample file. Clear the headline to hide it.
 
-**Lease Offer Section** comes after the questions and answers. It is deliberately short: a line on
-what arrives in a lease offer and an offer to go through it on a call. Its two lists are empty on
-purpose, because explaining the terms is what the call is for.
+**Lease Offer Section** comes after the questions and answers. It names the documents a lease
+offer usually arrives as, then the clauses that decide most of a lease's value, with a line or two
+on what to look for in each. Keep every entry general and true for any Pennsylvania lease: say what
+to look for, not what the owner should decide, because the decision is what the call is for. Empty
+either list to hide it.
 
 ---
 
