@@ -10,6 +10,7 @@ const NAV_DEFAULTS = {
   about: 'About',
   services: 'Services',
   mineral_owners: 'Mineral Owners',
+  companies: 'For Companies',
   experience: 'Experience',
   sample_work: 'Sample Work',
   insights: 'Insights',
@@ -47,12 +48,14 @@ export const mobileBarLabels = withDefaults(MOBILE_BAR_DEFAULTS, s.mobile_bar_la
 
 // Every page in the menu, in menu order. The addresses are fixed; only the wording is
 // editable, because a changed address would break every link to that page.
-// The order puts what each audience came for first: companies look for Services, owners
-// for Mineral Owners, and both are helped by seeing the work before reading about the firm.
+// The order puts what each audience came for first: companies look for Services and For
+// Companies, owners for Mineral Owners, and both are helped by seeing the work before
+// reading about the firm.
 export const NAV_PAGES: { key: keyof typeof NAV_DEFAULTS; href: string }[] = [
   { key: 'home', href: '/' },
   { key: 'services', href: '/services' },
   { key: 'mineral_owners', href: '/mineral-owners' },
+  { key: 'companies', href: '/companies' },
   { key: 'sample_work', href: '/sample-work' },
   { key: 'experience', href: '/experience' },
   { key: 'about', href: '/about' },

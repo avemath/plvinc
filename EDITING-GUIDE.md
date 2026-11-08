@@ -33,7 +33,7 @@ The left sidebar lists everything you can edit:
 | Section | What it controls |
 |---|---|
 | **Site Settings** | Your name, logos, phone, email, city, LinkedIn, site description |
-| **Pages** | The content on Home, About, Services, Mineral Owners, Experience, Insights, Contact, Sample Work and Privacy |
+| **Pages** | The content on Home, About, Services, Mineral Owners, Companies, Experience, Insights, Contact, Sample Work and Privacy |
 | **Services** | Each of the six service pages |
 | **Team / People** | The people shown first on the About page, and in the Who You'll Talk To strip on Home and Mineral Owners |
 | **Insights** | Short articles. Empty to begin with. |
@@ -425,6 +425,28 @@ offer usually arrives as, then the clauses that decide most of a lease's value, 
 on what to look for in each. Keep every entry general and true for any Pennsylvania lease: say what
 to look for, not what the owner should decide, because the decision is what the call is for. Empty
 either list to hide it.
+
+---
+
+## The Companies Page
+
+This is the page for operators, brokers, developers and investors, the company counterpart to
+Mineral Owners. It is in the menu as **For Companies**, and the project form on Contact links to it.
+
+1. Click **Pages**, then **Companies Page**.
+2. Edit any field and click **Save**.
+
+Two parts of it fill themselves in, so they never disagree with the rest of the site:
+
+- The **service cards** come from the **Services** section. Add or edit a service there and it
+  changes here too.
+- The **state cards** under Where We've Worked come from **Where We've Worked** on the Experience
+  page. Add a state there and it appears here.
+
+**What You Can Count On** is the three cards on the credential, the standard of work and
+conflicts. Like everything else on the site, only say what you can stand behind. **How a Project
+Runs** is the four steps; keep a turnaround time out of them. The closing button opens the project
+form on Contact.
 
 ---
 

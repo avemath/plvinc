@@ -144,6 +144,7 @@ collections:
               - { label: "About", name: about, widget: string, required: false }
               - { label: "Services", name: services, widget: string, required: false }
               - { label: "Mineral Owners", name: mineral_owners, widget: string, required: false }
+              - { label: "For Companies", name: companies, widget: string, required: false }
               - { label: "Experience", name: experience, widget: string, required: false }
               - { label: "Sample Work", name: sample_work, widget: string, required: false }
               - { label: "Insights", name: insights, widget: string, required: false, hint: "Only shows once there is at least one Insight." }
@@ -234,6 +235,7 @@ collections:
             widget: select
             options:
               - { label: "Mineral Owners page", value: "/mineral-owners" }
+              - { label: "Companies page", value: "/companies" }
               - { label: "Contact page", value: "/contact" }
               - { label: "Contact page, opened on the project form", value: "/contact#project" }
               - { label: "Contact page, opened on the landowner note", value: "/contact#note" }
@@ -255,6 +257,7 @@ collections:
             widget: select
             options:
               - { label: "Mineral Owners page", value: "/mineral-owners" }
+              - { label: "Companies page", value: "/companies" }
               - { label: "Contact page", value: "/contact" }
               - { label: "Contact page, opened on the project form", value: "/contact#project" }
               - { label: "Contact page, opened on the landowner note", value: "/contact#note" }
@@ -1330,6 +1333,195 @@ collections:
               - label: "Button Text"
                 name: button
                 widget: string
+
+      - name: companies
+        label: "Companies Page"
+        file: src/data/pages/companies.json
+        format: json
+        fields:
+          - label: "Page Heading"
+            name: page_heading
+            widget: string
+            required: false
+            hint: "The large heading in the green band at the top of the page. Blank shows \"For Companies\"."
+
+          - label: "Header Photo"
+            name: header_image
+            widget: image
+            required: false
+            hint: "Optional photo behind the green band at the top of this page. A dark green tint is laid over any new photo so the white heading stays readable. Leave blank for plain green."
+
+          - label: "Page Subtitle"
+            name: page_subtitle
+            widget: text
+            hint: "The line under the page heading in the green band at the top."
+
+          - label: "Header Call Button"
+            name: header_call_label
+            widget: string
+            required: false
+            hint: "The word before the phone number on the white button at the top of the page. Blank shows \"Call\"."
+
+          - label: "Header Project Button"
+            name: header_project_label
+            widget: string
+            required: false
+            hint: "The second button at the top. It opens the project form on the Contact page. Blank shows \"Tell us about the project\"."
+
+          - label: "Google Title (browser tab)"
+            name: page_title
+            widget: string
+            maxlength: 40
+            hint: "The browser tab title and the headline in Google results. \"| Petro Land Ventures\" is added to the end automatically, so this can be short. The counter stops at 40 characters."
+
+          - label: "Google Description"
+            name: meta_description
+            widget: text
+            maxlength: 160
+            hint: "The sentence shown under this page's title in Google results. The counter stops at 160 characters, about what Google shows."
+
+          - label: "Introduction"
+            name: intro
+            widget: markdown
+            required: false
+            hint: "The opening paragraphs, written for a land department, a broker or a developer. Select text to make it bold."
+
+          - label: "Services Section Label"
+            name: services_label
+            widget: string
+            required: false
+
+          - label: "Services Section Headline"
+            name: services_headline
+            widget: string
+            required: false
+            hint: "Blank shows \"What We Handle\". The service cards under it come from the Services section, so they always match the Services page."
+
+          - label: "Services Section Text"
+            name: services_intro
+            widget: text
+            required: false
+
+          - label: "How a Project Runs"
+            name: how_it_works
+            widget: object
+            collapsed: true
+            required: false
+            hint: "The steps from first contact to a finished report. Do not promise a turnaround time here."
+            fields:
+              - { label: "Small Label", name: label, widget: string, required: false }
+              - { label: "Headline", name: headline, widget: string }
+              - label: "Steps"
+                name: steps
+                widget: list
+                summary: "{{title}}"
+                fields:
+                  - { label: "Step Title", name: title, widget: string }
+                  - { label: "Step Text", name: text, widget: text }
+
+          - label: "What You Can Count On: Label"
+            name: standards_label
+            widget: string
+            required: false
+
+          - label: "What You Can Count On: Headline"
+            name: standards_headline
+            widget: string
+            required: false
+
+          - label: "What You Can Count On"
+            name: standards
+            widget: list
+            required: false
+            summary: "{{title}}"
+            hint: "Short cards on the credential, the standard of work and conflicts. Only claims you can stand behind. Empty this list to hide the section."
+            fields:
+              - { label: "Title", name: title, widget: string }
+              - { label: "Description", name: description, widget: text }
+
+          - label: "Where We've Worked: Label"
+            name: states_label
+            widget: string
+            required: false
+
+          - label: "Where We've Worked: Headline"
+            name: states_headline
+            widget: string
+            required: false
+
+          - label: "Where We've Worked: Text"
+            name: states_note
+            widget: text
+            required: false
+            hint: "The line above the state cards. The states themselves come from the Experience page, so add a state there and it shows here too."
+
+          - label: "Where We've Worked: Note Below"
+            name: states_aside
+            widget: markdown
+            required: false
+            hint: "A short line under the state cards, with links. Leave blank to hide it."
+
+          - label: "Who Does the Work"
+            name: team_label
+            widget: string
+            required: false
+            hint: "Small uppercase label above the photos of Rickey and Shannon. The photos, names and roles come from Team / People."
+
+          - label: "Who Does the Work: Headline"
+            name: team_headline
+            widget: string
+            required: false
+
+          - label: "Who Does the Work: Text"
+            name: team_intro
+            widget: text
+            required: false
+
+          - label: "Who Does the Work: Link"
+            name: team_link
+            widget: string
+            required: false
+            hint: "The link under the photos that goes to the About page. Blank shows \"Read their backgrounds\"."
+
+          - label: "Sample Work Band"
+            name: sample_feature
+            widget: object
+            required: false
+            hint: "The band that points at the sample file. Leave the headline blank to hide the band."
+            fields:
+              - { label: "Small Label", name: label, widget: string, required: false }
+              - { label: "Headline", name: headline, widget: string, required: false }
+              - { label: "Text", name: text, widget: text }
+              - { label: "Button Text", name: button, widget: string }
+
+          - label: "FAQ Section Label"
+            name: faq_label
+            widget: string
+            required: false
+
+          - label: "FAQ Section Headline"
+            name: faq_headline
+            widget: string
+            required: false
+
+          - label: "Questions and Answers"
+            name: faq
+            widget: list
+            required: false
+            summary: "{{question}}"
+            hint: "These also tell Google what this page answers, so write the question the way a land manager would ask it. Empty this list to hide the section."
+            fields:
+              - { label: "Question", name: question, widget: string }
+              - { label: "Answer", name: answer, widget: text }
+
+          - label: "Closing Call to Action"
+            name: cta
+            widget: object
+            hint: "The band at the bottom of this page. Its button opens the project form on the Contact page."
+            fields:
+              - { label: "Headline", name: headline, widget: string }
+              - { label: "Text", name: text, widget: text, required: false }
+              - { label: "Button Text", name: button, widget: string }
 
       - name: insights_page
         label: "Insights Page"

@@ -1,0 +1,98 @@
+{
+  "page_heading": "Land Work for Operators, Brokers, Developers and Investors",
+  "header_image": "",
+  "page_subtitle": "Title, leasing, due diligence and right-of-way from two Certified Professional Landmen who do the work themselves.",
+  "header_call_label": "Call",
+  "header_project_label": "Tell us about the project",
+  "page_title": "Land Services for Energy Companies",
+  "meta_description": "Title, leasing, A&D due diligence and right-of-way for operators, developers and investors, from Certified Professional Landmen in Duncansville, PA.",
+  "intro": "Petro Land Ventures has worked files since January 2005, from curative work on a single tract to multi-county leasing programs, acquisition and divestiture (A&D) packages and due diligence on whole portfolios.\n\n**No hand-offs.** The landman who searches the courthouse record is the one who writes your report and takes your call.\n\n**No guessing.** Every report says what the record shows, what it does not, and what it would take to close the gap.",
+  "services_label": "What We Handle",
+  "services_headline": "Land Work We Take On",
+  "services_intro": "Six kinds of land work, scoped to your project and your timing.",
+  "how_it_works": {
+    "label": "How It Works",
+    "headline": "How a Project Runs",
+    "steps": [
+      {
+        "title": "You send the scope.",
+        "text": "Call, or use the project form. Tell us the basin, the county, the tract list or the deal, and your timing."
+      },
+      {
+        "title": "We agree the approach.",
+        "text": "We talk through what the work involves and what it costs before we start."
+      },
+      {
+        "title": "We work the record.",
+        "text": "We run title all the way to the end of the chain, not just to the first clean deed, including the probate and heirship records where problems tend to sit."
+      },
+      {
+        "title": "You get a report you can act on.",
+        "text": "Each report states what we found, what it means and what the options are, written so you can hand it straight to an attorney, a lender or a deal team."
+      }
+    ]
+  },
+  "standards_label": "Why Companies Call Us",
+  "standards_headline": "What You Can Count On",
+  "standards": [
+    {
+      "title": "Certified Professional Landmen",
+      "description": "Both landmen hold the CPL, the highest credential the American Association of Professional Landmen issues for title and leasing work."
+    },
+    {
+      "title": "The same standard on every file",
+      "description": "A single tract gets the same care as a multi-county program, and an unclear record is reported as unclear, never filled in with a guess."
+    },
+    {
+      "title": "Conflicts disclosed up front",
+      "description": "We also help mineral owners with their own leases and division orders. The AAPL Code of Ethics requires us to disclose conflicts, so if one comes up on your project you hear about it at the start."
+    }
+  ],
+  "states_label": "Track Record",
+  "states_headline": "Where We've Worked",
+  "states_note": "These are the states where we have already completed files. We take work in any state.",
+  "states_aside": "The [Experience page](/experience) lists the project types, and the [coverage map](/#coverage) shows the plays worked in each basin.",
+  "team_label": "The Landmen",
+  "team_headline": "Who Does the Work",
+  "team_intro": "Your project is run by one of the two Certified Professional Landmen who own the firm, from the first call to the final report.",
+  "team_link": "Read their backgrounds",
+  "sample_feature": {
+    "label": "Sample Work",
+    "headline": "Judge the Work Product First",
+    "text": "A complete fictional file: a runsheet, an ownership report, a lease acquisition report and a supplemental report that resolves an heirship, with notes on how to read each one. It shows the level of detail your files come back with.",
+    "button": "View the sample file"
+  },
+  "faq_label": "Common Questions",
+  "faq_headline": "Questions Companies Ask",
+  "faq": [
+    {
+      "question": "What kinds of projects do you take on?",
+      "answer": "Title research and curative work, lease acquisition and negotiation, A&D due diligence, mineral and royalty management, right-of-way and surface use, and solar and renewable land acquisition. Projects range from curative work on a single tract to multi-county leasing programs and due diligence on whole portfolios."
+    },
+    {
+      "question": "Where do you work?",
+      "answer": "Our completed files run from Pennsylvania to Washington, across the Appalachian, Gulf Coast, Permian and Michigan basins and the Pacific Northwest. We are based in Duncansville, Pennsylvania, and take work in any state."
+    },
+    {
+      "question": "Who actually does the work?",
+      "answer": "Rickey or Shannon Matherne, the two Certified Professional Landmen who run the firm. The landman who searches the record is the one who writes your report and takes your call."
+    },
+    {
+      "question": "Can you work to a deal timeline?",
+      "answer": "Yes. Due diligence is scoped around the deal timeline, and the findings come back as a clear summary your deal team can act on. Tell us the closing date when you send the package."
+    },
+    {
+      "question": "What will it cost?",
+      "answer": "It depends on the scope: the number of tracts, the counties involved and how far back the title has to be run. Send us the scope and we will tell you what the work involves and what it costs before we start."
+    },
+    {
+      "question": "What does the finished work look like?",
+      "answer": "Runsheets, ownership reports, lease acquisition reports and supplemental reports, each stating what the record shows, what it does not, and what it would take to close the gap. The sample file on this site shows a complete set."
+    }
+  ],
+  "cta": {
+    "headline": "Have a project? Send us the scope.",
+    "text": "The basin, the county or tract list, and your timing are enough to start.",
+    "button": "Start a project"
+  }
+}

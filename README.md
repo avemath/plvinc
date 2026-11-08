@@ -39,8 +39,8 @@ plvinc/
 │   │   ├── settings.json        # Global site settings
 │   │   ├── us-states.json       # State paths and labels for the coverage map
 │   │   └── pages/               # One file per page: home, about, services,
-│   │                            #   mineral-owners, experience, insights,
-│   │                            #   contact
+│   │                            #   mineral-owners, companies, experience,
+│   │                            #   insights, contact
 │   ├── components/              # Nav, Footer, SEO, ContactForm, CoverageMap,
 │   │                            #   CallToAction, ServiceCard, ServiceList
 │   ├── layouts/Base.astro       # Shared HTML shell

@@ -1,0 +1,192 @@
+---
+// The company counterpart to Mineral Owners: what we handle, how a project runs, where we
+// have worked, the sample file and the questions a land department asks. Copy lives in
+// src/data/pages/companies.json; the services and the states come from their own sources
+// so this page can never disagree with the Services or Experience pages.
+import Base from '../layouts/Base.astro';
+import { text } from '../utils/labels';
+import CallToAction from '../components/CallToAction.astro';
+import SampleFeature from '../components/SampleFeature.astro';
+import HowItWorks from '../components/HowItWorks.astro';
+import TeamStrip from '../components/TeamStrip.astro';
+import ServiceCard from '../components/ServiceCard.astro';
+import { getCollection } from 'astro:content';
+import { renderMarkdown } from '../utils/markdown';
+import { cssUrl } from '../utils/cssUrl';
+import { needsTint } from '../utils/images';
+import page from '../data/pages/companies.json';
+import experience from '../data/pages/experience.json';
+import settings from '../data/settings.json';
+import { telHref } from '../utils/phone';
+
+const introHtml = page.intro ? await renderMarkdown(page.intro) : '';
+const statesAsideHtml = page.states_aside ? await renderMarkdown(page.states_aside) : '';
+
+const services = [...(await getCollection('services'))].sort((a, b) => a.data.sort_order - b.data.sort_order);
+const states = (experience.states_served || []).filter((s) => s.state);
+const standards = (page.standards || []).filter((s) => s.title);
+const faq = (page.faq || []).filter((f) => f.question && f.answer);
+
+function faqId(q: string) {
+  return q.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '').slice(0, 60);
+}
+
+const headerImage = page.header_image || '';
+const tel = telHref(settings.phone);
+
+const faqSchema = faq.length > 0
+  ? {
+      '@context': 'https://schema.org',
+      '@type': 'FAQPage',
+      mainEntity: faq.map((f) => ({
+        '@type': 'Question',
+        name: f.question,
+        acceptedAnswer: { '@type': 'Answer', text: f.answer },
+      })),
+    }
+  : undefined;
+---
+
+<Base
+  title={page.page_title}
+  description={page.meta_description}
+  schema={faqSchema}
+  preloadImage={headerImage || undefined}
+>
+  <div
+    class:list={['page-header', headerImage && 'page-header-image', needsTint(headerImage) && 'has-tint']}
+    style={headerImage ? `--header-image: ${cssUrl(headerImage)}` : undefined}
+  >
+    <div class="container">
+      <h1>{text(page.page_heading, 'For Companies')}</h1>
+      <p>{page.page_subtitle}</p>
+      <div class="page-header-actions">
+        {settings.phone && (
+          <a href={tel} class="btn btn-white">{text(page.header_call_label, 'Call')} {settings.phone}</a>
+        )}
+        <a href="/contact#project" class="btn btn-hero-outline">{text(page.header_project_label, 'Tell us about the project')} <span aria-hidden="true">→</span></a>
+      </div>
+    </div>
+  </div>
+
+  {introHtml && (
+    <section>
+      <div class="container container-narrow">
+        <div class="prose owner-intro" set:html={introHtml} />
+      </div>
+    </section>
+  )}
+
+  {services.length > 0 && (
+    <section class="section-alt">
+      <div class="container">
+        <div class="section-header">
+          {page.services_label && <span class="section-label">{page.services_label}</span>}
+          <h2>{text(page.services_headline, 'What We Handle')}</h2>
+          {page.services_intro && <p>{page.services_intro}</p>}
+        </div>
+        <div class="services-grid">
+          {services.map((svc) => (
+            <ServiceCard
+              title={svc.data.title}
+              card_description={svc.data.card_description}
+              icon={svc.data.icon}
+              slug={svc.id}
+              level={3}
+            />
+          ))}
+        </div>
+      </div>
+    </section>
+  )}
+
+  {page.how_it_works?.steps?.length > 0 && (
+    <HowItWorks label={page.how_it_works.label} headline={page.how_it_works.headline} steps={page.how_it_works.steps} />
+  )}
+
+  {standards.length > 0 && (
+    <section class="section-alt">
+      <div class="container">
+        <div class="section-header">
+          {page.standards_label && <span class="section-label">{page.standards_label}</span>}
+          <h2>{page.standards_headline}</h2>
+        </div>
+        <ul class="owner-services" role="list">
+          {standards.map((s) => (
+            <li class="owner-service">
+              <h3>{s.title}</h3>
+              <p>{s.description}</p>
+            </li>
+          ))}
+        </ul>
+      </div>
+    </section>
+  )}
+
+  {states.length > 0 && (
+    <section>
+      <div class="container">
+        <div class="section-header">
+          {page.states_label && <span class="section-label">{page.states_label}</span>}
+          <h2>{text(page.states_headline, "Where We've Worked")}</h2>
+          {page.states_note && <p>{page.states_note}</p>}
+        </div>
+        <div class="states-grid">
+          {states.map((s) => (
+            <div class="state-card">
+              <p class="state-name">{s.state}</p>
+              <p class="state-note">{s.note}</p>
+            </div>
+          ))}
+        </div>
+        {statesAsideHtml && <div class="section-aside" set:html={statesAsideHtml} />}
+      </div>
+    </section>
+  )}
+
+  <TeamStrip
+    label={page.team_label}
+    headline={page.team_headline}
+    intro={page.team_intro}
+    link={page.team_link}
+    tone="alt"
+  />
+
+  {page.sample_feature?.headline && (
+    <SampleFeature
+      label={page.sample_feature.label}
+      headline={page.sample_feature.headline}
+      text={page.sample_feature.text}
+      button={page.sample_feature.button}
+    />
+  )}
+
+  {faq.length > 0 && (
+    <section class="section-alt">
+      <div class="container container-narrow">
+        <div class="section-header">
+          {page.faq_label && <span class="section-label">{page.faq_label}</span>}
+          <h2>{page.faq_headline}</h2>
+        </div>
+        <dl class="owner-faq">
+          {faq.map((f) => (
+            <div class="owner-faq-item" id={faqId(f.question)}>
+              <dt>{f.question}</dt>
+              <dd>{f.answer}</dd>
+            </div>
+          ))}
+        </dl>
+      </div>
+    </section>
+  )}
+
+  <CallToAction
+    headline={page.cta.headline}
+    text={page.cta.text}
+    button={page.cta.button}
+    href="/contact#project"
+    tone="light"
+    phone={settings.phone}
+    phoneHref={tel}
+  />
+</Base>
