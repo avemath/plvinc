@@ -1760,12 +1760,20 @@ a.contact-detail-value:hover { color: var(--green-dark); }
   grid-template-columns: 1fr;
   gap: 2rem 3rem;
 }
+/* Stacked on a tablet, the figures share one column width so the text beside them
+   lines up instead of starting wherever each figure happens to end. */
+@media (min-width: 561px) and (max-width: 999px) {
+  .stat-row-list .stat { grid-template-columns: 5rem 1fr; }
+}
+/* Side by side, the items stretch to the tallest one; keep each label and its line
+   together in the middle rather than pulled to the top and bottom. */
 @media (min-width: 1000px) {
   .stat-row-list {
     grid-auto-flow: column;
     grid-auto-columns: minmax(0, 1fr);
     grid-template-columns: none;
   }
+  .stat { align-content: center; }
 }
 
 .stat {
