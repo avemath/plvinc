@@ -2992,6 +2992,26 @@ a.contact-detail-value:hover { color: var(--green-dark); }
   outline-offset: 2px;
 }
 
+/* On a phone the two labels wrapped at different widths and stacked unevenly, so they
+   become one segmented toggle: two equal halves side by side, text centred. */
+@media (max-width: 600px) {
+  .form-path-tabs {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0;
+  }
+  .form-path-tab {
+    justify-content: center;
+    text-align: center;
+    min-height: 52px;
+    padding: .5rem .6rem;
+    font-size: .9rem;
+    line-height: 1.25;
+  }
+  .form-path-tab:first-child { border-top-right-radius: 0; border-bottom-right-radius: 0; }
+  .form-path-tab:last-child  { border-top-left-radius: 0; border-bottom-left-radius: 0; margin-left: -1px; }
+}
+
 /* The line on the project form that points a company to its own page. */
 .form-path-note {
   margin: 0 0 1.5rem;
