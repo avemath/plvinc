@@ -270,7 +270,7 @@ collections:
             widget: list
             summary: "{{value}} {{label}}"
             required: false
-            hint: "The band below the hero. Two entries read best here, each with a line saying what it means. Only put figures here you can stand behind. Empty this list to hide the band."
+            hint: "The band below the hero. Two or three entries read best here, each with a line saying what it means. Only put figures here you can stand behind. Empty this list to hide the band."
             fields:
               - label: "Figure"
                 name: value

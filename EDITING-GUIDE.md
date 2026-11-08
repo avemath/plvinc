@@ -163,7 +163,7 @@ A few notes on the trickier fields:
 - The **Value Paragraph** supports basic formatting. Select text to get a toolbar for bold and
   italic.
 
-**Figures Under the Hero** is the band just below the top banner. Two entries look best. Each has a
+**Figures Under the Hero** is the band just below the top banner. Two or three entries look best. Each has a
 figure (like 45 or CPL), a label, and a line saying **What it means**. Only use figures you can
 stand behind. Empty the list to remove the band.
 

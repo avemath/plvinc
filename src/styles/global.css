@@ -1749,17 +1749,23 @@ a.contact-detail-value:hover { color: var(--green-dark); }
   padding: 0 0 3rem;
 }
 
-/* Two claims, not a scoreboard. A count of states undersold the coverage the
-   map already shows, so the band carries the two things that actually qualify
-   the firm and gives each one room to say what it means. */
+/* A few claims, each with room to say what it means. They stack until there is
+   room for all of them on one row, so three never break into two plus an orphan. */
 .stat-row-list {
   list-style: none;
   margin: 0;
   padding: 2.5rem 0 0;
   border-top: 1px solid rgba(255,255,255,.14);
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-  gap: 2rem 3.5rem;
+  grid-template-columns: 1fr;
+  gap: 2rem 3rem;
+}
+@media (min-width: 1000px) {
+  .stat-row-list {
+    grid-auto-flow: column;
+    grid-auto-columns: minmax(0, 1fr);
+    grid-template-columns: none;
+  }
 }
 
 .stat {
