@@ -80,6 +80,10 @@
   "short_form": {
     "tab_label": "I own land or minerals",
     "project_tab_label": "I represent a company",
+    "company_note": {
+      "text": "Want to see how a project with us runs first?",
+      "link_label": "Read our page for companies"
+    },
     "headline": "Send Us a Short Note",
     "intro": "Four details are enough to start. Tell us what you received and where the land is.",
     "what_label": "What you received (a lease offer, a division order, a letter, a question)",

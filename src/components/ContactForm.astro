@@ -141,6 +141,14 @@ const stateNames = (states as { name: string }[]).map((s) => s.name);
   )}
 
   <div class:list={['form-panel', shortForm && 'form-panel-project']}>
+  {/* Points a company that wants the background first to its own page, the way the
+      Services pages point owners to Mineral Owners. Blank text hides it. */}
+  {shortForm?.company_note?.text && (
+    <p class="form-path-note">
+      {shortForm.company_note.text}{' '}
+      <a href="/companies">{text(shortForm.company_note.link_label, 'Read our page for companies')} <span aria-hidden="true">→</span></a>
+    </p>
+  )}
   <h2>{contact.form_headline}</h2>
   {contact.form_intro && <p class="form-intro">{contact.form_intro}</p>}
 

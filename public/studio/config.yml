@@ -884,6 +884,14 @@ collections:
             fields:
               - { label: "Landowner Tab Label", name: tab_label, widget: string }
               - { label: "Project Tab Label", name: project_tab_label, widget: string }
+              - label: "Note Pointing Companies to Their Page"
+                name: company_note
+                widget: object
+                required: false
+                hint: "A line at the top of the project form that links to the Companies page. Clear the text to hide it."
+                fields:
+                  - { label: "Text", name: text, widget: string, required: false }
+                  - { label: "Link Text", name: link_label, widget: string, required: false, hint: "Blank shows \"Read our page for companies\"." }
               - { label: "Headline", name: headline, widget: string }
               - { label: "Introduction", name: intro, widget: text }
               - { label: "Contact Field Label", name: contact_label, widget: string }
