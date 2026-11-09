@@ -45,7 +45,8 @@ Click a section name to open it.
 | I want to change… | Go to |
 |---|---|
 | The phone number or email, anywhere on the site | **Site Settings** → Phone Number / Email Address. One change updates the header, the phone bar on mobile, the Contact page, the footer and every call button. |
-| What the pages are called in the menu | **Site Settings** → Menu Wording |
+| The menu at the top: its items, the lists under them and the contact button | **Site Settings** → Main Menu |
+| What the pages are called in the footer | **Site Settings** → Menu Wording |
 | The small headings, copyright words or Privacy link in the footer | **Site Settings** → Footer Wording |
 | The two buttons pinned to the bottom of the screen on phones | **Site Settings** → Phone Bar Wording |
 | The big heading at the top of a page | That page under **Pages** → Page Heading |
@@ -116,7 +117,7 @@ These apply across the whole site.
 | LinkedIn URL | The company LinkedIn page, if there is one. Personal profiles go under **Team / People**. |
 | Service Area Summary | The region line in the footer, with the regions separated by a middle dot ( · ) |
 | Footer Name / Company | The name in the copyright line at the bottom |
-| Menu Wording | What each page is called in the top menu and the footer |
+| Menu Wording | What each page is called in the footer |
 | Footer Wording | The small headings in the footer, the words after the copyright name, and the Privacy link |
 | Team Login Link | The small **Team login** link beside Privacy at the very bottom of every page, which opens the private tools site at tools.plvinc.com. Change its wording or address here, or switch it off. |
 | Phone Bar Wording (mobile) | The Call and Send a note buttons pinned to the bottom of the screen on phones |
@@ -140,6 +141,20 @@ that service is done. Using these names keeps the site from seeming to disagree 
 **Footer Scope Line** in Site Settings is the single sentence at the foot of every page saying what
 the work covers. It is stated once, in one place, so it never has to be repeated in the middle of a
 page where it would talk a visitor out of calling.
+
+---
+
+## The Main Menu
+
+The menu at the top has four items: **Services**, **Who we help**, **Sample work** and
+**About**, then the phone number and a **Get in touch** button. The logo goes to the home page.
+
+Open **Site Settings** → **Main Menu** to change it. The Services list fills itself with your six
+services, so it only has two wording boxes. Under **Menu Items**, each item has a **Name** and
+either some **Links Under It** (it opens a small list) or a single **Goes To** page (it is a plain
+link). Pages are picked from a list, so a link can never point somewhere that does not exist. On
+a phone the same items appear in the menu button, each list opening and closing on a tap. The
+footer keeps its own full list of pages and is not affected.
 
 ---
 

@@ -1,0 +1,40 @@
+{
+  "services_label": "Services",
+  "services_all_label": "All services",
+  "groups": [
+    {
+      "label": "Who we help",
+      "link": "",
+      "items": [
+        {
+          "label": "Landowners and mineral owners",
+          "link": "/mineral-owners"
+        },
+        {
+          "label": "Companies",
+          "link": "/companies"
+        }
+      ]
+    },
+    {
+      "label": "Sample work",
+      "link": "/sample-work",
+      "items": []
+    },
+    {
+      "label": "About",
+      "link": "",
+      "items": [
+        {
+          "label": "Our landmen",
+          "link": "/about"
+        },
+        {
+          "label": "Experience",
+          "link": "/experience"
+        }
+      ]
+    }
+  ],
+  "contact_button": "Get in touch"
+}

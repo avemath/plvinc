@@ -1,9 +1,14 @@
 ---
+// The main menu: the logo (home), four items and a contact button. The wording and the
+// grouping live in src/data/menu.json (Site Settings → Main Menu in the editor); the six
+// services fill the Services list by themselves. The footer keeps its own full link list.
 import { hasInsightFiles } from '../utils/insight-files';
-import { navLabels, NAV_PAGES } from '../utils/labels';
+import { navLabels } from '../utils/labels';
+import { text } from '../utils/labels';
 import { getCollection } from 'astro:content';
 import { telHref } from '../utils/phone';
 import { srcsetFor } from '../utils/images';
+import menu from '../data/menu.json';
 
 interface Props {
   settings: {
@@ -15,7 +20,6 @@ interface Props {
 }
 
 const { settings } = Astro.props;
-// Insights is dormant until something is written, so the link only appears then.
 const hasInsights = hasInsightFiles();
 const path = Astro.url.pathname;
 
@@ -23,15 +27,49 @@ const path = Astro.url.pathname;
 // marks Services as current, but Services is not the page they are on). build.format is
 // 'file', so pages arrive as /about.html and the home page as /index.html.
 function current(href: string): 'page' | 'true' | undefined {
-  if (href === '/') return path === '/' || path === '/index.html' ? 'page' : undefined;
+  if (!href) return undefined;
   if (path === href || path === `${href}.html`) return 'page';
   return path.startsWith(`${href}/`) ? 'true' : undefined;
 }
 
-// The six services, in their display order, for the Services dropdown.
+type Link = { label: string; href: string };
+type Item =
+  | { kind: 'link'; id: string; label: string; href: string }
+  | { kind: 'group'; id: string; label: string; links: Link[]; all?: Link };
+
+// The six services, in their display order, then a link to the overview.
 const services = (await getCollection('services'))
   .sort((a, b) => a.data.sort_order - b.data.sort_order)
-  .map((s) => ({ href: `/services/${s.id}`, title: s.data.title }));
+  .map((s) => ({ href: `/services/${s.id}`, label: s.data.title }));
+
+const items: Item[] = [];
+if (services.length > 0) {
+  items.push({
+    kind: 'group',
+    id: 'services',
+    label: text(menu.services_label, 'Services'),
+    links: services,
+    all: { label: text(menu.services_all_label, 'All services'), href: '/services' },
+  });
+}
+(menu.groups ?? []).forEach((g, i) => {
+  const links = (g.items ?? [])
+    .filter((l) => l?.label?.trim() && l?.link)
+    .map((l) => ({ label: l.label.trim(), href: l.link }));
+  // Insights joins the About list once the first article exists.
+  if (hasInsights && links.some((l) => l.href === '/about')) {
+    links.push({ label: navLabels.insights, href: '/insights' });
+  }
+  if (!g.label?.trim()) return;
+  if (links.length > 0) items.push({ kind: 'group', id: `group-${i}`, label: g.label.trim(), links });
+  else if (g.link) items.push({ kind: 'link', id: `link-${i}`, label: g.label.trim(), href: g.link });
+});
+
+// A group is current when the visitor is on any page inside it.
+const groupCurrent = (it: Item) =>
+  it.kind === 'group'
+    ? [...it.links, ...(it.all ? [it.all] : [])].some((l) => current(l.href))
+    : Boolean(current(it.href));
 
 // The header shows the wide PETROLAND wordmark at every width. The round badge was tried
 // on desktop, but its file is small and the words inside it, VENTURES above all, could not
@@ -40,6 +78,7 @@ const services = (await getCollection('services'))
 const navLogo = settings.logo_small || settings.logo;
 const isWordmark = Boolean(settings.logo_small);
 const tel = telHref(settings.phone);
+const contactLabel = text(menu.contact_button, 'Get in touch');
 ---
 
 <header class="site-header">
@@ -61,39 +100,53 @@ const tel = telHref(settings.phone);
       }
     </a>
 
-    <ul class="nav-links" id="nav-links" role="list">
-      {NAV_PAGES.filter((p) => p.key !== 'insights' || hasInsights).map((p) => (
-        p.key === 'services' && services.length > 0
-          ? (
-            <li class="nav-has-sub">
-              <a href={p.href} aria-current={current(p.href)}>{navLabels[p.key]}</a>
-              <button
-                type="button"
-                class="nav-sub-toggle"
-                aria-expanded="false"
-                aria-controls="nav-sub-services"
-                aria-label={`Show each of the ${navLabels[p.key]}`}
-              >
-                <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor"
-                     stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-                  <path d="m6 9 6 6 6-6" />
-                </svg>
-              </button>
-              <ul class="nav-sub" id="nav-sub-services" role="list">
-                {services.map((s) => (
-                  <li><a href={s.href} aria-current={current(s.href)}>{s.title}</a></li>
-                ))}
-              </ul>
-            </li>
-          )
-          : <li><a href={p.href} aria-current={current(p.href)}>{navLabels[p.key]}</a></li>
-      ))}
-      {settings.phone && (
-        <li class="nav-links-phone">
-          <a href={tel}>{settings.phone}</a>
-        </li>
-      )}
-    </ul>
+    <div class="nav-menu" id="nav-menu">
+      <ul class="nav-list" role="list">
+        {items.map((it) => (
+          it.kind === 'group'
+            ? (
+              <li class:list={['nav-item', 'has-sub', groupCurrent(it) && 'is-current']}>
+                <button
+                  type="button"
+                  class="nav-trigger"
+                  id={`nav-trigger-${it.id}`}
+                  aria-expanded="false"
+                  aria-controls={`nav-sub-${it.id}`}
+                >
+                  <span>{it.label}</span>
+                  <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor"
+                       stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                    <path d="m6 9 6 6 6-6" />
+                  </svg>
+                </button>
+                <ul class="nav-sub" id={`nav-sub-${it.id}`} role="list">
+                  {it.links.map((l) => (
+                    <li><a href={l.href} aria-current={current(l.href)}>{l.label}</a></li>
+                  ))}
+                  {it.all && (
+                    <li class="nav-sub-all">
+                      <a href={it.all.href} aria-current={current(it.all.href) === 'page' ? 'page' : undefined}>
+                        {it.all.label} <span aria-hidden="true">→</span>
+                      </a>
+                    </li>
+                  )}
+                </ul>
+              </li>
+            )
+            : (
+              <li class:list={['nav-item', groupCurrent(it) && 'is-current']}>
+                <a href={it.href} class="nav-top-link" aria-current={current(it.href)}>{it.label}</a>
+              </li>
+            )
+        ))}
+      </ul>
+
+      {/* In the phone menu only: the number in full and the contact button. */}
+      <div class="nav-menu-extra">
+        {settings.phone && <a href={tel} class="nav-menu-phone">{settings.phone}</a>}
+        <a href="/contact" class="btn btn-primary nav-menu-cta" aria-current={current('/contact')}>{contactLabel}</a>
+      </div>
+    </div>
 
     <div class="nav-actions">
       {settings.phone && (
@@ -116,11 +169,14 @@ const tel = telHref(settings.phone);
         </a>
       )}
 
+      <a href="/contact" class="btn btn-primary nav-cta" aria-current={current('/contact')}>{contactLabel}</a>
+
       <button
         class="nav-toggle"
-        aria-label="Toggle navigation menu"
+        type="button"
+        aria-label="Menu"
         aria-expanded="false"
-        aria-controls="nav-links"
+        aria-controls="nav-menu"
       >
         <span></span>
         <span></span>
@@ -131,72 +187,136 @@ const tel = telHref(settings.phone);
 </header>
 
 <script>
+  // Disclosure menus: each group is a button that shows or hides its own list. The same
+  // markup serves the desktop dropdowns and the phone menu's collapsible groups.
+  const DESKTOP = window.matchMedia('(min-width: 861px)');
   const toggle = document.querySelector<HTMLButtonElement>('.nav-toggle');
-  const links  = document.querySelector<HTMLElement>('#nav-links');
+  const menu = document.querySelector<HTMLElement>('#nav-menu');
+  const groups = [...document.querySelectorAll<HTMLElement>('.nav-item.has-sub')];
+  const topLevel = [...document.querySelectorAll<HTMLElement>('.nav-trigger, .nav-top-link')];
 
-  // The Services sub-list. On a wide screen it also opens on hover and keyboard focus
-  // (CSS); the button makes it work by tap and by click, and is the only way in the
-  // phone menu.
-  const subToggle = document.querySelector<HTMLButtonElement>('.nav-sub-toggle');
-  const subItem = subToggle?.closest('.nav-has-sub');
-  subToggle?.addEventListener('click', () => {
-    subItem?.classList.remove('is-dismissed');
-    const open = subItem?.classList.toggle('is-open');
-    subToggle.setAttribute('aria-expanded', String(!!open));
-  });
-  subItem?.addEventListener('focusout', (e) => {
-    const next = e.relatedTarget as Node | null;
-    if (next && !subItem.contains(next) && window.matchMedia('(min-width: 769px)').matches) {
-      subItem.classList.remove('is-open');
-      subToggle?.setAttribute('aria-expanded', 'false');
-    }
+  const triggerOf = (g: HTMLElement) => g.querySelector<HTMLButtonElement>('.nav-trigger')!;
+  const linksOf = (g: HTMLElement) => [...g.querySelectorAll<HTMLAnchorElement>('.nav-sub a')];
+
+  // Lists a mouse opened by hovering. A click that follows confirms the list rather than
+  // shutting it again under the pointer.
+  const hoverOpened = new WeakSet<HTMLElement>();
+
+  function setOpen(g: HTMLElement, open: boolean) {
+    if (!open) hoverOpened.delete(g);
+    g.classList.toggle('is-open', open);
+    triggerOf(g).setAttribute('aria-expanded', String(open));
+  }
+  function closeAll(except?: HTMLElement) {
+    groups.forEach((g) => { if (g !== except) setOpen(g, false); });
+  }
+
+  groups.forEach((g) => {
+    const trigger = triggerOf(g);
+
+    // Click and tap. On a desktop only one list is open at a time; in the phone menu
+    // several groups can be open together.
+    trigger.addEventListener('click', () => {
+      if (hoverOpened.has(g)) { hoverOpened.delete(g); return; }
+      const open = !g.classList.contains('is-open');
+      if (DESKTOP.matches) closeAll(g);
+      setOpen(g, open);
+    });
+
+    // Hover, for a mouse on a desktop. A short delay on leaving lets the pointer cross
+    // the gap between the button and the list.
+    let leaveTimer: number | undefined;
+    g.addEventListener('pointerenter', (e) => {
+      if (e.pointerType !== 'mouse' || !DESKTOP.matches) return;
+      clearTimeout(leaveTimer);
+      if (g.classList.contains('is-open')) return;
+      closeAll(g);
+      setOpen(g, true);
+      hoverOpened.add(g);
+    });
+    g.addEventListener('pointerleave', (e) => {
+      if (e.pointerType !== 'mouse' || !DESKTOP.matches) return;
+      leaveTimer = window.setTimeout(() => {
+        if (!g.contains(document.activeElement)) setOpen(g, false);
+      }, 180);
+    });
+
+    // Keyboard: arrows into and through the list, Escape back to the button.
+    g.addEventListener('keydown', (e) => {
+      const links = linksOf(g);
+      const i = links.indexOf(document.activeElement as HTMLAnchorElement);
+      const onTrigger = document.activeElement === trigger;
+      if (e.key === 'Escape' && g.classList.contains('is-open')) {
+        e.preventDefault();
+        e.stopPropagation();
+        setOpen(g, false);
+        trigger.focus();
+      } else if (e.key === 'ArrowDown') {
+        e.preventDefault();
+        if (onTrigger) { if (DESKTOP.matches) closeAll(g); setOpen(g, true); links[0]?.focus(); }
+        else if (i >= 0) links[(i + 1) % links.length].focus();
+      } else if (e.key === 'ArrowUp') {
+        e.preventDefault();
+        if (onTrigger) { if (DESKTOP.matches) closeAll(g); setOpen(g, true); links.at(-1)?.focus(); }
+        else if (i >= 0) links[(i - 1 + links.length) % links.length].focus();
+      } else if ((e.key === 'Home' || e.key === 'End') && i >= 0) {
+        e.preventDefault();
+        (e.key === 'Home' ? links[0] : links.at(-1))?.focus();
+      }
+    });
+
+    // Tabbing out of a desktop list closes it.
+    g.addEventListener('focusout', (e) => {
+      const next = e.relatedTarget as Node | null;
+      if (DESKTOP.matches && next && !g.contains(next)) setOpen(g, false);
+    });
   });
 
+  // Left and right move between the top items on a desktop, from a button or a list.
+  document.querySelector('.nav-list')?.addEventListener('keydown', (e) => {
+    const ke = e as KeyboardEvent;
+    if (!DESKTOP.matches || (ke.key !== 'ArrowLeft' && ke.key !== 'ArrowRight')) return;
+    const item = (ke.target as HTMLElement).closest('.nav-item');
+    const from = topLevel.findIndex((t) => t.closest('.nav-item') === item);
+    if (from < 0) return;
+    ke.preventDefault();
+    closeAll();
+    const to = (from + (ke.key === 'ArrowRight' ? 1 : -1) + topLevel.length) % topLevel.length;
+    topLevel[to].focus();
+  });
+
+  // A click anywhere else closes an open desktop list.
+  document.addEventListener('click', (e) => {
+    if (DESKTOP.matches && !(e.target as HTMLElement).closest('.nav-item.has-sub')) closeAll();
+  });
+
+  // The phone menu.
   const closeMenu = () => {
-    links?.classList.remove('is-open');
+    menu?.classList.remove('is-open');
     toggle?.setAttribute('aria-expanded', 'false');
   };
-
   toggle?.addEventListener('click', () => {
-    const isOpen = links?.classList.toggle('is-open');
-    toggle.setAttribute('aria-expanded', String(!!isOpen));
-    // The list comes before the button in the page, so after opening the menu the next
-    // Tab would skip past it. Move focus into the menu instead.
-    if (isOpen) links?.querySelector<HTMLAnchorElement>('a')?.focus();
+    const isOpen = !!menu?.classList.toggle('is-open');
+    toggle.setAttribute('aria-expanded', String(isOpen));
+    if (isOpen) {
+      // Open the group holding the current page, so the visitor sees where they are.
+      groups.forEach((g) => setOpen(g, g.classList.contains('is-current')));
+      // The menu comes before the button in the page, so move focus into it.
+      menu?.querySelector<HTMLElement>('button, a')?.focus();
+    }
   });
-
-  // Close the menu once focus leaves both the menu and its button.
-  links?.addEventListener('focusout', (e) => {
+  menu?.addEventListener('focusout', (e) => {
     const next = e.relatedTarget as Node | null;
-    if (links.classList.contains('is-open') && next && !links.contains(next) && next !== toggle) {
+    if (!DESKTOP.matches && menu.classList.contains('is-open') && next && !menu.contains(next) && next !== toggle) {
       closeMenu();
     }
   });
-
-  // Escape also has to close a list that hover opened, so it stays shut until the
-  // pointer leaves the item.
-  subItem?.addEventListener('mouseleave', () => subItem.classList.remove('is-dismissed'));
-
   document.addEventListener('keydown', (e) => {
-    const subShown = subItem?.classList.contains('is-open') || subItem?.matches(':hover');
-    if (e.key === 'Escape' && subItem && subShown && window.matchMedia('(min-width: 769px)').matches) {
-      const hadFocus = subItem.contains(document.activeElement);
-      subItem.classList.remove('is-open');
-      if (subItem.matches(':hover')) subItem.classList.add('is-dismissed');
-      subToggle?.setAttribute('aria-expanded', 'false');
-      if (hadFocus) subToggle?.focus();
-      return;
-    }
-    if (e.key === 'Escape' && subItem?.classList.contains('is-open')) {
-      subItem.classList.remove('is-open');
-      subToggle?.setAttribute('aria-expanded', 'false');
-      subToggle?.focus();
-      return;
-    }
-    if (e.key === 'Escape' && links?.classList.contains('is-open')) {
-      links.classList.remove('is-open');
-      toggle?.setAttribute('aria-expanded', 'false');
-      toggle?.focus();
-    }
+    if (e.key !== 'Escape') return;
+    if (menu?.classList.contains('is-open')) { closeMenu(); toggle?.focus(); }
+    else closeAll();
   });
+
+  // Moving between the phone and desktop layouts starts from a clean state.
+  DESKTOP.addEventListener('change', () => { closeAll(); closeMenu(); });
 </script>

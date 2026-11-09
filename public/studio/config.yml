@@ -138,7 +138,7 @@ collections:
             name: nav_labels
             widget: object
             collapsed: true
-            hint: "What each page is called in the menu at the top and in the footer. Only the wording changes; the pages themselves stay where they are. A blank box keeps the original wording."
+            hint: "What each page is called in the footer, and on the page-not-found page. The menu at the top has its own wording under Site Settings → Main Menu. Only the wording changes; the pages themselves stay where they are. A blank box keeps the original wording."
             fields:
               - { label: "Home", name: home, widget: string, required: false }
               - { label: "About", name: about, widget: string, required: false }
@@ -211,6 +211,70 @@ collections:
               destination, not the Email Address field above, so changing your email does not
               move the form. To redirect it, get a new free key at web3forms.com using the
               address you want the enquiries to reach, then paste that key here."
+
+      - name: menu
+        label: "Main Menu"
+        file: src/data/menu.json
+        format: json
+        fields:
+          - label: "Services Menu Name"
+            name: services_label
+            widget: string
+            required: false
+            hint: "The first menu item. Its list fills itself with your six services. Blank shows \"Services\"."
+          - label: "All Services Link"
+            name: services_all_label
+            widget: string
+            required: false
+            hint: "The last link in the Services list, to the overview page. Blank shows \"All services\"."
+          - label: "Menu Items"
+            name: groups
+            widget: list
+            summary: "{{fields.label}}"
+            hint: "The items after Services, in order. An item with links under it opens a small list; an item with no links goes straight to its own page. The footer keeps its own full list of pages."
+            fields:
+              - label: "Name"
+                name: label
+                widget: string
+                hint: "A word or two, for example Who we help."
+              - label: "Goes To (items without a list)"
+                name: link
+                widget: select
+                required: false
+                options:
+                  - { label: "Mineral Owners", value: "/mineral-owners" }
+                  - { label: "For Companies", value: "/companies" }
+                  - { label: "Sample Work", value: "/sample-work" }
+                  - { label: "About", value: "/about" }
+                  - { label: "Experience", value: "/experience" }
+                  - { label: "Services (the overview page)", value: "/services" }
+                  - { label: "Contact", value: "/contact" }
+                hint: "Only used when the item has no links under it."
+              - label: "Links Under It"
+                name: items
+                widget: list
+                required: false
+                summary: "{{fields.label}}"
+                fields:
+                  - label: "Link Text"
+                    name: label
+                    widget: string
+                  - label: "Goes To"
+                    name: link
+                    widget: select
+                    options:
+                      - { label: "Mineral Owners", value: "/mineral-owners" }
+                      - { label: "For Companies", value: "/companies" }
+                      - { label: "Sample Work", value: "/sample-work" }
+                      - { label: "About", value: "/about" }
+                      - { label: "Experience", value: "/experience" }
+                      - { label: "Services (the overview page)", value: "/services" }
+                      - { label: "Contact", value: "/contact" }
+          - label: "Contact Button"
+            name: contact_button
+            widget: string
+            required: false
+            hint: "The solid button at the right of the menu. It always opens the Contact page. Blank shows \"Get in touch\"."
 
   # ──────────────────────────────────────────────────────────────
   # PAGES
