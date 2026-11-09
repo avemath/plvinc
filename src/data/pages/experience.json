@@ -1,6 +1,28 @@
 {
   "page_heading": "Experience by Basin and State",
   "intro": "Our project work covers the Appalachian, Gulf Coast, Permian and Michigan basins and the Pacific Northwest. It runs from Marcellus and Utica leasing in Pennsylvania and Ohio to deep gas in northwest Louisiana and East Texas, and solar siting in eastern Washington.",
+  "glance": {
+    "heading": "At a glance",
+    "items": [
+      {
+        "title": "8 states with completed files",
+        "text": "From Pennsylvania to Washington. We take work in any state."
+      },
+      {
+        "title": "45 combined years in oil and gas",
+        "text": "Each of us has more than 20 years in the business."
+      },
+      {
+        "title": "Working files since January 2005",
+        "text": ""
+      },
+      {
+        "title": "Certified Professional Landmen",
+        "text": "Based in Duncansville, PA."
+      }
+    ],
+    "call_label": "Call"
+  },
   "states_note": "These are the states where we have already worked files. We take work in any state.",
   "states_served": [
     {

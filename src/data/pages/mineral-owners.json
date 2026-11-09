@@ -6,6 +6,28 @@
   "header_note_label": "Send us the letter",
   "meta_description": "Help for Pennsylvania mineral owners with lease offers, inherited mineral rights, division orders and royalty questions, from Certified Professional Landmen.",
   "intro": "Has a company asked to lease your minerals, run a line across your land, or have you sign a division order (the form that sets your share before royalty checks start)? You do not have to figure it out alone.\n\nWe are Certified Professional Landmen. We read the public record for a living. We can tell you what the record shows you own and what the document in front of you says. Just as important, we can tell you what the record leaves unsettled.",
+  "glance": {
+    "heading": "At a glance",
+    "items": [
+      {
+        "title": "Certified Professional Landmen",
+        "text": "You talk to one of the two landmen who run the firm."
+      },
+      {
+        "title": "Landmen, not attorneys",
+        "text": "We research and report the public record, and we are glad to work alongside your attorney."
+      },
+      {
+        "title": "Working files since 2005",
+        "text": ""
+      },
+      {
+        "title": "Based in Duncansville, PA",
+        "text": "Work across central and western Pennsylvania."
+      }
+    ],
+    "call_label": "Call"
+  },
   "services_label": "How We Help",
   "services_headline": "What You Can Bring to Us",
   "services": [

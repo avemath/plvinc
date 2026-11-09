@@ -3,6 +3,7 @@ import Base from '../layouts/Base.astro';
 import { text } from '../utils/labels';
 import CallToAction from '../components/CallToAction.astro';
 import SampleFeature from '../components/SampleFeature.astro';
+import GlanceCard from '../components/GlanceCard.astro';
 import { renderMarkdown } from '../utils/markdown';
 import exp from '../data/pages/experience.json';
 import settings from '../data/settings.json';
@@ -28,9 +29,10 @@ const statesAsideHtml = await renderMarkdown(
   </div>
 
   <!-- Intro -->
-  <section>
-    <div class="container container-narrow">
-      <div class="experience-intro" set:html={introHtml} />
+  <section class="intro-section">
+    <div class="container intro-split">
+      <div class="intro-main experience-intro" set:html={introHtml} />
+      <GlanceCard glance={exp.glance} />
     </div>
   </section>
 

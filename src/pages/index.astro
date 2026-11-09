@@ -11,7 +11,7 @@ import PriceTicker from '../components/PriceTicker.astro';
 import MemberMarks from '../components/MemberMarks.astro';
 import contact from '../data/pages/contact.json';
 import { getCollection } from 'astro:content';
-import { renderMarkdown } from '../utils/markdown';
+import ServiceIcon from '../components/ServiceIcon.astro';
 import { cssUrl } from '../utils/cssUrl';
 import home from '../data/pages/home.json';
 import settings from '../data/settings.json';
@@ -19,7 +19,8 @@ import { telHref } from '../utils/phone';
 
 const services = await getCollection('services');
 const sorted   = [...services].sort((a, b) => a.data.sort_order - b.data.sort_order);
-const valueParagraphHtml = await renderMarkdown(home.value_paragraph);
+// The two "why us" claims, set in the figures band so they read as part of the proof.
+const valuePoints = (home.value_points ?? []).filter((v) => v?.title || v?.text);
 
 const tel = telHref(settings.phone);
 
@@ -82,19 +83,39 @@ const hasMemberMarks = memberMarks.some((m) => m.src?.trim());
     </div>
   </section>
 
-  <!-- ─── Proof points ─── -->
-  {home.stats?.length > 0 && (
+  <!-- ─── Proof points, then the two "why us" claims under them ─── -->
+  {(home.stats?.length > 0 || valuePoints.length > 0) && (
     <section class="stat-row" aria-label="At a glance">
       <div class="container">
-        <ul class="stat-row-list" role="list">
-          {home.stats.map((s) => (
-            <li class="stat">
-              <span class="stat-value">{s.value}</span>
-              <span class="stat-label">{s.label}</span>
-              {s.detail && <span class="stat-detail">{s.detail}</span>}
-            </li>
-          ))}
-        </ul>
+        {home.stats?.length > 0 && (
+          <ul class="stat-row-list" role="list">
+            {home.stats.map((s) => (
+              <li class="stat">
+                <span class="stat-value">{s.value}</span>
+                <span class="stat-label">{s.label}</span>
+                {s.detail && <span class="stat-detail">{s.detail}</span>}
+              </li>
+            ))}
+          </ul>
+        )}
+        {valuePoints.length > 0 && (
+          <ul class="why-row" role="list">
+            {valuePoints.map((v) => (
+              <li class="why-item">
+                {v.icon && (
+                  <span class="why-icon" aria-hidden="true">
+                    <ServiceIcon name={v.icon} size={24} />
+                  </span>
+                )}
+                <p class="why-text">
+                  {v.title && <strong class="why-title">{v.title}</strong>}
+                  {v.title && v.text && ' '}
+                  {v.text}
+                </p>
+              </li>
+            ))}
+          </ul>
+        )}
       </div>
     </section>
   )}
@@ -103,13 +124,6 @@ const hasMemberMarks = memberMarks.some((m) => m.src?.trim());
   {home.price_ticker?.show && home.price_ticker.symbols?.length > 0 && (
     <PriceTicker label={home.price_ticker.label} symbols={home.price_ticker.symbols} />
   )}
-
-  <!-- ─── Value paragraph ─── -->
-  <section class="value-section">
-    <div class="container">
-      <div class="value-text prose" set:html={valueParagraphHtml} />
-    </div>
-  </section>
 
   <!-- ─── Who you'll talk to ─── -->
   <TeamStrip

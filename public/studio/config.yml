@@ -339,10 +339,28 @@ collections:
                     required: false
                     hint: "What the price is called in the strip, for example WTI Crude. Leave blank to show TradingView's own code."
 
-          - label: "Value Paragraph"
-            name: value_paragraph
-            widget: markdown
-            hint: "A paragraph below the hero that explains your value and what you offer. Plain writing is best. Skip the sales language."
+          - label: "Why Us Points"
+            name: value_points
+            widget: list
+            required: false
+            max: 2
+            summary: "{{fields.title}}"
+            hint: "The two short claims in the green band under the three figures, side by side with a small icon each. Two fit the row; leave the list empty to hide it. Plain writing is best. Skip the sales language."
+            fields:
+              - label: "Heading"
+                name: title
+                widget: string
+                hint: "A few words, in bold. For example: A CPL on every project."
+              - label: "Text"
+                name: text
+                widget: text
+                hint: "One or two sentences that say what the heading means."
+              - label: "Icon"
+                name: icon
+                widget: select
+                required: false
+                options: ["badge", "search", "pen", "list", "banknotes", "pin", "sun"]
+                hint: "The small line drawing beside the point. badge is a seal with a tick, search is a magnifying glass, pen is a document, list is a clipboard, banknotes is money, pin is a map pin, sun is renewables."
 
           - label: "Who You'll Talk To"
             name: team_label
@@ -772,6 +790,40 @@ collections:
             name: intro
             widget: markdown
             hint: "Opening paragraph(s) for the Experience page. Describe your regional background and depth of experience."
+
+          - label: "At a Glance Card"
+            name: glance
+            widget: object
+            required: false
+            collapsed: true
+            hint: "The small card beside the opening paragraphs on a wide screen, under them on a phone. List only plain facts that are true today. Empty the list to hide the card."
+            fields:
+              - label: "Card Heading"
+                name: heading
+                widget: string
+                required: false
+                hint: "The small heading at the top of the card. Blank shows \"At a glance\"."
+              - label: "Facts"
+                name: items
+                widget: list
+                required: false
+                summary: "{{fields.title}}"
+                hint: "Three or four short facts read best."
+                fields:
+                  - label: "Fact"
+                    name: title
+                    widget: string
+                    hint: "A few words, shown in bold. For example: Working files since 2005."
+                  - label: "Detail"
+                    name: text
+                    widget: string
+                    required: false
+                    hint: "Optional short line under the fact."
+              - label: "Call Button Word"
+                name: call_label
+                widget: string
+                required: false
+                hint: "The word before the phone number on the button at the foot of the card. The number comes from Site Settings. Blank shows \"Call\"."
 
           - label: "Where We've Worked: Note"
             name: states_note
@@ -1234,6 +1286,40 @@ collections:
             widget: markdown
             hint: "The opening paragraphs. Write for someone who has never dealt with a landman before."
 
+          - label: "At a Glance Card"
+            name: glance
+            widget: object
+            required: false
+            collapsed: true
+            hint: "The small card beside the opening paragraphs on a wide screen, under them on a phone. List only plain facts that are true today. Empty the list to hide the card."
+            fields:
+              - label: "Card Heading"
+                name: heading
+                widget: string
+                required: false
+                hint: "The small heading at the top of the card. Blank shows \"At a glance\"."
+              - label: "Facts"
+                name: items
+                widget: list
+                required: false
+                summary: "{{fields.title}}"
+                hint: "Three or four short facts read best."
+                fields:
+                  - label: "Fact"
+                    name: title
+                    widget: string
+                    hint: "A few words, shown in bold. For example: Working files since 2005."
+                  - label: "Detail"
+                    name: text
+                    widget: string
+                    required: false
+                    hint: "Optional short line under the fact."
+              - label: "Call Button Word"
+                name: call_label
+                widget: string
+                required: false
+                hint: "The word before the phone number on the button at the foot of the card. The number comes from Site Settings. Blank shows \"Call\"."
+
           - label: "Service Area Line"
             name: service_area_line
             widget: text
@@ -1488,6 +1574,40 @@ collections:
             required: false
             hint: "The opening paragraphs, written for a land department, a broker or a developer. Select text to make it bold."
 
+          - label: "At a Glance Card"
+            name: glance
+            widget: object
+            required: false
+            collapsed: true
+            hint: "The small card beside the opening paragraphs on a wide screen, under them on a phone. List only plain facts that are true today. Empty the list to hide the card."
+            fields:
+              - label: "Card Heading"
+                name: heading
+                widget: string
+                required: false
+                hint: "The small heading at the top of the card. Blank shows \"At a glance\"."
+              - label: "Facts"
+                name: items
+                widget: list
+                required: false
+                summary: "{{fields.title}}"
+                hint: "Three or four short facts read best."
+                fields:
+                  - label: "Fact"
+                    name: title
+                    widget: string
+                    hint: "A few words, shown in bold. For example: Working files since 2005."
+                  - label: "Detail"
+                    name: text
+                    widget: string
+                    required: false
+                    hint: "Optional short line under the fact."
+              - label: "Call Button Word"
+                name: call_label
+                widget: string
+                required: false
+                hint: "The word before the phone number on the button at the foot of the card. The number comes from Site Settings. Blank shows \"Call\"."
+
           - label: "Services Section Label"
             name: services_label
             widget: string
@@ -1706,6 +1826,40 @@ collections:
             name: intro
             widget: markdown
             hint: "The paragraphs above the samples, explaining what the four documents are."
+
+          - label: "At a Glance Card"
+            name: glance
+            widget: object
+            required: false
+            collapsed: true
+            hint: "The small card beside the opening paragraphs on a wide screen, under them on a phone. List only plain facts that are true today. Empty the list to hide the card."
+            fields:
+              - label: "Card Heading"
+                name: heading
+                widget: string
+                required: false
+                hint: "The small heading at the top of the card. Blank shows \"At a glance\"."
+              - label: "Facts"
+                name: items
+                widget: list
+                required: false
+                summary: "{{fields.title}}"
+                hint: "Three or four short facts read best."
+                fields:
+                  - label: "Fact"
+                    name: title
+                    widget: string
+                    hint: "A few words, shown in bold. For example: Working files since 2005."
+                  - label: "Detail"
+                    name: text
+                    widget: string
+                    required: false
+                    hint: "Optional short line under the fact."
+              - label: "Call Button Word"
+                name: call_label
+                widget: string
+                required: false
+                hint: "The word before the phone number on the button at the foot of the card. The number comes from Site Settings. Blank shows \"Call\"."
 
           - label: "How To Read This"
             name: how_to_read

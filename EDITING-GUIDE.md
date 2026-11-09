@@ -161,12 +161,13 @@ A few notes on the trickier fields:
   coverage can grow without anything needing to be renumbered.
 - The **Coverage Intro** is the line under the headline, and it's the right place to say you take
   work nationwide.
-- The **Value Paragraph** supports basic formatting. Select text to get a toolbar for bold and
-  italic.
-
 **Figures Under the Hero** is the band just below the top banner. Two or three entries look best. Each has a
 figure (like 45 or CPL), a label, and a line saying **What it means**. Only use figures you can
 stand behind. Empty the list to remove the band.
+
+**Why Us Points** are the two short claims in the same green band, under the figures, each with a
+small icon. Each has a bold **Heading**, a sentence or two of **Text**, and an **Icon** picked from
+the list. Two fit the row side by side. Empty the list to remove them.
 
 **Energy Price Ticker** is the slim strip of oil and gas prices just below the figures. The prices
 come free from TradingView and are delayed, so the label says so. Switch it off with **Show the
@@ -523,6 +524,17 @@ already describe, and never describe a real past project.
 The numbers are meant to agree with each other: a three-quarter interest in 62.40 acres is 46.80
 net acres, and a bonus of $1,500.00 an acre on 46.80 acres is $70,200.00. The notes are referred to
 by number from inside the tables, so check those references if you reorder them.
+
+---
+
+## The At a Glance Card
+
+The Companies, Mineral Owners, Experience and Sample Work pages each have a small **At a Glance
+Card** beside the opening paragraphs (under them on a phone). Open the page in **Pages** and find
+**At a Glance Card**. Each **Fact** is a few words in bold, with an optional **Detail** line under
+it, and the card always ends with a call button using the phone number from Site Settings. List
+only facts that are true today, three or four at most. Empty the **Facts** list and the card
+disappears, and the opening text goes back to a single centred column.
 
 ---
 

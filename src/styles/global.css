@@ -490,14 +490,113 @@ section { padding: 5rem 0; }
 /* ============================================================
    Value / intro section
    ============================================================ */
-.value-section { background: var(--white); }
+/* Interior pages: the opening text on the left and a short "at a glance" card on the
+   right. Stacked on a phone, card second. With no card, the text keeps its centred
+   reading column. */
+.intro-split { display: grid; gap: 2.5rem; }
+.intro-main { max-width: 720px; min-width: 0; }
+.intro-split:not(:has(.glance-card)) .intro-main { margin: 0 auto; }
+@media (min-width: 900px) {
+  .intro-split:has(.glance-card) {
+    grid-template-columns: minmax(0, 1fr) 340px;
+    gap: 4.5rem;
+    align-items: start;
+  }
+  .intro-split .glance-card {
+    position: sticky;
+    top: calc(var(--nav-height) + 2rem);
+  }
+}
 
-.value-section .container { max-width: 760px; }
-
-.value-section .value-text {
-  font-size: 1.1rem;
-  line-height: 1.85;
+.glance-card {
+  background: var(--white);
+  border: 1px solid var(--border);
+  border-top: 3px solid var(--gold);
+  border-radius: var(--radius-lg);
+  padding: 1.6rem 1.6rem 1.75rem;
+  box-shadow: var(--shadow-sm);
+}
+.glance-heading {
+  margin: 0 0 .5rem;
+  font-size: .8125rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: .12em;
+  color: var(--green-mid);
+}
+.glance-list { list-style: none; margin: 0 0 1.5rem; padding: 0; }
+.glance-item {
+  padding: .85rem 0 .85rem 1.6rem;
+  border-bottom: 1px solid var(--border);
+  position: relative;
+}
+.glance-item:last-child { border-bottom: none; padding-bottom: 0; }
+/* A small tick, drawn in CSS so it needs no icon file. */
+.glance-item::before {
+  content: '';
+  position: absolute;
+  left: .15rem;
+  top: 1.2rem;
+  width: .45rem;
+  height: .8rem;
+  border: solid var(--green-mid);
+  border-width: 0 2px 2px 0;
+  transform: translateY(-50%) rotate(45deg);
+}
+.glance-title {
+  display: block;
+  font-family: var(--font-heading);
+  font-size: 1.05rem;
+  font-weight: 700;
+  line-height: 1.35;
+  color: var(--green-dark);
+}
+.glance-text {
+  display: block;
+  margin-top: .2rem;
+  font-size: .95rem;
+  line-height: 1.55;
   color: var(--text-muted);
+}
+.glance-call { width: 100%; justify-content: center; gap: .55rem; }
+
+/* Home: the two "why us" claims, a row under the three figures in the same green band,
+   so they read as part of the proof rather than as a separate block of grey text. */
+.why-row {
+  list-style: none;
+  margin: 2.25rem 0 0;
+  padding: 2rem 0 0;
+  border-top: 1px solid rgba(255,255,255,.14);
+  display: grid;
+  gap: 1.5rem 3.5rem;
+}
+@media (min-width: 768px) {
+  .why-row { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+.why-item { display: flex; align-items: flex-start; gap: 1rem; }
+.why-icon {
+  display: grid;
+  place-items: center;
+  flex-shrink: 0;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  border: 1px solid rgba(217,190,142,.45);
+  color: var(--gold-light);
+}
+.why-text {
+  margin: 0;
+  font-size: 1rem;
+  line-height: 1.65;
+  color: rgba(255,255,255,.82);
+}
+.why-title {
+  display: block;
+  margin-bottom: .2rem;
+  font-family: var(--font-heading);
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: var(--white);
 }
 
 /* ============================================================
@@ -1812,7 +1911,7 @@ a.contact-detail-value:hover { color: var(--green-dark); }
    Proof points
    ============================================================ */
 /* Sits directly under the hero, so it keeps the hero's dark field rather than
-   introducing a third band colour between it and the value paragraph. */
+   introducing a third band colour between it and the page below. */
 .stat-row {
   background: var(--green-dark);
   padding: 0 0 3rem;
@@ -3247,7 +3346,6 @@ body { font-size: 1.125rem; }
 
 .prose p,
 .prose li,
-.value-section .value-text,
 .owner-intro,
 .owner-state-note,
 .section-header p,
@@ -3282,7 +3380,6 @@ body { font-size: 1.125rem; }
   /* 17px on a phone keeps the same lines from wrapping three words to a line. */
   .prose p,
   .prose li,
-  .value-section .value-text,
   .owner-intro,
   .section-header p,
   .reason,

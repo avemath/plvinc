@@ -4,6 +4,28 @@
   "meta_description": "A fictional land file from first deed to signed lease and resolved heirship, with reader's notes explaining what each part of the report decides.",
   "page_subtitle": "One fictional tract, from the first deed to a signed lease and a resolved heirship.",
   "intro": "Most land work ends in a few documents. A runsheet lists every recorded document in the chain of title. An ownership report states who owns what and what stands in the way. Once a lease is signed, a lease acquisition report tells the client exactly what it bought. When the record leaves a question open, a supplemental report closes it.\n\nThe file below follows one fictional tract through all four, with reader's notes beside each document.",
+  "glance": {
+    "heading": "At a glance",
+    "items": [
+      {
+        "title": "Four documents",
+        "text": "A runsheet, an ownership report, a lease acquisition report and a supplemental report."
+      },
+      {
+        "title": "Fictional and annotated",
+        "text": "Reader's notes sit beside each document."
+      },
+      {
+        "title": "Your templates or ours",
+        "text": "Formats vary by client and by state. The content stays the same."
+      },
+      {
+        "title": "The same method as working files",
+        "text": "Working files are longer, and the method does not change."
+      }
+    ],
+    "call_label": "Call"
+  },
   "fiction_notice_title": "Fictional samples",
   "fiction_notice": "Everything on this page is fictional. The county, township, people, companies, tract, dollar figures, and recording references were invented for illustration and do not describe any real property, owner, or transaction.",
   "jump_label": "The four documents",

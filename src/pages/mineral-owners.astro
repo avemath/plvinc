@@ -5,6 +5,7 @@ import CallToAction from '../components/CallToAction.astro';
 import SampleFeature from '../components/SampleFeature.astro';
 import HowItWorks from '../components/HowItWorks.astro';
 import TeamStrip from '../components/TeamStrip.astro';
+import GlanceCard from '../components/GlanceCard.astro';
 import { renderMarkdown } from '../utils/markdown';
 import { cssUrl } from '../utils/cssUrl';
 import { needsTint } from '../utils/images';
@@ -70,13 +71,16 @@ const faqSchema = faq.length > 0
     </div>
   </div>
 
-  <section>
-    <div class="container container-narrow">
-      <div class="prose owner-intro" set:html={introHtml} />
+  <section class="intro-section">
+    <div class="container intro-split">
+      <div class="intro-main">
+        <div class="prose owner-intro" set:html={introHtml} />
 
-      {page.service_area_line && (
-        <p class="service-area-line">{page.service_area_line}</p>
-      )}
+        {page.service_area_line && (
+          <p class="service-area-line">{page.service_area_line}</p>
+        )}
+      </div>
+      <GlanceCard glance={page.glance} />
     </div>
   </section>
 
