@@ -2399,7 +2399,7 @@ collections:
       - label: "Card Description"
         name: card_description
         widget: text
-        hint: "The short summary on the main Services page. One or two sentences."
+        hint: "The short summary on the main Services page, the For Companies page and under each tile on the home page. One or two sentences."
 
       - label: "Icon / Symbol"
         name: icon

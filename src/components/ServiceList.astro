@@ -1,14 +1,13 @@
 ---
 import ServiceIcon from './ServiceIcon.astro';
 
-// The home page index of the services.
+// The home page index of the services: compact tiles, each one a single link.
 //
-// /services carries the full preview cards, with a description under each title.
-// Repeating them here made the two pages read as the same block twice, so the
-// home page shows the icon and the name only. Six tiles are scannable at a
-// glance and still take you straight to the page that explains the work.
+// The one-line summary under each title is the service's card description, the same
+// field the /services cards show, so the two can never disagree. Leave summary out and
+// the tile shows the icon and the name only.
 interface Props {
-  services: { title: string; icon?: string; slug: string }[];
+  services: { title: string; icon?: string; slug: string; summary?: string | null }[];
 }
 
 const { services } = Astro.props;
@@ -23,7 +22,10 @@ const { services } = Astro.props;
             <ServiceIcon name={svc.icon} size={28} />
           </span>
         )}
-        <span class="service-tile-title">{svc.title}</span>
+        <span class="service-tile-body">
+          <span class="service-tile-title">{svc.title}</span>
+          {svc.summary && <span class="service-tile-summary">{svc.summary}</span>}
+        </span>
       </a>
     </li>
   ))}
