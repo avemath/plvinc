@@ -118,6 +118,7 @@ These apply across the whole site.
 | Footer Name / Company | The name in the copyright line at the bottom |
 | Menu Wording | What each page is called in the top menu and the footer |
 | Footer Wording | The small headings in the footer, the words after the copyright name, and the Privacy link |
+| Team Login Link | The small **Team login** link beside Privacy at the very bottom of every page, which opens the private tools site at tools.plvinc.com. Change its wording or address here, or switch it off. |
 | Phone Bar Wording (mobile) | The Call and Send a note buttons pinned to the bottom of the screen on phones |
 | Home Page Google Title / Description | What Google shows for the home page |
 | Default Share Image | The image shown when the site is shared on social media |

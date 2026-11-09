@@ -39,5 +39,10 @@
   "mobile_bar_labels": {
     "call": "Call",
     "note": "Send a note"
+  },
+  "team_login": {
+    "show": true,
+    "label": "Team login",
+    "url": "https://tools.plvinc.com"
   }
 }

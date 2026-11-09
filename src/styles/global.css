@@ -1411,6 +1411,12 @@ a.contact-detail-value:hover { color: var(--green-dark); }
 }
 .footer-bottom a:hover { opacity: 1; }
 
+.footer-bottom-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0 1.5rem;
+}
+
 /* ============================================================
    Page-header band (shared by About, Experience, etc.)
    ============================================================ */

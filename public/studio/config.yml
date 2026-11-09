@@ -161,6 +161,21 @@ collections:
               - { label: "Words after the copyright name", name: rights, widget: string, required: false, hint: "e.g. All rights reserved." }
               - { label: "Privacy link", name: privacy_link, widget: string, required: false }
 
+          - label: "Team Login Link"
+            name: team_login
+            widget: object
+            collapsed: true
+            hint: "The small link at the very bottom of every page, beside Privacy, that opens the private team tools site. Search engines are told not to follow it."
+            fields:
+              - { label: "Show the link", name: show, widget: boolean, default: true, required: false, hint: "Switch off to hide the link." }
+              - { label: "Link wording", name: label, widget: string, required: false, hint: "Blank shows Team login." }
+              - label: "Web address"
+                name: url
+                widget: string
+                required: false
+                pattern: ['^(https://.+)?$', "Paste the full address, starting with https://"]
+                hint: "Where the link goes, for example https://tools.plvinc.com. Leave blank to hide the link."
+
           - label: "Phone Bar Wording (mobile)"
             name: mobile_bar_labels
             widget: object

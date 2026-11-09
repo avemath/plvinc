@@ -21,6 +21,7 @@ interface Props {
     city?: string;
     state?: string;
     linkedin_url?: string;
+    team_login?: { show?: boolean; label?: string; url?: string };
   };
 }
 
@@ -35,6 +36,11 @@ const year = new Date().getFullYear();
 const name = settings.footer_name || settings.professional_name;
 
 const hasInsights = hasInsightFiles();
+
+// The way in to the private tools site, kept small at the very bottom. Hidden when switched
+// off in Site Settings or when the address is cleared.
+const teamLogin = settings.team_login;
+const teamLoginUrl = teamLogin?.show !== false ? teamLogin?.url?.trim() : '';
 
 // based_in is what visitors read, and it can be a region rather than a town. Falling back
 // to city and state keeps working for anyone who fills those in instead.
@@ -135,6 +141,11 @@ const location = settings.based_in
 
   <div class="footer-bottom">
     <p>&copy; {year} {name}. {footerLabels.rights}</p>
-    <a href="/privacy">{footerLabels.privacy_link}</a>
+    <div class="footer-bottom-links">
+      <a href="/privacy">{footerLabels.privacy_link}</a>
+      {teamLoginUrl && (
+        <a href={teamLoginUrl} rel="nofollow">{teamLogin?.label?.trim() || 'Team login'}</a>
+      )}
+    </div>
   </div>
 </footer>
