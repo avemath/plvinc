@@ -38,7 +38,7 @@ const statesAsideHtml = await renderMarkdown(
   {exp.states_served?.length > 0 && (
     <section class="section-alt">
       <div class="container">
-        <div class="section-header">
+        <div class="section-header is-left">
           <span class="section-label">{exp.states_label}</span>
           <h2>{exp.states_headline}</h2>
           <p>{exp.states_note}</p>
@@ -58,9 +58,9 @@ const statesAsideHtml = await renderMarkdown(
 
   <!-- Project types -->
   {exp.project_types?.length > 0 && (
-    <section>
-      <div class="container">
-        <div class="section-header">
+    <section class="section-roomy">
+      <div class="container section-split">
+        <div class="section-header is-left">
           <span class="section-label">{exp.project_types_label}</span>
           <h2>{exp.project_types_headline}</h2>
         </div>

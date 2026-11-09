@@ -167,6 +167,50 @@ section { padding: 5rem 0; }
 .section-header h2       { margin-bottom: .6rem; }
 .section-header p        { color: var(--text-muted); max-width: 600px; margin: 0 auto; }
 
+/* Left-aligned headers, for sections that sit beside or above a wide layout. The ruled
+   eyebrow belongs to centred headers, where the two lines frame the label; set flush
+   left, the label stands on its own. */
+.section-header.is-left  { text-align: left; }
+.section-header.is-left p { margin: 0; }
+.section-header.is-left .section-label::before,
+.section-header.is-left .section-label::after,
+.sample-feature-copy .section-label::before,
+.sample-feature-copy .section-label::after { display: none; }
+
+/* A left header with a quiet link on the right of the same row. */
+.section-header-row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 1rem 2rem;
+  margin-bottom: 2.5rem;
+}
+.section-header-row > .section-header { margin-bottom: 0; }
+.section-header-row > .section-aside { margin: 0; text-align: left; }
+
+/* Header in a left column, content in a wider right one. Used where the content is a
+   list that reads top to bottom (questions, standards, project types), so the headline
+   stays in view beside it instead of sitting centred over a narrow column. */
+.section-split { display: grid; gap: 1.75rem; }
+.section-split > .section-header { margin-bottom: 0; }
+@media (min-width: 900px) {
+  .section-split {
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1.9fr);
+    gap: 4.5rem;
+    align-items: start;
+  }
+  .section-split > .section-header {
+    position: sticky;
+    top: calc(var(--nav-height) + 2rem);
+  }
+  /* These sections carry more reading, so they get more air than the card sections. */
+  .section-roomy { padding: 6.5rem 0; }
+}
+.section-header.is-left ~ .section-aside { text-align: left; }
+/* Beside a header the cards run as one column, so none is left alone on a second row. */
+.owner-services.is-stacked { grid-template-columns: minmax(0, 1fr); gap: 1rem; }
+
 /* ============================================================
    Buttons
    ============================================================ */

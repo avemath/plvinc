@@ -126,7 +126,7 @@ const faqSchema = faq.length > 0
   {page.services?.length > 0 && (
     <section>
       <div class="container">
-        <div class="section-header">
+        <div class="section-header is-left">
           <span class="section-label">{page.services_label}</span>
           <h2>{page.services_headline}</h2>
         </div>
@@ -153,9 +153,9 @@ const faqSchema = faq.length > 0
   )}
 
   {faq.length > 0 && (
-    <section>
-      <div class="container container-narrow">
-        <div class="section-header">
+    <section class="section-roomy">
+      <div class="container section-split">
+        <div class="section-header is-left">
           <span class="section-label">{page.faq_label}</span>
           <h2>{page.faq_headline}</h2>
         </div>

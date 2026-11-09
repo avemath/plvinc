@@ -105,13 +105,13 @@ const faqSchema = faq.length > 0
   )}
 
   {standards.length > 0 && (
-    <section class="section-alt">
-      <div class="container">
-        <div class="section-header">
+    <section class="section-alt section-roomy">
+      <div class="container section-split">
+        <div class="section-header is-left">
           {page.standards_label && <span class="section-label">{page.standards_label}</span>}
           <h2>{page.standards_headline}</h2>
         </div>
-        <ul class="owner-services" role="list">
+        <ul class="owner-services is-stacked" role="list">
           {standards.map((s) => (
             <li class="owner-service">
               <h3>{s.title}</h3>
@@ -126,7 +126,7 @@ const faqSchema = faq.length > 0
   {states.length > 0 && (
     <section>
       <div class="container">
-        <div class="section-header">
+        <div class="section-header is-left">
           {page.states_label && <span class="section-label">{page.states_label}</span>}
           <h2>{text(page.states_headline, "Where We've Worked")}</h2>
           {page.states_note && <p>{page.states_note}</p>}
@@ -162,9 +162,9 @@ const faqSchema = faq.length > 0
   )}
 
   {faq.length > 0 && (
-    <section class="section-alt">
-      <div class="container container-narrow">
-        <div class="section-header">
+    <section class="section-alt section-roomy">
+      <div class="container section-split">
+        <div class="section-header is-left">
           {page.faq_label && <span class="section-label">{page.faq_label}</span>}
           <h2>{page.faq_headline}</h2>
         </div>

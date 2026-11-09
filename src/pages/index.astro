@@ -143,10 +143,15 @@ const hasMemberMarks = memberMarks.some((m) => m.src?.trim());
   <!-- ─── Services overview ─── -->
   <section class="home-services">
     <div class="container">
-      <div class="section-header">
-        <span class="section-label">{home.services_label}</span>
-        <h2>{home.services_headline}</h2>
-        <p>{home.services_intro}</p>
+      <div class="section-header-row">
+        <div class="section-header is-left">
+          <span class="section-label">{home.services_label}</span>
+          <h2>{home.services_headline}</h2>
+          <p>{home.services_intro}</p>
+        </div>
+        <p class="section-aside">
+          <a href="/services">{text(home.services_link_text, 'See what each service covers')} <span aria-hidden="true">→</span></a>
+        </p>
       </div>
       <ServiceList
         services={sorted.map((svc) => ({
@@ -155,10 +160,6 @@ const hasMemberMarks = memberMarks.some((m) => m.src?.trim());
           slug: svc.id,
         }))}
       />
-
-      <p class="section-aside">
-        <a href="/services">{text(home.services_link_text, 'See what each service covers')} <span aria-hidden="true">→</span></a>
-      </p>
     </div>
   </section>
 
