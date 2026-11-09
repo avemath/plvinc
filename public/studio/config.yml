@@ -309,7 +309,7 @@ collections:
             name: team_intro
             widget: text
             required: false
-            hint: "One sentence under the headline. The point is that the owners do the work themselves."
+            hint: "One sentence under the headline. The point is that a Certified Professional Landman who runs the firm handles every call and every project."
 
           - label: "Who You'll Talk To: Link"
             name: team_link
@@ -1198,7 +1198,7 @@ collections:
             name: team_intro
             widget: text
             required: false
-            hint: "One sentence under the headline. The point is that the owners do the work themselves."
+            hint: "One sentence under the headline. The point is that a Certified Professional Landman who runs the firm handles every call and every project."
 
           - label: "Who You'll Talk To: Link"
             name: team_link
@@ -1469,23 +1469,23 @@ collections:
             required: false
             hint: "A short line under the state cards, with links. Leave blank to hide it."
 
-          - label: "Who Does the Work"
+          - label: "Who Runs Your Project"
             name: team_label
             widget: string
             required: false
             hint: "Small uppercase label above the photos of Rickey and Shannon. The photos, names and roles come from Team / People."
 
-          - label: "Who Does the Work: Headline"
+          - label: "Who Runs Your Project: Headline"
             name: team_headline
             widget: string
             required: false
 
-          - label: "Who Does the Work: Text"
+          - label: "Who Runs Your Project: Text"
             name: team_intro
             widget: text
             required: false
 
-          - label: "Who Does the Work: Link"
+          - label: "Who Runs Your Project: Link"
             name: team_link
             widget: string
             required: false
