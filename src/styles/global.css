@@ -1107,6 +1107,28 @@ section { padding: 5rem 0; }
   margin-bottom: .35rem;
 }
 
+/* The state's outline beside its name, from the coverage map's own paths. Sized to the
+   name's line so the card stays the height it was. */
+.state-card-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: .75rem;
+  margin-bottom: .35rem;
+}
+.state-card-head .state-name { margin-bottom: 0; }
+.state-shape {
+  flex-shrink: 0;
+  width: 44px;
+  height: 28px;
+  fill: var(--green-pale);
+  stroke: var(--green-mid);
+  stroke-width: 1.25;
+  stroke-linejoin: round;
+  vector-effect: non-scaling-stroke;
+}
+.state-shape path { vector-effect: non-scaling-stroke; }
+
 .state-note {
   font-size: .875rem;
   color: var(--text-muted);

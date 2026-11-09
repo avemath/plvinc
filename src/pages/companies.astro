@@ -13,6 +13,7 @@ import GlanceCard from '../components/GlanceCard.astro';
 import ServiceCard from '../components/ServiceCard.astro';
 import { getCollection } from 'astro:content';
 import { renderMarkdown } from '../utils/markdown';
+import { stateShape } from '../utils/state-shapes';
 import { cssUrl } from '../utils/cssUrl';
 import { needsTint } from '../utils/images';
 import page from '../data/pages/companies.json';
@@ -136,7 +137,14 @@ const faqSchema = faq.length > 0
         <div class="states-grid">
           {states.map((s) => (
             <div class="state-card">
-              <p class="state-name">{s.state}</p>
+              <div class="state-card-head">
+                <p class="state-name">{s.state}</p>
+                {stateShape(s.state) && (
+                  <svg class="state-shape" viewBox={stateShape(s.state)!.viewBox} aria-hidden="true" focusable="false">
+                    <path d={stateShape(s.state)!.d} />
+                  </svg>
+                )}
+              </div>
               <p class="state-note">{s.note}</p>
             </div>
           ))}

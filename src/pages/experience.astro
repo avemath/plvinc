@@ -5,6 +5,7 @@ import CallToAction from '../components/CallToAction.astro';
 import SampleFeature from '../components/SampleFeature.astro';
 import GlanceCard from '../components/GlanceCard.astro';
 import { renderMarkdown } from '../utils/markdown';
+import { stateShape } from '../utils/state-shapes';
 import exp from '../data/pages/experience.json';
 import settings from '../data/settings.json';
 
@@ -48,7 +49,14 @@ const statesAsideHtml = await renderMarkdown(
         <div class="states-grid">
           {exp.states_served.map((s) => (
             <div class="state-card">
-              <p class="state-name">{s.state}</p>
+              <div class="state-card-head">
+                <p class="state-name">{s.state}</p>
+                {stateShape(s.state) && (
+                  <svg class="state-shape" viewBox={stateShape(s.state)!.viewBox} aria-hidden="true" focusable="false">
+                    <path d={stateShape(s.state)!.d} />
+                  </svg>
+                )}
+              </div>
               <p class="state-note">{s.note}</p>
             </div>
           ))}
