@@ -8,6 +8,7 @@ import SampleFeature from '../components/SampleFeature.astro';
 import TeamStrip from '../components/TeamStrip.astro';
 import HowItWorks from '../components/HowItWorks.astro';
 import PriceTicker from '../components/PriceTicker.astro';
+import MemberMarks from '../components/MemberMarks.astro';
 import contact from '../data/pages/contact.json';
 import { getCollection } from 'astro:content';
 import { renderMarkdown } from '../utils/markdown';
@@ -25,6 +26,14 @@ const tel = telHref(settings.phone);
 // The registered name leads the hero. Falls back to the trading name so the hero
 // never renders a blank line if legal_name is cleared in Site Settings.
 const heroName = settings.legal_name || settings.professional_name;
+
+// The AAPL member marks. The band stays hidden until at least one file is uploaded.
+const membership = home.membership ?? {};
+const memberMarks = [
+  { src: membership.member_mark, alt: membership.member_mark_alt },
+  { src: membership.cpl_mark, alt: membership.cpl_mark_alt },
+];
+const hasMemberMarks = memberMarks.some((m) => m.src?.trim());
 ---
 
 <Base
@@ -109,6 +118,16 @@ const heroName = settings.legal_name || settings.professional_name;
     intro={home.team_intro}
     link={home.team_link}
   />
+
+  <!-- ─── AAPL membership, hidden until a member mark is uploaded ─── -->
+  {hasMemberMarks && (
+    <section class="affiliations-band membership-band">
+      <div class="container container-narrow">
+        <MemberMarks marks={memberMarks} />
+        {membership.text && <p class="membership-text">{membership.text}</p>}
+      </div>
+    </section>
+  )}
 
   <!-- ─── Sample file ─── -->
   {home.sample_feature?.headline && (

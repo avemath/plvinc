@@ -1,0 +1,58 @@
+---
+// The official AAPL member mark, and the CPL version, exactly as uploaded in the editor.
+// AAPL's graphic standards allow members to use these files only as supplied, so they are
+// shown at their own proportions with clear space around them: no srcset of re-encoded
+// copies, no cropping, no filters. Renders nothing until at least one file is uploaded.
+import fs from 'node:fs';
+import sharp from 'sharp';
+
+export interface Mark { src?: string; alt?: string }
+
+interface Props {
+  marks: Mark[];
+}
+
+const uploaded = Astro.props.marks.filter((m) => m.src?.trim());
+
+// Width and height from the file itself, so the page reserves the right space and nothing
+// moves as the image arrives. SVGs report their own size too.
+async function sizeOf(src: string) {
+  try {
+    const file = `public${decodeURI(src)}`;
+    if (!fs.existsSync(file)) return {};
+    const meta = await sharp(file).metadata();
+    return meta.width && meta.height ? { width: meta.width, height: meta.height } : {};
+  } catch {
+    return {};
+  }
+}
+
+// Shown no wider than 220px and no taller than 120px, whichever bites first, with the
+// proportions kept. A PNG is never blown up past its own pixel size; an SVG scales cleanly,
+// and one that only carries a viewBox would otherwise collapse to nothing.
+const MAX_W = 220;
+const MAX_H = 120;
+function displayWidth(src: string, w?: number, h?: number) {
+  if (!w || !h) return MAX_W;
+  const fit = Math.min(MAX_W, (MAX_H * w) / h);
+  return Math.round(src.toLowerCase().endsWith('.svg') ? fit : Math.min(fit, w));
+}
+
+const marks = await Promise.all(
+  uploaded.map(async (m) => {
+    const src = m.src!.trim();
+    const size = await sizeOf(src);
+    return { src, alt: m.alt?.trim() || '', ...size, display: displayWidth(src, size.width, size.height) };
+  })
+);
+---
+
+{marks.length > 0 && (
+  <ul class="member-marks" role="list">
+    {marks.map((m) => (
+      <li class="member-mark">
+        <img src={m.src} alt={m.alt} width={m.width} height={m.height} style={`width: ${m.display}px`} loading="lazy" decoding="async" />
+      </li>
+    ))}
+  </ul>
+)}

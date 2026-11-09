@@ -2033,6 +2033,35 @@ a.contact-detail-value:hover { color: var(--green-dark); }
 
 .affiliations-band .affiliations-list { justify-content: center; }
 
+/* The AAPL member marks, shown exactly as supplied. AAPL's standards ask for clear space
+   around the mark, which the padding gives, and for its proportions to be left alone, so
+   only the width is capped and the height follows. */
+.member-marks {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem 2.5rem;
+}
+.affiliations-list + .member-marks { margin-top: 1.5rem; }
+.member-mark { padding: 1rem; }
+.member-mark img {
+  display: block;
+  height: auto;
+  max-width: 100%;
+}
+
+.membership-band { padding: 3rem 0; }
+.membership-text {
+  margin: 1rem auto 0;
+  max-width: 560px;
+  font-size: .95rem;
+  color: var(--text-muted);
+}
+
 /* ============================================================
    Sample work product
    The three samples are set as documents rather than as web

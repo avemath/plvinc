@@ -368,6 +368,49 @@ collections:
             required: false
             hint: "The link under the photos that goes to the About page. Blank shows \"Read their backgrounds\"."
 
+          - label: "AAPL Member Mark"
+            name: membership
+            widget: object
+            collapsed: true
+            required: false
+            hint: "A small band on the home page showing the AAPL member mark, below Who You'll Talk To. The same marks also show under Affiliations on the About page. Everything here stays hidden until at least one mark is uploaded."
+            fields:
+              - label: "Member Mark"
+                name: member_mark
+                widget: image
+                required: false
+                accept: ".svg,.png,image/svg+xml,image/png"
+                media_libraries:
+                  default:
+                    config:
+                      transformations: {}
+                hint: "Only the official AAPL member mark file, downloaded from landman.org while logged in as a member. Upload the SVG if the download includes one, otherwise the PNG. Use it exactly as AAPL supplies it: do not recolor, crop, stretch or edit it. The site shows it no wider than 220 pixels with clear space around it."
+              - label: "Member Mark Description"
+                name: member_mark_alt
+                widget: string
+                required: false
+                hint: "Read aloud to visitors who cannot see the image, for example American Association of Professional Landmen member mark."
+              - label: "CPL Mark (optional)"
+                name: cpl_mark
+                widget: image
+                required: false
+                accept: ".svg,.png,image/svg+xml,image/png"
+                media_libraries:
+                  default:
+                    config:
+                      transformations: {}
+                hint: "Only the official AAPL Certified Professional Landman mark file from landman.org, if you want it shown beside the member mark. SVG if there is one, otherwise PNG. Same rules: exactly as supplied, no recoloring, cropping or stretching."
+              - label: "CPL Mark Description"
+                name: cpl_mark_alt
+                widget: string
+                required: false
+                hint: "Read aloud to visitors who cannot see the image, for example AAPL Certified Professional Landman mark."
+              - label: "Line Under the Marks"
+                name: text
+                widget: string
+                required: false
+                hint: "One line under the marks on the home page. Leave blank for no line."
+
           - label: "Sample Work Band"
             name: sample_feature
             widget: object

@@ -11,6 +11,13 @@
   "team_headline": "Who You'll Talk To",
   "team_intro": "Every call and every report comes from one of the two Certified Professional Landmen who run the firm.",
   "team_link": "Read their backgrounds",
+  "membership": {
+    "member_mark": "",
+    "member_mark_alt": "American Association of Professional Landmen member mark",
+    "cpl_mark": "",
+    "cpl_mark_alt": "AAPL Certified Professional Landman mark",
+    "text": "Certified Professional Landmen · Members of the American Association of Professional Landmen"
+  },
   "regions_label": "Coverage",
   "regions_headline": "Where We Work",
   "regions_note": "Select a basin or a shaded state to see the plays worked there.",

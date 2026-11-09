@@ -8,6 +8,8 @@ import { srcsetFor } from '../utils/images';
 import about from '../data/pages/about.json';
 import settings from '../data/settings.json';
 import LinkedInIcon from '../components/LinkedInIcon.astro';
+import MemberMarks from '../components/MemberMarks.astro';
+import home from '../data/pages/home.json';
 
 const introHtml    = await renderMarkdown(about.intro);
 const approachHtml = await renderMarkdown(about.approach);
@@ -57,6 +59,13 @@ function credentialLine(c: { name: string; issuer?: string | null; year?: string
 // otherwise leave TypeScript thinking it can never hold anything.
 type Credential = { name: string; issuer?: string | null; year?: string; number?: string };
 const companyCredentials = (about.credentials ?? []) as Credential[];
+
+// The AAPL member marks are uploaded once, on the Home page, and shown here as well.
+// Nothing is drawn until a file is uploaded.
+const memberMarks = [
+  { src: home.membership?.member_mark, alt: home.membership?.member_mark_alt },
+  { src: home.membership?.cpl_mark, alt: home.membership?.cpl_mark_alt },
+];
 
 // One Person entry per landman. Credentials come from each person's own list, so someone
 // added without a CPL is never described to search engines as holding one. Only emitted
@@ -242,6 +251,7 @@ const schema = sorted.length > 0
             </li>
           ))}
         </ul>
+        <MemberMarks marks={memberMarks} />
       </div>
     </section>
   )}

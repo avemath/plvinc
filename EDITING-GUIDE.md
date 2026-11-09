@@ -184,6 +184,22 @@ a firm. The four fields set the small label, the headline, the sentence under it
 About. The photos, names and roles themselves come from **Team / People**, so a change there shows
 up here too.
 
+**AAPL Member Mark** is a small band under Who You'll Talk To that shows the AAPL member mark,
+with one line of text under it. It stays hidden until a mark is uploaded. To add it:
+
+1. Log in at landman.org as a member and download the official member mark from AAPL's graphic
+   standards page. If you also want the CPL version, download that too.
+2. In the editor, click **Pages**, then **Home Page**, then open **AAPL Member Mark**.
+3. Click **Member Mark** and upload the file. Use the SVG if the download includes one, otherwise
+   the PNG. For the CPL version, use **CPL Mark (optional)**.
+4. Click **Save**.
+
+Upload the files exactly as AAPL supplies them. Do not recolor, crop, stretch or edit them, and do
+not use a copy found elsewhere on the web: AAPL only allows members to use the official files. The
+site shows each mark at a modest size (no wider than 220 pixels) with clear space around it, and
+leaves its shape alone. The same marks appear under **Affiliations** on the About page as well, so
+there is nothing to upload there. To take the marks down, clear both image boxes.
+
 The home page also shows **What Happens Next**, the four steps from the Contact page. Edit them
 there (**Pages** → Contact Page).
 
