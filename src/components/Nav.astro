@@ -33,37 +33,29 @@ const services = (await getCollection('services'))
   .sort((a, b) => a.data.sort_order - b.data.sort_order)
   .map((s) => ({ href: `/services/${s.id}`, title: s.data.title }));
 
-// The full logo is a badge, roughly square, so it needs height to stay legible. The narrow
-// wordmark reads better in a cramped header, so small screens get that instead. Both are
-// rendered and CSS picks one, which avoids a layout shift from swapping the src in script.
-const logoFull = settings.logo;
-const logoSmall = settings.logo_small || settings.logo;
+// The header shows the wide PETROLAND wordmark at every width. The round badge was tried
+// on desktop, but its file is small and the words inside it, VENTURES above all, could not
+// be read at any height the header can hold. One mark also makes desktop, phone and the
+// footer read as the same brand. The badge is the fallback if no wordmark is uploaded.
+const navLogo = settings.logo_small || settings.logo;
+const isWordmark = Boolean(settings.logo_small);
 const tel = telHref(settings.phone);
-const desktopLogo = logoFull || logoSmall;
-const mobileLogo = logoSmall || logoFull;
 ---
 
 <header class="site-header">
   <nav class="nav-inner" aria-label="Main navigation">
     <a href="/" class="nav-logo" aria-label={`${settings.professional_name}, home`}>
-      {desktopLogo
+      {navLogo
         ? (
-          // One <picture>, so a phone downloads only the wide mark and a desktop only the
-          // stacked logo. With just one of the two uploaded, it is used at every width.
-          <picture>
-            {mobileLogo !== desktopLogo && (
-              <source media="(max-width: 768px)" srcset={srcsetFor(mobileLogo, 465) || mobileLogo} sizes="150px" width="465" height="132" />
-            )}
-            <img
-              src={desktopLogo}
-              srcset={srcsetFor(desktopLogo, logoFull ? 245 : 465)}
-              sizes={logoFull ? '85px' : '210px'}
-              alt={settings.professional_name}
-              class="nav-logo-img"
-              width={logoFull ? 245 : 465}
-              height={logoFull ? 174 : 132}
-            />
-          </picture>
+          <img
+            src={navLogo}
+            srcset={srcsetFor(navLogo, isWordmark ? 465 : 245)}
+            sizes={isWordmark ? '165px' : '85px'}
+            alt={settings.professional_name}
+            class:list={['nav-logo-img', isWordmark && 'is-wordmark']}
+            width={isWordmark ? 465 : 245}
+            height={isWordmark ? 132 : 174}
+          />
         )
         : <span class="nav-logo-text">{settings.professional_name}</span>
       }

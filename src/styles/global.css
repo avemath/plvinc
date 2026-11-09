@@ -294,11 +294,10 @@ section { padding: 5rem 0; }
   align-items: center;
 }
 
-/* Two logo files, one shown at a time. The full badge is nearly square and needs height to
-   stay legible; the narrow wordmark reads better in a cramped header, so it takes over on
-   small screens. Both are in the markup with explicit width and height so neither swap nor
-   load shifts the header. */
+/* The wide wordmark, the same mark at every width. 46px keeps PETROLAND clearly legible
+   on a desktop. The badge, used only when no wordmark is uploaded, needs more height. */
 .nav-logo-img { width: auto; height: 58px; display: block; }
+.nav-logo-img.is-wordmark { height: 46px; }
 
 .nav-actions {
   display: flex;
@@ -1875,9 +1874,10 @@ a.contact-detail-value:hover { color: var(--green-dark); }
 
   .nav-toggle { display: flex; }
 
-  /* The header is tight here, so the wordmark replaces the badge and the phone collapses
-     to its icon. The full number moves into the menu instead of disappearing. */
-  .nav-logo-img { height: 40px; }
+  /* The header is tight here, so the logo steps down and the phone collapses to its icon.
+     The full number moves into the menu instead of disappearing. */
+  .nav-logo-img,
+  .nav-logo-img.is-wordmark { height: 40px; }
 
   .nav-phone-number { display: none; }
   .nav-phone {
@@ -3550,21 +3550,30 @@ body { font-size: 1.125rem; }
   .cta-band p { font-size: 1.0625rem; }
 }
 
-/* The nav carries eight links. Between 769px and 1010px the number collapses to
-   its icon through that band so the row never has to wrap or shrink. */
-@media (max-width: 1010px) and (min-width: 769px) {
+/* The nav carries eight links beside the wordmark. Below 1200px the number collapses to
+   its icon so the row never has to wrap or run off the edge. (It ran 70px past the edge
+   between 1011px and 1080px before this band was widened.) */
+@media (max-width: 1199px) and (min-width: 769px) {
   .nav-phone-number { display: none; }
   .nav-links a { padding-left: .55rem; padding-right: .55rem; }
   .nav-sub-toggle { margin-right: 0; }
 }
 
-/* The narrowest tablet widths still need a touch less, or the row runs off the edge. */
-@media (max-width: 920px) and (min-width: 769px) {
+/* Narrower tablet widths need a touch less, or the row runs off the edge. */
+@media (max-width: 1060px) and (min-width: 769px) {
   .nav-links a { font-size: .8125rem; padding-left: .32rem; padding-right: .32rem; }
   .nav-links a::after { left: .32rem; right: .32rem; }
   .nav-inner { gap: .6rem; padding: 0 1rem; }
-  .nav-logo-img { height: 46px; }
+  .nav-logo-img,
+  .nav-logo-img.is-wordmark { height: 36px; }
   .nav-sub-toggle { width: 20px; }
+}
+@media (max-width: 900px) and (min-width: 769px) {
+  .nav-links a { font-size: .78rem; padding-left: .22rem; padding-right: .22rem; }
+  .nav-links a::after { left: .22rem; right: .22rem; }
+  .nav-inner { gap: .4rem; }
+  .nav-logo-img,
+  .nav-logo-img.is-wordmark { height: 28px; }
 }
 
 /* ============================================================

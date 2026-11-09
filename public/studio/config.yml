@@ -60,13 +60,13 @@ collections:
             name: logo
             widget: image
             required: false
-            hint: "The main logo, shown in the header on desktop. If left blank, your business name appears as text instead."
+            hint: "The full round badge. It is the logo Google is told about, and it shows in the header only if the narrow logo below is left blank."
 
           - label: "Logo (narrow)"
             name: logo_small
             widget: image
             required: false
-            hint: "A narrower version of the logo, used in the header on phones where the main one is too tall. Leave blank to use the main logo everywhere."
+            hint: "The wide PETROLAND wordmark, shown in the header at every screen size because it stays readable at header height. Leave blank to use the main logo there instead, or your business name as text if both are blank."
 
           - label: "Logo (light, for dark backgrounds)"
             name: logo_small_light

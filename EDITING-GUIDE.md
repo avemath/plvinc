@@ -106,8 +106,8 @@ These apply across the whole site.
 | Business Name | The short business name, Petro Land Ventures. It is added to every browser tab title, so change it only if the business is renamed |
 | Registered Business Name | The company's full registered name, for example *Petro Land Ventures, Inc.* It's the large name at the top of the home page. Leave blank to use Professional Name there. |
 | Tagline | One short line for the footer, for example *Certified Professional Landman* |
-| Logo | The main logo, shown in the header on desktop. Leave blank to show your name as text. |
-| Logo (narrow) | A narrower version of the logo, used in the header on phones. |
+| Logo | The full round badge. It is the logo Google is told about, and it shows in the header only if the narrow logo is blank. |
+| Logo (narrow) | The wide PETROLAND wordmark, shown in the header on every screen size because it stays readable at that height. |
 | Logo (light, for dark backgrounds) | A white version, used in the dark footer. |
 | Phone Number | Your business phone, written exactly as you want it displayed. Used everywhere the site shows a phone number. |
 | Email Address | Your primary business email. Used on the Contact page and in the footer. |
