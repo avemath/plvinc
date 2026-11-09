@@ -25,7 +25,7 @@ function faqId(q: string) {
   return q.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '').slice(0, 60);
 }
 
-// The header photo is set in the editor. With none set, the band is plain green like the
+// The header photo is set in the editor. With none set, the band is the patterned green of the
 // other pages.
 const headerImage = page.header_image || '';
 

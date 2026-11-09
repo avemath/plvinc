@@ -1198,7 +1198,7 @@ collections:
             name: header_image
             widget: image
             required: false
-            hint: "The photo behind the green band at the top of this page. A dark green tint is laid over any new photo so the white heading stays readable. Upload replacements under a new file name. Leave blank for plain green."
+            hint: "The photo behind the green band at the top of this page. A dark green tint is laid over any new photo so the white heading stays readable. Upload replacements under a new file name. Leave blank for the plain green band with its faint map linework."
 
           - label: "Page Subtitle"
             name: page_subtitle
@@ -1451,7 +1451,7 @@ collections:
             name: header_image
             widget: image
             required: false
-            hint: "Optional photo behind the green band at the top of this page. A dark green tint is laid over any new photo so the white heading stays readable. Leave blank for plain green."
+            hint: "Optional photo behind the green band at the top of this page. A dark green tint is laid over any new photo so the white heading stays readable. Wide landscape photos work best. Leave blank for the plain green band with its faint map linework."
 
           - label: "Page Subtitle"
             name: page_subtitle
