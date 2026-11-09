@@ -94,18 +94,25 @@ h1 { font-size: clamp(2.1rem, 5.2vw, 3.4rem); line-height: 1.12; letter-spacing:
 h2 { font-size: clamp(1.65rem, 3.2vw, 2.4rem); line-height: 1.15; letter-spacing: -.008em; }
 
 /* Small h2s that act as card or box titles keep the sans heading face, like the h3 card
-   titles beside them. The Home hero and the Home closing band keep their original type. */
+   titles beside them. */
 .service-card h2,
 .how-to-read-title,
-.sample-sheet-title,
-.hero h1,
-.cta-band-image h2 {
+.sample-sheet-title {
   font-family: var(--font-heading);
   font-weight: 700;
   text-wrap: wrap;
 }
-.hero h1 { font-size: clamp(2rem, 5vw, 3.25rem); line-height: 1.2; letter-spacing: -.025em; }
-.cta-band-image h2 { font-size: clamp(1.5rem, 3vw, 2.25rem); line-height: 1.2; letter-spacing: -.015em; }
+
+/* The Home hero headline keeps its original sans type exactly, on its own rule so that
+   nothing else depends on it. */
+.hero h1 {
+  font-family: var(--font-heading);
+  font-weight: 700;
+  text-wrap: wrap;
+  font-size: clamp(2rem, 5vw, 3.25rem);
+  line-height: 1.2;
+  letter-spacing: -.025em;
+}
 
 /* The figures under the hero share the display serif. */
 .stat-value { font-family: var(--font-display); font-weight: 600; }

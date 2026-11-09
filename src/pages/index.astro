@@ -38,9 +38,13 @@ const memberMarks = [
 ];
 const hasMemberMarks = memberMarks.some((m) => m.src?.trim());
 
-// The AAPL member mark closes the strip, once it has been uploaded. Shown as supplied, at
-// its own proportions; its size is read from the file so nothing moves as it loads.
-const stripMarkSrc = membership.member_mark?.trim() || '';
+// The AAPL member mark closes the strip once it has been uploaded, but only while the AAPL
+// band further down is not on the page, so the mark never appears twice on Home. The band
+// decides for itself when it shows (hasMemberMarks, unchanged); the strip just follows it.
+// Shown as supplied, at its own proportions; its size is read from the file so nothing
+// moves as it loads.
+const membershipBandShown = hasMemberMarks;
+const stripMarkSrc = membershipBandShown ? '' : membership.member_mark?.trim() || '';
 let stripMark: { src: string; alt: string; width?: number; height?: number } | undefined;
 if (stripMarkSrc) {
   stripMark = { src: stripMarkSrc, alt: membership.member_mark_alt?.trim() || '' };
