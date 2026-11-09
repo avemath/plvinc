@@ -1231,6 +1231,35 @@ section { padding: 5rem 0; }
 
 .contact-details { display: flex; flex-direction: column; gap: 1.25rem; }
 
+/* Who answers: the two landmen, small and round like the team strip. */
+.contact-people {
+  list-style: none;
+  margin: 0 0 1.5rem;
+  padding: 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem 1.75rem;
+}
+.contact-person { display: flex; align-items: center; gap: .8rem; }
+.contact-person-photo {
+  width: 64px;
+  height: 64px;
+  flex-shrink: 0;
+  border-radius: 50%;
+  object-fit: cover;
+  object-position: 50% 20%;
+  border: 2px solid var(--white);
+  box-shadow: var(--shadow-md);
+}
+.contact-person-text { display: flex; flex-direction: column; line-height: 1.35; }
+.contact-person-name { font-family: var(--font-heading); font-weight: 700; font-size: 1rem; color: var(--text); }
+.contact-person-role { font-size: .85rem; color: var(--green-dark); }
+.contact-response {
+  margin: -.5rem 0 1.5rem;
+  font-size: 1rem;
+  color: var(--text-muted);
+}
+
 .contact-detail-label {
   font-size: .78rem;
   font-weight: 600;

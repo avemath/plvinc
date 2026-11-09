@@ -279,7 +279,13 @@ permission. The section is hidden until you add the first project.
 2. Edit the wording and any notes. The phone number and email shown here come from **Site
    Settings**, and the LinkedIn links come from **Team / People**, so they are changed there.
 3. **Mailing Address** is optional. Leave it blank to hide it.
-4. Click **Save**.
+4. **Response Time Line** is optional too: one line under the two photos saying how soon you
+   reply, for example "We reply within one business day". Only fill it in with a time you can
+   keep every week. Leave it blank to hide it.
+5. Click **Save**.
+
+The small round photos of Rickey and Shannon beside **Reach Out Directly** come from **Team /
+People**, the same photos as the team strip on the home page.
 
 **Contact Detail Labels** rewords the small grey labels (Phone, Email, Based In and so on).
 Everything else a visitor reads on the forms is here too: **Form Hints Inside the Boxes** (the grey

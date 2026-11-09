@@ -9,8 +9,21 @@ import settings from '../data/settings.json';
 import LinkedInIcon from '../components/LinkedInIcon.astro';
 import { getLinkedInProfiles } from '../utils/people';
 import { telHref } from '../utils/phone';
+import { srcsetFor } from '../utils/images';
+import { getCollection } from 'astro:content';
 
 const profiles = await getLinkedInProfiles();
+
+// The landmen who answer, shown small beside the direct details. Same source as the team
+// strip on Home, so a new headshot uploaded under Team / People shows here too.
+let people: Awaited<ReturnType<typeof getCollection<'people'>>> = [];
+try {
+  people = await getCollection('people');
+} catch {
+  people = [];
+}
+const answerers = [...people].sort((a, b) => (a.data.sort_order ?? 0) - (b.data.sort_order ?? 0));
+const responseTime = (contact as { response_time?: string | null }).response_time?.trim();
 
 // The small grey labels above each contact detail. Blank ones keep their original wording.
 const dl = (contact as { detail_labels?: Record<string, string> }).detail_labels ?? {};
@@ -49,6 +62,25 @@ const location = settings.based_in
             phone and email instead of after a full screen of LinkedIn and service area. */}
         <div class="contact-primary">
           <h2>{contact.details_headline}</h2>
+
+          {answerers.length > 0 && (
+            <ul class="contact-people" role="list">
+              {answerers.map((p) => (
+                <li class="contact-person">
+                  {p.data.photo
+                    ? <img src={p.data.photo} srcset={srcsetFor(p.data.photo, 800)} sizes="64px" alt="" width="64" height="64" loading="lazy" decoding="async" class="contact-person-photo" />
+                    : <span class="contact-person-photo team-strip-photo-empty" aria-hidden="true"></span>}
+                  <span class="contact-person-text">
+                    <span class="contact-person-name">{p.data.name}</span>
+                    {p.data.role && <span class="contact-person-role">{p.data.role}</span>}
+                  </span>
+                </li>
+              ))}
+            </ul>
+          )}
+
+          {responseTime && <p class="contact-response">{responseTime}</p>}
+
           <div class="contact-details">
             {/* Phone and email come from Site Settings, so changing them there updates
                 this page, the header, the footer and the call buttons together. */}

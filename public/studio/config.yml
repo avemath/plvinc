@@ -1007,6 +1007,12 @@ collections:
             widget: string
             hint: "Heading above your phone, email and service area (e.g., Reach Out Directly)."
 
+          - label: "Response Time Line"
+            name: response_time
+            widget: string
+            required: false
+            hint: "Optional. One line under the photos of Rickey and Shannon saying how soon you reply, for example: We reply within one business day. Only fill this in with a time you can keep every week. Leave blank to hide it."
+
           - label: "Contact Detail Labels"
             name: detail_labels
             widget: object
