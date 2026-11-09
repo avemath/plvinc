@@ -3380,13 +3380,31 @@ body { font-size: 1.125rem; }
 
 .hero-sub { font-size: 1.15rem; }
 
-/* Cards and list items keep their own measure but not their own small type. */
+/* Card titles. Each one sits over 18px body copy, so the title has to be clearly the
+   larger and heavier of the two, set in the heading face, or the card reads as one run
+   of text with its first line in bold. */
 .lease-term dt,
+.lease-doc-title,
 .hiw-step-title,
 .hard-file-title,
-.how-to-read-title { font-size: 1.05rem; }
+.how-to-read-title {
+  font-family: var(--font-heading);
+  font-size: 1.25rem;
+  font-weight: 700;
+  line-height: 1.3;
+  letter-spacing: -.01em;
+  color: var(--green-dark);
+}
+.owner-faq dt { font-size: 1.3rem; line-height: 1.35; }
 
 @media (max-width: 560px) {
+  .lease-term dt,
+  .lease-doc-title,
+  .hiw-step-title,
+  .hard-file-title,
+  .how-to-read-title { font-size: 1.15rem; }
+  .owner-faq dt { font-size: 1.2rem; }
+
   /* 17px on a phone keeps the same lines from wrapping three words to a line. */
   .prose p,
   .prose li,
