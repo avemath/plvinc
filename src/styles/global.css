@@ -32,6 +32,9 @@
   --action-on-dark-hover: #E8D4AE;
 
   --font-heading: 'Manrope', system-ui, -apple-system, sans-serif;
+  /* The display serif: page and section headings (h1, h2) and the figures. h3 and
+     below, the nav, buttons and labels stay in the sans faces above. */
+  --font-display: 'Source Serif 4', Georgia, 'Times New Roman', serif;
   --font-sans:  'Inter', system-ui, -apple-system, sans-serif;
 
   --container: 1200px;
@@ -81,8 +84,31 @@ h1, h2, h3, h4 {
   margin-bottom: .75rem;
 }
 
-h1 { font-size: clamp(2rem, 5vw, 3.25rem);   letter-spacing: -.025em; }
-h2 { font-size: clamp(1.5rem, 3vw, 2.25rem); letter-spacing: -.015em; }
+h1, h2 {
+  font-family: var(--font-display);
+  font-weight: 600;
+  /* Balanced lines, so a two-line heading does not leave one word on its own. */
+  text-wrap: balance;
+}
+h1 { font-size: clamp(2.1rem, 5.2vw, 3.4rem); line-height: 1.12; letter-spacing: -.012em; }
+h2 { font-size: clamp(1.65rem, 3.2vw, 2.4rem); line-height: 1.15; letter-spacing: -.008em; }
+
+/* Small h2s that act as card or box titles keep the sans heading face, like the h3 card
+   titles beside them. The Home hero and the Home closing band keep their original type. */
+.service-card h2,
+.how-to-read-title,
+.sample-sheet-title,
+.hero h1,
+.cta-band-image h2 {
+  font-family: var(--font-heading);
+  font-weight: 700;
+  text-wrap: wrap;
+}
+.hero h1 { font-size: clamp(2rem, 5vw, 3.25rem); line-height: 1.2; letter-spacing: -.025em; }
+.cta-band-image h2 { font-size: clamp(1.5rem, 3vw, 2.25rem); line-height: 1.2; letter-spacing: -.015em; }
+
+/* The figures under the hero share the display serif. */
+.stat-value { font-family: var(--font-display); font-weight: 600; }
 h3 { font-size: clamp(1.1rem, 2vw, 1.4rem);  letter-spacing: -.01em;  }
 
 p { margin-top: 0; }

@@ -29,7 +29,7 @@ const { title, description, image, noindex = false, schema, preloadImage } = Ast
 // text could paint.
 //
 // The @font-face rules live in the bundled CSS, so a browser only discovers them once
-// that stylesheet has parsed. The two preloads below start the latin files immediately
+// that stylesheet has parsed. The preloads below start the latin files immediately
 // instead. latin-ext is left to load on demand, and nothing else is shipped.
 ---
 
@@ -58,6 +58,13 @@ const { title, description, image, noindex = false, schema, preloadImage } = Ast
     <link
       rel="preload"
       href="/fonts/manrope-latin-IRggexSg.woff2"
+      as="font"
+      type="font/woff2"
+      crossorigin
+    />
+    <link
+      rel="preload"
+      href="/fonts/source-serif-4-latin-600.woff2"
       as="font"
       type="font/woff2"
       crossorigin
