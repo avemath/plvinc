@@ -352,7 +352,7 @@ collections:
             widget: list
             summary: "{{value}} {{label}}"
             required: false
-            hint: "The band below the hero. Two or three entries read best here, each with a line saying what it means. Only put figures here you can stand behind. Empty this list to hide the band."
+            hint: "The slim green strip below the hero: each figure in large gold type with its label beside it. Three read best in one row. Only put figures here you can stand behind. Empty this list to hide the strip."
             fields:
               - label: "Figure"
                 name: value
@@ -365,7 +365,7 @@ collections:
                 name: detail
                 widget: text
                 required: false
-                hint: "One line saying what the figure means, for example what the credential is. Leave blank to show just the figure and label."
+                hint: "One line saying what the figure means. Kept for later use: the strip on the home page shows only the figure and its label, so this line is not shown at present."
 
           - label: "Energy Price Ticker"
             name: price_ticker
@@ -409,7 +409,7 @@ collections:
             required: false
             max: 2
             summary: "{{fields.title}}"
-            hint: "The two short claims in the green band under the three figures, side by side with a small icon each. Two fit the row; leave the list empty to hide it. Plain writing is best. Skip the sales language."
+            hint: "Two short claims, each with a small icon. Kept for later use: they are not shown on the home page at present, since the team section and the sample file already make these points."
             fields:
               - label: "Heading"
                 name: title

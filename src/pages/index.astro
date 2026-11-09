@@ -11,7 +11,8 @@ import PriceTicker from '../components/PriceTicker.astro';
 import MemberMarks from '../components/MemberMarks.astro';
 import contact from '../data/pages/contact.json';
 import { getCollection } from 'astro:content';
-import ServiceIcon from '../components/ServiceIcon.astro';
+import fs from 'node:fs';
+import sharp from 'sharp';
 import { cssUrl } from '../utils/cssUrl';
 import home from '../data/pages/home.json';
 import settings from '../data/settings.json';
@@ -19,8 +20,9 @@ import { telHref } from '../utils/phone';
 
 const services = await getCollection('services');
 const sorted   = [...services].sort((a, b) => a.data.sort_order - b.data.sort_order);
-// The two "why us" claims, set in the figures band so they read as part of the proof.
-const valuePoints = (home.value_points ?? []).filter((v) => v?.title || v?.text);
+// The figures under the hero, as one slim strip: the figure and its label. The longer
+// "what it means" line stays in the editor but is not shown here.
+const stats = (home.stats ?? []).filter((s) => s?.value?.trim());
 
 const tel = telHref(settings.phone);
 
@@ -35,6 +37,21 @@ const memberMarks = [
   { src: membership.cpl_mark, alt: membership.cpl_mark_alt },
 ];
 const hasMemberMarks = memberMarks.some((m) => m.src?.trim());
+
+// The AAPL member mark closes the strip, once it has been uploaded. Shown as supplied, at
+// its own proportions; its size is read from the file so nothing moves as it loads.
+const stripMarkSrc = membership.member_mark?.trim() || '';
+let stripMark: { src: string; alt: string; width?: number; height?: number } | undefined;
+if (stripMarkSrc) {
+  stripMark = { src: stripMarkSrc, alt: membership.member_mark_alt?.trim() || '' };
+  try {
+    const file = `public${decodeURI(stripMarkSrc)}`;
+    if (fs.existsSync(file)) {
+      const meta = await sharp(file).metadata();
+      if (meta.width && meta.height) Object.assign(stripMark, { width: meta.width, height: meta.height });
+    }
+  } catch {}
+}
 ---
 
 <Base
@@ -83,39 +100,23 @@ const hasMemberMarks = memberMarks.some((m) => m.src?.trim());
     </div>
   </section>
 
-  <!-- ─── Proof points, then the two "why us" claims under them ─── -->
-  {(home.stats?.length > 0 || valuePoints.length > 0) && (
-    <section class="stat-row" aria-label="At a glance">
+  <!-- ─── Credential strip: the three figures, and the AAPL mark once uploaded ─── -->
+  {stats.length > 0 && (
+    <section class="cred-strip" aria-label="At a glance">
       <div class="container">
-        {home.stats?.length > 0 && (
-          <ul class="stat-row-list" role="list">
-            {home.stats.map((s) => (
-              <li class="stat">
-                <span class="stat-value">{s.value}</span>
-                <span class="stat-label">{s.label}</span>
-                {s.detail && <span class="stat-detail">{s.detail}</span>}
-              </li>
-            ))}
-          </ul>
-        )}
-        {valuePoints.length > 0 && (
-          <ul class="why-row" role="list">
-            {valuePoints.map((v) => (
-              <li class="why-item">
-                {v.icon && (
-                  <span class="why-icon" aria-hidden="true">
-                    <ServiceIcon name={v.icon} size={24} />
-                  </span>
-                )}
-                <p class="why-text">
-                  {v.title && <strong class="why-title">{v.title}</strong>}
-                  {v.title && v.text && ' '}
-                  {v.text}
-                </p>
-              </li>
-            ))}
-          </ul>
-        )}
+        <ul class:list={['cred-list', stripMark && 'has-mark']} role="list">
+          {stats.map((s) => (
+            <li class="cred">
+              <span class="stat-value cred-value">{s.value}</span>
+              <span class="cred-label">{s.label}</span>
+            </li>
+          ))}
+          {stripMark && (
+            <li class="cred-mark">
+              <img src={stripMark.src} alt={stripMark.alt} width={stripMark.width} height={stripMark.height} decoding="async" />
+            </li>
+          )}
+        </ul>
       </div>
     </section>
   )}

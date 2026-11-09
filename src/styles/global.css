@@ -722,44 +722,6 @@ section { padding: 5rem 0; }
 }
 .glance-call { width: 100%; justify-content: center; gap: .55rem; }
 
-/* Home: the two "why us" claims, a row under the three figures in the same green band,
-   so they read as part of the proof rather than as a separate block of grey text. */
-.why-row {
-  list-style: none;
-  margin: 2.25rem 0 0;
-  padding: 2rem 0 0;
-  border-top: 1px solid rgba(255,255,255,.14);
-  display: grid;
-  gap: 1.5rem 3.5rem;
-}
-@media (min-width: 768px) {
-  .why-row { grid-template-columns: repeat(2, minmax(0, 1fr)); }
-}
-.why-item { display: flex; align-items: flex-start; gap: 1rem; }
-.why-icon {
-  display: grid;
-  place-items: center;
-  flex-shrink: 0;
-  width: 44px;
-  height: 44px;
-  border-radius: 50%;
-  border: 1px solid rgba(217,190,142,.45);
-  color: var(--gold-light);
-}
-.why-text {
-  margin: 0;
-  font-size: 1rem;
-  line-height: 1.65;
-  color: rgba(255,255,255,.82);
-}
-.why-title {
-  display: block;
-  margin-bottom: .2rem;
-  font-family: var(--font-heading);
-  font-size: 1.1rem;
-  font-weight: 700;
-  color: var(--white);
-}
 
 /* ============================================================
    Coverage map: basins & plays
@@ -2194,45 +2156,127 @@ a.contact-detail-value:hover { color: var(--green-dark); }
 }
 
 /* ============================================================
-   Proof points
+   Credential strip, under the home hero
    ============================================================ */
-/* Sits directly under the hero, so it keeps the hero's dark field rather than
-   introducing a third band colour between it and the page below. */
-.stat-row {
-  background: var(--green-dark);
-  padding: 0 0 3rem;
+/* The three figures in one slim row on the hero's green: the figure in the display serif
+   and gold, its label beside it, thin rules between. The AAPL member mark closes the row
+   once it is uploaded; without it the three share the width evenly. */
+.cred-strip { background: var(--green-dark); color: var(--white); padding: 0; }
+.cred-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  border-top: 1px solid rgba(255,255,255,.14);
+}
+.cred {
+  display: flex;
+  align-items: center;
+  gap: .9rem;
+  padding: .85rem 0;
+  min-width: 0;
+}
+.cred + .cred { border-top: 1px solid rgba(255,255,255,.12); }
+.cred-strip .cred-value {
+  flex-shrink: 0;
+  min-width: 1.6ch;
+  font-family: var(--font-display);
+  font-size: 2rem;
+  font-weight: 600;
+  line-height: 1;
+  color: var(--gold-light);
+}
+.cred-label {
+  font-size: .95rem;
+  font-weight: 600;
+  line-height: 1.3;
+  color: var(--white);
+}
+/* The mark sits on a white plate with clear space, shown exactly as supplied. */
+.cred-mark {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: .85rem 0;
+}
+.cred-mark img {
+  display: block;
+  width: auto;
+  height: 56px;
+  max-width: 160px;
+  object-fit: contain;
+  padding: .4rem .6rem;
+  background: var(--white);
+  border-radius: var(--radius);
+}
+
+/* Phones without the mark: three compact rows, the figures in one column so the labels
+   line up. */
+@media (max-width: 767px) {
+  .cred-list:not(.has-mark) .cred-value { width: 4.4rem; }
+}
+
+/* Phones with the mark: a 2 by 2 grid, the mark taking the fourth cell. */
+@media (max-width: 767px) {
+  .cred-list.has-mark { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .cred-list.has-mark .cred {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: .35rem;
+    padding: 1rem .75rem 1rem 0;
+    border-top: 0;
+  }
+  .cred-list.has-mark > li:nth-child(n + 3) { border-top: 1px solid rgba(255,255,255,.12); }
+  .cred-list.has-mark .cred-label { font-size: .875rem; }
+}
+
+@media (min-width: 768px) {
+  .cred-list { grid-auto-flow: column; grid-auto-columns: minmax(0, 1fr); grid-template-columns: none; }
+  .cred-list.has-mark { grid-auto-flow: row; grid-template-columns: repeat(3, minmax(0, 1fr)) auto; }
+  .cred {
+    justify-content: center;
+    padding: 1.9rem 1.25rem;
+    border-top: 0;
+  }
+  .cred + .cred,
+  .cred + .cred-mark { border-top: 0; border-left: 1px solid rgba(255,255,255,.16); }
+  .cred-strip .cred-value { font-size: clamp(2.1rem, 3.2vw, 2.6rem); }
+  .cred-list { border-top: 0; }
+  .cred-label { font-size: clamp(.9rem, 1.2vw, 1rem); max-width: 15em; }
+  .cred-list.has-mark .cred-mark { justify-content: flex-end; padding: 1rem 0 1rem 1.5rem; }
 }
 
 /* ============================================================
-   Energy price ticker (TradingView), under the figures
+   Energy price ticker (TradingView), under the strip
    ============================================================ */
-/* Continues the green of the hero and figures. The widget's height is reserved before it
-   loads, so nothing below it moves when the prices arrive. */
+/* A thin cream bar of its own, with the widget in its light theme on a transparent
+   background. The widget's height is reserved before it loads, so nothing below it moves
+   when the prices arrive, and the bar removes itself if the widget never draws. */
 .price-ticker {
-  background: var(--green-dark);
-  color: var(--white);
-  padding: 0 0 1.25rem;
+  background: var(--cream);
+  color: var(--text);
+  padding: .55rem 0 .5rem;
+  border-bottom: 1px solid var(--border);
 }
 .price-ticker[hidden] { display: none; }
 
 .price-ticker-inner {
   display: grid;
   grid-template-columns: 1fr;
-  gap: .35rem;
-  padding-top: 1rem;
-  border-top: 1px solid rgba(255,255,255,.14);
+  gap: .25rem;
 }
 
 .price-ticker-label {
   font-size: .72rem;
-  font-weight: 600;
+  font-weight: 700;
   letter-spacing: .14em;
   text-transform: uppercase;
-  color: var(--gold-light);
+  color: var(--green-mid);
 }
 
 .price-ticker-widget {
-  height: 58px; /* what the widget sets itself to once drawn */
+  height: 58px; /* what the widget sets itself to once drawn, in either theme */
   min-width: 0;
   overflow: hidden;
 }
@@ -2243,12 +2287,11 @@ a.contact-detail-value:hover { color: var(--green-dark); }
 }
 .price-ticker-credit a {
   font-size: .7rem;
-  color: var(--white);
-  opacity: .55;
+  color: var(--text-muted);
   text-decoration: none;
-  transition: opacity var(--transition);
+  transition: color var(--transition);
 }
-.price-ticker-credit a:hover { opacity: 1; }
+.price-ticker-credit a:hover { color: var(--green-dark); text-decoration: underline; }
 
 @media (min-width: 768px) {
   .price-ticker-inner {
@@ -2257,80 +2300,6 @@ a.contact-detail-value:hover { color: var(--green-dark); }
     column-gap: 1.5rem;
   }
   .price-ticker-credit { grid-column: 2; }
-}
-
-/* A few claims, each with room to say what it means. They stack until there is
-   room for all of them on one row, so three never break into two plus an orphan. */
-.stat-row-list {
-  list-style: none;
-  margin: 0;
-  padding: 2.5rem 0 0;
-  border-top: 1px solid rgba(255,255,255,.14);
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: 2rem 3rem;
-}
-/* Stacked on a tablet, the figures share one column width so the text beside them
-   lines up instead of starting wherever each figure happens to end. */
-@media (min-width: 561px) and (max-width: 999px) {
-  .stat-row-list .stat { grid-template-columns: 5rem 1fr; }
-}
-/* Side by side, the items stretch to the tallest one; keep each label and its line
-   together in the middle rather than pulled to the top and bottom. */
-@media (min-width: 1000px) {
-  .stat-row-list {
-    grid-auto-flow: column;
-    grid-auto-columns: minmax(0, 1fr);
-    grid-template-columns: none;
-  }
-  .stat { align-content: center; }
-}
-
-.stat {
-  color: var(--white);
-  display: grid;
-  grid-template-columns: auto 1fr;
-  column-gap: 1.25rem;
-  align-items: center;
-}
-
-/* Centred against the whole text block rather than sat on the first baseline.
-   Baseline alignment left a figure this size looking like it was floating
-   above its own label. */
-.stat-value {
-  grid-row: 1 / span 2;
-  align-self: center;
-  font-family: var(--font-heading);
-  font-size: clamp(2.4rem, 4.4vw, 3.1rem);
-  font-weight: 700;
-  line-height: 1;
-  color: var(--gold);
-}
-
-.stat-label {
-  font-size: 1.05rem;
-  font-weight: 600;
-  line-height: 1.3;
-  color: var(--white);
-}
-
-/* The credential is jargon to most visitors, so it gets a line that says what
-   it is rather than sitting there as three letters. */
-.stat-detail {
-  margin-top: .4rem;
-  font-size: .95rem;
-  line-height: 1.6;
-  color: rgba(255,255,255,.72);
-  max-width: 46ch;
-}
-
-@media (max-width: 560px) {
-  .stat {
-    grid-template-columns: 1fr;
-    column-gap: 0;
-  }
-  .stat-value { grid-row: auto; }
-  .stat-label { margin-top: .25rem; }
 }
 
 .projects-list {

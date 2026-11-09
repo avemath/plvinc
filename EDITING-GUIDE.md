@@ -176,15 +176,15 @@ A few notes on the trickier fields:
   coverage can grow without anything needing to be renumbered.
 - The **Coverage Intro** is the line under the headline, and it's the right place to say you take
   work nationwide.
-**Figures Under the Hero** is the band just below the top banner. Two or three entries look best. Each has a
-figure (like 45 or CPL), a label, and a line saying **What it means**. Only use figures you can
-stand behind. Empty the list to remove the band.
+**Figures Under the Hero** is the slim green strip just below the top banner. Three entries fill
+one row. Each has a figure (like 45 or CPL) and a label, shown side by side. The **What it means**
+line is kept in the editor but is not shown in the strip. Only use figures you can stand behind.
+Empty the list to remove the strip. Once the member mark is uploaded under **AAPL Member
+Mark**, it also appears at the right end of the strip.
 
-**Why Us Points** are the two short claims in the same green band, under the figures, each with a
-small icon. Each has a bold **Heading**, a sentence or two of **Text**, and an **Icon** picked from
-the list. Two fit the row side by side. Empty the list to remove them.
+**Why Us Points** are kept in the editor but are not shown on the home page at present.
 
-**Energy Price Ticker** is the slim strip of oil and gas prices just below the figures. The prices
+**Energy Price Ticker** is the thin cream bar of oil and gas prices just below the figures. The prices
 come free from TradingView and are delayed, so the label says so. Switch it off with **Show the
 ticker**, change the small heading with **Label**, and add, remove or reorder prices under **Prices
 Shown**. Each price needs TradingView's code for it, for example `TVC:USOIL` for WTI crude,
