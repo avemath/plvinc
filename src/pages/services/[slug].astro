@@ -4,7 +4,10 @@ import { navLabels, text } from '../../utils/labels';
 import ServiceIcon from '../../components/ServiceIcon.astro';
 import SampleFeature from '../../components/SampleFeature.astro';
 import CallToAction from '../../components/CallToAction.astro';
+import ServiceList from '../../components/ServiceList.astro';
 import servicesPage from '../../data/pages/services.json';
+import samplePage from '../../data/pages/sample-work.json';
+import { telHref } from '../../utils/phone';
 import { getCollection, render } from 'astro:content';
 import settings from '../../data/settings.json';
 
@@ -18,7 +21,10 @@ export async function getStaticPaths() {
 
 const { entry }       = Astro.props;
 const { Content }     = await render(entry);
-const { title, icon, show_sample_link, show_owner_note, cta_headline, cta_text, cta_button, cta_link } = entry.data;
+const {
+  title, icon, show_sample_link, show_owner_note, cta_headline, cta_text, cta_button, cta_link,
+  audience, deliverables, sample_documents,
+} = entry.data;
 
 // The other services, for the "related" links at the foot of the page.
 const others = (await getCollection('services'))
@@ -28,6 +34,18 @@ const others = (await getCollection('services'))
 const site = Astro.site ?? new URL('https://plvinc.com');
 const servicesLabel = navLabels.services;
 const ownerNote = (servicesPage as Record<string, any>).owner_note ?? {};
+const sidebar = (servicesPage as Record<string, any>).sidebar ?? {};
+const tel = telHref(settings.phone);
+
+// The sample documents this service points at, titled as the sample file titles them and
+// linked to the heading of each one on that page.
+const SAMPLE_DOCS = {
+  runsheet:            { title: samplePage.runsheet?.title, href: '/sample-work#runsheet-title' },
+  ownership_report:    { title: samplePage.mor?.title, href: '/sample-work#mor-title' },
+  lease_report:        { title: samplePage.lar?.title, href: '/sample-work#lar-title' },
+  supplemental_report: { title: samplePage.supplemental?.title, href: '/sample-work#supp-title' },
+} as const;
+const sampleDocs = sample_documents.map((k) => SAMPLE_DOCS[k]).filter((d) => d?.title);
 
 // Breadcrumbs for search engines, matching the visible trail, plus the service itself.
 const schema = {
@@ -76,28 +94,90 @@ const schema = {
     </div>
   </div>
 
-  <!-- Body -->
+  <!-- Body: the description on the left, a box to reach a landman on the right -->
   <section class="service-detail-body">
-    <div class="container">
-      <div class="prose">
-        <Content />
+    <div class="container service-layout">
+      <div class="service-main">
+        {audience && (
+          <p class="service-audience">
+            <span class="service-audience-label">{text(servicesPage.audience_heading, 'Who this is for')}</span>
+            {audience}
+          </p>
+        )}
+
+        <div class="prose service-prose">
+          <Content />
+        </div>
+
+        {deliverables.length > 0 && (
+          <div class="service-deliverables">
+            <h2 class="service-deliverables-heading">{text(servicesPage.deliverables_heading, 'What you get')}</h2>
+            <ul class="deliverables-list" role="list">
+              {deliverables.map((d) => (
+                <li class="deliverable">
+                  <span class="deliverable-title">{d.title}</span>
+                  {d.text && <span class="deliverable-text">{d.text}</span>}
+                </li>
+              ))}
+            </ul>
+          </div>
+        )}
+
+        {show_owner_note && (
+          <aside class="owner-note" aria-label="For landowners">
+            <p>
+              {text(ownerNote.text, 'Own the land or the minerals yourself? This page is written for the companies we work for. Our page for owners explains what to expect in plain terms.')}
+              {' '}<a href="/mineral-owners">{text(ownerNote.link_label, 'Start here')} <span aria-hidden="true">→</span></a>
+            </p>
+          </aside>
+        )}
       </div>
 
-      {show_owner_note && (
-        <aside class="owner-note" aria-label="For landowners">
-          <p>
-            {text(ownerNote.text, 'Own the land or the minerals yourself? This page is written for the companies we work for. Our page for owners explains what to expect in plain terms.')}
-            {' '}<a href="/mineral-owners">{text(ownerNote.link_label, 'Start here')} <span aria-hidden="true">→</span></a>
-          </p>
-        </aside>
-      )}
+      <aside class="service-sidebar" aria-labelledby="service-sidebar-heading">
+        <div class="service-sidebar-card">
+          <h2 class="service-sidebar-heading" id="service-sidebar-heading">{text(sidebar.heading, 'Talk to a landman')}</h2>
+          {settings.phone && (
+            <a href={tel} class="btn btn-primary service-sidebar-call">
+              <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor"
+                   stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6A19.79 19.79 0 0 1 2.12 4.18 2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.9.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92Z" />
+              </svg>
+              {text(sidebar.call_label, 'Call')} {settings.phone}
+            </a>
+          )}
+          <a href={cta_link} class="service-sidebar-link">
+            {text(sidebar.form_link_label, 'Send us the details')} <span aria-hidden="true">→</span>
+          </a>
 
+          <div class="service-sidebar-samples">
+            {sampleDocs.length > 0
+              ? (
+                <>
+                  <p class="service-sidebar-label">{text(sidebar.sample_heading, 'From the sample file')}</p>
+                  <ul role="list">
+                    {sampleDocs.map((d) => (
+                      <li><a href={d.href} class="service-sidebar-link">{d.title} <span aria-hidden="true">→</span></a></li>
+                    ))}
+                  </ul>
+                </>
+              )
+              : (
+                <a href="/sample-work" class="service-sidebar-link">
+                  {text(sidebar.sample_link_label, 'See the sample file')} <span aria-hidden="true">→</span>
+                </a>
+              )}
+          </div>
+        </div>
+      </aside>
+    </div>
+
+    <div class="container">
       {others.length > 0 && (
         <nav class="related-services" aria-labelledby="related-services-heading">
           <h2 id="related-services-heading">{text(servicesPage.related_heading, 'Other Services')}</h2>
-          <ul role="list">
-            {others.map((o) => <li><a href={`/services/${o.id}`}>{o.data.title}</a></li>)}
-          </ul>
+          <ServiceList
+            services={others.map((o) => ({ title: o.data.title, icon: o.data.icon, slug: o.id }))}
+          />
         </nav>
       )}
 

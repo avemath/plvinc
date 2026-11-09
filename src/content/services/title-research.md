@@ -8,6 +8,16 @@ show_sample_link: true
 cta_headline: "Need title run on a tract? Send us the details."
 cta_button: "Request title work"
 sort_order: 1
+sample_documents:
+  - "runsheet"
+  - "ownership_report"
+deliverables:
+  - title: "Runsheets"
+    text: "A list of every deed, will and lease in the chain of title."
+  - title: "Ownership reports"
+    text: "Who owns what, and what stands in the way."
+  - title: "Supplemental reports"
+    text: "When the record leaves a question open, a supplemental report closes it."
 ---
 
 Courthouse-level examination of mineral and surface title, from chain of title construction through curative work.

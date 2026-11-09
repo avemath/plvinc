@@ -2317,6 +2317,51 @@ collections:
             required: false
             hint: "The heading over the links to the other services, at the foot of each service page. Blank shows \"Other Services\"."
 
+          - label: "What You Get Heading"
+            name: deliverables_heading
+            widget: string
+            required: false
+            hint: "The heading over a service's What You Get list, on services that have one. Blank shows \"What you get\"."
+
+          - label: "Who This Is For Label"
+            name: audience_heading
+            widget: string
+            required: false
+            hint: "The small label before a service's Who This Is For line. Blank shows \"Who this is for\"."
+
+          - label: "Box Beside Each Service"
+            name: sidebar
+            widget: object
+            required: false
+            collapsed: true
+            hint: "The box that stays beside the text on each service page on a wide screen, and sits under it on a phone. The phone number comes from Site Settings."
+            fields:
+              - label: "Heading"
+                name: heading
+                widget: string
+                required: false
+                hint: "Blank shows \"Talk to a landman\"."
+              - label: "Call Button Word"
+                name: call_label
+                widget: string
+                required: false
+                hint: "The word before the phone number. Blank shows \"Call\"."
+              - label: "Form Link"
+                name: form_link_label
+                widget: string
+                required: false
+                hint: "The link to the contact form. It opens the same form as that service's closing button. Blank shows \"Send us the details\"."
+              - label: "Sample Documents Heading"
+                name: sample_heading
+                widget: string
+                required: false
+                hint: "The small heading over the links to sample documents, on services that have some picked. Blank shows \"From the sample file\"."
+              - label: "Sample File Link"
+                name: sample_link_label
+                widget: string
+                required: false
+                hint: "The link to the sample file, on services with no sample documents picked. Blank shows \"See the sample file\"."
+
           - label: "Note for Owners (Services page)"
             name: owner_band
             widget: object
@@ -2456,6 +2501,41 @@ collections:
           - { label: "Contact page, opened on the short note (landowners)", value: "/contact#note" }
           - { label: "Contact page, top of the page (visitor picks a form)", value: "/contact" }
         hint: "Pick the form that fits who usually reads this service. Most services are for companies."
+
+      - label: "Who This Is For"
+        name: audience
+        widget: string
+        required: false
+        hint: "Optional. One line near the top of this service page saying who usually needs this work, for example operators running a leasing program. Leave blank to hide it."
+
+      - label: "What You Get"
+        name: deliverables
+        widget: list
+        required: false
+        summary: "{{fields.title}}"
+        hint: "Optional. The documents or results the client receives, shown as a short list under the description. Only list things you actually hand over. Leave empty to hide it."
+        fields:
+          - label: "Deliverable"
+            name: title
+            widget: string
+            hint: "A few words, for example Ownership reports."
+          - label: "What It Is"
+            name: text
+            widget: string
+            required: false
+            hint: "Optional short line saying what it tells the client."
+
+      - label: "Sample Documents"
+        name: sample_documents
+        widget: select
+        multiple: true
+        required: false
+        options:
+          - { label: "Runsheet", value: "runsheet" }
+          - { label: "Ownership report", value: "ownership_report" }
+          - { label: "Lease acquisition report", value: "lease_report" }
+          - { label: "Supplemental report", value: "supplemental_report" }
+        hint: "Optional. Documents in the sample file that show this kind of work. The box beside the page links straight to each one. Leave empty and it links to the sample file as a whole."
 
       - label: "Google Title (browser tab)"
         name: seo_title

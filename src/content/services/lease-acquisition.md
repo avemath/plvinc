@@ -9,6 +9,11 @@ show_sample_link: true
 cta_headline: "Have a play to lease? Let's talk scope and timing."
 cta_button: "Discuss a leasing project"
 sort_order: 2
+sample_documents:
+  - "lease_report"
+deliverables:
+  - title: "Lease acquisition reports"
+    text: "Once a lease is signed, a report that tells you exactly what you bought."
 ---
 
 Leasehold acquisition from owner identification through executed and recorded lease.

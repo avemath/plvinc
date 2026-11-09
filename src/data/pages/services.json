@@ -24,5 +24,14 @@
     "text": "Own the land or the minerals yourself? This page is written for the companies we work for. Our page for owners explains what to expect in plain terms.",
     "link_label": "Start here"
   },
-  "related_heading": "Other Services"
+  "related_heading": "Other Services",
+  "sidebar": {
+    "heading": "Talk to a landman",
+    "call_label": "Call",
+    "form_link_label": "Send us the details",
+    "sample_heading": "From the sample file",
+    "sample_link_label": "See the sample file"
+  },
+  "deliverables_heading": "What you get",
+  "audience_heading": "Who this is for"
 }

@@ -333,7 +333,8 @@ Each service has its own page, and there are six to start with.
 1. Click **Services**, then the one you want to edit.
 2. Edit any of:
    - **Service Title**, the name shown on the site
-   - **Card Description**, the short summary on the main Services page. One or two sentences.
+   - **Card Description**, the short summary on the main Services page, the Companies page and
+     under each service tile on the home page. One or two sentences.
    - **Full Description**, the detailed text on that service's own page. Supports lists and
      formatting.
    - **Icon / Symbol**, the line drawing beside the title. Pick one from the list: search is a
@@ -350,15 +351,30 @@ Each service has its own page, and there are six to start with.
      one from the Services page.
    - **Closing Button Goes To**, which picks the form that button opens: the project form for
      companies, or the short note for landowners.
+   - **Who This Is For**, an optional line near the top of the page saying who usually needs this
+     work. Blank hides it.
+   - **What You Get**, an optional short list of what the client receives, shown under the
+     description. Only list things you actually hand over. Title Research lists runsheets,
+     ownership reports and supplemental reports; Lease Acquisition lists lease acquisition
+     reports. Empty hides it.
+   - **Sample Documents**, the documents in the sample file that show this kind of work. The box
+     beside the page links straight to each one. With none picked it links to the whole sample
+     file.
    - **Google Title (browser tab)** and **Google Description**, which are what Google shows for this
      service. Leave them blank to fall back to the service title and card description.
 3. Click **Save**.
+
+Beside the text on every service page (under it on a phone) is a box with a call button, a link
+to the contact form and the sample file links. Its wording is shared by all six pages and lives
+on **Pages** → Services Page → **Box Beside Each Service**. The call button uses the phone number
+from Site Settings, and the form link opens the same form as that service's closing button.
 
 **To add a service:** click **New Service** at the top of the section, fill in the fields, and
 save. A new service appears by itself in the Services menu at the top of the site, in the footer,
 on the contact form and in the "Other Services" links at the foot of every service page.
 
-On **Pages** → Services Page you will also find **Other Services Heading**, and the two notes that
+On **Pages** → Services Page you will also find **Other Services Heading**, **What You Get
+Heading**, **Who This Is For Label**, and the two notes that
 point landowners to Mineral Owners: **Note for Owners (Services page)** near the top of that page,
 and **Note for Owners (each service)**, the box described above.
 

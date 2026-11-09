@@ -37,6 +37,19 @@ const services = defineCollection({
     // Shows a short "own land or minerals? start here" note linking to the owners page.
     show_owner_note: z.boolean().nullish().transform((v) => v ?? false),
     cta_button: optionalText,
+    // Optional "Who this is for" line and "What you get" list on the service page. Both
+    // hide when empty, so a service never shows a heading over nothing.
+    audience: optionalText,
+    deliverables: z
+      .array(z.object({ title: optionalText, text: optionalText }))
+      .nullish()
+      .transform((v) => (v ?? []).filter((d) => d.title?.trim())),
+    // Documents in the sample file that show this service's work. The sidebar links
+    // straight to them; with none picked it links to the sample file as a whole.
+    sample_documents: z
+      .array(z.enum(['runsheet', 'ownership_report', 'lease_report', 'supplemental_report']))
+      .nullish()
+      .transform((v) => v ?? []),
   }),
 });
 

@@ -1361,7 +1361,135 @@ a.contact-detail-value:hover { color: var(--green-dark); }
 
 .service-detail-body { background: var(--white); }
 
-.service-detail-body .container { max-width: 760px; }
+/* The description on the left and the contact box on the right. On a phone the box
+   follows the text, the order it has in the markup. */
+.service-layout { display: grid; gap: 2.5rem; }
+.service-main { min-width: 0; max-width: 760px; }
+@media (min-width: 960px) {
+  .service-layout {
+    grid-template-columns: minmax(0, 1fr) 320px;
+    gap: 4.5rem;
+    align-items: start;
+  }
+}
+
+/* "Services include" as a checklist: a tick in a pale disc, no rules between rows, two
+   columns once the column is wide enough to hold them. */
+.prose.service-prose ul {
+  display: grid;
+  gap: .9rem 2rem;
+  margin: 1.4rem 0 1.8rem;
+}
+@media (min-width: 700px) {
+  .prose.service-prose ul { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+.prose.service-prose ul li {
+  padding: 0 0 0 2.1rem;
+  border-bottom: none;
+  line-height: 1.6;
+  color: var(--text);
+}
+.prose.service-prose ul li::before {
+  left: 0;
+  top: .2em;
+  transform: none;
+  width: 1.3rem;
+  height: 1.3rem;
+  border-radius: 0;
+  background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20'%3E%3Ccircle cx='10' cy='10' r='10' fill='%23EAF4EE'/%3E%3Cpath d='M6 10.4l2.6 2.6L14 7.6' fill='none' stroke='%232D6A4F' stroke-width='1.8' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E") center / contain no-repeat;
+}
+
+.service-audience {
+  margin: 0 0 1.75rem;
+  padding: 0 0 1.25rem;
+  border-bottom: 1px solid var(--border);
+  font-size: 1.1rem;
+  line-height: 1.6;
+  color: var(--text);
+}
+.service-audience-label {
+  display: block;
+  margin-bottom: .3rem;
+  font-size: .8125rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: .12em;
+  color: var(--green-mid);
+}
+
+.service-deliverables { margin: 2.5rem 0 0; }
+.service-deliverables-heading { font-size: 1.4rem; margin-bottom: 1rem; }
+.deliverables-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: 1rem;
+  grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+}
+.deliverable {
+  padding: 1.2rem 1.3rem;
+  background: var(--cream);
+  border: 1px solid var(--border);
+  border-left: 3px solid var(--gold);
+  border-radius: var(--radius);
+}
+.deliverable-title {
+  display: block;
+  font-family: var(--font-heading);
+  font-size: 1.15rem;
+  font-weight: 700;
+  line-height: 1.3;
+  color: var(--green-dark);
+}
+.deliverable-text {
+  display: block;
+  margin-top: .3rem;
+  font-size: .95rem;
+  line-height: 1.55;
+  color: var(--text-muted);
+}
+
+/* The contact box. It stays in view beside a long description on a wide screen. */
+@media (min-width: 960px) {
+  .service-sidebar { position: sticky; top: calc(var(--nav-height) + 2rem); }
+}
+.service-sidebar-card {
+  background: var(--cream);
+  border: 1px solid var(--border);
+  border-top: 3px solid var(--gold);
+  border-radius: var(--radius-lg);
+  padding: 1.6rem 1.6rem 1.4rem;
+}
+.service-sidebar-heading { font-size: 1.35rem; margin-bottom: 1.1rem; color: var(--green-dark); }
+.service-sidebar-call { width: 100%; justify-content: center; gap: .55rem; }
+.service-sidebar-link {
+  display: inline-flex;
+  align-items: center;
+  gap: .35em;
+  min-height: 44px;
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--green-dark);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+.service-sidebar-link:hover { color: var(--green-mid); }
+.service-sidebar-call + .service-sidebar-link { margin-top: .6rem; }
+.service-sidebar-samples {
+  margin-top: .9rem;
+  padding-top: .9rem;
+  border-top: 1px solid var(--border);
+}
+.service-sidebar-samples ul { list-style: none; margin: 0; padding: 0; }
+.service-sidebar-label {
+  margin: 0 0 .1rem;
+  font-size: .8125rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: .12em;
+  color: var(--green-mid);
+}
 
 .prose {
   font-size: 1.05rem;
@@ -3617,19 +3745,10 @@ html { scroll-padding-top: calc(var(--nav-height) + 1rem); }
 .owner-note p { margin: 0; color: var(--text); font-size: 1rem; line-height: 1.6; }
 .owner-note a { color: var(--green-dark); font-weight: 600; }
 
-.related-services { margin: 2.5rem 0 0; }
-.related-services h2 { font-size: 1.15rem; margin-bottom: .75rem; }
-.related-services ul {
-  list-style: none;
-  padding: 0;
-  margin: 0;
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
-  gap: .5rem 1.5rem;
-}
-.related-services a { color: var(--green-mid); text-decoration: underline; text-underline-offset: 2px; }
-.related-services a:hover { color: var(--green-dark); }
-.related-services + .service-nav { margin-top: 2rem; }
+/* The other services, as the same tiles the home page uses. */
+.related-services { margin: 4rem 0 0; padding-top: 3rem; border-top: 1px solid var(--border); }
+.related-services h2 { font-size: 1.4rem; margin-bottom: 1.25rem; }
+.related-services + .service-nav { margin-top: 2rem; border-top: none; padding-top: 0; }
 
 .owner-band {
   text-align: center;
@@ -3681,8 +3800,6 @@ html { scroll-padding-top: calc(var(--nav-height) + 1rem); }
   .contact-detail-value { min-height: 44px; }
   .contact-detail-value { display: flex; align-items: center; }
   .breadcrumb a,
-  .related-services a,
   .doc-jump a { display: inline-flex; align-items: center; min-height: 44px; }
-  .related-services ul { gap: 0 1.5rem; }
   .doc-jump ol { gap: 0; }
 }
