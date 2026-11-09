@@ -183,7 +183,7 @@
   ],
   "price_ticker": {
     "show": true,
-    "label": "Energy prices · delayed",
+    "label": "",
     "symbols": [
       {
         "symbol": "TVC:USOIL",

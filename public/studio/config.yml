@@ -384,7 +384,7 @@ collections:
                 name: label
                 widget: string
                 required: false
-                hint: "The small heading beside the prices, for example Energy prices · delayed. Leave blank for no heading."
+                hint: "An optional small heading above the prices, for example Energy prices. Leave blank, as it is now, and the prices run the full width of the screen with no heading."
               - label: "Prices Shown"
                 name: symbols
                 widget: list

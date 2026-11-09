@@ -24,15 +24,18 @@ const config = {
 
 {config.symbols.length > 0 && (
   <section class="price-ticker" aria-label={label || 'Energy prices'} data-config={JSON.stringify(config)}>
-    <div class="container price-ticker-inner">
-      {label && <span class="price-ticker-label">{label}</span>}
-      <div class="price-ticker-widget tradingview-widget-container">
-        <div class="tradingview-widget-container__widget"></div>
+    {label && (
+      <div class="container">
+        <span class="price-ticker-label">{label}</span>
       </div>
-      <!-- TradingView's attribution, which the free widget requires. -->
-      <div class="price-ticker-credit">
-        <a href="https://www.tradingview.com/" rel="noopener nofollow" target="_blank">Track all markets on TradingView</a>
-      </div>
+    )}
+    <!-- The prices run edge to edge across the screen, outside the page container. -->
+    <div class="price-ticker-widget tradingview-widget-container">
+      <div class="tradingview-widget-container__widget"></div>
+    </div>
+    <!-- TradingView's attribution, which the free widget requires. -->
+    <div class="container price-ticker-credit">
+      <a href="https://www.tradingview.com/" rel="noopener nofollow" target="_blank">Track all markets on TradingView</a>
     </div>
   </section>
   <noscript><style>.price-ticker { display: none; }</style></noscript>

@@ -185,7 +185,7 @@ Mark**, it also appears at the right end of the strip.
 **Why Us Points** are kept in the editor but are not shown on the home page at present.
 
 **Energy Price Ticker** is the thin cream bar of oil and gas prices just below the figures. The prices
-come free from TradingView and are delayed, so the label says so. Switch it off with **Show the
+come free from TradingView and are delayed, not live to the second. Switch it off with **Show the
 ticker**, change the small heading with **Label**, and add, remove or reorder prices under **Prices
 Shown**. Each price needs TradingView's code for it, for example `TVC:USOIL` for WTI crude,
 `TVC:UKOIL` for Brent and `FX:NGAS` for natural gas. Not every code works in the free strip: the
