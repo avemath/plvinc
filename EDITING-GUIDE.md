@@ -168,6 +168,16 @@ A few notes on the trickier fields:
 figure (like 45 or CPL), a label, and a line saying **What it means**. Only use figures you can
 stand behind. Empty the list to remove the band.
 
+**Energy Price Ticker** is the slim strip of oil and gas prices just below the figures. The prices
+come free from TradingView and are delayed, so the label says so. Switch it off with **Show the
+ticker**, change the small heading with **Label**, and add, remove or reorder prices under **Prices
+Shown**. Each price needs TradingView's code for it, for example `TVC:USOIL` for WTI crude,
+`TVC:UKOIL` for Brent and `FX:NGAS` for natural gas. Not every code works in the free strip: the
+NYMEX futures codes show a message saying the symbol is only available on TradingView, so look at
+the home page after adding a new one. If the strip cannot load, for example because a visitor's ad
+blocker stops it, it simply disappears. The Privacy page mentions TradingView, so if you ever
+remove the ticker for good, take that line out of the Privacy page too.
+
 **Who You'll Talk To** is the strip with Rickey's and Shannon's photos, names and roles, near the
 top of the page. It sits that high on purpose: a landowner decides whether to trust a person before
 a firm. The four fields set the small label, the headline, the sentence under it and the link to
@@ -509,9 +519,10 @@ small type at the very bottom of every page.
 2. Edit the **Policy Text**.
 3. Click **Save**.
 
-Keep it true rather than tidy. It currently says the site uses no analytics or advertising cookies
-and does not track anyone, which is accurate today. If that ever changes, or if the contact form
-starts collecting something new, this page needs to change with it.
+Keep it true rather than tidy. It currently says the site uses cookie-free Cloudflare Web Analytics
+and no advertising cookies of its own, and that the home page price ticker comes from TradingView,
+which may set its own cookies. If any of that changes (for example the ticker is switched off for
+good), or if the contact form starts collecting something new, this page needs to change with it.
 
 ---
 

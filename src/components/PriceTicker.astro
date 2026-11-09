@@ -1,0 +1,91 @@
+---
+// A slim band of live oil and gas prices from TradingView's free ticker tape widget.
+// The widget's script is only fetched once the page has loaded and the band is near the
+// screen, so it never holds up the first paint. Its height is reserved in CSS so nothing
+// moves when it arrives. If the script is blocked or never draws, the band removes itself.
+interface Props {
+  label?: string;
+  symbols: { symbol?: string; title?: string }[];
+}
+
+const { label, symbols } = Astro.props;
+
+const config = {
+  symbols: symbols
+    .filter((s) => s.symbol?.trim())
+    .map((s) => ({ proName: s.symbol!.trim(), ...(s.title?.trim() ? { title: s.title.trim() } : {}) })),
+  showSymbolLogo: true,
+  isTransparent: true,
+  displayMode: 'regular',
+  colorTheme: 'dark',
+  locale: 'en',
+};
+---
+
+{config.symbols.length > 0 && (
+  <section class="price-ticker" aria-label={label || 'Energy prices'} data-config={JSON.stringify(config)}>
+    <div class="container price-ticker-inner">
+      {label && <span class="price-ticker-label">{label}</span>}
+      <div class="price-ticker-widget tradingview-widget-container">
+        <div class="tradingview-widget-container__widget"></div>
+      </div>
+      <!-- TradingView's attribution, which the free widget requires. -->
+      <div class="price-ticker-credit">
+        <a href="https://www.tradingview.com/" rel="noopener nofollow" target="_blank">Track all markets on TradingView</a>
+      </div>
+    </div>
+  </section>
+  <noscript><style>.price-ticker { display: none; }</style></noscript>
+)}
+
+<script>
+  const band = document.querySelector<HTMLElement>('.price-ticker');
+
+  if (band) {
+    const holder = band.querySelector<HTMLElement>('.price-ticker-widget')!;
+    const hide = () => { band.hidden = true; };
+
+    // The widget's frame reports its size to the page once it has drawn. Hearing from it
+    // is the only reliable sign it worked, since a blocked frame still takes up room.
+    let drawn = false;
+    window.addEventListener('message', (e) => {
+      if (e.origin === 'https://www.tradingview-widget.com') drawn = true;
+    });
+
+    const start = () => {
+      const s = document.createElement('script');
+      s.src = 'https://s3.tradingview.com/external-embedding/embed-widget-ticker-tape.js';
+      s.async = true;
+      // The widget reads its settings from the text of its own script tag.
+      s.textContent = band.dataset.config || '{}';
+      s.onerror = hide;
+      holder.appendChild(s);
+
+      // Blocked by an ad blocker, or loaded but never drawn: take the band away
+      // rather than leave an empty strip with a label over nothing.
+      setTimeout(() => {
+        const frame = holder.querySelector('iframe');
+        if (!drawn || !frame || frame.offsetHeight === 0) hide();
+      }, 10000);
+    };
+
+    const whenIdle = () => {
+      if ('requestIdleCallback' in window) requestIdleCallback(start, { timeout: 2000 });
+      else setTimeout(start, 200);
+    };
+
+    const watch = () => {
+      if (!('IntersectionObserver' in window)) return whenIdle();
+      const io = new IntersectionObserver((entries) => {
+        if (entries.some((e) => e.isIntersecting)) {
+          io.disconnect();
+          whenIdle();
+        }
+      }, { rootMargin: '400px 0px' });
+      io.observe(band);
+    };
+
+    if (document.readyState === 'complete') watch();
+    else window.addEventListener('load', watch, { once: true });
+  }
+</script>

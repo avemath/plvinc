@@ -163,6 +163,24 @@
       "detail": "From Pennsylvania to Washington, and we take work in any state."
     }
   ],
+  "price_ticker": {
+    "show": true,
+    "label": "Energy prices · delayed",
+    "symbols": [
+      {
+        "symbol": "TVC:USOIL",
+        "title": "WTI Crude"
+      },
+      {
+        "symbol": "TVC:UKOIL",
+        "title": "Brent Crude"
+      },
+      {
+        "symbol": "FX:NGAS",
+        "title": "Natural Gas"
+      }
+    ]
+  },
   "testimonials_label": "From Clients",
   "testimonials_headline": "What They Say",
   "testimonials": [],

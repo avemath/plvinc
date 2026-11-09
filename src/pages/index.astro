@@ -7,6 +7,7 @@ import CallToAction from '../components/CallToAction.astro';
 import SampleFeature from '../components/SampleFeature.astro';
 import TeamStrip from '../components/TeamStrip.astro';
 import HowItWorks from '../components/HowItWorks.astro';
+import PriceTicker from '../components/PriceTicker.astro';
 import contact from '../data/pages/contact.json';
 import { getCollection } from 'astro:content';
 import { renderMarkdown } from '../utils/markdown';
@@ -87,6 +88,11 @@ const heroName = settings.legal_name || settings.professional_name;
         </ul>
       </div>
     </section>
+  )}
+
+  <!-- ─── Oil and gas prices, switched on and off in the editor ─── -->
+  {home.price_ticker?.show && home.price_ticker.symbols?.length > 0 && (
+    <PriceTicker label={home.price_ticker.label} symbols={home.price_ticker.symbols} />
   )}
 
   <!-- ─── Value paragraph ─── -->

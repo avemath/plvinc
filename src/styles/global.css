@@ -1756,6 +1756,62 @@ a.contact-detail-value:hover { color: var(--green-dark); }
   padding: 0 0 3rem;
 }
 
+/* ============================================================
+   Energy price ticker (TradingView), under the figures
+   ============================================================ */
+/* Continues the green of the hero and figures. The widget's height is reserved before it
+   loads, so nothing below it moves when the prices arrive. */
+.price-ticker {
+  background: var(--green-dark);
+  color: var(--white);
+  padding: 0 0 1.25rem;
+}
+.price-ticker[hidden] { display: none; }
+
+.price-ticker-inner {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: .35rem;
+  padding-top: 1rem;
+  border-top: 1px solid rgba(255,255,255,.14);
+}
+
+.price-ticker-label {
+  font-size: .72rem;
+  font-weight: 600;
+  letter-spacing: .14em;
+  text-transform: uppercase;
+  color: var(--gold-light);
+}
+
+.price-ticker-widget {
+  height: 58px; /* what the widget sets itself to once drawn */
+  min-width: 0;
+  overflow: hidden;
+}
+
+.price-ticker-credit {
+  text-align: right;
+  line-height: 1;
+}
+.price-ticker-credit a {
+  font-size: .7rem;
+  color: var(--white);
+  opacity: .55;
+  text-decoration: none;
+  transition: opacity var(--transition);
+}
+.price-ticker-credit a:hover { opacity: 1; }
+
+@media (min-width: 768px) {
+  .price-ticker-inner {
+    grid-template-columns: auto minmax(0, 1fr);
+    align-items: center;
+    column-gap: 1.5rem;
+  }
+  .price-ticker-credit { grid-column: 2; }
+}
+
 /* A few claims, each with room to say what it means. They stack until there is
    room for all of them on one row, so three never break into two plus an orphan. */
 .stat-row-list {

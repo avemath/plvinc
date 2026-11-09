@@ -303,6 +303,42 @@ collections:
                 required: false
                 hint: "One line saying what the figure means, for example what the credential is. Leave blank to show just the figure and label."
 
+          - label: "Energy Price Ticker"
+            name: price_ticker
+            widget: object
+            collapsed: true
+            required: false
+            hint: "The slim strip of live oil and gas prices just below the figures, supplied free by TradingView. Prices are delayed, not live to the second."
+            fields:
+              - label: "Show the ticker"
+                name: show
+                widget: boolean
+                default: true
+                required: false
+                hint: "Switch off to hide the strip completely."
+              - label: "Label"
+                name: label
+                widget: string
+                required: false
+                hint: "The small heading beside the prices, for example Energy prices · delayed. Leave blank for no heading."
+              - label: "Prices Shown"
+                name: symbols
+                widget: list
+                summary: "{{title}} ({{symbol}})"
+                required: false
+                hint: "One entry per price, in the order they scroll. Empty this list to hide the strip."
+                fields:
+                  - label: "TradingView Symbol"
+                    name: symbol
+                    widget: string
+                    pattern: ['^[A-Z0-9_]+:[A-Z0-9_.!]+$', "Use TradingView's exchange and symbol together, in capitals, for example TVC:USOIL"]
+                    hint: "TradingView's code for the price, exchange first, for example TVC:USOIL for WTI crude. Some codes, including the NYMEX futures, only show a message saying the symbol is only available on TradingView, so check the home page after saving a new one."
+                  - label: "Name Shown"
+                    name: title
+                    widget: string
+                    required: false
+                    hint: "What the price is called in the strip, for example WTI Crude. Leave blank to show TradingView's own code."
+
           - label: "Value Paragraph"
             name: value_paragraph
             widget: markdown
