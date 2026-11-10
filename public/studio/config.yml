@@ -1025,7 +1025,7 @@ collections:
           - label: "Closing Call to Action"
             name: cta
             widget: object
-            hint: "The band at the bottom of the Experience page."
+            hint: "The band at the bottom of the Experience page. Never promise a price, quote, estimate, flat fee or timeline: say what affects the cost or the time and that you keep the client posted."
             fields:
               - label: "Headline"
                 name: headline
@@ -1521,7 +1521,7 @@ collections:
             widget: list
             required: false
             summary: "{{question}}"
-            hint: "Shown as rows a visitor clicks to open, with the first one open. All answers stay on the page and also tell Google what this page answers, so write the question the way someone would actually ask it. Empty this list to hide the section."
+            hint: "Shown as rows a visitor clicks to open, with the first one open. All answers stay on the page and also tell Google what this page answers, so write the question the way someone would actually ask it. Empty this list to hide the section. Never promise a price, quote, estimate, flat fee or timeline: say what affects the cost or the time and that you keep the client posted."
             fields:
               - label: "Question"
                 name: question
@@ -1739,7 +1739,7 @@ collections:
             widget: list
             required: false
             summary: "{{question}}"
-            hint: "Shown high on the page as rows a visitor clicks to open, with the first one open. All answers stay on the page and also tell Google what this page answers, so write the question the way a land manager would ask it. Empty this list to hide the section."
+            hint: "Shown high on the page as rows a visitor clicks to open, with the first one open. All answers stay on the page and also tell Google what this page answers, so write the question the way a land manager would ask it. Empty this list to hide the section. Never promise a price, quote, estimate, flat fee or timeline: say what affects the cost or the time and that you keep the client posted."
             fields:
               - { label: "Question", name: question, widget: string }
               - { label: "Answer", name: answer, widget: text }
@@ -1803,7 +1803,7 @@ collections:
             widget: object
             collapsed: true
             required: false
-            hint: "The steps from first contact to a finished report, shown as one compact row near the foot of the page. Keep each step to a sentence or two. Do not promise a turnaround time here."
+            hint: "The steps from first contact to a finished report, shown as one compact row near the foot of the page. Keep each step to a sentence or two. Do not promise a turnaround time here. Never promise a price, quote, estimate, flat fee or timeline: say what affects the cost or the time and that you keep the client posted."
             fields:
               - { label: "Small Label", name: label, widget: string, required: false, hint: "Not shown in the compact row. Kept for reuse." }
               - { label: "Headline", name: headline, widget: string }
@@ -2532,7 +2532,7 @@ collections:
           - label: "Closing Call to Action"
             name: cta
             widget: object
-            hint: "The band at the bottom of the Services page. It is also used at the foot of every individual service, unless that service has its own closing wording."
+            hint: "The band at the bottom of the Services page. It is also used at the foot of every individual service, unless that service has its own closing wording. Never promise a price, quote, estimate, flat fee or timeline: say what affects the cost or the time and that you keep the client posted."
             fields:
               - label: "Headline"
                 name: headline
@@ -2609,7 +2609,7 @@ collections:
         name: cta_text
         widget: text
         required: false
-        hint: "The sentence under that headline. Leave blank to use the shared one from the Services page."
+        hint: "The sentence under that headline. Leave blank to use the shared one from the Services page. Never promise a price, quote, estimate, flat fee or timeline: say what affects the cost or the time and that you keep the client posted."
 
       - label: "Closing Button Text"
         name: cta_button

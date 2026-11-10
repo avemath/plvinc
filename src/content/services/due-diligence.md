@@ -1,8 +1,8 @@
 ---
 title: "Due Diligence"
-card_description: "Due diligence for acquisitions, divestitures (A&D) and financings: leasehold, title, contracts and land obligations, reviewed on the deal timeline."
+card_description: "Due diligence for acquisitions, divestitures (A&D) and financings: leasehold, title, contracts and land obligations, scoped around the deal timeline."
 seo_title: "A&D Due Diligence"
-seo_description: "A&D due diligence on deal timelines, from leasehold to title, across the Appalachian, Gulf Coast, Permian and Michigan basins and the Pacific Northwest."
+seo_description: "A&D due diligence scoped around the deal, from leasehold to title, across the Appalachian, Gulf Coast, Permian and Michigan basins and the Pacific Northwest."
 icon: "list"
 show_sample_link: true
 cta_headline: "Deal on a clock? Send us the package."
@@ -10,7 +10,7 @@ cta_button: "Start due diligence"
 sort_order: 3
 ---
 
-Transaction support for acquisitions, divestitures, and financings, delivered on the deal timeline.
+Transaction support for acquisitions, divestitures, and financings, scoped around the deal timeline, with word straight away if the record turns up something that affects it.
 
 Due diligence support includes:
 

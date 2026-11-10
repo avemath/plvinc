@@ -1,6 +1,6 @@
 # Questions for Rickey and Shannon
 
-Five things only the client can answer. Each one has the question, what the site says today, a suggested wording marked **DRAFT**, and exactly where the answer goes in /studio.
+Six things only the client can answer. Each one has the question, what the site says today, a suggested wording marked **DRAFT**, and exactly where the answer goes in /studio.
 
 Nothing in this file is on the site. Every draft is built from wording the site already uses; anything we do not know is left in [square brackets] for the client to fill in or strike. Please correct anything that is not exactly right before it goes live.
 
@@ -143,3 +143,30 @@ Nothing in this file is on the site. Every draft is built from wording the site 
   - `Option and lease packages`: Signed options and leases across contiguous tracts.
   - `Encumbrance and title review`: Agricultural leases, encumbrances and title issues found before anything is signed.
 - Who This Is For: **DRAFT** `Solar, wind and transmission developers siting utility-scale projects.`
+
+---
+
+## 6. How you price work
+
+**The question:** How do you price work: hourly, per tract, per project, or another way? Do you give an estimate up front, or not? Do you ever give a rough range before starting?
+
+**Why we are asking:** The site used to say you would tell people "what it costs before we start". You told us that is not always possible, because the record can turn up complications that take more time. The site now promises no price, quote, estimate, flat fee or timeline. Instead it says what affects the cost and time and that you keep the client posted. Once we know how you price, we can say a little more, as long as it stays true.
+
+**Site wording waiting on this answer** (all live now, written to promise nothing; we will revisit each one once you answer):
+
+| Page | Where in /studio | Wording now |
+|---|---|---|
+| Mineral Owners | Pages > Mineral Owners Page > Questions and Answers > "What will it cost?" | "It depends on what the record holds. The main factors are how many tracts are involved, how far back the title has to be run, and whether there are heirship questions or missing or unclear records along the way. … Send us the details and we will tell you what the work involves, and we keep you posted if the record turns up something that changes it." |
+| Mineral Owners | Same list > "How long does this take?" | "… Heirship questions and missing records add time too. Once we know the tract and the county we will tell you what the work involves, and we keep you posted as it goes, especially if the record turns up something that changes the picture." |
+| Companies | Pages > Companies Page > Questions and Answers > "What will it cost?" | "It depends on what the record holds: the number of tracts, the counties involved and how far back the title has to be run. Heirship questions and missing or unclear records take more time. Send us the scope and we will tell you what the work involves, and we keep you posted if the record turns up something that changes it." |
+| Companies | Same list > "Can you work to a deal timeline?" | "Yes. Tell us the closing date when you send the package and we scope the review around it. … if the record turns up something that affects your timeline, you hear about it as soon as we find it." |
+| Companies | Pages > Companies Page > What Happens Next > step 2 | "We talk through what the work involves and what drives the cost: the number of tracts, the counties and how far back the record runs." |
+| Services, every service page without its own closing, Experience | Pages > Services Page > Closing Call to Action > Text; Pages > Experience Page > Closing Call to Action > Text | "Send us what you have. A Certified Professional Landman will look it over, tell you what the work involves, and keep you posted if the record turns up something that changes the scope." |
+| Due Diligence | 🧭 Services > Due Diligence > Card Description, Google Description and the opening line | "scoped around the deal timeline" (no promise to finish by a date) |
+
+**DRAFT wording, to use only if it matches how you actually work:**
+
+- If you give a rough range up front: **DRAFT** `Once we see the county and the tract list, we can usually give you a rough range. If the record turns up heirship questions or missing records, we tell you before the work goes past it.`
+- If you bill hourly: **DRAFT** `We bill for the time the record takes. We tell you what the work involves at the start and keep you posted as it goes, so nothing on the bill comes as a surprise.`
+- If you price per tract or per project: **DRAFT** `Most work is priced [per tract / per project]. Heirship, missing records or a title that runs back further than expected can add to it, and we tell you as soon as we find them.`
+
