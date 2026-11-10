@@ -196,6 +196,14 @@
       {
         "symbol": "FX:NGAS",
         "title": "Natural Gas"
+      },
+      {
+        "symbol": "CAPITALCOM:HEATINGOIL",
+        "title": "Heating Oil"
+      },
+      {
+        "symbol": "AMEX:XLE",
+        "title": "Energy Sector (XLE)"
       }
     ]
   },
