@@ -19,9 +19,15 @@ interface Props {
       CSS background once the stylesheet has parsed, which left the hero, the largest
       thing on the page, waiting behind it. Preloading it starts the download at once. */
   preloadImage?: string;
+  /** For pages with an interactive feature (Mineral Owners, Sample Work). Marks the page as
+      scripted in the head, before anything is drawn, so the feature's CSS can show its
+      interactive layout from the first paint. Setting it later, mid-page, made the browser
+      restyle everything already drawn. Without JavaScript the class is never added and every
+      feature shows as plain content. */
+  enhance?: boolean;
 }
 
-const { title, description, image, noindex = false, schema, preloadImage } = Astro.props;
+const { title, description, image, noindex = false, schema, preloadImage, enhance = false } = Astro.props;
 
 // Fonts are self-hosted (src/styles/fonts.css). They used to come from
 // fonts.googleapis.com, which put a render-blocking stylesheet on one third-party origin
@@ -38,6 +44,7 @@ const { title, description, image, noindex = false, schema, preloadImage } = Ast
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    {enhance && <script is:inline>document.documentElement.classList.add('js')</script>}
     <!-- The droplet from the wordmark. The SVG stays first for browsers that take it;
          the PNGs are rendered from that same SVG and cover everything else, including
          the iOS home screen. The version query is here because browsers hold on to a

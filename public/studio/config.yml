@@ -1388,6 +1388,7 @@ collections:
             hint: "The row of short links just under the green band that jump down the page. Blank labels use the words shown in brackets."
             fields:
               - { label: "Row Label", name: label, widget: string, required: false, hint: "Shown before the links. Blank shows \"On this page\"." }
+              - { label: "What You Received Link", name: guide, widget: string, required: false, hint: "Jumps to the What Did You Receive? guide. Blank shows \"What you received\"." }
               - { label: "Lease Offers Link", name: lease, widget: string, required: false, hint: "Blank shows \"Lease offers\"." }
               - { label: "Key Terms Link", name: terms, widget: string, required: false, hint: "Blank shows \"Key terms\"." }
               - { label: "Pennsylvania Link", name: pennsylvania, widget: string, required: false, hint: "Blank shows \"Pennsylvania\"." }
@@ -1443,7 +1444,7 @@ collections:
             widget: object
             collapsed: true
             required: false
-            hint: "The list of reasons a landowner gets in touch, written in their words rather than yours. It is the first full section after the opening, with a call button under it."
+            hint: "NOT SHOWN ON THE PAGE. These reasons are now the choices in the What Did You Receive? guide below, where each sentence appears as \"Situations\" under its choice. This copy is kept for reference; edit the guide instead."
             fields:
               - { label: "Headline", name: headline, widget: string, required: false, hint: "Blank shows \"Common Reasons People Call Us\"." }
               - { label: "Introduction", name: intro, widget: string }
@@ -1456,6 +1457,49 @@ collections:
                   - { label: "Reason", name: text, widget: string }
               - { label: "Closing Line", name: closing, widget: text }
               - { label: "Button Text", name: button, widget: string }
+
+          - label: "What Did You Receive? Guide"
+            name: received_guide
+            widget: object
+            collapsed: true
+            required: false
+            hint: "The first full section after the opening. A visitor picks what arrived in the mail and sees what it is, what to look at first and what to send. The first choice is open to start. Without JavaScript every choice shows, one after another. Keep it general: never promise a price or a timeline, and never point the visitor to anyone else first."
+            fields:
+              - { label: "Section Label", name: label, widget: string, required: false, hint: "Small uppercase label above the headline." }
+              - { label: "Headline", name: headline, widget: string, required: false, hint: "Blank shows \"What Did You Receive?\"." }
+              - { label: "Introduction", name: intro, widget: text, required: false }
+              - { label: "Name of the Choices (screen readers)", name: choices_legend, widget: string, required: false, hint: "Read aloud before the choices by screen readers; not shown. Blank says \"What you received\"." }
+              - { label: "\"What It Is\" Heading", name: what_heading, widget: string, required: false }
+              - { label: "\"What to Look At\" Heading", name: checks_heading, widget: string, required: false }
+              - { label: "\"What to Send\" Heading", name: send_heading, widget: string, required: false }
+              - { label: "Button Text", name: button, widget: string, required: false, hint: "The button at the end of each choice. It opens the short note on the Contact page with \"What you received\" already filled in. Blank shows \"Send it to us\"." }
+              - { label: "Call Label (screen readers)", name: call_label, widget: string, required: false, hint: "Read before the phone number. Blank says \"Call\"." }
+              - { label: "Closing Line", name: closing, widget: text, required: false, hint: "Under the guide." }
+              - { label: "General Information Line", name: disclaimer, widget: text, required: false, hint: "The small line at the very end. Keep it to: general information, not legal advice, and send it to us." }
+              - label: "Choices"
+                name: choices
+                widget: list
+                summary: "{{label}}"
+                hint: "One per kind of document, in the order shown. The first one is open when the page loads."
+                fields:
+                  - { label: "Choice", name: label, widget: string, hint: "As the visitor would name it, e.g. A lease offer." }
+                  - { label: "Link Key", name: key, widget: string, pattern: ["^[a-z0-9-]+$", "Lowercase letters, numbers and hyphens only"], hint: "A short code for this choice, e.g. lease-offer. The Send button carries it to the Contact page, which uses it to find the Contact Form Wording below. Changing it breaks any link already sent out with the old one, so leave it alone once it is live." }
+                  - label: "Situations"
+                    name: situations
+                    widget: list
+                    required: false
+                    hint: "Sentences in the visitor's own words, shown at the top of this choice. These came from the old Common Reasons People Call list."
+                    field: { label: "Situation", name: text, widget: string }
+                  - { label: "What It Is", name: what, widget: text, hint: "Two sentences, plain language." }
+                  - label: "What to Look At First"
+                    name: checks
+                    widget: list
+                    hint: "Three or four points."
+                    field: { label: "Point", name: text, widget: text }
+                  - { label: "What to Send Us", name: send, widget: text }
+                  - { label: "Extra Link Text", name: more_label, widget: string, required: false, hint: "Optional link after the buttons, e.g. Read what is in a lease offer. Leave blank for none." }
+                  - { label: "Extra Link Address", name: more_href, widget: string, required: false, hint: "Where the extra link goes, e.g. #lease-offers or #decimal-calculator for a section of this page." }
+                  - { label: "Contact Form Wording", name: prefill, widget: string, hint: "What appears in the \"What you received\" box on the Contact page when the visitor arrives from this choice. They can change it before sending." }
 
           - label: "Lease Offer Section"
             name: lease_packet

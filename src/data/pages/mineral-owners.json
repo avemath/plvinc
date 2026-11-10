@@ -10,7 +10,8 @@
     "lease": "Lease offers",
     "terms": "Key terms",
     "pennsylvania": "Pennsylvania",
-    "faq": "FAQ"
+    "faq": "FAQ",
+    "guide": "What you received"
   },
   "intro": "Has a company asked to lease your minerals, run a line across your land, or have you sign a division order (the form that sets your share before royalty checks start)? You do not have to figure it out alone.\n\nWe are Certified Professional Landmen, and we read the public record for a living. We tell you what you own, what the document in front of you says, and what the record leaves unsettled.",
   "glance": {
@@ -51,6 +52,128 @@
       "description": "We check the offer against the record. Is the land it describes really yours? Does the share it credits you with match the record? Which terms are worth asking about?"
     }
   ],
+  "received_guide": {
+    "label": "Start Here",
+    "headline": "What Did You Receive?",
+    "intro": "Pick the one closest to what is in front of you. Each shows what it is, what to look at first, and what to send us.",
+    "choices_legend": "What you received",
+    "what_heading": "What it is",
+    "checks_heading": "What to look at first",
+    "send_heading": "What to send us",
+    "button": "Send it to us",
+    "call_label": "Call",
+    "closing": "Call us and we will look at it with you.",
+    "disclaimer": "This is general information, not legal advice. Send it to us and we will go through your own record with you.",
+    "choices": [
+      {
+        "key": "lease-offer",
+        "label": "A lease offer",
+        "situations": [
+          "I got a lease offer and want to understand it before I answer."
+        ],
+        "what": "A company is asking for the right to drill for and produce oil and gas under your land for a set term, in return for a bonus paid up front and a royalty on what is produced. It usually arrives as a printed lease, an addendum and a memorandum for recording, and the addendum often overrides the printed form.",
+        "checks": [
+          "The royalty rate. Pennsylvania law sets the floor at one-eighth (12.5%), so check the exact figure.",
+          "Post-production costs: whether the company may subtract gathering, processing and transport costs before paying you.",
+          "The primary term, and any option to extend it on terms set today.",
+          "The acres and the share the bonus is based on, against what the record shows you own."
+        ],
+        "send": "The whole packet: the lease, any addendum or exhibit, the memorandum and the bonus paperwork, plus the county. A photo of each page is fine.",
+        "more_label": "Read what is in a lease offer",
+        "more_href": "#lease-offers",
+        "prefill": "A lease offer."
+      },
+      {
+        "key": "division-order",
+        "label": "A division order or royalty check",
+        "situations": [
+          "A division order came in the mail and I don't know if the decimal is right.",
+          "My royalty check stopped, dropped, or looks wrong."
+        ],
+        "what": "A division order is the form an operator sends before royalty payments start. It states your share of the well as a decimal, and your checks follow that number.",
+        "checks": [
+          "The decimal. It should match your share of the unit, worked out from your share, your acres, the unit size and your royalty rate.",
+          "The name and the land: the owner and the tract should match your deed, or the estate the interest came through.",
+          "The well or unit it names, and the date it takes effect.",
+          "If a check stopped or dropped: the well, the volumes and the deductions on the statement, against earlier months."
+        ],
+        "send": "The division order, or the royalty statement that looks wrong, plus your deed or the estate papers and the county.",
+        "more_label": "",
+        "more_href": "",
+        "prefill": "A division order or a royalty statement."
+      },
+      {
+        "key": "right-of-way",
+        "label": "A pipeline, right-of-way, solar or wind letter",
+        "situations": [
+          "A pipeline, solar, or wind company contacted me about my land."
+        ],
+        "what": "A company wants to use the surface of your land: a strip for a pipeline or power line (a right-of-way, also called an easement), or acreage leased for solar panels or wind turbines. These agreements usually run for many years and stay with the land when it is sold.",
+        "checks": [
+          "Where on your land: the route or the area, its width, and any temporary work space.",
+          "How long it lasts, and whether the company can hand it to another company.",
+          "What is paid and when, including damage to crops, timber, fences and water.",
+          "Whether the company has to put the land back the way it was when the work is done."
+        ],
+        "send": "The letter and anything that came with it, such as an agreement or a map, plus the county and the tax parcel number if you have it.",
+        "more_label": "",
+        "more_href": "",
+        "prefill": "A pipeline, right-of-way, solar or wind letter."
+      },
+      {
+        "key": "estate",
+        "label": "A letter about an estate, heirs or inheritance",
+        "situations": [
+          "I inherited mineral rights and I'm not sure what I own."
+        ],
+        "what": "Mineral rights pass through wills and estates like any other property, and a share can be split again every generation. A letter like this often means a company has found your family's name in the record and is working out who owns that share now.",
+        "checks": [
+          "Whose estate or which relative it names, and the county the land is in.",
+          "The share it says you hold, and how it says that share came to you.",
+          "Whether the estate was ever settled, or a transfer was never filed. Gaps like that are common in inherited interests.",
+          "Anything it asks you to sign, such as a sworn statement about your family (an affidavit of heirship)."
+        ],
+        "send": "The letter, any deeds, wills or probate papers you have, and the names and dates of the relatives the interest came through.",
+        "more_label": "",
+        "more_href": "",
+        "prefill": "A letter about an estate, heirs or an inheritance."
+      },
+      {
+        "key": "purchase-offer",
+        "label": "An offer to buy your minerals or land",
+        "situations": [
+          "I'm buying or selling land and need to know about the minerals."
+        ],
+        "what": "Someone wants to buy your mineral rights, your royalty or the land itself. A sale is permanent, and what you would be selling depends on what you actually own, which can be more or less than the offer assumes.",
+        "checks": [
+          "Exactly what it covers: all minerals, only oil and gas, or only royalty, and at which depths.",
+          "The acres and the share it assumes you own, against what the record shows.",
+          "Whether the land and the minerals are owned separately. In Pennsylvania they often are.",
+          "If you are the one buying land: whether the minerals come with it, or were kept back in an old deed."
+        ],
+        "send": "The offer or the purchase agreement, your deed and the county. If you are buying, the deed or listing you were given.",
+        "more_label": "",
+        "more_href": "",
+        "prefill": "An offer to buy minerals or land."
+      },
+      {
+        "key": "not-sure",
+        "label": "Not sure what it is",
+        "situations": [],
+        "what": "Companies send many kinds of letters and forms about land and minerals, and the wording does not always make clear what they are asking for. Reading them is what we do every day.",
+        "checks": [
+          "Who sent it, and whether it asks you to sign, return or record anything.",
+          "Any date it gives for a reply.",
+          "The land it describes: the county, township, acres or tax parcel.",
+          "Any number for your share, such as a fraction or a decimal."
+        ],
+        "send": "A photo or copy of every page, and the county. That is enough to start.",
+        "more_label": "",
+        "more_href": "",
+        "prefill": "I'm not sure what it is."
+      }
+    ]
+  },
   "reasons_to_call": {
     "headline": "Does One of These Sound Like You?",
     "intro": "",

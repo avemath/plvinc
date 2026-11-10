@@ -3,6 +3,7 @@ import { getCollection } from 'astro:content';
 import settings from '../data/settings.json';
 import contact from '../data/pages/contact.json';
 import { STATE_OPTIONS } from '../utils/state-options';
+import owners from '../data/pages/mineral-owners.json';
 import { text } from '../utils/labels';
 
 // Web3Forms uses each field's name attribute as the label in the email it sends, so the
@@ -77,6 +78,16 @@ try {
 }
 
 const stateNames = STATE_OPTIONS;
+
+// "What you received", filled in when a visitor arrives from the guide or the calculator on
+// Mineral Owners (/contact?received=lease-offer#note). The link carries only a key; the
+// wording comes from the guide's choices in Studio, so a hand-made link cannot put arbitrary
+// text into the form. An unknown key, or no key, leaves the box empty as before.
+const prefill = Object.fromEntries(
+  (((owners as any).received_guide?.choices ?? []) as { key?: string; prefill?: string }[])
+    .filter((c) => c.key && c.prefill?.trim())
+    .map((c) => [c.key, c.prefill!.trim()])
+);
 ---
 
 <div class="contact-form-block">
@@ -134,7 +145,7 @@ const stateNames = STATE_OPTIONS;
             <label for="short-message">
               {shortForm.what_label} <span class="required-mark" aria-hidden="true">*</span>
             </label>
-            <textarea id="short-message" data-msg={t.errShortWhat} name="message" rows="5" required
+            <textarea id="short-message" data-msg={t.errShortWhat} data-prefill={JSON.stringify(prefill)} name="message" rows="5" required
                       aria-describedby="short-message-error"></textarea>
             <p class="field-error" id="short-message-error" hidden></p>
           </div>
@@ -380,6 +391,21 @@ const stateNames = STATE_OPTIONS;
   }
   openFormFromHash();
   window.addEventListener('hashchange', openFormFromHash);
+
+  // Fill in "What you received" from ?received=…, only when the box is still empty, so a
+  // note the browser kept from an earlier visit is never overwritten. The visitor can edit
+  // or clear it like anything else they type.
+  (() => {
+    const key = new URLSearchParams(location.search).get('received');
+    const box = document.getElementById('short-message') as HTMLTextAreaElement | null;
+    if (!key || !box || box.value.trim()) return;
+    let map: Record<string, string> = {};
+    try { map = JSON.parse(box.dataset.prefill || '{}'); } catch { map = {}; }
+    if (!Object.prototype.hasOwnProperty.call(map, key)) return;
+    box.value = `${map[key]} `;
+    const radio = document.getElementById('path-short') as HTMLInputElement | null;
+    if (radio) radio.checked = true;
+  })();
 
   // "Send us a short note instead" on the project form. A hash link alone does nothing when
   // the address already ends in #note, so the switch is made here, and focus moves to the

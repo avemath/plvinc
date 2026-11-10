@@ -1,0 +1,299 @@
+---
+// "What did you receive?" on Mineral Owners. A radio group of situations; picking one shows
+// what the document is, what to look at first and what to send. The first is open.
+//
+// Without JavaScript every panel shows, one after another, as a plain section, and the
+// choices are hidden because they would do nothing. The page marks itself as scripted in the head
+// (Base enhance), so the enhanced layout appears from the first paint and nothing jumps
+// when the module script below loads.
+//
+// Each panel's button opens the short note on /contact with "What you received" filled in.
+// Only the key travels in the address (?received=lease-offer); the wording is looked up on
+// the Contact page from this same data, so nothing typed into a link can end up in the form.
+// Copy: Studio → Mineral Owners Page → What Did You Receive? Guide.
+import { text } from '../utils/labels';
+import { telHref } from '../utils/phone';
+import settings from '../data/settings.json';
+
+type Choice = {
+  key: string;
+  label: string;
+  situations?: string[];
+  what?: string;
+  checks?: string[];
+  send?: string;
+  more_label?: string;
+  more_href?: string;
+};
+interface Props {
+  guide: {
+    label?: string;
+    headline?: string;
+    intro?: string;
+    choices_legend?: string;
+    what_heading?: string;
+    checks_heading?: string;
+    send_heading?: string;
+    button?: string;
+    call_label?: string;
+    closing?: string;
+    disclaimer?: string;
+    choices: Choice[];
+  };
+}
+const { guide } = Astro.props;
+const choices = (guide.choices ?? []).filter((c) => c.key && c.label);
+const tel = telHref(settings.phone);
+const callLabel = text(guide.call_label, 'Call');
+const headline = text(guide.headline, 'What Did You Receive?');
+---
+
+{choices.length > 0 && (
+  <section id="what-you-received" class="section-alt owner-guide" aria-labelledby="guide-headline">
+    <div class="container">
+      <div class="section-header is-left">
+        {guide.label && <span class="section-label">{guide.label}</span>}
+        <h2 id="guide-headline">{headline}</h2>
+        {guide.intro && <p>{guide.intro}</p>}
+      </div>
+
+      <div class="guide" data-guide>
+        <fieldset class="guide-choices">
+          <legend class="sr-only">{text(guide.choices_legend, 'What you received')}</legend>
+          {choices.map((c, i) => (
+            <label class:list={['guide-choice', i === 0 && 'is-checked']}>
+              <input
+                type="radio"
+                name="received"
+                value={c.key}
+                checked={i === 0}
+                aria-controls={`guide-${c.key}`}
+              />
+              <span class="guide-choice-text">{c.label}</span>
+            </label>
+          ))}
+        </fieldset>
+
+        <div class="guide-panels">
+          {choices.map((c, i) => (
+            <section
+              class:list={['guide-panel', i === 0 && 'is-active']}
+              id={`guide-${c.key}`}
+              aria-labelledby={`guide-${c.key}-title`}
+              data-key={c.key}
+              tabindex="-1"
+            >
+              <h3 class="guide-panel-title" id={`guide-${c.key}-title`}>{c.label}</h3>
+              {(c.situations ?? []).filter(Boolean).length > 0 && (
+                <ul class="guide-situations" role="list">
+                  {c.situations!.filter(Boolean).map((s) => <li>{s}</li>)}
+                </ul>
+              )}
+              {c.what && (
+                <>
+                  <h4 class="guide-subhead">{text(guide.what_heading, 'What it is')}</h4>
+                  <p class="guide-what">{c.what}</p>
+                </>
+              )}
+              {(c.checks ?? []).filter(Boolean).length > 0 && (
+                <>
+                  <h4 class="guide-subhead">{text(guide.checks_heading, 'What to look at first')}</h4>
+                  <ul class="guide-checks">
+                    {c.checks!.filter(Boolean).map((k) => <li>{k}</li>)}
+                  </ul>
+                </>
+              )}
+              {c.send && (
+                <>
+                  <h4 class="guide-subhead">{text(guide.send_heading, 'What to send us')}</h4>
+                  <p class="guide-send">{c.send}</p>
+                </>
+              )}
+              <div class="guide-actions">
+                <a href={`/contact?received=${encodeURIComponent(c.key)}#note`} class="btn btn-primary">
+                  {text(guide.button, 'Send it to us')} <span aria-hidden="true">→</span>
+                </a>
+                {settings.phone && (
+                  <a href={tel} class="inline-phone" aria-label={`${callLabel} ${settings.phone}`}>
+                    <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor"
+                         stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                      <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6A19.79 19.79 0 0 1 2.12 4.18 2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.9.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92Z" />
+                    </svg>
+                    {settings.phone}
+                  </a>
+                )}
+                {c.more_label && c.more_href && (
+                  <a href={c.more_href} class="guide-more">{c.more_label}{' '}<span aria-hidden="true">→</span></a>
+                )}
+              </div>
+            </section>
+          ))}
+        </div>
+        <p class="sr-only" aria-live="polite" data-guide-status></p>
+      </div>
+
+      {(guide.closing || guide.disclaimer) && (
+        <div class="guide-foot">
+          {guide.closing && <p class="guide-closing">{guide.closing}</p>}
+          {guide.disclaimer && <p class="guide-disclaimer">{guide.disclaimer}</p>}
+        </div>
+      )}
+    </div>
+  </section>
+)}
+
+<script>
+  // Shows the panel for the chosen radio. The radios themselves give arrow-key movement,
+  // Tab into and out of the group, and the checked state to screen readers; the status line
+  // says which panel is now showing.
+  const root = document.querySelector<HTMLElement>('[data-guide]');
+  if (root) {
+    const radios = [...root.querySelectorAll<HTMLInputElement>('input[name="received"]')];
+    const panels = [...root.querySelectorAll<HTMLElement>('.guide-panel')];
+    const status = root.querySelector<HTMLElement>('[data-guide-status]');
+    const show = (key: string, announce: boolean) => {
+      for (const p of panels) p.classList.toggle('is-active', p.dataset.key === key);
+      for (const r of radios) r.closest('.guide-choice')?.classList.toggle('is-checked', r.checked);
+      const label = radios.find((r) => r.value === key)?.closest('.guide-choice')?.textContent?.trim();
+      if (announce && status && label) status.textContent = label;
+    };
+    for (const r of radios) r.addEventListener('change', () => r.checked && show(r.value, true));
+    for (const r of radios) {
+      r.addEventListener('focus', () => r.closest('.guide-choice')?.classList.toggle('is-focused', r.matches(':focus-visible')));
+      r.addEventListener('blur', () => r.closest('.guide-choice')?.classList.remove('is-focused'));
+    }
+    // A browser restoring the page from history can bring back a different checked radio.
+    // Only then is anything changed on load; the page is built with the first one showing.
+    const checked = radios.find((r) => r.checked);
+    if (checked && checked !== radios[0]) show(checked.value, false);
+  }
+</script>
+
+<style is:global>
+  /* Styles for this feature only, so they load on Mineral Owners and nowhere else. */
+/* ============================================================
+   Mineral Owners: "What did you receive?" guide
+   Without JavaScript every panel shows in turn and the choices are hidden. html.js is set
+   by a one-line script in the component before it is drawn, so nothing shifts on load.
+   ============================================================ */
+.owner-guide { padding: 4rem 0; }
+
+.guide-choices { display: none; margin: 0; padding: 0; border: 0; min-width: 0; }
+.js .guide-choices { display: grid; gap: .5rem; align-content: start; }
+
+.guide-choice {
+  position: relative;
+  display: flex;
+  align-items: center;
+  min-height: 48px;
+  padding: .7rem 1rem .7rem 2.75rem;
+  background: var(--white);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  font-family: var(--font-sans);
+  font-size: .98rem;
+  font-weight: 500;
+  line-height: 1.4;
+  color: var(--text);
+  cursor: pointer;
+  transition: border-color var(--transition), background var(--transition);
+}
+.guide-choice:hover { border-color: var(--green-light); }
+/* The radio stays a real, focusable radio, drawn as the ring on the left. */
+.guide-choice input {
+  position: absolute;
+  left: 1rem;
+  top: 50%;
+  width: 18px;
+  height: 18px;
+  margin: -9px 0 0;
+  accent-color: var(--green-dark);
+}
+.guide-choice.is-checked {
+  border-color: var(--green-dark);
+  background: var(--green-pale);
+  box-shadow: inset 3px 0 0 var(--green-dark);
+}
+/* The ring goes round the whole choice when its radio has keyboard focus. The script sets
+   .is-focused (from :focus-visible) rather than using :has(), which is costly to keep up to
+   date across the whole page. */
+.guide-choice.is-focused { outline: 2px solid var(--green-mid); outline-offset: 2px; }
+.guide-choice input:focus-visible { outline: none; }
+
+.guide-panels { display: grid; gap: 1.25rem; }
+.js .guide-panel:not(.is-active) { display: none; }
+
+.guide-panel {
+  padding: 1.75rem 2rem;
+  background: var(--white);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+}
+.guide-panel:focus { outline: none; }
+.guide-panel-title {
+  margin: 0 0 1rem;
+  font-family: var(--font-heading);
+  font-size: 1.25rem;
+  line-height: 1.35;
+  color: var(--green-dark);
+}
+.guide-situations {
+  list-style: none;
+  margin: 0 0 1.25rem;
+  padding: 0;
+  display: grid;
+  gap: .5rem;
+}
+.guide-situations li {
+  padding: .6rem .9rem;
+  border-left: 3px solid var(--green-light);
+  background: var(--cream);
+  font-size: 1rem;
+  line-height: 1.55;
+  color: var(--text);
+}
+.guide-subhead {
+  margin: 1.25rem 0 .4rem;
+  font-family: var(--font-heading);
+  font-size: .8rem;
+  font-weight: 700;
+  letter-spacing: .06em;
+  text-transform: uppercase;
+  color: var(--green-mid);
+}
+.guide-what,
+.guide-send { margin: 0; font-size: 1rem; line-height: 1.7; color: var(--text); }
+.guide-checks { margin: 0; padding-left: 1.2rem; display: grid; gap: .45rem; }
+.guide-checks li { font-size: 1rem; line-height: 1.6; color: var(--text); padding-left: .2rem; }
+.guide-checks li::marker { color: var(--green-light); }
+
+.guide-actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: .75rem 1.5rem;
+  margin-top: 1.5rem;
+}
+.guide-more {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+  font-weight: 600;
+  color: var(--green-dark);
+}
+
+.guide-foot { margin-top: 1.75rem; max-width: 46rem; }
+.guide-closing { margin: 0 0 .5rem; font-size: 1.02rem; line-height: 1.7; color: var(--text); }
+.guide-disclaimer { margin: 0; font-size: .9rem; line-height: 1.6; color: var(--text-muted); }
+
+@media (min-width: 900px) {
+  .js .guide { display: grid; grid-template-columns: minmax(260px, 320px) 1fr; gap: 1.5rem; align-items: start; }
+}
+@media (max-width: 899px) {
+  .js .guide-choices { margin-bottom: 1.25rem; }
+}
+@media (max-width: 560px) {
+  .owner-guide { padding: 3rem 0; }
+  .guide-panel { padding: 1.35rem 1.15rem; }
+}
+</style>

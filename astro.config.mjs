@@ -22,6 +22,11 @@ export default defineConfig({
   // tags written on separate lines ("Learn more" and its arrow, words either side of a
   // link). The templates are written as ordinary HTML, so keep ordinary HTML whitespace.
   compressHTML: true,
+  // Each interactive feature carries its own small stylesheet (about 4.5 KB), loaded only on
+  // its page. Inlining it in that page saves a separate request before the page can draw.
+  // The shared stylesheet, at 85 KB, is far over this and stays a cached file. Nothing in
+  // src imports an image or font, so this limit changes nothing else.
+  vite: { build: { assetsInlineLimit: 6144 } },
   integrations: [
     sitemap({
       filter: (page) =>
