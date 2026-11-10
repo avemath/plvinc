@@ -4,6 +4,7 @@ import { text } from '../utils/labels';
 import CallToAction from '../components/CallToAction.astro';
 import GlanceCard from '../components/GlanceCard.astro';
 import HardFilesShort from '../components/HardFilesShort.astro';
+import ChainExplorer from '../components/ChainExplorer.astro';
 import { renderMarkdown } from '../utils/markdown';
 import page from '../data/pages/sample-work.json';
 import settings from '../data/settings.json';
@@ -52,9 +53,18 @@ const recordsField = (() => {
 
 type TreeNode = { name: string; interest: string; detail: string; children?: TreeNode[] };
 const tree = supplemental.tree as TreeNode;
+
+// Each "What Makes a File Hard" point gets its own address, so a step in the chain explorer
+// can link straight to the one it shows.
+const hardSlug = (t: string) => 'hard-' + t.toLowerCase().replace(/[^a-z0-9]+/g, '-').slice(0, 50).replace(/^-|-$/g, '');
+const hardFileIds: Record<string, string> = Object.fromEntries(
+  (page.hard_files?.items ?? []).map((i: { title: string }) => [i.title, hardSlug(i.title)])
+);
+const explorer = (page as any).chain_explorer;
 ---
 
 <Base
+  enhance
   title={page.seo_title}
   description={page.meta_description}
 >
@@ -105,6 +115,9 @@ const tree = supplemental.tree as TreeNode;
             <li><a href="#lar-title">{lar.title}</a></li>
             <li><a href="#supp-title">{supplemental.title}</a></li>
           </ol>
+          {explorer?.jump_link && explorer?.steps?.length > 0 && (
+            <p class="doc-jump-extra"><a href="#chain-explorer">{explorer.jump_link} <span aria-hidden="true">↓</span></a></p>
+          )}
         </nav>
       </div>
       <GlanceCard glance={page.glance} />
@@ -635,6 +648,8 @@ const tree = supplemental.tree as TreeNode;
     </section>
   </div>
 
+  {explorer && <ChainExplorer explorer={explorer} hardFileIds={hardFileIds} />}
+
   {(page.simple_note || page.format_note) && (
     <section class="sample-after-notes">
       <div class="container container-narrow">
@@ -658,7 +673,7 @@ const tree = supplemental.tree as TreeNode;
         </div>
         <ul class="hard-files" role="list">
           {page.hard_files.items.map((i) => (
-            <li class="hard-file">
+            <li class="hard-file" id={hardFileIds[i.title]} tabindex="-1">
               <h3 class="hard-file-title">{i.title}</h3>
               <p class="hard-file-text">{i.text}</p>
             </li>

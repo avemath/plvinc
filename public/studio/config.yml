@@ -2369,6 +2369,56 @@ collections:
                   - { label: "Sits Next To", name: anchor, widget: select, options: [{ label: "Sources", value: "sources" }, { label: "Ownership table", value: "owners" }, { label: "Curative list", value: "curative" }], hint: "Which part of the document this note explains." }
                   - { label: "Note", name: text, widget: text }
 
+          - label: "Chain of Title Explorer"
+            name: chain_explorer
+            widget: object
+            collapsed: true
+            required: false
+            hint: "The step-by-step chain of title, after the four documents. Same fictional tract, people and recording references as the documents above, so the page tells one story; never use anything from a real file. Without JavaScript every step shows in order."
+            fields:
+              - { label: "Section Label", name: label, widget: string, required: false }
+              - { label: "Headline", name: headline, widget: string, required: false }
+              - { label: "Introduction", name: intro, widget: text, required: false }
+              - { label: "Link From the Top of the Page", name: jump_link, widget: string, required: false, hint: "Shown under the list of four documents near the top. Blank hides it." }
+              - { label: "Step List Name (screen readers)", name: steps_label, widget: string, required: false }
+              - { label: "Word \"Step\"", name: step_word, widget: string, required: false }
+              - { label: "Word \"of\"", name: of_word, widget: string, required: false, hint: "As in Step 3 of 12." }
+              - { label: "Previous Button", name: previous, widget: string, required: false }
+              - { label: "Next Button", name: next, widget: string, required: false }
+              - { label: "Reference Label", name: reference_label, widget: string, required: false }
+              - { label: "\"What Changed\" Heading", name: changed_label, widget: string, required: false }
+              - { label: "\"Why It Matters\" Heading", name: why_label, widget: string, required: false }
+              - { label: "Ownership Table Heading", name: owners_heading, widget: string, required: false }
+              - { label: "Owner Column", name: owner_column, widget: string, required: false }
+              - { label: "Share Column", name: fraction_column, widget: string, required: false }
+              - { label: "Decimal Column", name: decimal_column, widget: string, required: false }
+              - { label: "Total Row", name: total_label, widget: string, required: false }
+              - { label: "Hard File Link Lead-in", name: hard_file_label, widget: string, required: false, hint: "Shown before the link to a What Makes a File Hard point." }
+              - { label: "Closing Line", name: closing, widget: text, required: false, hint: "Invites companies to send their file. Blank hides the closing box." }
+              - { label: "Closing Button", name: closing_button, widget: string, required: false, hint: "Opens the project form on the Contact page." }
+              - label: "Steps"
+                name: steps
+                widget: list
+                summary: "{{year}} {{title}}"
+                hint: "8 to 12 steps, oldest first. IMPORTANT: in every step the owners' shares must add up to exactly 1 (for example 3/4 + 1/12 + 1/24 + 1/24 + 1/12). The site checks every step each time it is published; if any step does not add up, the update will not go live and the last good version stays up until it is fixed."
+                fields:
+                  - { label: "Year", name: year, widget: string }
+                  - { label: "Kind of Document", name: type, widget: string, hint: "One or two words: Deed, Will, Lease." }
+                  - { label: "Title", name: title, widget: string }
+                  - { label: "Reference", name: reference, widget: string, hint: "The fictional book and page, or where the record sits." }
+                  - { label: "What the Document Says", name: summary, widget: text }
+                  - { label: "What Changed", name: changed, widget: text }
+                  - { label: "Why It Matters", name: why, widget: text }
+                  - { label: "What Makes a File Hard Link", name: hard_file, widget: string, required: false, hint: "Optional. Type a title from What Makes a File Hard below exactly as written there, e.g. Old leases that were never released. The check above also fails if it does not match. Leave blank for no link." }
+                  - label: "Who Owns the Oil and Gas After This Step"
+                    name: owners
+                    widget: list
+                    summary: "{{name}}: {{share}}"
+                    hint: "Each owner and their share as a fraction (1/2, 3/4, 1/24). The decimals are worked out for you. The shares must add up to exactly 1."
+                    fields:
+                      - { label: "Owner", name: name, widget: string }
+                      - { label: "Share", name: share, widget: string, pattern: ["^\\s*\\d+\\s*(/\\s*\\d+)?\\s*$", "A fraction like 1/4, or 1 for the whole"] }
+
           - label: "Simple File Note"
             name: simple_note
             widget: text

@@ -4220,3 +4220,6 @@ html { scroll-padding-top: calc(var(--nav-height) + 1rem); }
 }
 .trust-inline p { display: inline; margin: 0; }
 .trust-inline a { font-weight: 600; color: var(--green-dark); }
+
+.doc-jump-extra { margin: .75rem 0 0; font-size: .95rem; }
+.hard-file:focus { outline: none; }

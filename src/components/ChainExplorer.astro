@@ -1,0 +1,411 @@
+---
+// The chain-of-title explorer on Sample Work: the same fictional tract as the documents
+// above it, one recorded document at a time, with who owns the oil and gas after each.
+//
+// Shares are exact fractions (src/lib/fraction.ts) and their 8-place decimals are worked
+// out here, at build time, so the page ships no arithmetic. tests/chain.test.ts checks that
+// every step adds up to exactly 1; the build runs it, so a mistake saved in Studio stops
+// the site publishing rather than showing a wrong table.
+//
+// Without JavaScript every step shows in order, each with its own table. With it, a step
+// list, Previous and Next, and one step at a time. html.js is set in the head (Base enhance), so
+// nothing moves when the script loads. Copy: Studio → Sample Work Page → Chain of Title Explorer.
+import { text } from '../utils/labels';
+import { parse, toDecimal, toFractionString, sum } from '../lib/fraction.ts';
+
+type Owner = { name: string; share: string };
+type Step = {
+  year?: string; type?: string; title: string; reference?: string; summary?: string;
+  changed?: string; why?: string; hard_file?: string; owners: Owner[];
+};
+interface Props { explorer: Record<string, any>; hardFileIds: Record<string, string> }
+const { explorer: x, hardFileIds } = Astro.props;
+const steps: Step[] = (x.steps ?? []).filter((s: Step) => s?.title && s.owners?.length);
+
+const stepWord = text(x.step_word, 'Step');
+const ofWord = text(x.of_word, 'of');
+const total = steps.length;
+const rows = steps.map((s) => {
+  const owners = s.owners.map((o) => {
+    const f = parse(o.share);
+    if (!f) throw new Error(`Chain explorer: "${o.share}" for ${o.name} in "${s.title}" is not a fraction`);
+    return { name: o.name, fraction: toFractionString(f), decimal: toDecimal(f), pct: Number(f.n * 1000000n / f.d) / 10000 };
+  });
+  const t = sum(s.owners.map((o) => parse(o.share)!));
+  return { ...s, owners, totalFraction: toFractionString(t), totalDecimal: toDecimal(t) };
+});
+// The bar's colours follow a person through the chain, so Daniel's 3/4 keeps one shade from
+// 2003 to the end. The present owners take the main brand shades first; everyone earlier
+// takes the first shade not already used by someone else in the same step, so two owners in
+// one table never share a colour.
+const palette = ['#1B4332', '#B7935A', '#40916C', '#7A5C2E', '#74A98C', '#5C5C5C'];
+const colour = new Map<string, string>();
+for (const s of [...rows].reverse()) {
+  const used = new Set(s.owners.map((o) => colour.get(o.name)).filter(Boolean));
+  for (const o of s.owners) {
+    if (colour.has(o.name)) continue;
+    const c = palette.find((p) => !used.has(p)) ?? palette[colour.size % palette.length];
+    colour.set(o.name, c);
+    used.add(c);
+  }
+}
+const label = (s: Step, i: number) => `${stepWord} ${i + 1} ${ofWord} ${total}`;
+---
+
+{total > 0 && (
+  <section id="chain-explorer" class="chain-section" aria-labelledby="chain-headline">
+    <div class="container">
+      <div class="section-header is-left">
+        {x.label && <span class="section-label">{x.label}</span>}
+        <h2 id="chain-headline">{text(x.headline, 'Follow the Oil and Gas, One Document at a Time')}</h2>
+        {x.intro && <p>{x.intro}</p>}
+      </div>
+
+      <div class="chain" data-chain data-step-word={stepWord} data-of-word={ofWord}>
+        <nav class="chain-nav" aria-label={text(x.steps_label, 'Steps in the chain')}>
+          <ol class="chain-list" role="list">
+            {rows.map((s, i) => (
+              <li>
+                <button
+                  type="button"
+                  class="chain-list-btn"
+                  data-step={i}
+                  aria-controls={`chain-step-${i + 1}`}
+                  aria-current={i === 0 ? 'step' : undefined}
+                  tabindex={i === 0 ? 0 : -1}
+                >
+                  <span class="chain-list-year">{s.year}</span>
+                  <span class="chain-list-title">{s.title}</span>
+                </button>
+              </li>
+            ))}
+          </ol>
+        </nav>
+
+        <div class="chain-body">
+          <ol class="chain-steps" role="list">
+            {rows.map((s, i) => (
+              <li
+                class:list={['chain-step', i === 0 && 'is-active']}
+                id={`chain-step-${i + 1}`}
+                aria-labelledby={`chain-step-${i + 1}-title`}
+                data-index={i}
+                data-title={`${s.year ? s.year + ', ' : ''}${s.title}`}
+              >
+                <p class="chain-step-count">
+                  {label(s, i)}{s.year && <> · {s.year}</>}{s.type && <> · {s.type}</>}
+                </p>
+                <h3 class="chain-step-title" id={`chain-step-${i + 1}-title`}>{s.title}</h3>
+                {s.reference && (
+                  <p class="chain-ref"><span class="chain-ref-label">{text(x.reference_label, 'Reference')}</span> {s.reference}</p>
+                )}
+                {s.summary && <p class="chain-summary">{s.summary}</p>}
+                <div class="chain-notes">
+                  {s.changed && (
+                    <div>
+                      <h4 class="chain-subhead">{text(x.changed_label, 'What changed')}</h4>
+                      <p>{s.changed}</p>
+                    </div>
+                  )}
+                  {s.why && (
+                    <div>
+                      <h4 class="chain-subhead">{text(x.why_label, 'Why it matters when you run title')}</h4>
+                      <p>{s.why}</p>
+                      {s.hard_file && hardFileIds[s.hard_file] && (
+                        <p class="chain-hard">
+                          {text(x.hard_file_label, 'What makes a file hard:')}{' '}
+                          <a href={`#${hardFileIds[s.hard_file]}`}>{s.hard_file}</a>
+                        </p>
+                      )}
+                    </div>
+                  )}
+                </div>
+
+                <div class="chain-owners">
+                  <h4 class="chain-subhead">{text(x.owners_heading, 'Who owns the oil and gas after this step')}</h4>
+                  <div class="chain-bar" aria-hidden="true">
+                    {s.owners.map((o) => (
+                      <span class="chain-bar-seg" style={`width:${o.pct}%;background:${colour.get(o.name)}`}></span>
+                    ))}
+                  </div>
+                  <table class="chain-table">
+                    <caption class="sr-only">{text(x.owners_heading, 'Who owns the oil and gas after this step')}, {label(s, i).toLowerCase()}</caption>
+                    <thead>
+                      <tr>
+                        <th scope="col">{text(x.owner_column, 'Owner')}</th>
+                        <th scope="col" class="num">{text(x.fraction_column, 'Share')}</th>
+                        <th scope="col" class="num">{text(x.decimal_column, 'Decimal')}</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {s.owners.map((o) => (
+                        <tr>
+                          <th scope="row"><span class="chain-swatch" style={`background:${colour.get(o.name)}`} aria-hidden="true"></span>{o.name}</th>
+                          <td class="num">{o.fraction}</td>
+                          <td class="num">{o.decimal}</td>
+                        </tr>
+                      ))}
+                    </tbody>
+                    <tfoot>
+                      <tr>
+                        <th scope="row">{text(x.total_label, 'Total')}</th>
+                        <td class="num">{s.totalFraction}</td>
+                        <td class="num">{s.totalDecimal}</td>
+                      </tr>
+                    </tfoot>
+                  </table>
+                </div>
+              </li>
+            ))}
+          </ol>
+
+          <div class="chain-controls">
+            <button type="button" class="btn chain-prev" data-prev disabled>
+              <span aria-hidden="true">←</span> {text(x.previous, 'Previous')}
+            </button>
+            <p class="chain-position" data-position aria-hidden="true">{stepWord} 1 {ofWord} {total}</p>
+            <button type="button" class="btn btn-primary chain-next" data-next>
+              {text(x.next, 'Next')} <span aria-hidden="true">→</span>
+            </button>
+          </div>
+          <p class="sr-only" aria-live="polite" data-chain-status></p>
+        </div>
+      </div>
+
+      {x.closing && (
+        <div class="chain-closing">
+          <p>{x.closing}</p>
+          <a href="/contact#project" class="btn btn-primary">{text(x.closing_button, 'Send us your file')} <span aria-hidden="true">→</span></a>
+        </div>
+      )}
+    </div>
+  </section>
+)}
+
+<script>
+  // One step at a time. The step list uses a roving tab stop: Tab reaches the current step,
+  // the arrow keys (and Home and End) move between steps, and the status line announces the
+  // step that is now showing. Previous and Next keep focus where it is.
+  const root = document.querySelector<HTMLElement>('[data-chain]');
+  if (root) {
+    const buttons = [...root.querySelectorAll<HTMLButtonElement>('.chain-list-btn')];
+    const steps = [...root.querySelectorAll<HTMLElement>('.chain-step')];
+    const prev = root.querySelector<HTMLButtonElement>('[data-prev]');
+    const next = root.querySelector<HTMLButtonElement>('[data-next]');
+    const status = root.querySelector<HTMLElement>('[data-chain-status]');
+    const position = root.querySelector<HTMLElement>('[data-position]');
+    const word = root.dataset.stepWord || 'Step';
+    const of = root.dataset.ofWord || 'of';
+    let current = 0;
+
+    const go = (i: number, opts: { focusList?: boolean; announce?: boolean } = {}) => {
+      if (i < 0 || i >= steps.length) return;
+      current = i;
+      steps.forEach((s, j) => s.classList.toggle('is-active', j === i));
+      buttons.forEach((b, j) => {
+        if (j === i) b.setAttribute('aria-current', 'step');
+        else b.removeAttribute('aria-current');
+        b.tabIndex = j === i ? 0 : -1;
+      });
+      if (prev) prev.disabled = i === 0;
+      if (next) next.disabled = i === steps.length - 1;
+      const where = `${word} ${i + 1} ${of} ${steps.length}`;
+      if (position) position.textContent = where;
+      if (opts.announce !== false && status) status.textContent = `${where}: ${steps[i].dataset.title ?? ''}`;
+      if (opts.focusList) buttons[i]?.focus();
+      // On a phone the list sits above the step, so bring the step into view after a pick,
+      // without animation for anyone who has asked for less motion.
+      if (opts.focusList === undefined && window.matchMedia('(max-width: 899px)').matches) {
+        const top = steps[i].getBoundingClientRect().top;
+        if (top < 0 || top > window.innerHeight * 0.6) {
+          const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+          steps[i].scrollIntoView({ block: 'start', behavior: reduce ? 'auto' : 'smooth' });
+        }
+      }
+    };
+
+    buttons.forEach((b, i) => {
+      b.addEventListener('click', () => go(i));
+      b.addEventListener('keydown', (e) => {
+        const keys: Record<string, number> = {
+          ArrowDown: current + 1, ArrowRight: current + 1,
+          ArrowUp: current - 1, ArrowLeft: current - 1,
+          Home: 0, End: steps.length - 1,
+        };
+        if (!(e.key in keys)) return;
+        e.preventDefault();
+        const to = Math.max(0, Math.min(steps.length - 1, keys[e.key]));
+        go(to, { focusList: true });
+      });
+    });
+    prev?.addEventListener('click', () => go(current - 1, { focusList: false }));
+    next?.addEventListener('click', () => go(current + 1, { focusList: false }));
+    // Keep the button that was pressed usable: at the first or last step it becomes disabled,
+    // so move focus to the other one rather than losing it.
+    prev?.addEventListener('click', () => { if (prev.disabled) next?.focus(); });
+    next?.addEventListener('click', () => { if (next.disabled) prev?.focus(); });
+    // The page is built with step 1 already showing, its list item current and Previous
+    // disabled, so nothing is changed on load. Touching the page here, even to set what is
+    // already set, made the browser recalculate its layout during load.
+  }
+</script>
+
+<style is:global>
+  /* Styles for this feature only, so they load on Sample Work and nowhere else. */
+/* ============================================================
+   Sample Work: chain-of-title explorer
+   Without JavaScript the step list and the controls are hidden and every step shows in
+   order. html.js is set by the component before it is drawn, so nothing moves on load.
+   ============================================================ */
+.chain-section { padding: 4.5rem 0; border-top: 1px solid var(--border); }
+.chain-nav,
+.chain-controls { display: none; }
+.js .chain-nav { display: block; }
+.js .chain-controls { display: flex; }
+.js .chain-step:not(.is-active) { display: none; }
+
+.chain-list { list-style: none; margin: 0; padding: 0; display: grid; gap: .35rem; }
+.chain-list-btn {
+  display: flex;
+  align-items: baseline;
+  gap: .75rem;
+  width: 100%;
+  min-height: 44px;
+  padding: .55rem .85rem;
+  background: var(--white);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  font-family: var(--font-sans);
+  font-size: .92rem;
+  line-height: 1.35;
+  color: var(--text);
+  text-align: left;
+  cursor: pointer;
+  transition: border-color var(--transition), background var(--transition);
+}
+.chain-list-btn:hover { border-color: var(--green-light); }
+.chain-list-btn[aria-current="step"] {
+  border-color: var(--green-dark);
+  background: var(--green-pale);
+  box-shadow: inset 3px 0 0 var(--green-dark);
+  font-weight: 600;
+}
+.chain-list-year {
+  flex: 0 0 auto;
+  min-width: 2.6rem;
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+  color: var(--green-mid);
+}
+
+.chain-steps { list-style: none; margin: 0; padding: 0; display: grid; gap: 1.5rem; }
+.chain-step {
+  padding: 1.75rem 2rem;
+  background: var(--white);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+}
+.chain-step-count {
+  margin: 0 0 .35rem;
+  font-size: .8rem;
+  font-weight: 600;
+  letter-spacing: .04em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+}
+.chain-step-title {
+  margin: 0 0 .6rem;
+  font-family: var(--font-heading);
+  font-size: 1.3rem;
+  line-height: 1.3;
+  color: var(--green-dark);
+}
+.chain-ref { margin: 0 0 1rem; font-size: .9rem; line-height: 1.55; color: var(--text-muted); }
+.chain-ref-label { font-weight: 600; color: var(--text); }
+.chain-summary { margin: 0 0 1.25rem; font-size: 1.02rem; line-height: 1.7; color: var(--text); }
+.chain-notes { display: grid; grid-template-columns: 1fr 1fr; gap: 1.25rem 2rem; margin-bottom: 1.5rem; }
+.chain-notes p { margin: 0; font-size: .98rem; line-height: 1.65; color: var(--text); }
+.chain-notes .chain-hard { margin-top: .6rem; font-size: .92rem; color: var(--text-muted); }
+.chain-hard a { color: var(--green-dark); font-weight: 600; }
+.chain-subhead {
+  margin: 0 0 .4rem;
+  font-family: var(--font-heading);
+  font-size: .78rem;
+  font-weight: 700;
+  letter-spacing: .06em;
+  text-transform: uppercase;
+  color: var(--green-mid);
+}
+
+.chain-bar {
+  display: flex;
+  height: 14px;
+  margin: .6rem 0 .9rem;
+  border-radius: var(--radius);
+  overflow: hidden;
+  background: var(--cream-dark);
+}
+.chain-bar-seg { display: block; height: 100%; }
+.chain-bar-seg + .chain-bar-seg { box-shadow: inset 2px 0 0 var(--white); }
+.chain-table { width: 100%; border-collapse: collapse; font-size: .95rem; }
+.chain-table th,
+.chain-table td { padding: .5rem .4rem; border-bottom: 1px solid var(--border); text-align: left; vertical-align: top; }
+.chain-table thead th { font-size: .8rem; font-weight: 600; color: var(--text-muted); }
+.chain-table tbody th { font-weight: 500; }
+.chain-table .num { text-align: right; white-space: nowrap; font-variant-numeric: tabular-nums; }
+.chain-table tfoot th,
+.chain-table tfoot td { font-weight: 700; border-bottom: 0; }
+.chain-swatch {
+  display: inline-block;
+  width: .7rem;
+  height: .7rem;
+  margin-right: .5rem;
+  border-radius: 2px;
+  vertical-align: -.05rem;
+}
+
+.chain-controls {
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-top: 1rem;
+}
+.chain-prev {
+  background: var(--white);
+  color: var(--green-dark);
+  border-color: var(--green-dark);
+}
+.chain-prev:hover:not(:disabled) { background: var(--green-pale); }
+.chain-controls .btn { min-height: 44px; }
+.chain-controls .btn:disabled { opacity: .4; cursor: default; }
+.chain-position { margin: 0; font-size: .9rem; color: var(--text-muted); font-variant-numeric: tabular-nums; }
+
+.chain-closing {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 1rem 1.5rem;
+  margin-top: 2.25rem;
+  padding: 1.25rem 1.5rem;
+  background: var(--green-pale);
+  border-left: 4px solid var(--green-mid);
+  border-radius: var(--radius);
+}
+.chain-closing p { margin: 0; flex: 1 1 22rem; font-size: 1.02rem; line-height: 1.6; color: var(--text); }
+
+@media (min-width: 900px) {
+  .js .chain { display: grid; grid-template-columns: minmax(250px, 300px) 1fr; gap: 1.5rem; align-items: start; }
+}
+@media (max-width: 899px) {
+  .js .chain-list { grid-template-columns: 1fr 1fr; }
+  .js .chain-nav { margin-bottom: 1rem; }
+}
+@media (max-width: 560px) {
+  .chain-section { padding: 3rem 0; }
+  .chain-step { padding: 1.35rem 1.1rem; }
+  .chain-notes { grid-template-columns: 1fr; }
+  .chain-list-btn { flex-direction: column; gap: .1rem; font-size: .88rem; }
+  .chain-position { display: none; }
+}
+
+</style>

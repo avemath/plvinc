@@ -548,6 +548,334 @@
       }
     ]
   },
+  "chain_explorer": {
+    "label": "Chain of Title",
+    "headline": "Follow the Oil and Gas, One Document at a Time",
+    "intro": "The same fictional tract, told in the order the record tells it. Pick a step to see what the document says, what changed, and who owns what afterward.",
+    "steps_label": "Steps in the chain",
+    "step_word": "Step",
+    "of_word": "of",
+    "previous": "Previous",
+    "next": "Next",
+    "reference_label": "Reference",
+    "changed_label": "What changed",
+    "why_label": "Why it matters when you run title",
+    "owners_heading": "Who owns the oil and gas after this step",
+    "owner_column": "Owner",
+    "fraction_column": "Share",
+    "decimal_column": "Decimal",
+    "total_label": "Total",
+    "hard_file_label": "What makes a file hard:",
+    "closing": "Have a chain like this, or a longer one? Send us the file and we will run it to the end.",
+    "closing_button": "Send us your file",
+    "steps": [
+      {
+        "year": "1921",
+        "type": "Deed",
+        "title": "Deed into Jonas P. Hallbeck",
+        "reference": "Deed Book 212, Page 144. Recorded 03/22/1921.",
+        "summary": "Elias and Clara Vandermeer sell the 62.40 acres to Jonas P. Hallbeck. They keep \"all coal and other minerals\", but the deed never names oil and gas.",
+        "changed": "Jonas owns the land. The coal is split off and stays with the Vandermeers.",
+        "why": "In Pennsylvania, a deed that keeps \"minerals\" is presumed not to keep oil and gas unless it names them. The report runs oil and gas to Jonas and states that assumption plainly, so nobody relies on it without knowing.",
+        "hard_file": "Minerals severed generations ago",
+        "owners": [
+          {
+            "name": "Jonas P. Hallbeck",
+            "share": "1"
+          }
+        ]
+      },
+      {
+        "year": "1954",
+        "type": "Deed",
+        "title": "Half the oil and gas held back",
+        "reference": "Deed Book 388, Page 501. Recorded 06/09/1954.",
+        "summary": "Jonas deeds the land to his son Walter and Walter's wife Ruth, but keeps an undivided one-half of the oil and gas for himself.",
+        "changed": "The oil and gas splits for the first time: Jonas keeps 1/2, and Walter and Ruth take 1/2 together.",
+        "why": "From here on, half the oil and gas no longer follows the land. Anyone who runs only the surface chain will miss it.",
+        "hard_file": "Minerals severed generations ago",
+        "owners": [
+          {
+            "name": "Jonas P. Hallbeck",
+            "share": "1/2"
+          },
+          {
+            "name": "Walter and Ruth Hallbeck (together, as a married couple)",
+            "share": "1/2"
+          }
+        ]
+      },
+      {
+        "year": "1961",
+        "type": "Will",
+        "title": "Jonas's will",
+        "reference": "Will Book 31, Page 88. Estate 1961-0147.",
+        "summary": "Jonas dies. His will leaves everything that is left, including his half of the oil and gas, to his two children, Walter and Marian, in equal shares.",
+        "changed": "Jonas's 1/2 splits in two: 1/4 to Walter in his own name and 1/4 to Marian H. Oster.",
+        "why": "The estate closed without a deed of distribution, so the shares have to be read from the will itself. Walter now holds oil and gas two different ways, and that matters when he dies.",
+        "hard_file": "",
+        "owners": [
+          {
+            "name": "Walter and Ruth Hallbeck (together, as a married couple)",
+            "share": "1/2"
+          },
+          {
+            "name": "Walter J. Hallbeck",
+            "share": "1/4"
+          },
+          {
+            "name": "Marian H. Oster",
+            "share": "1/4"
+          }
+        ]
+      },
+      {
+        "year": "1968",
+        "type": "Lease",
+        "title": "First oil and gas lease",
+        "reference": "Deed Book 455, Page 210. Recorded 05/02/1968.",
+        "summary": "Walter and Ruth lease their oil and gas to Alder Valley Gas Company for a 10-year primary term at a 1/8 royalty.",
+        "changed": "Ownership does not change. A lease grants the right to drill; it does not move the minerals.",
+        "why": "No well, unit or production was found, and the lease was never released. It appears to have expired on its own, but until a release is recorded it is an open question on the title.",
+        "hard_file": "Old leases that were never released",
+        "owners": [
+          {
+            "name": "Walter and Ruth Hallbeck (together, as a married couple)",
+            "share": "1/2"
+          },
+          {
+            "name": "Walter J. Hallbeck",
+            "share": "1/4"
+          },
+          {
+            "name": "Marian H. Oster",
+            "share": "1/4"
+          }
+        ]
+      },
+      {
+        "year": "1989",
+        "type": "Estate",
+        "title": "Walter's estate",
+        "reference": "Will Book 58, Page 301. Estate 1989-0312.",
+        "summary": "Walter dies. The half he held with Ruth passes to her because she survives him, and his will leaves her his separate 1/4 as well.",
+        "changed": "Ruth now holds 3/4 of the oil and gas. Marian still holds 1/4.",
+        "why": "Two different rules move Walter's interests on the same day: survivorship for the half he held with Ruth, and his will for his own quarter. Both have to be accounted for.",
+        "hard_file": "",
+        "owners": [
+          {
+            "name": "Ruth E. Hallbeck",
+            "share": "3/4"
+          },
+          {
+            "name": "Marian H. Oster",
+            "share": "1/4"
+          }
+        ]
+      },
+      {
+        "year": "2003",
+        "type": "Deed",
+        "title": "Deed to Daniel W. Hallbeck",
+        "reference": "Record Book 1042, Page 677. Instrument 2003-006152.",
+        "summary": "Ruth deeds the land and all of her oil and gas to Daniel W. Hallbeck, with nothing held back.",
+        "changed": "Daniel owns the surface and 3/4 of the oil and gas. Marian's 1/4 is not in his chain at all.",
+        "why": "Daniel's deed looks complete. The missing quarter only shows up when the title is run back to 1954 and forward again through Jonas's estate.",
+        "hard_file": "Minerals severed generations ago",
+        "owners": [
+          {
+            "name": "Daniel W. Hallbeck",
+            "share": "3/4"
+          },
+          {
+            "name": "Marian H. Oster",
+            "share": "1/4"
+          }
+        ]
+      },
+      {
+        "year": "2011",
+        "type": "Will",
+        "title": "Marian's will, probated in Ohio",
+        "reference": "Probate Court of Marlow County, Ohio. Will admitted 2011. Nothing filed in Alder County.",
+        "summary": "Marian dies while living in Ohio. Her will leaves everything to her three children, Paul, Janet and Carol, in equal shares.",
+        "changed": "Marian's 1/4 splits three ways: 1/12 each.",
+        "why": "Nothing was filed where the land is, so the county records still show the quarter in Marian's name. The answer sits in another state's probate court.",
+        "hard_file": "Heirs who never opened an estate",
+        "owners": [
+          {
+            "name": "Daniel W. Hallbeck",
+            "share": "3/4"
+          },
+          {
+            "name": "Paul R. Oster",
+            "share": "1/12"
+          },
+          {
+            "name": "Janet O. Whitlow",
+            "share": "1/12"
+          },
+          {
+            "name": "Carol O. Deane",
+            "share": "1/12"
+          }
+        ]
+      },
+      {
+        "year": "2012",
+        "type": "Lease",
+        "title": "Second oil and gas lease",
+        "reference": "Record Book 1388, Page 102. Instrument 2012-004417.",
+        "summary": "Daniel leases his oil and gas to Operator A, LLC for a 5-year primary term, with an option to extend for 5 more.",
+        "changed": "Ownership does not change.",
+        "why": "No extension, unit or production was found, so the lease appears to have expired in 2017. Like the 1968 lease, it was never released, and a new operator will want both cleared.",
+        "hard_file": "Old leases that were never released",
+        "owners": [
+          {
+            "name": "Daniel W. Hallbeck",
+            "share": "3/4"
+          },
+          {
+            "name": "Paul R. Oster",
+            "share": "1/12"
+          },
+          {
+            "name": "Janet O. Whitlow",
+            "share": "1/12"
+          },
+          {
+            "name": "Carol O. Deane",
+            "share": "1/12"
+          }
+        ]
+      },
+      {
+        "year": "2015",
+        "type": "Deed",
+        "title": "Carol's share goes into a trust",
+        "reference": "Deed recorded in Ohio only, 2015. Not recorded in Alder County.",
+        "summary": "Carol deeds her share to the Deane Family Trust. The deed is recorded in Ohio but never in the county where the land is.",
+        "changed": "The trust holds Carol's 1/12, and its trustee is the one who signs.",
+        "why": "A deed recorded in the wrong county does not show up where the land is. It has to be recorded in Alder County, along with proof of the trustee's authority to lease.",
+        "hard_file": "",
+        "owners": [
+          {
+            "name": "Daniel W. Hallbeck",
+            "share": "3/4"
+          },
+          {
+            "name": "Paul R. Oster",
+            "share": "1/12"
+          },
+          {
+            "name": "Janet O. Whitlow",
+            "share": "1/12"
+          },
+          {
+            "name": "Deane Family Trust",
+            "share": "1/12"
+          }
+        ]
+      },
+      {
+        "year": "2019",
+        "type": "Heirship",
+        "title": "Janet dies without a will",
+        "reference": "Affidavits of death and heirship, prepared for recording in Alder County.",
+        "summary": "Janet dies without a will. She is not married, and she leaves two children, Kevin and Erin, who share her 1/12 equally.",
+        "changed": "Janet's 1/12 splits in two: 1/24 each to Kevin M. Whitlow and Erin W. Baird.",
+        "why": "With no will and no estate opened, the only record of who inherits is sworn statements from the family. Until they are recorded, those shares cannot be leased.",
+        "hard_file": "Heirs who never opened an estate",
+        "owners": [
+          {
+            "name": "Daniel W. Hallbeck",
+            "share": "3/4"
+          },
+          {
+            "name": "Paul R. Oster",
+            "share": "1/12"
+          },
+          {
+            "name": "Kevin M. Whitlow",
+            "share": "1/24"
+          },
+          {
+            "name": "Erin W. Baird",
+            "share": "1/24"
+          },
+          {
+            "name": "Deane Family Trust",
+            "share": "1/12"
+          }
+        ]
+      },
+      {
+        "year": "2026",
+        "type": "Lease",
+        "title": "New lease on Daniel's 3/4",
+        "reference": "Oil and gas lease dated 09/10/2026, with a memorandum for recording.",
+        "summary": "Daniel signs a new lease with Operator B, LLC covering his 3/4. The other quarter is left out until its owners are found.",
+        "changed": "Ownership does not change. 3/4 is leased and 1/4 is not.",
+        "why": "The operator knows exactly what it bought: 46.80 net mineral acres, with the open quarter stated as open instead of assumed away.",
+        "hard_file": "",
+        "owners": [
+          {
+            "name": "Daniel W. Hallbeck",
+            "share": "3/4"
+          },
+          {
+            "name": "Paul R. Oster",
+            "share": "1/12"
+          },
+          {
+            "name": "Kevin M. Whitlow",
+            "share": "1/24"
+          },
+          {
+            "name": "Erin W. Baird",
+            "share": "1/24"
+          },
+          {
+            "name": "Deane Family Trust",
+            "share": "1/12"
+          }
+        ]
+      },
+      {
+        "year": "2026",
+        "type": "Present owners",
+        "title": "Who owns the oil and gas today",
+        "reference": "Supplemental report dated 10/02/2026.",
+        "summary": "The supplemental report traces the open quarter to four present owners and lists what has to be recorded to make their title hold.",
+        "changed": "Five owners, and the shares add back to the whole: 3/4 + 1/12 + 1/24 + 1/24 + 1/12 = 1.",
+        "why": "Each of the four has to be found and has to sign. Once the curative is recorded, the quarter can be leased and paid.",
+        "hard_file": "",
+        "owners": [
+          {
+            "name": "Daniel W. Hallbeck",
+            "share": "3/4"
+          },
+          {
+            "name": "Paul R. Oster",
+            "share": "1/12"
+          },
+          {
+            "name": "Kevin M. Whitlow",
+            "share": "1/24"
+          },
+          {
+            "name": "Erin W. Baird",
+            "share": "1/24"
+          },
+          {
+            "name": "Deane Family Trust",
+            "share": "1/12"
+          }
+        ]
+      }
+    ],
+    "jump_link": "Or follow the chain of title one document at a time"
+  },
   "simple_note": "This file is short on purpose. One tract, eight instruments, one open question. That keeps the format easy to follow. Working files are longer, often much longer, and the method does not change. The last document shows what that method looks like when the record runs out.",
   "how_to_read": [
     {
