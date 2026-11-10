@@ -4,13 +4,14 @@
 interface Props {
   headline?: string | null;
   steps: { title: string; text: string }[];
+  headingId?: string;
 }
-const { headline, steps } = Astro.props;
+const { headline, steps, headingId } = Astro.props;
 ---
 
 {steps.length > 0 && (
   <div class="trust-steps">
-    {headline && <h2 class="trust-heading">{headline}</h2>}
+    {headline && <h2 class="trust-heading" id={headingId}>{headline}</h2>}
     <ol class="trust-step-list" role="list">
       {steps.map((s) => (
         <li class="trust-step">

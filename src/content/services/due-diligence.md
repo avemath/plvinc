@@ -2,7 +2,7 @@
 title: "Due Diligence"
 card_description: "Due diligence for acquisitions, divestitures (A&D) and financings: leasehold, title, contracts and land obligations, reviewed on the deal timeline."
 seo_title: "A&D Due Diligence"
-seo_description: "Acquisition and divestiture due diligence on a deal timeline: leasehold review, title, contracts and land obligations in the Appalachian and Gulf Coast basins."
+seo_description: "A&D due diligence on deal timelines, from leasehold to title, across the Appalachian, Gulf Coast, Permian and Michigan basins and the Pacific Northwest."
 icon: "list"
 show_sample_link: true
 cta_headline: "Deal on a clock? Send us the package."

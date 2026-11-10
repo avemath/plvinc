@@ -2,7 +2,7 @@
 title: "Title Research & Curative"
 card_description: "Courthouse-level mineral and surface title examination, chain of title analysis, and curative work (fixing gaps in the title) to confirm ownership before defects become problems."
 seo_title: "Mineral Title Research & Curative"
-seo_description: "Courthouse title examination and curative work in the Appalachian and Gulf Coast basins, from Pennsylvania to Louisiana and East Texas."
+seo_description: "Courthouse title examination and curative work across the Appalachian, Gulf Coast, Permian and Michigan basins and the Pacific Northwest."
 icon: "search"
 show_sample_link: true
 cta_headline: "Need title run on a tract? Send us the details."

@@ -6,7 +6,7 @@
     "items": [
       {
         "title": "8 states with completed files",
-        "text": "From Pennsylvania to Washington. We take work in any state."
+        "text": "From Pennsylvania to Washington."
       },
       {
         "title": "45 combined years in oil and gas",
@@ -85,7 +85,7 @@
     }
   ],
   "testimonials": [],
-  "page_subtitle": "Files worked in eight states since 2005, from single tracts to multi-county programs.",
+  "page_subtitle": "Files worked in eight states across five regions since 2005.",
   "meta_description": "Completed land work across Pennsylvania, Ohio, Texas, Louisiana, Mississippi, Michigan, Tennessee and Washington, from single tracts to multi-county programs.",
   "states_label": "Track Record",
   "states_headline": "Where We've Worked",
@@ -94,8 +94,8 @@
   "testimonials_label": "From Clients",
   "testimonials_headline": "What They Say",
   "cta": {
-    "headline": "Have similar work coming up? Let's talk.",
-    "text": "Tell us the basin, the scope and your timing.",
+    "headline": "Have work coming up in one of these basins? Send us the scope.",
+    "text": "Tell us the basin, the scope and your timing. A Certified Professional Landman will tell you what the work involves and what it costs before we start.",
     "button": "Get in touch"
   },
   "projects_label": "Selected Work",

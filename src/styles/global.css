@@ -1173,7 +1173,7 @@ section { padding: 5rem 0; }
 /* Now that How We Work opens its section, the box needs no gap above it, and the clients
    paragraph needs room below the box rather than sitting against it. */
 .approach-section:first-child { margin-top: 0; }
-.about-intro-after { margin: 2.25rem 0 0; }
+.about-intro-before { margin: 0 0 2.25rem; }
 
 .affiliations-list {
   list-style: none;

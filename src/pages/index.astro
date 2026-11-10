@@ -6,7 +6,7 @@ import CoverageMap from '../components/CoverageMap.astro';
 import CallToAction from '../components/CallToAction.astro';
 import SampleFeature from '../components/SampleFeature.astro';
 import TeamStrip from '../components/TeamStrip.astro';
-import HowItWorks from '../components/HowItWorks.astro';
+import StepsStrip from '../components/StepsStrip.astro';
 import PriceTicker from '../components/PriceTicker.astro';
 import MemberMarks from '../components/MemberMarks.astro';
 import contact from '../data/pages/contact.json';
@@ -209,13 +209,13 @@ if (stripMarkSrc) {
     </section>
   )}
 
-  <!-- ─── What happens when you get in touch (the same steps as the Contact page) ─── -->
+  <!-- ─── What happens when you get in touch: the Contact page's steps, as one compact row ─── -->
   {contact.how_it_works?.headline && (
-    <HowItWorks
-      label={contact.how_it_works.label}
-      headline={contact.how_it_works.headline}
-      steps={contact.how_it_works.steps}
-    />
+    <section class="steps-band" aria-labelledby="steps-band-headline">
+      <div class="container">
+        <StepsStrip headline={contact.how_it_works.headline} steps={contact.how_it_works.steps} headingId="steps-band-headline" />
+      </div>
+    </section>
   )}
 
   <!-- ─── Coverage map ─── -->

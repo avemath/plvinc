@@ -204,15 +204,15 @@ const schema = sorted.length > 0
     </section>
   )}
 
-  <!-- ─── How we work, then who we work for. The people come first, above. ─── -->
+  <!-- ─── Who we work for, then how we work. The people come first, above. ─── -->
   <section>
     <div class="container container-narrow">
+      <div class="prose about-intro about-intro-before" set:html={introHtml} />
+
       <div class="approach-section">
         <h2>{about.approach_headline}</h2>
         <div class="approach-body" set:html={approachHtml} />
       </div>
-
-      <div class="prose about-intro about-intro-after" set:html={introHtml} />
     </div>
   </section>
 

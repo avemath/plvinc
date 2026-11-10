@@ -563,7 +563,7 @@ collections:
           - label: "Coverage Intro"
             name: regions_note
             widget: text
-            hint: "Sentence below the headline explaining how to use the map. This is also where you say you take work nationwide."
+            hint: "The lines below the headline. It starts by saying in plain words what a basin and a play are, for landowners who have not met the terms, then says how to use the map."
 
           - label: "Map Legend: Worked"
             name: regions_legend_worked
@@ -750,7 +750,7 @@ collections:
           - label: "Who We Work For"
             name: intro
             widget: markdown
-            hint: "The paragraph under How We Work, about the clients and the kinds of work you take on. Each person's own bio is edited under Team / People."
+            hint: "The paragraph just above How We Work, about the clients and the kinds of work you take on. Each person's own bio is edited under Team / People."
 
           - label: "Company Credentials Heading"
             name: credentials_heading
@@ -1283,7 +1283,7 @@ collections:
             widget: object
             collapsed: true
             required: false
-            hint: "The four steps between a first call and a report. These steps also appear on the home page, so keep step one general enough for landowners and companies alike. Do not promise a response time here."
+            hint: "The four steps between a first call and a report. This page shows them in full as cards. The home page shows the same steps as one compact row, so keep step one general enough for landowners and companies alike, and each step to a sentence or two. Do not promise a response time here."
             fields:
               - { label: "Small Label", name: label, widget: string, required: false }
               - { label: "Headline", name: headline, widget: string }
