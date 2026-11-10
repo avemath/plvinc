@@ -42,6 +42,15 @@ const rendered = await Promise.all(
 // Landman" and the credential "Certified Professional Landman (CPL)") would print the same
 // words twice. In that case only its details (issuer, year, number) are shown, right under
 // the role, which already names it.
+// Headshot alt text: the name as the person is introduced, and the role when the name does
+// not already carry it ("Rickey Matherne, Jr., CPL" already says Certified Professional
+// Landman, so the role is not repeated).
+function photoAlt(name: string, role?: string | null) {
+  const cplInName = /,\s*CPL$/.test(name.trim());
+  const roleIsCpl = Boolean(role) && /certified professional landman/i.test(role!);
+  return role && !(cplInName && roleIsCpl) ? `${name}, ${role}` : name;
+}
+
 const plain = (s: string) => s.replace(/\(.*?\)/g, '').replace(/\s+/g, ' ').trim().toLowerCase();
 function restatesRole(credentialName: string, role?: string | null) {
   return Boolean(role) && plain(credentialName) === plain(role!);
@@ -131,7 +140,7 @@ const schema = sorted.length > 0
                     src={person.data.photo}
                     srcset={srcsetFor(person.data.photo, 800)}
                     sizes="(max-width: 768px) 90vw, 560px"
-                    alt={`${person.data.name}, professional photo`}
+                    alt={photoAlt(person.data.name, person.data.role)}
                     class="person-photo"
                     width="800"
                     height="800"
@@ -204,10 +213,16 @@ const schema = sorted.length > 0
     </section>
   )}
 
-  <!-- ─── Who we work for, then how we work. The people come first, above. ─── -->
+  <!-- ─── Who we work for, then how we work. The people come first, above. The paragraph
+       has its own heading so it does not read as the end of the last person's bio. ─── -->
   <section>
     <div class="container container-narrow">
-      <div class="prose about-intro about-intro-before" set:html={introHtml} />
+      {introHtml && (
+        <div class="about-who">
+          <h2 class="about-who-headline">{text(about.intro_headline, 'Who We Work For')}</h2>
+          <div class="prose about-intro about-intro-before" set:html={introHtml} />
+        </div>
+      )}
 
       <div class="approach-section">
         <h2>{about.approach_headline}</h2>

@@ -747,6 +747,12 @@ collections:
             widget: markdown
             hint: "Describe your working philosophy, approach to projects, and what clients can expect."
 
+          - label: "Who We Work For: Heading"
+            name: intro_headline
+            widget: string
+            required: false
+            hint: "The heading over the paragraph below, so it reads as its own section and not as part of the last bio. Blank shows \"Who We Work For\"."
+
           - label: "Who We Work For"
             name: intro
             widget: markdown

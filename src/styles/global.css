@@ -1174,6 +1174,8 @@ section { padding: 5rem 0; }
    paragraph needs room below the box rather than sitting against it. */
 .approach-section:first-child { margin-top: 0; }
 .about-intro-before { margin: 0 0 2.25rem; }
+/* Who We Work For: its own heading, so it reads as a new section after the last bio. */
+.about-who-headline { margin-bottom: .75rem; }
 
 .affiliations-list {
   list-style: none;
