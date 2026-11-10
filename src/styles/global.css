@@ -3851,3 +3851,285 @@ html { scroll-padding-top: calc(var(--nav-height) + 1rem); }
   .doc-jump a { display: inline-flex; align-items: center; min-height: 44px; }
   .doc-jump ol { gap: 0; }
 }
+
+/* ============================================================
+   Mineral Owners: jump links, opening facts, expandable rows,
+   and the compact trust band
+   ============================================================ */
+.jump-row {
+  background: var(--white);
+  border-bottom: 1px solid var(--border);
+  padding: .6rem 0;
+}
+.jump-row-inner {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: .4rem 1rem;
+}
+.jump-row-label {
+  font-size: .75rem;
+  font-weight: 700;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+}
+.jump-row-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: .4rem .5rem;
+}
+.jump-row-list a {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+  padding: 0 1rem;
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  font-size: .95rem;
+  font-weight: 600;
+  color: var(--green-dark);
+  text-decoration: none;
+  background: var(--cream);
+  transition: background var(--transition), border-color var(--transition);
+}
+.jump-row-list a:hover { background: var(--green-pale); border-color: var(--green-light); }
+
+.owner-opening { padding: 3rem 0 3.25rem; }
+.owner-facts {
+  list-style: none;
+  margin: 1.75rem 0 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 1rem 1.25rem;
+}
+@media (max-width: 760px) {
+  .owner-facts { grid-template-columns: 1fr 1fr; }
+}
+.owner-fact {
+  display: flex;
+  flex-direction: column;
+  gap: .2rem;
+  padding-left: .85rem;
+  border-left: 3px solid var(--green-light);
+}
+.owner-fact-title { font-weight: 700; font-size: 1rem; line-height: 1.35; color: var(--green-dark); }
+.owner-fact-text { font-size: .9rem; line-height: 1.5; color: var(--text-muted); }
+.owner-opening .service-area-line { margin-top: 1.75rem; }
+
+.owner-reasons,
+.owner-lease,
+.owner-bring,
+.owner-state,
+.owner-faq-section { padding: 4rem 0; }
+
+.lease-docs-grid {
+  grid-template-columns: repeat(auto-fit, minmax(290px, 1fr));
+  margin-bottom: 2.75rem;
+}
+
+.owner-terms-headline {
+  margin: 0 0 .75rem;
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: 1.5rem;
+  color: var(--green-dark);
+}
+
+/* Expandable rows (key terms and questions). Native details and summary, so the
+   keyboard, the open or closed state read to screen readers, and find-in-page all
+   work without script. */
+.disclosure-list { border-top: 1px solid var(--border); }
+.disclosure { border-bottom: 1px solid var(--border); }
+.disclosure-summary {
+  list-style: none;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  min-height: 44px;
+  padding: 1rem .25rem;
+  cursor: pointer;
+  font-family: var(--font-heading);
+  font-weight: 700;
+  font-size: 1.15rem;
+  line-height: 1.35;
+  color: var(--green-dark);
+  border-radius: var(--radius);
+  -webkit-tap-highlight-color: transparent;
+}
+.disclosure-summary::-webkit-details-marker { display: none; }
+.disclosure-summary::after {
+  content: '';
+  flex: 0 0 auto;
+  width: .6rem;
+  height: .6rem;
+  margin-right: .35rem;
+  border: solid var(--green-mid);
+  border-width: 0 2px 2px 0;
+  transform: translateY(-25%) rotate(45deg);
+  transition: transform var(--transition);
+}
+.disclosure[open] > .disclosure-summary::after { transform: translateY(25%) rotate(-135deg); }
+.disclosure-summary:hover { color: var(--green-mid); }
+.disclosure-summary:focus-visible { outline: 2px solid var(--green-mid); outline-offset: 2px; }
+.disclosure-body p {
+  margin: 0 0 1.25rem;
+  padding: 0 .25rem;
+  max-width: 68ch;
+  font-size: 1.125rem;
+  line-height: 1.75;
+  color: var(--text-muted);
+}
+@media (prefers-reduced-motion: reduce) {
+  .disclosure-summary::after { transition: none; }
+}
+
+.owner-lease-cta {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem 1.5rem;
+  margin-top: 2.25rem;
+  padding: 1.4rem 1.6rem;
+  background: var(--green-pale);
+  border-left: 3px solid var(--green-mid);
+  border-radius: var(--radius);
+}
+.owner-lease-cta p {
+  flex: 1 1 320px;
+  margin: 0;
+  font-size: 1.0625rem;
+  line-height: 1.65;
+  color: var(--text);
+}
+
+.owner-state-card {
+  padding: 2rem 2.25rem;
+  background: var(--white);
+  border: 1px solid var(--border);
+  border-top: 3px solid var(--green-mid);
+  border-radius: var(--radius-lg);
+}
+.owner-state .owner-state-note { color: var(--text); }
+
+/* The compact trust band. */
+.owner-trust {
+  padding: 3.5rem 0;
+  background: var(--white);
+  border-top: 1px solid var(--border);
+}
+.owner-trust .container > * + * {
+  margin-top: 2.25rem;
+  padding-top: 2.25rem;
+  border-top: 1px solid var(--border);
+}
+.owner-trust-heading {
+  margin: 0 0 1rem;
+  font-size: 1.35rem;
+  color: var(--green-dark);
+}
+.owner-trust-team-row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 1rem 2rem;
+}
+.owner-trust-people {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: .75rem 1.5rem;
+}
+.owner-trust-person { display: flex; align-items: center; gap: .7rem; }
+.owner-trust-photo {
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+  object-fit: cover;
+  object-position: 50% 20%;
+  border: 2px solid var(--white);
+  box-shadow: var(--shadow-md);
+}
+.owner-trust-photo-empty { display: block; background: var(--green-pale); }
+.owner-trust-name { font-weight: 700; font-size: 1rem; color: var(--text); }
+.owner-trust-line {
+  flex: 1 1 340px;
+  margin: 0;
+  font-size: 1rem;
+  line-height: 1.6;
+  color: var(--text-muted);
+}
+.owner-trust-line a,
+.owner-trust-sample a { font-weight: 600; color: var(--green-dark); white-space: nowrap; }
+
+.owner-steps {
+  list-style: none;
+  counter-reset: owner-step;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+  gap: 1.25rem 1.5rem;
+}
+.owner-step {
+  counter-increment: owner-step;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: .25rem;
+  padding-left: 2.4rem;
+}
+.owner-step::before {
+  content: counter(owner-step);
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 1.7rem;
+  height: 1.7rem;
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+  background: var(--green-dark);
+  color: var(--white);
+  font-size: .8rem;
+  font-weight: 700;
+}
+.owner-step-title { font-weight: 700; font-size: 1rem; line-height: 1.4; color: var(--green-dark); }
+.owner-step-text { font-size: .95rem; line-height: 1.55; color: var(--text-muted); }
+
+.owner-trust-sample {
+  margin: 0;
+  font-size: 1rem;
+  line-height: 1.65;
+  color: var(--text-muted);
+}
+.owner-trust-sample strong { color: var(--text); }
+
+.owner-trust-notes p {
+  margin: 0;
+  max-width: 80ch;
+  font-size: .95rem;
+  line-height: 1.65;
+  color: var(--text-muted);
+}
+.owner-trust-notes p + p { margin-top: .75rem; }
+
+@media (max-width: 560px) {
+  .owner-opening { padding: 2.25rem 0 2.5rem; }
+  .owner-reasons,
+  .owner-lease,
+  .owner-bring,
+  .owner-state,
+  .owner-faq-section { padding: 3rem 0; }
+  .disclosure-summary { font-size: 1.08rem; }
+  .disclosure-body p { font-size: 1.0625rem; }
+  .owner-state-card { padding: 1.5rem 1.25rem; }
+}

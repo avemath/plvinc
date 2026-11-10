@@ -1351,23 +1351,36 @@ collections:
             maxlength: 160
             hint: "The sentence shown under this page's title in Google results. The counter stops at 160 characters, about what Google shows."
 
+          - label: "On This Page Links"
+            name: jump_links
+            widget: object
+            required: false
+            collapsed: true
+            hint: "The row of short links just under the green band that jump down the page. Blank labels use the words shown in brackets."
+            fields:
+              - { label: "Row Label", name: label, widget: string, required: false, hint: "Shown before the links. Blank shows \"On this page\"." }
+              - { label: "Lease Offers Link", name: lease, widget: string, required: false, hint: "Blank shows \"Lease offers\"." }
+              - { label: "Key Terms Link", name: terms, widget: string, required: false, hint: "Blank shows \"Key terms\"." }
+              - { label: "Pennsylvania Link", name: pennsylvania, widget: string, required: false, hint: "Blank shows \"Pennsylvania\"." }
+              - { label: "Questions Link", name: faq, widget: string, required: false, hint: "Blank shows \"FAQ\"." }
+
           - label: "Introduction"
             name: intro
             widget: markdown
-            hint: "The opening paragraphs. Write for someone who has never dealt with a landman before."
+            hint: "The short opening paragraph under the jump links. Keep it to two or three sentences, written for someone who has never dealt with a landman before. The detail lives further down the page."
 
           - label: "At a Glance Card"
             name: glance
             widget: object
             required: false
             collapsed: true
-            hint: "The small card beside the opening paragraphs on a wide screen, under them on a phone. List only plain facts that are true today. Empty the list to hide the card."
+            hint: "On this page the facts show as a single row of short facts under the opening paragraph, not as a card. List only plain facts that are true today. Empty the list to hide the row."
             fields:
               - label: "Card Heading"
                 name: heading
                 widget: string
                 required: false
-                hint: "The small heading at the top of the card. Blank shows \"At a glance\"."
+                hint: "Read aloud to screen readers as the name of the fact row; not shown on screen. Blank uses \"At a glance\"."
               - label: "Facts"
                 name: items
                 widget: list
@@ -1388,20 +1401,20 @@ collections:
                 name: call_label
                 widget: string
                 required: false
-                hint: "The word before the phone number on the button at the foot of the card. The number comes from Site Settings. Blank shows \"Call\"."
+                hint: "Not shown on the Mineral Owners page, which already has a call button at the top and after the situations list. Kept here in case the card comes back."
 
           - label: "Service Area Line"
             name: service_area_line
             widget: text
             required: false
-            hint: "One sentence naming the counties you take work in. This is about availability, not past projects."
+            hint: "One sentence naming the counties you take work in, shown under the row of facts near the top. This is about availability, not past projects."
 
           - label: "Common Reasons People Call"
             name: reasons_to_call
             widget: object
             collapsed: true
             required: false
-            hint: "The list of reasons a landowner gets in touch, written in their words rather than yours."
+            hint: "The list of reasons a landowner gets in touch, written in their words rather than yours. It is the first full section after the opening, with a call button under it."
             fields:
               - { label: "Headline", name: headline, widget: string, required: false, hint: "Blank shows \"Common Reasons People Call Us\"." }
               - { label: "Introduction", name: intro, widget: string }
@@ -1415,108 +1428,12 @@ collections:
               - { label: "Closing Line", name: closing, widget: text }
               - { label: "Button Text", name: button, widget: string }
 
-          - label: "What Happens Next"
-            name: how_it_works
-            widget: object
-            collapsed: true
-            required: false
-            hint: "The four steps between a first call and a report. Do not promise a response time here."
-            fields:
-              - { label: "Small Label", name: label, widget: string, required: false }
-              - { label: "Headline", name: headline, widget: string }
-              - label: "Steps"
-                name: steps
-                widget: list
-                summary: "{{title}}"
-                fields:
-                  - { label: "Step Title", name: title, widget: string }
-                  - { label: "Step Text", name: text, widget: text }
-
-          - label: "Who You'll Talk To"
-            name: team_label
-            widget: string
-            required: false
-            hint: "Small uppercase label above the strip of photos of Rickey and Shannon on the Mineral Owners page. The photos, names and roles come from Team / People."
-
-          - label: "Who You'll Talk To: Headline"
-            name: team_headline
-            widget: string
-            required: false
-            hint: "Blank shows \"Who You'll Talk To\"."
-
-          - label: "Who You'll Talk To: Text"
-            name: team_intro
-            widget: text
-            required: false
-            hint: "One sentence under the headline. The point is that a Certified Professional Landman who runs the firm handles every call and every project."
-
-          - label: "Who You'll Talk To: Link"
-            name: team_link
-            widget: string
-            required: false
-            hint: "The link under the photos that goes to the About page. Blank shows \"Read their backgrounds\"."
-
-          - label: "Services Section Label"
-            name: services_label
-            widget: string
-
-          - label: "Services Section Headline"
-            name: services_headline
-            widget: string
-
-          - label: "What You Can Bring to Us"
-            name: services
-            widget: list
-            required: false
-            summary: "{{title}}"
-            hint: "Each entry becomes a card. Empty this list to hide the whole section."
-            fields:
-              - label: "Title"
-                name: title
-                widget: string
-              - label: "Description"
-                name: description
-                widget: text
-
-          - label: "Sample Work Band"
-            name: sample_feature
-            widget: object
-            required: false
-            hint: "The band that points at the sample file on the Mineral Owners page. Leave the headline blank to hide the band."
-            fields:
-              - { label: "Small Label", name: label, widget: string, required: false }
-              - { label: "Headline", name: headline, widget: string, required: false }
-              - { label: "Text", name: text, widget: text }
-              - { label: "Button Text", name: button, widget: string }
-
-          - label: "FAQ Section Label"
-            name: faq_label
-            widget: string
-
-          - label: "FAQ Section Headline"
-            name: faq_headline
-            widget: string
-
-          - label: "Questions and Answers"
-            name: faq
-            widget: list
-            required: false
-            summary: "{{question}}"
-            hint: "These also tell Google what this page answers, so write the question the way someone would actually ask it. Empty this list to hide the section."
-            fields:
-              - label: "Question"
-                name: question
-                widget: string
-              - label: "Answer"
-                name: answer
-                widget: text
-
           - label: "Lease Offer Section"
             name: lease_packet
             widget: object
             collapsed: true
             required: false
-            hint: "The section about what arrives in a lease offer. It comes right after the questions and answers. The two lists say what each document is and what to look for in each clause. Keep them general and educational, and leave the advice for the call. Empty a list to hide it."
+            hint: "The section about what arrives in a lease offer, right after the situations list. The documents show as numbered cards. The terms show as rows a visitor clicks to open, with the first one open; all the text stays on the page for Google. Keep them general and educational, and leave the advice for the call. Empty a list to hide it."
             fields:
               - label: "Section Label"
                 name: label
@@ -1550,13 +1467,40 @@ collections:
               - label: "Closing Line"
                 name: closing
                 widget: text
-                hint: "The line that closes the section by inviting the reader to call us and walk through the offer."
+                hint: "The line that closes the section by inviting the reader to call us and walk through the offer. A button sits under it."
+              - label: "Button Text"
+                name: button
+                widget: string
+                required: false
+                hint: "The button under the closing line. It opens the short landowner form on the Contact page. Blank shows \"Send us the offer\"."
+
+          - label: "Services Section Label"
+            name: services_label
+            widget: string
+
+          - label: "Services Section Headline"
+            name: services_headline
+            widget: string
+
+          - label: "What You Can Bring to Us"
+            name: services
+            widget: list
+            required: false
+            summary: "{{title}}"
+            hint: "Each entry becomes a card. Empty this list to hide the whole section."
+            fields:
+              - label: "Title"
+                name: title
+                widget: string
+              - label: "Description"
+                name: description
+                widget: text
 
           - label: "State Section Heading"
             name: pennsylvania_headline
             widget: string
             required: false
-            hint: "Heading for the state-specific section near the bottom of the page (e.g., Pennsylvania mineral owners)."
+            hint: "Heading for the state-specific section, after What You Can Bring to Us and before the questions (e.g., Pennsylvania mineral owners). The Pennsylvania jump link at the top leads here."
 
           - label: "State Section Text"
             name: pennsylvania_note
@@ -1564,17 +1508,91 @@ collections:
             required: false
             hint: "Background on how ownership and leasing work in your home state. Leave blank to hide the whole section, heading included."
 
+          - label: "FAQ Section Label"
+            name: faq_label
+            widget: string
+
+          - label: "FAQ Section Headline"
+            name: faq_headline
+            widget: string
+
+          - label: "Questions and Answers"
+            name: faq
+            widget: list
+            required: false
+            summary: "{{question}}"
+            hint: "Shown as rows a visitor clicks to open, with the first one open. All answers stay on the page and also tell Google what this page answers, so write the question the way someone would actually ask it. Empty this list to hide the section."
+            fields:
+              - label: "Question"
+                name: question
+                widget: string
+              - label: "Answer"
+                name: answer
+                widget: text
+
+          - label: "Who You'll Talk To"
+            name: team_label
+            widget: string
+            required: false
+            hint: "Not shown on this page since the redesign: Rickey and Shannon now appear in the compact band near the foot of the page, under the headline below. Kept for reuse. The photos, names and roles come from Team / People."
+
+          - label: "Who You'll Talk To: Headline"
+            name: team_headline
+            widget: string
+            required: false
+            hint: "The small heading over the two photos in the compact band near the foot of the page. Blank shows \"Who You'll Talk To\"."
+
+          - label: "Who You'll Talk To: Text"
+            name: team_intro
+            widget: text
+            required: false
+            hint: "One sentence beside the two photos in the compact band. The point is that a Certified Professional Landman who runs the firm handles every call and every project."
+
+          - label: "Who You'll Talk To: Link"
+            name: team_link
+            widget: string
+            required: false
+            hint: "The link beside the photos that goes to the full bios on the About page. Blank shows \"Read their backgrounds\"."
+
+          - label: "What Happens Next"
+            name: how_it_works
+            widget: object
+            collapsed: true
+            required: false
+            hint: "The four steps between a first call and a report, shown as one row of short steps in the compact band near the foot of the page. Keep each step text to one short sentence. Do not promise a response time here."
+            fields:
+              - { label: "Small Label", name: label, widget: string, required: false, hint: "Not shown on this page since the redesign. Kept for reuse." }
+              - { label: "Headline", name: headline, widget: string }
+              - label: "Steps"
+                name: steps
+                widget: list
+                summary: "{{title}}"
+                fields:
+                  - { label: "Step Title", name: title, widget: string }
+                  - { label: "Step Text", name: text, widget: text }
+
+          - label: "Sample Work Band"
+            name: sample_feature
+            widget: object
+            required: false
+            hint: "One line in the compact band near the foot of the page: the headline in bold, the text, then a link to the sample file. Leave the headline blank to hide it."
+            fields:
+              - { label: "Small Label", name: label, widget: string, required: false, hint: "Not shown on this page since the redesign. Kept for reuse." }
+              - { label: "Headline", name: headline, widget: string, required: false }
+              - { label: "Text", name: text, widget: text }
+              - { label: "Button Text", name: button, widget: string }
+
           - label: "Conflict of Interest Note"
             name: conflict_note
             widget: text
             required: false
-            hint: "The note about also taking leases for companies. It sits just above the legal note near the foot of the page."
+            hint: "The note about also taking leases for companies. It sits at the foot of the compact band, just above the legal note."
 
           - label: "Legal Note"
             name: disclaimer
             widget: text
             required: false
-            hint: "The note at the bottom saying what our work covers and that the next step is a conversation with us. Leave blank to hide it."
+            hint: "The short legal note at the foot of the compact band: we are landmen, not attorneys. Do not send visitors to someone else here; if they need another professional, Rickey or Shannon will tell them after they get in touch. Leave blank to hide it."
 
           - label: "Closing Call to Action"
             name: cta

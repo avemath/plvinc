@@ -3,15 +3,14 @@ import Base from '../layouts/Base.astro';
 import { text } from '../utils/labels';
 import CallToAction from '../components/CallToAction.astro';
 import SampleFeature from '../components/SampleFeature.astro';
-import HowItWorks from '../components/HowItWorks.astro';
-import TeamStrip from '../components/TeamStrip.astro';
-import GlanceCard from '../components/GlanceCard.astro';
+import { getCollection } from 'astro:content';
 import { renderMarkdown } from '../utils/markdown';
 import { cssUrl } from '../utils/cssUrl';
 import { needsTint } from '../utils/images';
 import page from '../data/pages/mineral-owners.json';
 import settings from '../data/settings.json';
 import { telHref } from '../utils/phone';
+import { srcsetFor } from '../utils/images';
 
 const introHtml = await renderMarkdown(page.intro);
 const pennsylvaniaHtml = page.pennsylvania_note
@@ -31,6 +30,31 @@ function faqId(q: string) {
 const headerImage = page.header_image || '';
 
 const tel = telHref(settings.phone);
+
+// The facts that used to sit in the At a glance card, now one row under the opening.
+const facts = (page.glance?.items ?? []).filter((i) => i?.title?.trim());
+
+// The row of jump links under the green band. Each link only shows when its section does.
+const jump = page.jump_links ?? {};
+const leaseDocs = page.lease_packet?.documents ?? [];
+const leaseTerms = page.lease_packet?.terms ?? [];
+const pennsylvaniaShown = Boolean(pennsylvaniaHtml);
+const jumpLinks = [
+  { href: '#lease-offers', label: text(jump.lease, 'Lease offers'), show: Boolean(page.lease_packet) },
+  { href: '#key-terms', label: text(jump.terms, 'Key terms'), show: leaseTerms.length > 0 },
+  { href: '#pennsylvania', label: text(jump.pennsylvania, 'Pennsylvania'), show: pennsylvaniaShown },
+  { href: '#faq', label: text(jump.faq, 'FAQ'), show: faq.length > 0 },
+].filter((l) => l.show);
+
+// Rickey and Shannon for the compact band near the foot of the page.
+let people: Awaited<ReturnType<typeof getCollection<'people'>>> = [];
+try {
+  people = await getCollection('people');
+} catch {
+  people = [];
+}
+const team = [...people].sort((a, b) => (a.data.sort_order ?? 0) - (b.data.sort_order ?? 0));
+const steps = page.how_it_works?.steps ?? [];
 
 // FAQPage markup is only valid with at least one entry, so it is built here and passed to
 // the layout rather than emitted unconditionally.
@@ -71,23 +95,44 @@ const faqSchema = faq.length > 0
     </div>
   </div>
 
-  <section class="intro-section">
-    <div class="container intro-split">
-      <div class="intro-main">
-        <div class="prose owner-intro" set:html={introHtml} />
-
-        {page.service_area_line && (
-          <p class="service-area-line">{page.service_area_line}</p>
-        )}
+  {jumpLinks.length > 0 && (
+    <nav class="jump-row" aria-labelledby="jump-row-label">
+      <div class="container jump-row-inner">
+        <span class="jump-row-label" id="jump-row-label">{text(jump.label, 'On this page')}</span>
+        <ul class="jump-row-list" role="list">
+          {jumpLinks.map((l) => (
+            <li><a href={l.href}>{l.label}</a></li>
+          ))}
+        </ul>
       </div>
-      <GlanceCard glance={page.glance} />
+    </nav>
+  )}
+
+  {/* A short opening and the facts in one row, so the page gets to the owner's own
+      situation within the first screen or two. */}
+  <section class="owner-opening">
+    <div class="container container-narrow">
+      <div class="prose owner-intro" set:html={introHtml} />
+      {facts.length > 0 && (
+        <ul class="owner-facts" role="list" aria-label={text(page.glance?.heading, 'At a glance')}>
+          {facts.map((f) => (
+            <li class="owner-fact">
+              <span class="owner-fact-title">{f.title}</span>
+              {f.text && <span class="owner-fact-text">{f.text}</span>}
+            </li>
+          ))}
+        </ul>
+      )}
+      {page.service_area_line && (
+        <p class="service-area-line">{page.service_area_line}</p>
+      )}
     </div>
   </section>
 
   {page.reasons_to_call && (
-    <section class="section-alt" aria-labelledby="reasons-headline">
+    <section class="section-alt owner-reasons" aria-labelledby="reasons-headline">
       <div class="container container-narrow">
-        <div class="section-header">
+        <div class="section-header is-left">
           <h2 id="reasons-headline">{text(page.reasons_to_call.headline, 'Common Reasons People Call Us')}</h2>
           {page.reasons_to_call.intro && <p>{page.reasons_to_call.intro}</p>}
         </div>
@@ -115,20 +160,57 @@ const faqSchema = faq.length > 0
     </section>
   )}
 
-  {page.how_it_works && (
-    <HowItWorks label={page.how_it_works.label} headline={page.how_it_works.headline} steps={page.how_it_works.steps} />
+  {page.lease_packet && (
+    <section id="lease-offers" class="owner-lease" aria-labelledby="lease-packet-headline">
+      <div class="container container-narrow">
+        <div class="section-header is-left">
+          <span class="section-label">{page.lease_packet.label}</span>
+          <h2 id="lease-packet-headline">{page.lease_packet.headline}</h2>
+          {page.lease_packet.intro && <p>{page.lease_packet.intro}</p>}
+        </div>
+
+        {leaseDocs.length > 0 && (
+          <ol class="lease-docs lease-docs-grid" role="list">
+            {leaseDocs.map((doc) => (
+              <li class="lease-doc">
+                <h3 class="lease-doc-title">{doc.title}</h3>
+                <p class="lease-doc-text">{doc.text}</p>
+              </li>
+            ))}
+          </ol>
+        )}
+
+        {leaseTerms.length > 0 && (
+          <div id="key-terms" class="owner-terms">
+            <h3 class="owner-terms-headline">{page.lease_packet.terms_headline}</h3>
+            {/* Native disclosure rows: they open with a click, Enter or Space, screen
+                readers announce them as expanded or collapsed, and the text stays in the
+                page for search engines and for find-in-page. */}
+            <div class="disclosure-list">
+              {leaseTerms.map((t, i) => (
+                <details class="disclosure" open={i === 0}>
+                  <summary class="disclosure-summary"><span>{t.title}</span></summary>
+                  <div class="disclosure-body"><p>{t.text}</p></div>
+                </details>
+              ))}
+            </div>
+          </div>
+        )}
+
+        {page.lease_packet.closing && (
+          <div class="owner-lease-cta">
+            <p>{page.lease_packet.closing}</p>
+            <a href="/contact#note" class="btn btn-primary">
+              {text(page.lease_packet.button, 'Send us the offer')} <span aria-hidden="true">→</span>
+            </a>
+          </div>
+        )}
+      </div>
+    </section>
   )}
 
-  <TeamStrip
-    label={page.team_label}
-    headline={page.team_headline}
-    intro={page.team_intro}
-    link={page.team_link}
-    tone="alt"
-  />
-
   {page.services?.length > 0 && (
-    <section>
+    <section class="section-alt owner-bring">
       <div class="container">
         <div class="section-header is-left">
           <span class="section-label">{page.services_label}</span>
@@ -146,92 +228,92 @@ const faqSchema = faq.length > 0
     </section>
   )}
 
-  {page.sample_feature?.headline && (
-    <SampleFeature
-      label={page.sample_feature.label}
-      headline={page.sample_feature.headline}
-      text={page.sample_feature.text}
-      button={page.sample_feature.button}
-      tone="alt"
-    />
+  {pennsylvaniaShown && (
+    <section id="pennsylvania" class="owner-state" aria-labelledby="pennsylvania-headline">
+      <div class="container container-narrow">
+        <div class="owner-state-card">
+          {page.pennsylvania_headline && <h2 id="pennsylvania-headline" class="owner-state-headline">{page.pennsylvania_headline}</h2>}
+          <div class="prose owner-state-note" set:html={pennsylvaniaHtml} />
+        </div>
+      </div>
+    </section>
   )}
 
   {faq.length > 0 && (
-    <section class="section-roomy">
-      <div class="container section-split">
+    <section id="faq" class="section-alt owner-faq-section" aria-labelledby="faq-headline">
+      <div class="container container-narrow">
         <div class="section-header is-left">
           <span class="section-label">{page.faq_label}</span>
-          <h2>{page.faq_headline}</h2>
+          <h2 id="faq-headline">{page.faq_headline}</h2>
         </div>
-        <dl class="owner-faq">
-          {faq.map((f) => (
-            <div class="owner-faq-item" id={faqId(f.question)}>
-              <dt>{f.question}</dt>
-              <dd>{f.answer}</dd>
-            </div>
+        <div class="disclosure-list">
+          {faq.map((f, i) => (
+            <details class="disclosure" id={faqId(f.question)} open={i === 0}>
+              <summary class="disclosure-summary"><span>{f.question}</span></summary>
+              <div class="disclosure-body"><p>{f.answer}</p></div>
+            </details>
           ))}
-        </dl>
+        </div>
       </div>
     </section>
   )}
 
-  {page.lease_packet && (
-    <section class="section-alt" aria-labelledby="lease-packet-headline">
-      <div class="container container-narrow">
-        <div class="section-header">
-          <span class="section-label">{page.lease_packet.label}</span>
-          <h2 id="lease-packet-headline">{page.lease_packet.headline}</h2>
-          {page.lease_packet.intro && <p>{page.lease_packet.intro}</p>}
+  {/* The trust content a visitor from Google may need, kept but compact: who they will
+      talk to, what happens after they call, the sample file, and the two notes. */}
+  <section class="owner-trust" aria-label="About working with us">
+    <div class="container">
+      {team.length > 0 && (
+        <div class="owner-trust-team">
+          <h2 class="owner-trust-heading">{text(page.team_headline, "Who You'll Talk To")}</h2>
+          <div class="owner-trust-team-row">
+            <ul class="owner-trust-people" role="list">
+              {team.map((p) => (
+                <li class="owner-trust-person">
+                  {p.data.photo
+                    ? <img src={p.data.photo} srcset={srcsetFor(p.data.photo, 800)} sizes="72px" alt="" width="72" height="72" loading="lazy" decoding="async" class="owner-trust-photo" />
+                    : <span class="owner-trust-photo owner-trust-photo-empty" aria-hidden="true"></span>}
+                  <span class="owner-trust-name">{p.data.name}</span>
+                </li>
+              ))}
+            </ul>
+            <p class="owner-trust-line">
+              {page.team_intro}{' '}
+              <a href="/about">{text(page.team_link, 'Read their backgrounds')} <span aria-hidden="true">→</span></a>
+            </p>
+          </div>
         </div>
+      )}
 
-        {page.lease_packet.documents?.length > 0 && (
-          <ol class="lease-docs" role="list">
-            {page.lease_packet.documents.map((doc) => (
-              <li class="lease-doc">
-                <h3 class="lease-doc-title">{doc.title}</h3>
-                <p class="lease-doc-text">{doc.text}</p>
+      {steps.length > 0 && (
+        <div class="owner-trust-steps">
+          <h2 class="owner-trust-heading">{page.how_it_works?.headline}</h2>
+          <ol class="owner-steps" role="list">
+            {steps.map((s) => (
+              <li class="owner-step">
+                <span class="owner-step-title">{s.title}</span>
+                <span class="owner-step-text">{s.text}</span>
               </li>
             ))}
           </ol>
-        )}
+        </div>
+      )}
 
-        {page.lease_packet.terms?.length > 0 && (
-          <>
-            <h3 class="lease-terms-headline">{page.lease_packet.terms_headline}</h3>
-            <dl class="lease-terms">
-              {page.lease_packet.terms.map((t) => (
-                <div class="lease-term">
-                  <dt>{t.title}</dt>
-                  <dd>{t.text}</dd>
-                </div>
-              ))}
-            </dl>
-          </>
-        )}
+      {page.sample_feature?.headline && (
+        <p class="owner-trust-sample">
+          <strong>{/[.!?]$/.test(page.sample_feature.headline.trim()) ? page.sample_feature.headline : `${page.sample_feature.headline.trim()}.`}</strong>{' '}
+          {page.sample_feature.text}{' '}
+          <a href="/sample-work">{page.sample_feature.button} <span aria-hidden="true">→</span></a>
+        </p>
+      )}
 
-        <p class="lease-closing">{page.lease_packet.closing}</p>
-
-      </div>
-    </section>
-  )}
-
-  {pennsylvaniaHtml && (
-    <section>
-      <div class="container container-narrow">
-        {page.pennsylvania_headline && <h2 class="owner-state-headline">{page.pennsylvania_headline}</h2>}
-        <div class="prose owner-state-note" set:html={pennsylvaniaHtml} />
-      </div>
-    </section>
-  )}
-
-  {(page.conflict_note || page.disclaimer) && (
-    <section class="owner-disclaimer-band">
-      <div class="container container-narrow">
-        {page.conflict_note && <p class="owner-disclaimer">{page.conflict_note}</p>}
-        {page.disclaimer && <p class="owner-disclaimer">{page.disclaimer}</p>}
-      </div>
-    </section>
-  )}
+      {(page.conflict_note || page.disclaimer) && (
+        <div class="owner-trust-notes">
+          {page.conflict_note && <p>{page.conflict_note}</p>}
+          {page.disclaimer && <p>{page.disclaimer}</p>}
+        </div>
+      )}
+    </div>
+  </section>
 
   <CallToAction
     headline={page.cta.headline}
@@ -243,3 +325,17 @@ const faqSchema = faq.length > 0
     phoneHref={tel}
   />
 </Base>
+
+<script>
+  // A link straight to one question (/mineral-owners#what-is-a-division-order) or to the
+  // key terms opens the row it points at, so the visitor lands on the answer, not a
+  // closed row.
+  const openTarget = () => {
+    const id = decodeURIComponent(location.hash.slice(1));
+    if (!id) return;
+    const el = document.getElementById(id);
+    if (el instanceof HTMLDetailsElement) el.open = true;
+  };
+  openTarget();
+  window.addEventListener('hashchange', openTarget);
+</script>
