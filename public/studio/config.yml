@@ -1392,6 +1392,7 @@ collections:
               - { label: "Lease Offers Link", name: lease, widget: string, required: false, hint: "Blank shows \"Lease offers\"." }
               - { label: "Key Terms Link", name: terms, widget: string, required: false, hint: "Blank shows \"Key terms\"." }
               - { label: "Pennsylvania Link", name: pennsylvania, widget: string, required: false, hint: "Blank shows \"Pennsylvania\"." }
+              - { label: "Decimal Calculator Link", name: calculator, widget: string, required: false, hint: "Jumps to the decimal calculator. Blank shows \"Decimal calculator\"." }
               - { label: "Questions Link", name: faq, widget: string, required: false, hint: "Blank shows \"FAQ\"." }
 
           - label: "Introduction"
@@ -1580,6 +1581,66 @@ collections:
             widget: markdown
             required: false
             hint: "Background on how ownership and leasing work in your home state. Leave blank to hide the whole section, heading included."
+
+          - label: "Decimal Calculator"
+            name: decimal_calculator
+            widget: object
+            collapsed: true
+            required: false
+            hint: "The division order calculator, just before the questions. Net mineral acres = share x tract acres; decimal interest = (net mineral acres / unit acres) x royalty, shown to 8 places. The maths is exact and does not change with this wording. Without JavaScript the boxes are hidden and the worked example shows on its own. Nothing typed into it is stored or sent."
+            fields:
+              - { label: "Section Label", name: label, widget: string, required: false }
+              - { label: "Headline", name: headline, widget: string, required: false }
+              - { label: "Introduction", name: intro, widget: text, required: false }
+              - { label: "Share Box Label", name: share_label, widget: string, required: false }
+              - { label: "Share Box Hint", name: share_hint, widget: string, required: false }
+              - { label: "Tract Acres Label", name: tract_label, widget: string, required: false }
+              - { label: "Tract Acres Hint", name: tract_hint, widget: string, required: false }
+              - { label: "Unit Acres Label", name: unit_label, widget: string, required: false }
+              - { label: "Unit Acres Hint", name: unit_hint, widget: string, required: false }
+              - { label: "Royalty Label", name: royalty_label, widget: string, required: false }
+              - { label: "Royalty Hint", name: royalty_hint, widget: string, required: false }
+              - { label: "Button", name: button, widget: string, required: false, hint: "Blank shows \"Work it out\"." }
+              - label: "Worked Example"
+                name: example
+                widget: object
+                required: false
+                hint: "The numbers filled in when the page opens, and the example shown without JavaScript. Fractions like 1/2 or decimals like 0.5."
+                fields:
+                  - { label: "Share", name: share, widget: string }
+                  - { label: "Tract acres", name: tract, widget: string }
+                  - { label: "Unit acres", name: unit, widget: string }
+                  - { label: "Royalty", name: royalty, widget: string }
+              - { label: "Worked Example Caption", name: example_label, widget: string, required: false, hint: "Above the result before the visitor changes anything. Blank shows \"Worked example\"." }
+              - { label: "Their Result Caption", name: yours_label, widget: string, required: false, hint: "Above the result once they press the button. Blank shows \"With your numbers\"." }
+              - { label: "Net Mineral Acres Label", name: nma_label, widget: string, required: false }
+              - { label: "Decimal Interest Label", name: decimal_label, widget: string, required: false }
+              - { label: "Formula Heading", name: formula_label, widget: string, required: false }
+              - { label: "Net Mineral Acres Formula in Words", name: nma_formula_word, widget: string, required: false }
+              - { label: "Decimal Formula in Words", name: decimal_formula_word, widget: string, required: false }
+              - { label: "Line Under the Result", name: result_note, widget: text, required: false }
+              - { label: "Send Button", name: button_send, widget: string, required: false, hint: "Opens the short note on the Contact page with \"What you received\" filled in from the division order choice in the guide above." }
+              - { label: "Call Label (screen readers)", name: call_label, widget: string, required: false }
+              - { label: "Arithmetic Line", name: caveat, widget: text, required: false, hint: "Says this is arithmetic, not a review of title, and that unleased interests and deductions can change it." }
+              - { label: "General Information Line", name: disclaimer, widget: text, required: false }
+              - { label: "Announced Result (screen readers)", name: announce_result, widget: string, required: false, hint: "Read aloud before the decimal when a result appears." }
+              - { label: "Announced Problem (screen readers)", name: announce_errors, widget: string, required: false }
+              - label: "Error Messages"
+                name: errors
+                widget: object
+                collapsed: true
+                required: false
+                hint: "Shown under a box when its number can't be used. A blank box keeps the original wording."
+                fields:
+                  - { label: "Share not readable", name: share_invalid, widget: string, required: false }
+                  - { label: "Share not between 0 and 1", name: share_range, widget: string, required: false }
+                  - { label: "Tract acres not readable", name: tract_invalid, widget: string, required: false }
+                  - { label: "Tract acres zero", name: tract_range, widget: string, required: false }
+                  - { label: "Unit acres not readable", name: unit_invalid, widget: string, required: false }
+                  - { label: "Unit acres zero", name: unit_range, widget: string, required: false }
+                  - { label: "Unit smaller than net mineral acres", name: unit_small, widget: string, required: false }
+                  - { label: "Royalty not readable", name: royalty_invalid, widget: string, required: false }
+                  - { label: "Royalty not between 0 and 1", name: royalty_range, widget: string, required: false }
 
           - label: "FAQ Section Label"
             name: faq_label

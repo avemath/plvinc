@@ -6,6 +6,7 @@ import SampleFeature from '../components/SampleFeature.astro';
 import TrustBand from '../components/TrustBand.astro';
 import Disclosures from '../components/Disclosures.astro';
 import ReceivedGuide from '../components/ReceivedGuide.astro';
+import DecimalCalculator from '../components/DecimalCalculator.astro';
 import { renderMarkdown } from '../utils/markdown';
 import { cssUrl } from '../utils/cssUrl';
 import { needsTint } from '../utils/images';
@@ -42,11 +43,13 @@ const leaseTerms = page.lease_packet?.terms ?? [];
 const pennsylvaniaShown = Boolean(pennsylvaniaHtml);
 const guide = (page as any).received_guide;
 const guideShown = Boolean(guide?.choices?.length);
+const calc = (page as any).decimal_calculator;
 const jumpLinks = [
   { href: '#what-you-received', label: text((jump as any).guide, 'What you received'), show: guideShown },
   { href: '#lease-offers', label: text(jump.lease, 'Lease offers'), show: Boolean(page.lease_packet) },
   { href: '#key-terms', label: text(jump.terms, 'Key terms'), show: leaseTerms.length > 0 },
   { href: '#pennsylvania', label: text(jump.pennsylvania, 'Pennsylvania'), show: pennsylvaniaShown },
+  { href: '#decimal-calculator', label: text((jump as any).calculator, 'Decimal calculator'), show: Boolean(calc) },
   { href: '#faq', label: text(jump.faq, 'FAQ'), show: faq.length > 0 },
 ].filter((l) => l.show);
 
@@ -198,6 +201,8 @@ const faqSchema = faq.length > 0
       </div>
     </section>
   )}
+
+  {calc && <DecimalCalculator calc={calc} />}
 
   {faq.length > 0 && (
     <section id="faq" class="section-alt owner-faq-section" aria-labelledby="faq-headline">

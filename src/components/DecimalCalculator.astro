@@ -1,0 +1,284 @@
+---
+// The division-order decimal on Mineral Owners. The worked example is computed here, at
+// build time, with the same exact-fraction code the page uses, so without JavaScript the
+// section still shows a complete, correct example. With JavaScript the four boxes appear
+// (html.js is set in the head by Base enhance, so nothing moves) and the result follows the
+// visitor's numbers. Nothing typed here is stored or sent anywhere.
+// Copy: Studio → Mineral Owners Page → Decimal Calculator.
+import { text } from '../utils/labels';
+import { telHref } from '../utils/phone';
+import settings from '../data/settings.json';
+import { calculate } from '../lib/decimal-interest.ts';
+import { toDecimal, toTrimmed } from '../lib/fraction.ts';
+
+type Calc = Record<string, any>;
+interface Props { calc: Calc }
+const { calc } = Astro.props;
+const ex = { share: '1/2', tract: '50', unit: '640', royalty: '1/8', ...(calc.example ?? {}) };
+const r = calculate(ex);
+const tel = telHref(settings.phone);
+const errs = calc.errors ?? {};
+const msg = (k: string, fallback: string) => text(errs[k], fallback);
+const messages = {
+  share_invalid: msg('share_invalid', 'Enter your share as a fraction like 1/2 or a decimal like 0.5.'),
+  share_range: msg('share_range', 'Your share has to be more than 0 and no more than 1.'),
+  tract_invalid: msg('tract_invalid', "Enter the tract's acres as a number, like 50 or 62.4."),
+  tract_range: msg('tract_range', 'Tract acres have to be more than 0.'),
+  unit_invalid: msg('unit_invalid', "Enter the unit's acres as a number, like 640."),
+  unit_range: msg('unit_range', 'Unit acres have to be more than 0.'),
+  unit_small: msg('unit_small', "Unit acres can't be smaller than your net mineral acres. Check both numbers."),
+  royalty_invalid: msg('royalty_invalid', 'Enter the royalty as a fraction like 1/8 or a decimal like 0.125.'),
+  royalty_range: msg('royalty_range', 'The royalty has to be more than 0 and less than 1.'),
+};
+const fields = [
+  { key: 'share', label: text(calc.share_label, 'Your share of the minerals in the tract'), hint: calc.share_hint, mode: 'text' },
+  { key: 'tract', label: text(calc.tract_label, 'Tract acres'), hint: calc.tract_hint, mode: 'decimal' },
+  { key: 'unit', label: text(calc.unit_label, 'Unit acres'), hint: calc.unit_hint, mode: 'decimal' },
+  { key: 'royalty', label: text(calc.royalty_label, 'Royalty rate'), hint: calc.royalty_hint, mode: 'text' },
+];
+const nmaLabel = text(calc.nma_label, 'Net mineral acres');
+const decLabel = text(calc.decimal_label, 'Decimal interest');
+const nmaText = r.ok ? toTrimmed(r.nma) : '';
+const decText = r.ok ? toDecimal(r.decimal) : '';
+const exampleCaption = text(calc.example_label, 'Worked example');
+const yoursCaption = text(calc.yours_label, 'With your numbers');
+const callLabel = text(calc.call_label, 'Call');
+---
+
+<section id="decimal-calculator" class="owner-calc" aria-labelledby="calc-headline">
+  <div class="container container-narrow">
+    <div class="section-header is-left">
+      {calc.label && <span class="section-label">{calc.label}</span>}
+      <h2 id="calc-headline">{text(calc.headline, 'Check the Decimal on Your Division Order')}</h2>
+      {calc.intro && <p>{calc.intro}</p>}
+    </div>
+
+    <div class="calc" data-calc data-messages={JSON.stringify(messages)} data-example={exampleCaption} data-yours={yoursCaption}
+         data-announce={text(calc.announce_result, 'Decimal interest:')} data-announce-errors={text(calc.announce_errors, 'Check the highlighted boxes.')}
+         data-nma-label={nmaLabel} data-dec-label={decLabel}>
+      <form class="calc-form" novalidate>
+        <div class="calc-grid">
+          {fields.map((f) => (
+            <div class="form-group calc-field">
+              <label for={`calc-${f.key}`}>{f.label}</label>
+              {f.hint && <p class="calc-hint" id={`calc-${f.key}-hint`}>{f.hint}</p>}
+              <input
+                type="text"
+                id={`calc-${f.key}`}
+                name={f.key}
+                inputmode={f.mode === 'decimal' ? 'decimal' : undefined}
+                autocomplete="off"
+                spellcheck="false"
+                value={ex[f.key]}
+                aria-describedby={[f.hint && `calc-${f.key}-hint`, `calc-${f.key}-error`].filter(Boolean).join(' ')}
+              />
+              <p class="field-error calc-error" id={`calc-${f.key}-error`} hidden></p>
+            </div>
+          ))}
+        </div>
+        <button type="submit" class="btn btn-primary">{text(calc.button, 'Work it out')}</button>
+      </form>
+
+      <div class="calc-result" data-result>
+        <p class="calc-caption" data-caption>{exampleCaption}</p>
+        <p class="calc-example-inputs" data-example-line>
+          {fields.map((f, i) => <>{i > 0 && ' · '}{f.label}: <strong>{ex[f.key]}</strong></>)}
+        </p>
+        <dl class="calc-figures">
+          <div class="calc-figure">
+            <dt>{nmaLabel}</dt>
+            <dd data-nma>{nmaText}</dd>
+          </div>
+          <div class="calc-figure calc-figure-main">
+            <dt>{decLabel}</dt>
+            <dd data-decimal>{decText}</dd>
+          </div>
+        </dl>
+        <div class="calc-formula">
+          <p class="calc-formula-label">{text(calc.formula_label, 'How it is worked out')}</p>
+          <p data-formula-nma>
+            {nmaLabel} = {text(calc.nma_formula_word, 'share × tract acres')} = <span data-f-share>{ex.share}</span> × <span data-f-tract>{ex.tract}</span> = <strong data-f-nma>{nmaText}</strong>
+          </p>
+          <p data-formula-dec>
+            {decLabel} = {text(calc.decimal_formula_word, '(net mineral acres ÷ unit acres) × royalty')} = (<span data-f-nma2>{nmaText}</span> ÷ <span data-f-unit>{ex.unit}</span>) × <span data-f-royalty>{ex.royalty}</span> = <strong data-f-dec>{decText}</strong>
+          </p>
+        </div>
+      </div>
+      <p class="sr-only" aria-live="polite" data-calc-status></p>
+
+      {calc.result_note && <p class="calc-note">{calc.result_note}</p>}
+      <div class="calc-actions">
+        <a href="/contact?received=division-order#note" class="btn btn-primary">
+          {text(calc.button_send, 'Send us your division order')} <span aria-hidden="true">→</span>
+        </a>
+        {settings.phone && (
+          <a href={tel} class="inline-phone" aria-label={`${callLabel} ${settings.phone}`}>
+            <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor"
+                 stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6A19.79 19.79 0 0 1 2.12 4.18 2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.9.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92Z" />
+            </svg>
+            {settings.phone}
+          </a>
+        )}
+      </div>
+      {calc.caveat && <p class="calc-caveat">{calc.caveat}</p>}
+      {calc.disclaimer && <p class="calc-caveat">{calc.disclaimer}</p>}
+    </div>
+  </div>
+</section>
+
+<script>
+  import { calculate, type FieldKey } from '../lib/decimal-interest.ts';
+  import { toDecimal, toTrimmed } from '../lib/fraction.ts';
+
+  const root = document.querySelector<HTMLElement>('[data-calc]');
+  const form = root?.querySelector<HTMLFormElement>('.calc-form');
+  if (root && form) {
+    const messages = JSON.parse(root.dataset.messages || '{}') as Record<string, string>;
+    const keys: FieldKey[] = ['share', 'tract', 'unit', 'royalty'];
+    const input = (k: FieldKey) => root.querySelector<HTMLInputElement>(`#calc-${k}`)!;
+    const q = (s: string) => root.querySelector<HTMLElement>(s);
+    const status = q('[data-calc-status]');
+    let touched = false;
+
+    const setError = (k: FieldKey, m: string | null) => {
+      const slot = q(`#calc-${k}-error`);
+      if (!slot) return;
+      slot.textContent = m ?? '';
+      slot.hidden = !m;
+      if (m) input(k).setAttribute('aria-invalid', 'true');
+      else input(k).removeAttribute('aria-invalid');
+    };
+
+    // Returns true when the numbers worked. 'submit' shows the messages, announces the
+    // result or the problem, and moves focus to the first box to fix. 'blur' only shows the
+    // messages, so leaving a box never pulls focus back. 'silent' only updates a good result.
+    const run = (mode: 'submit' | 'blur' | 'silent') => {
+      const report = mode !== 'silent';
+      const values = Object.fromEntries(keys.map((k) => [k, input(k).value])) as Record<FieldKey, string>;
+      const r = calculate(values);
+      if (!r.ok) {
+        if (report) {
+          for (const k of keys) {
+            const code = r.errors[k];
+            // unit_small has its own message; the others are named field_code (share_range).
+            setError(k, code ? messages[code === 'unit_small' ? code : `${k}_${code}`] ?? '' : null);
+          }
+          if (mode === 'submit') {
+            if (status) status.textContent = root.dataset.announceErrors || '';
+            const first = keys.find((k) => r.errors[k]);
+            if (first) input(first).focus();
+          }
+        }
+        return false;
+      }
+      for (const k of keys) setError(k, null);
+      const nma = toTrimmed(r.nma);
+      const dec = toDecimal(r.decimal);
+      const set = (s: string, v: string) => { const el = q(s); if (el) el.textContent = v; };
+      set('[data-nma]', nma);
+      set('[data-decimal]', dec);
+      set('[data-f-share]', values.share.trim());
+      set('[data-f-tract]', values.tract.trim());
+      set('[data-f-nma]', nma);
+      set('[data-f-nma2]', nma);
+      set('[data-f-unit]', values.unit.trim());
+      set('[data-f-royalty]', values.royalty.trim());
+      set('[data-f-dec]', dec);
+      set('[data-caption]', root.dataset.yours || '');
+      const line = q('[data-example-line]');
+      if (line) line.hidden = true;
+      if (mode === 'submit' && status) {
+        status.textContent = `${root.dataset.announce || ''} ${dec}. ${root.dataset.nmaLabel || ''}: ${nma}.`;
+      }
+      return true;
+    };
+
+    form.addEventListener('submit', (e) => {
+      e.preventDefault();
+      touched = true;
+      run('submit');
+    });
+    // After the first try, the result follows the numbers as they are typed. Messages only
+    // change on Work it out or when a box is left, so nobody is scolded mid-keystroke.
+    for (const k of keys) {
+      input(k).addEventListener('input', () => {
+        if (touched) run('silent');
+      });
+      input(k).addEventListener('blur', () => { if (touched) run('blur'); });
+    }
+  }
+</script>
+
+<style is:global>
+  /* Styles for this feature only, so they load on Mineral Owners and nowhere else. */
+/* ============================================================
+   Mineral Owners: decimal calculator
+   Without JavaScript the boxes are hidden and the worked example stands on its own.
+   ============================================================ */
+.owner-calc { padding: 4rem 0; }
+.calc-form { display: none; }
+.js .calc-form { display: block; margin-bottom: 1.5rem; }
+.js .calc-example-inputs { display: none; }
+
+.calc-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.1rem 1.25rem;
+  margin-bottom: 1.25rem;
+}
+.calc-field input { min-height: 48px; }
+.calc-hint { margin: -.15rem 0 .1rem; font-size: .85rem; line-height: 1.45; color: var(--text-muted); }
+.calc-field input[aria-invalid="true"] { border-color: #991B1B; }
+
+.calc-result {
+  padding: 1.5rem 1.75rem;
+  background: var(--green-pale);
+  border: 1px solid rgba(27,67,50,.2);
+  border-radius: var(--radius-lg);
+}
+.calc-caption {
+  margin: 0 0 .5rem;
+  font-family: var(--font-heading);
+  font-size: .8rem;
+  font-weight: 700;
+  letter-spacing: .06em;
+  text-transform: uppercase;
+  color: var(--green-mid);
+}
+.calc-example-inputs { margin: 0 0 1rem; font-size: .95rem; line-height: 1.6; color: var(--text); }
+.calc-figures { display: flex; flex-wrap: wrap; gap: 1rem 2.5rem; margin: 0 0 1.1rem; }
+.calc-figure dt { font-size: .875rem; font-weight: 500; color: var(--text-muted); }
+.calc-figure dd {
+  margin: .15rem 0 0;
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: 1.6rem;
+  line-height: 1.2;
+  color: var(--green-dark);
+  font-variant-numeric: tabular-nums;
+}
+.calc-figure-main dd { font-size: 2rem; }
+.calc-formula {
+  padding-top: 1rem;
+  border-top: 1px solid rgba(27,67,50,.15);
+  font-size: .95rem;
+  line-height: 1.6;
+  color: var(--text);
+  overflow-wrap: anywhere;
+}
+.calc-formula p { margin: 0 0 .35rem; }
+.calc-formula p:last-child { margin-bottom: 0; }
+.calc-formula-label { font-weight: 600; color: var(--green-dark); }
+.calc-note { margin: 1.5rem 0 1rem; font-size: 1.02rem; line-height: 1.7; color: var(--text); }
+.calc-actions { display: flex; flex-wrap: wrap; align-items: center; gap: .75rem 1.5rem; margin-bottom: 1.25rem; }
+.calc-caveat { margin: 0 0 .4rem; font-size: .9rem; line-height: 1.6; color: var(--text-muted); }
+
+@media (max-width: 560px) {
+  .owner-calc { padding: 3rem 0; }
+  .calc-grid { grid-template-columns: 1fr; }
+  .calc-result { padding: 1.25rem 1.1rem; }
+  .calc-figure-main dd { font-size: 1.75rem; }
+}
+
+</style>

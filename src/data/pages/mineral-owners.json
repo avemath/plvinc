@@ -11,7 +11,8 @@
     "terms": "Key terms",
     "pennsylvania": "Pennsylvania",
     "faq": "FAQ",
-    "guide": "What you received"
+    "guide": "What you received",
+    "calculator": "Decimal calculator"
   },
   "intro": "Has a company asked to lease your minerals, run a line across your land, or have you sign a division order (the form that sets your share before royalty checks start)? You do not have to figure it out alone.\n\nWe are Certified Professional Landmen, and we read the public record for a living. We tell you what you own, what the document in front of you says, and what the record leaves unsettled.",
   "glance": {
@@ -92,14 +93,14 @@
         ],
         "what": "A division order is the form an operator sends before royalty payments start. It states your share of the well as a decimal, and your checks follow that number.",
         "checks": [
-          "The decimal. It should match your share of the unit, worked out from your share, your acres, the unit size and your royalty rate.",
+          "The decimal. You can work it out from your share, your acres, the unit size and your royalty rate with the calculator further down this page.",
           "The name and the land: the owner and the tract should match your deed, or the estate the interest came through.",
           "The well or unit it names, and the date it takes effect.",
           "If a check stopped or dropped: the well, the volumes and the deductions on the statement, against earlier months."
         ],
         "send": "The division order, or the royalty statement that looks wrong, plus your deed or the estate papers and the county.",
-        "more_label": "",
-        "more_href": "",
+        "more_label": "Check the decimal",
+        "more_href": "#decimal-calculator",
         "prefill": "A division order or a royalty statement."
       },
       {
@@ -290,6 +291,50 @@
   "team_headline": "Who You'll Talk To",
   "team_intro": "When you call, you reach one of the two Certified Professional Landmen who will run your file.",
   "team_link": "Read their backgrounds",
+  "decimal_calculator": {
+    "label": "Division Orders",
+    "headline": "Check the Decimal on Your Division Order",
+    "intro": "A division order shows your share of a well as a decimal. You can work it out from four numbers.",
+    "share_label": "Your share of the minerals in the tract",
+    "share_hint": "A fraction like 1/2, or a decimal like 0.5. If you own all of it, enter 1.",
+    "tract_label": "Tract acres",
+    "tract_hint": "The acres in your tract. If only part of it is in the unit, use the acres inside the unit.",
+    "unit_label": "Unit acres",
+    "unit_hint": "The size of the drilling unit your tract is in.",
+    "royalty_label": "Royalty rate",
+    "royalty_hint": "From your lease: 1/8, 3/16, 1/5, or a decimal like 0.18.",
+    "button": "Work it out",
+    "example_label": "Worked example",
+    "example": {
+      "share": "1/2",
+      "tract": "50",
+      "unit": "640",
+      "royalty": "1/8"
+    },
+    "nma_label": "Net mineral acres",
+    "decimal_label": "Decimal interest",
+    "formula_label": "How it is worked out",
+    "nma_formula_word": "share × tract acres",
+    "decimal_formula_word": "(net mineral acres ÷ unit acres) × royalty",
+    "result_note": "Your division order should show a decimal close to this. If it doesn't, or you're not sure your share is right, send it to us.",
+    "button_send": "Send us your division order",
+    "call_label": "Call",
+    "caveat": "This is arithmetic, not a review of your title. Unleased interests and deductions can change the figure.",
+    "disclaimer": "General information, not legal advice. Send it to us and we will go through your own record with you.",
+    "errors": {
+      "share_invalid": "Enter your share as a fraction like 1/2 or a decimal like 0.5.",
+      "share_range": "Your share has to be more than 0 and no more than 1.",
+      "tract_invalid": "Enter the tract's acres as a number, like 50 or 62.4.",
+      "tract_range": "Tract acres have to be more than 0.",
+      "unit_invalid": "Enter the unit's acres as a number, like 640.",
+      "unit_range": "Unit acres have to be more than 0.",
+      "unit_small": "Unit acres can't be smaller than your net mineral acres. Check both numbers.",
+      "royalty_invalid": "Enter the royalty as a fraction like 1/8 or a decimal like 0.125.",
+      "royalty_range": "The royalty has to be more than 0 and less than 1."
+    },
+    "announce_result": "Decimal interest:",
+    "announce_errors": "Check the highlighted boxes."
+  },
   "faq_label": "Common Questions",
   "faq_headline": "Questions We Are Asked Often",
   "faq": [
