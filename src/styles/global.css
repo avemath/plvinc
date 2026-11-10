@@ -2263,7 +2263,7 @@ a.contact-detail-value:hover { color: var(--green-dark); }
 .price-ticker {
   background: var(--cream);
   color: var(--text);
-  padding: .4rem 0 .5rem;
+  padding: 10px 0;
   border-bottom: 1px solid var(--border);
 }
 .price-ticker[hidden] { display: none; }
@@ -2278,22 +2278,38 @@ a.contact-detail-value:hover { color: var(--green-dark); }
   color: var(--green-mid);
 }
 
-/* Full width: the scrolling prices span the whole screen, not the page column. */
+/* TradingView's frame is 58px tall and draws its prices in rows 10 to 33 of it, leaving
+   blank space above and a wide blank band below. This window shows rows 8 to 35, so the
+   prices sit evenly in the bar. Its height is fixed, so nothing below moves when the
+   prices arrive. */
+.price-ticker-window {
+  height: 28px;
+  overflow: hidden;
+}
 .price-ticker-widget {
   width: 100%;
   height: 58px; /* what the widget sets itself to once drawn, in either theme */
+  margin-top: -8px;
   min-width: 0;
   overflow: hidden;
 }
 
+/* TradingView's attribution: small, right under the end of the prices, never its own
+   tall row. #5C5C5C on the cream bar is about 6.5:1, well over AA. */
 .price-ticker-credit {
+  margin-top: 3px;
   text-align: right;
-  line-height: 1;
+  font-size: 11px;
+  line-height: 1.2;
 }
 .price-ticker-credit a {
-  font-size: .7rem;
+  /* A taller tap area that takes up no extra room. */
+  display: inline-block;
+  padding: 6px 0;
+  margin: -6px 0;
   color: var(--text-muted);
   text-decoration: none;
+  white-space: nowrap;
   transition: color var(--transition);
 }
 .price-ticker-credit a:hover { color: var(--green-dark); text-decoration: underline; }
