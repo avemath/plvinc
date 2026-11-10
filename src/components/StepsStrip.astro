@@ -1,0 +1,23 @@
+---
+// The four steps between a first call and a report, as one compact row. The full
+// version with cards is on Contact; everywhere else uses this.
+interface Props {
+  headline?: string | null;
+  steps: { title: string; text: string }[];
+}
+const { headline, steps } = Astro.props;
+---
+
+{steps.length > 0 && (
+  <div class="trust-steps">
+    {headline && <h2 class="trust-heading">{headline}</h2>}
+    <ol class="trust-step-list" role="list">
+      {steps.map((s) => (
+        <li class="trust-step">
+          <span class="trust-step-title">{s.title}</span>
+          <span class="trust-step-text">{s.text}</span>
+        </li>
+      ))}
+    </ol>
+  </div>
+)}

@@ -1,0 +1,51 @@
+---
+// A short version of "What Makes a File Hard" from the Sample Work page: the titles
+// only, with a link down to the full explanations. The titles are edited once, under
+// Sample Work Page > What Makes a File Hard, so every short version stays in step.
+import sample from '../data/pages/sample-work.json';
+import { text } from '../utils/labels';
+
+interface Props {
+  label?: string | null;
+  headline?: string | null;
+  intro?: string | null;
+  link?: string | null;
+  href?: string;
+  /** 'band' renders its own section; 'box' sits inside another section. */
+  variant?: 'band' | 'box';
+}
+const { label, headline, intro, link, href = '/sample-work#hard-files', variant = 'band' } = Astro.props;
+const titles = (sample.hard_files?.items ?? []).map((i) => i.title).filter(Boolean);
+const heading = text(headline, sample.hard_files?.headline || 'What Makes a File Hard');
+---
+
+{titles.length > 0 && (
+  variant === 'band' ? (
+    <section class="hard-short-band" aria-labelledby="hard-short-headline">
+      <div class="container">
+        <div class="hard-short">
+          <div class="hard-short-head">
+            {label && <span class="section-label">{label}</span>}
+            <h2 id="hard-short-headline">{heading}</h2>
+            {intro && <p>{intro}</p>}
+          </div>
+          <ul class="hard-short-list" role="list">
+            {titles.map((t) => <li>{t}</li>)}
+          </ul>
+          <a class="hard-short-link" href={href}>{text(link, 'How we handle each one')} <span aria-hidden="true">→</span></a>
+        </div>
+      </div>
+    </section>
+  ) : (
+    <aside class="hard-short hard-short-box" aria-labelledby="hard-short-headline">
+      <div class="hard-short-head">
+        <p class="hard-short-title" id="hard-short-headline">{heading}</p>
+        {intro && <p>{intro}</p>}
+      </div>
+      <ul class="hard-short-list" role="list">
+        {titles.map((t) => <li>{t}</li>)}
+      </ul>
+      <a class="hard-short-link" href={href}>{text(link, 'How we handle each one')} <span aria-hidden="true">↓</span></a>
+    </aside>
+  )
+)}

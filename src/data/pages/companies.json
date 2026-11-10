@@ -6,7 +6,7 @@
   "header_project_label": "Tell us about the project",
   "page_title": "Land Services for Energy Companies",
   "meta_description": "Title, leasing, A&D due diligence and right-of-way for operators, developers and investors, from Certified Professional Landmen in Duncansville, PA.",
-  "intro": "Petro Land Ventures has worked files since January 2005, from curative work on a single tract to multi-county leasing programs, acquisition and divestiture (A&D) packages and due diligence on whole portfolios.\n\n**A CPL on every project.** A Certified Professional Landman runs your project, reviews every file before it reaches you, and is the person you talk to.\n\n**No guessing.** Every report says what the record shows, what it does not, and what it would take to close the gap.",
+  "intro": "Petro Land Ventures has worked files since January 2005, from curative work on a single tract to multi-county leasing programs, acquisition and divestiture (A&D) packages and due diligence on whole portfolios.",
   "glance": {
     "heading": "At a glance",
     "items": [
@@ -16,7 +16,7 @@
       },
       {
         "title": "Working files since 2005",
-        "text": "From a single tract to multi-county programs."
+        "text": ""
       },
       {
         "title": "8 states with completed files",
@@ -28,6 +28,12 @@
       }
     ],
     "call_label": "Call"
+  },
+  "hard_files_short": {
+    "label": "Hard Files",
+    "headline": "What Makes a File Hard",
+    "intro": "Most files carry at least one of these. We run each one to the end of the chain, so it turns up in our report, not at closing.",
+    "link": "See how we handle each one"
   },
   "services_label": "What We Handle",
   "services_headline": "Land Work We Take On",
@@ -73,7 +79,7 @@
   "states_label": "Track Record",
   "states_headline": "Where We've Worked",
   "states_note": "These are the states where we have already completed files. We take work in any state.",
-  "states_aside": "The [Experience page](/experience) lists the project types, and the [coverage map](/#coverage) shows the plays worked in each basin.",
+  "states_aside": "The [Experience page](/experience) breaks the work down by state, basin and project type.",
   "team_label": "The Landmen",
   "team_headline": "Who Runs Your Project",
   "team_intro": "Your project is run by one of the two Certified Professional Landmen who run the firm, from the first call to the final report.",
@@ -89,7 +95,7 @@
   "faq": [
     {
       "question": "What kinds of projects do you take on?",
-      "answer": "Title research and curative work, lease acquisition and negotiation, A&D due diligence, mineral and royalty management, right-of-way and surface use, and solar and renewable land acquisition. Projects range from curative work on a single tract to multi-county leasing programs and due diligence on whole portfolios."
+      "answer": "Title research and curative work, lease acquisition and negotiation, A&D due diligence, mineral and royalty management, right-of-way and surface use, and solar and renewable land acquisition."
     },
     {
       "question": "Where do you work?",
@@ -112,6 +118,10 @@
       "answer": "Runsheets, ownership reports, lease acquisition reports and supplemental reports, each stating what the record shows, what it does not, and what it would take to close the gap. The sample file on this site shows a complete set."
     }
   ],
+  "faq_cta": {
+    "text": "Have a deal, a leasing program or a tract list to staff? Send us the scope and a CPL will talk it through with you.",
+    "button": "Tell us about the project"
+  },
   "cta": {
     "headline": "Have a project? Send us the scope.",
     "text": "The basin, the county or tract list, and your timing are enough to start.",

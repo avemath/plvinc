@@ -3,14 +3,14 @@ import Base from '../layouts/Base.astro';
 import { text } from '../utils/labels';
 import CallToAction from '../components/CallToAction.astro';
 import SampleFeature from '../components/SampleFeature.astro';
-import { getCollection } from 'astro:content';
+import TrustBand from '../components/TrustBand.astro';
+import Disclosures from '../components/Disclosures.astro';
 import { renderMarkdown } from '../utils/markdown';
 import { cssUrl } from '../utils/cssUrl';
 import { needsTint } from '../utils/images';
 import page from '../data/pages/mineral-owners.json';
 import settings from '../data/settings.json';
 import { telHref } from '../utils/phone';
-import { srcsetFor } from '../utils/images';
 
 const introHtml = await renderMarkdown(page.intro);
 const pennsylvaniaHtml = page.pennsylvania_note
@@ -46,15 +46,6 @@ const jumpLinks = [
   { href: '#faq', label: text(jump.faq, 'FAQ'), show: faq.length > 0 },
 ].filter((l) => l.show);
 
-// Rickey and Shannon for the compact band near the foot of the page.
-let people: Awaited<ReturnType<typeof getCollection<'people'>>> = [];
-try {
-  people = await getCollection('people');
-} catch {
-  people = [];
-}
-const team = [...people].sort((a, b) => (a.data.sort_order ?? 0) - (b.data.sort_order ?? 0));
-const steps = page.how_it_works?.steps ?? [];
 
 // FAQPage markup is only valid with at least one entry, so it is built here and passed to
 // the layout rather than emitted unconditionally.
@@ -183,17 +174,7 @@ const faqSchema = faq.length > 0
         {leaseTerms.length > 0 && (
           <div id="key-terms" class="owner-terms">
             <h3 class="owner-terms-headline">{page.lease_packet.terms_headline}</h3>
-            {/* Native disclosure rows: they open with a click, Enter or Space, screen
-                readers announce them as expanded or collapsed, and the text stays in the
-                page for search engines and for find-in-page. */}
-            <div class="disclosure-list">
-              {leaseTerms.map((t, i) => (
-                <details class="disclosure" open={i === 0}>
-                  <summary class="disclosure-summary"><span>{t.title}</span></summary>
-                  <div class="disclosure-body"><p>{t.text}</p></div>
-                </details>
-              ))}
-            </div>
+            <Disclosures items={leaseTerms.map((t) => ({ title: t.title, text: t.text }))} />
           </div>
         )}
 
@@ -246,74 +227,25 @@ const faqSchema = faq.length > 0
           <span class="section-label">{page.faq_label}</span>
           <h2 id="faq-headline">{page.faq_headline}</h2>
         </div>
-        <div class="disclosure-list">
-          {faq.map((f, i) => (
-            <details class="disclosure" id={faqId(f.question)} open={i === 0}>
-              <summary class="disclosure-summary"><span>{f.question}</span></summary>
-              <div class="disclosure-body"><p>{f.answer}</p></div>
-            </details>
-          ))}
-        </div>
+        <Disclosures items={faq.map((f) => ({ id: faqId(f.question), title: f.question, text: f.answer }))} />
       </div>
     </section>
   )}
 
   {/* The trust content a visitor from Google may need, kept but compact: who they will
       talk to, what happens after they call, the sample file, and the two notes. */}
-  <section class="owner-trust" aria-label="About working with us">
-    <div class="container">
-      {team.length > 0 && (
-        <div class="owner-trust-team">
-          <h2 class="owner-trust-heading">{text(page.team_headline, "Who You'll Talk To")}</h2>
-          <div class="owner-trust-team-row">
-            <ul class="owner-trust-people" role="list">
-              {team.map((p) => (
-                <li class="owner-trust-person">
-                  {p.data.photo
-                    ? <img src={p.data.photo} srcset={srcsetFor(p.data.photo, 800)} sizes="72px" alt="" width="72" height="72" loading="lazy" decoding="async" class="owner-trust-photo" />
-                    : <span class="owner-trust-photo owner-trust-photo-empty" aria-hidden="true"></span>}
-                  <span class="owner-trust-name">{p.data.name}</span>
-                </li>
-              ))}
-            </ul>
-            <p class="owner-trust-line">
-              {page.team_intro}{' '}
-              <a href="/about">{text(page.team_link, 'Read their backgrounds')} <span aria-hidden="true">→</span></a>
-            </p>
-          </div>
-        </div>
-      )}
-
-      {steps.length > 0 && (
-        <div class="owner-trust-steps">
-          <h2 class="owner-trust-heading">{page.how_it_works?.headline}</h2>
-          <ol class="owner-steps" role="list">
-            {steps.map((s) => (
-              <li class="owner-step">
-                <span class="owner-step-title">{s.title}</span>
-                <span class="owner-step-text">{s.text}</span>
-              </li>
-            ))}
-          </ol>
-        </div>
-      )}
-
-      {page.sample_feature?.headline && (
-        <p class="owner-trust-sample">
-          <strong>{/[.!?]$/.test(page.sample_feature.headline.trim()) ? page.sample_feature.headline : `${page.sample_feature.headline.trim()}.`}</strong>{' '}
-          {page.sample_feature.text}{' '}
-          <a href="/sample-work">{page.sample_feature.button} <span aria-hidden="true">→</span></a>
-        </p>
-      )}
-
-      {(page.conflict_note || page.disclaimer) && (
-        <div class="owner-trust-notes">
-          {page.conflict_note && <p>{page.conflict_note}</p>}
-          {page.disclaimer && <p>{page.disclaimer}</p>}
-        </div>
-      )}
-    </div>
-  </section>
+  <TrustBand
+    team={{ headline: page.team_headline, intro: page.team_intro, link: page.team_link }}
+    steps={page.how_it_works}
+    sample={page.sample_feature}
+  >
+    {(page.conflict_note || page.disclaimer) && (
+      <div class="trust-notes">
+        {page.conflict_note && <p>{page.conflict_note}</p>}
+        {page.disclaimer && <p>{page.disclaimer}</p>}
+      </div>
+    )}
+  </TrustBand>
 
   <CallToAction
     headline={page.cta.headline}
@@ -325,17 +257,3 @@ const faqSchema = faq.length > 0
     phoneHref={tel}
   />
 </Base>
-
-<script>
-  // A link straight to one question (/mineral-owners#what-is-a-division-order) or to the
-  // key terms opens the row it points at, so the visitor lands on the answer, not a
-  // closed row.
-  const openTarget = () => {
-    const id = decodeURIComponent(location.hash.slice(1));
-    if (!id) return;
-    const el = document.getElementById(id);
-    if (el instanceof HTMLDetailsElement) el.open = true;
-  };
-  openTarget();
-  window.addEventListener('hashchange', openTarget);
-</script>

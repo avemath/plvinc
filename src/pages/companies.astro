@@ -1,19 +1,18 @@
 ---
-// The company counterpart to Mineral Owners: what we handle, how a project runs, where we
-// have worked, the sample file and the questions a land department asks. Copy lives in
+// The company counterpart to Mineral Owners. The order puts what a land manager checks
+// first near the top: what we take on, the hard files, and the answers to their questions.
+// Trust content (team, steps, sample file, states) sits in one compact band at the foot. Copy lives in
 // src/data/pages/companies.json; the services and the states come from their own sources
 // so this page can never disagree with the Services or Experience pages.
 import Base from '../layouts/Base.astro';
 import { text } from '../utils/labels';
 import CallToAction from '../components/CallToAction.astro';
-import SampleFeature from '../components/SampleFeature.astro';
-import HowItWorks from '../components/HowItWorks.astro';
-import TeamStrip from '../components/TeamStrip.astro';
-import GlanceCard from '../components/GlanceCard.astro';
+import TrustBand from '../components/TrustBand.astro';
+import Disclosures from '../components/Disclosures.astro';
+import HardFilesShort from '../components/HardFilesShort.astro';
 import ServiceCard from '../components/ServiceCard.astro';
 import { getCollection } from 'astro:content';
 import { renderMarkdown } from '../utils/markdown';
-import { stateShape } from '../utils/state-shapes';
 import { cssUrl } from '../utils/cssUrl';
 import { needsTint } from '../utils/images';
 import page from '../data/pages/companies.json';
@@ -28,6 +27,13 @@ const services = [...(await getCollection('services'))].sort((a, b) => a.data.so
 const states = (experience.states_served || []).filter((s) => s.state);
 const standards = (page.standards || []).filter((s) => s.title);
 const faq = (page.faq || []).filter((f) => f.question && f.answer);
+const facts = (page.glance?.items ?? []).filter((i) => i?.title?.trim());
+
+// "Pennsylvania, Ohio and Texas": the states from the Experience page, as one line.
+const stateNames = states.map((s) => s.state);
+const stateList = stateNames.length > 1
+  ? `${stateNames.slice(0, -1).join(', ')} and ${stateNames[stateNames.length - 1]}`
+  : stateNames.join('');
 
 function faqId(q: string) {
   return q.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '').slice(0, 60);
@@ -71,14 +77,30 @@ const faqSchema = faq.length > 0
     </div>
   </div>
 
-  {introHtml && (
-    <section class="intro-section">
-      <div class="container intro-split">
-        <div class="intro-main prose owner-intro" set:html={introHtml} />
-        <GlanceCard glance={page.glance} />
+  {(introHtml || facts.length > 0) && (
+    <section class="owner-opening">
+      <div class="container container-narrow">
+        {introHtml && <div class="prose owner-intro" set:html={introHtml} />}
+        {facts.length > 0 && (
+          <ul class="owner-facts" role="list" aria-label={text(page.glance?.heading, 'At a glance')}>
+            {facts.map((f) => (
+              <li class="owner-fact">
+                <span class="owner-fact-title">{f.title}</span>
+                {f.text && <span class="owner-fact-text">{f.text}</span>}
+              </li>
+            ))}
+          </ul>
+        )}
       </div>
     </section>
   )}
+
+  <HardFilesShort
+    label={page.hard_files_short?.label}
+    headline={page.hard_files_short?.headline}
+    intro={page.hard_files_short?.intro}
+    link={page.hard_files_short?.link}
+  />
 
   {services.length > 0 && (
     <section class="section-alt">
@@ -103,8 +125,24 @@ const faqSchema = faq.length > 0
     </section>
   )}
 
-  {page.how_it_works?.steps?.length > 0 && (
-    <HowItWorks label={page.how_it_works.label} headline={page.how_it_works.headline} steps={page.how_it_works.steps} />
+  {faq.length > 0 && (
+    <section id="faq" class="owner-faq-section" aria-labelledby="faq-headline">
+      <div class="container container-narrow">
+        <div class="section-header is-left">
+          {page.faq_label && <span class="section-label">{page.faq_label}</span>}
+          <h2 id="faq-headline">{page.faq_headline}</h2>
+        </div>
+        <Disclosures items={faq.map((f) => ({ id: faqId(f.question), title: f.question, text: f.answer }))} />
+        {page.faq_cta?.text && (
+          <div class="owner-lease-cta">
+            <p>{page.faq_cta.text}</p>
+            <a href="/contact#project" class="btn btn-primary">
+              {text(page.faq_cta.button, 'Tell us about the project')} <span aria-hidden="true">→</span>
+            </a>
+          </div>
+        )}
+      </div>
+    </section>
   )}
 
   {standards.length > 0 && (
@@ -126,69 +164,20 @@ const faqSchema = faq.length > 0
     </section>
   )}
 
-  {states.length > 0 && (
-    <section>
-      <div class="container">
-        <div class="section-header is-left">
-          {page.states_label && <span class="section-label">{page.states_label}</span>}
-          <h2>{text(page.states_headline, "Where We've Worked")}</h2>
-          {page.states_note && <p>{page.states_note}</p>}
-        </div>
-        <div class="states-grid">
-          {states.map((s) => (
-            <div class="state-card">
-              <div class="state-card-head">
-                <p class="state-name">{s.state}</p>
-                {stateShape(s.state) && (
-                  <svg class="state-shape" viewBox={stateShape(s.state)!.viewBox} aria-hidden="true" focusable="false">
-                    <path d={stateShape(s.state)!.d} />
-                  </svg>
-                )}
-              </div>
-              <p class="state-note">{s.note}</p>
-            </div>
-          ))}
-        </div>
-        {statesAsideHtml && <div class="section-aside" set:html={statesAsideHtml} />}
+  <TrustBand
+    label="Working with us"
+    team={{ headline: page.team_headline, intro: page.team_intro, link: page.team_link }}
+    steps={page.how_it_works}
+    sample={page.sample_feature}
+  >
+    {stateList && (
+      <div class="trust-sample trust-states">
+        <strong>{text(page.states_headline, "Where We've Worked")}.</strong>{' '}
+        {stateList}.{' '}
+        {statesAsideHtml && <span class="trust-inline" set:html={statesAsideHtml} />}
       </div>
-    </section>
-  )}
-
-  <TeamStrip
-    label={page.team_label}
-    headline={page.team_headline}
-    intro={page.team_intro}
-    link={page.team_link}
-    tone="alt"
-  />
-
-  {page.sample_feature?.headline && (
-    <SampleFeature
-      label={page.sample_feature.label}
-      headline={page.sample_feature.headline}
-      text={page.sample_feature.text}
-      button={page.sample_feature.button}
-    />
-  )}
-
-  {faq.length > 0 && (
-    <section class="section-alt section-roomy">
-      <div class="container section-split">
-        <div class="section-header is-left">
-          {page.faq_label && <span class="section-label">{page.faq_label}</span>}
-          <h2>{page.faq_headline}</h2>
-        </div>
-        <dl class="owner-faq">
-          {faq.map((f) => (
-            <div class="owner-faq-item" id={faqId(f.question)}>
-              <dt>{f.question}</dt>
-              <dd>{f.answer}</dd>
-            </div>
-          ))}
-        </dl>
-      </div>
-    </section>
-  )}
+    )}
+  </TrustBand>
 
   <CallToAction
     headline={page.cta.headline}

@@ -1,0 +1,68 @@
+---
+// A compact band of the trust content a visitor from Google may need on whatever page
+// they land on: who they will talk to, what happens after they get in touch, and the
+// sample file, each in a line or a row. Extra lines (notes, where we have worked) go in
+// the slot and sit at the foot of the band.
+import { getCollection } from 'astro:content';
+import { text } from '../utils/labels';
+import { srcsetFor } from '../utils/images';
+import StepsStrip from './StepsStrip.astro';
+
+interface Props {
+  label?: string;
+  team?: { headline?: string | null; intro?: string | null; link?: string | null } | null;
+  steps?: { headline?: string | null; steps?: { title: string; text: string }[] | null } | null;
+  sample?: { headline?: string | null; text?: string | null; button?: string | null } | null;
+}
+const { label = 'About working with us', team, steps, sample } = Astro.props;
+
+let people: Awaited<ReturnType<typeof getCollection<'people'>>> = [];
+try {
+  people = await getCollection('people');
+} catch {
+  people = [];
+}
+const sorted = [...people].sort((a, b) => (a.data.sort_order ?? 0) - (b.data.sort_order ?? 0));
+const sampleHeadline = sample?.headline?.trim() || '';
+const sampleLead = sampleHeadline && !/[.!?]$/.test(sampleHeadline) ? `${sampleHeadline}.` : sampleHeadline;
+---
+
+<section class="trust-band" aria-label={label}>
+  <div class="container">
+    {team && sorted.length > 0 && (
+      <div class="trust-team">
+        <h2 class="trust-heading">{text(team.headline, "Who You'll Talk To")}</h2>
+        <div class="trust-team-row">
+          <ul class="trust-people" role="list">
+            {sorted.map((p) => (
+              <li class="trust-person">
+                {p.data.photo
+                  ? <img src={p.data.photo} srcset={srcsetFor(p.data.photo, 800)} sizes="72px" alt="" width="72" height="72" loading="lazy" decoding="async" class="trust-photo" />
+                  : <span class="trust-photo trust-photo-empty" aria-hidden="true"></span>}
+                <span class="trust-name">{p.data.name}</span>
+              </li>
+            ))}
+          </ul>
+          <p class="trust-line">
+            {team.intro}{' '}
+            <a href="/about">{text(team.link, 'Read their backgrounds')} <span aria-hidden="true">→</span></a>
+          </p>
+        </div>
+      </div>
+    )}
+
+    {steps?.steps && steps.steps.length > 0 && (
+      <StepsStrip headline={steps.headline} steps={steps.steps} />
+    )}
+
+    {sampleLead && (
+      <p class="trust-sample">
+        <strong>{sampleLead}</strong>{' '}
+        {sample?.text}{' '}
+        <a href="/sample-work">{text(sample?.button, 'View the sample file')} <span aria-hidden="true">→</span></a>
+      </p>
+    )}
+
+    <slot />
+  </div>
+</section>

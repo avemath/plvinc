@@ -4018,29 +4018,29 @@ html { scroll-padding-top: calc(var(--nav-height) + 1rem); }
 }
 .owner-state .owner-state-note { color: var(--text); }
 
-/* The compact trust band. */
-.owner-trust {
+/* The compact trust band (Mineral Owners, Companies) and the steps strip (Home). */
+.trust-band {
   padding: 3.5rem 0;
   background: var(--white);
   border-top: 1px solid var(--border);
 }
-.owner-trust .container > * + * {
+.trust-band .container > * + * {
   margin-top: 2.25rem;
   padding-top: 2.25rem;
   border-top: 1px solid var(--border);
 }
-.owner-trust-heading {
+.trust-heading {
   margin: 0 0 1rem;
   font-size: 1.35rem;
   color: var(--green-dark);
 }
-.owner-trust-team-row {
+.trust-team-row {
   display: flex;
   flex-wrap: wrap;
   align-items: center;
   gap: 1rem 2rem;
 }
-.owner-trust-people {
+.trust-people {
   list-style: none;
   margin: 0;
   padding: 0;
@@ -4048,8 +4048,8 @@ html { scroll-padding-top: calc(var(--nav-height) + 1rem); }
   flex-wrap: wrap;
   gap: .75rem 1.5rem;
 }
-.owner-trust-person { display: flex; align-items: center; gap: .7rem; }
-.owner-trust-photo {
+.trust-person { display: flex; align-items: center; gap: .7rem; }
+.trust-photo {
   width: 64px;
   height: 64px;
   border-radius: 50%;
@@ -4058,37 +4058,37 @@ html { scroll-padding-top: calc(var(--nav-height) + 1rem); }
   border: 2px solid var(--white);
   box-shadow: var(--shadow-md);
 }
-.owner-trust-photo-empty { display: block; background: var(--green-pale); }
-.owner-trust-name { font-weight: 700; font-size: 1rem; color: var(--text); }
-.owner-trust-line {
+.trust-photo-empty { display: block; background: var(--green-pale); }
+.trust-name { font-weight: 700; font-size: 1rem; color: var(--text); }
+.trust-line {
   flex: 1 1 340px;
   margin: 0;
   font-size: 1rem;
   line-height: 1.6;
   color: var(--text-muted);
 }
-.owner-trust-line a,
-.owner-trust-sample a { font-weight: 600; color: var(--green-dark); white-space: nowrap; }
+.trust-line a,
+.trust-sample a { font-weight: 600; color: var(--green-dark); white-space: nowrap; }
 
-.owner-steps {
+.trust-step-list {
   list-style: none;
-  counter-reset: owner-step;
+  counter-reset: trust-step;
   margin: 0;
   padding: 0;
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
   gap: 1.25rem 1.5rem;
 }
-.owner-step {
-  counter-increment: owner-step;
+.trust-step {
+  counter-increment: trust-step;
   position: relative;
   display: flex;
   flex-direction: column;
   gap: .25rem;
   padding-left: 2.4rem;
 }
-.owner-step::before {
-  content: counter(owner-step);
+.trust-step::before {
+  content: counter(trust-step);
   position: absolute;
   left: 0;
   top: 0;
@@ -4102,25 +4102,25 @@ html { scroll-padding-top: calc(var(--nav-height) + 1rem); }
   font-size: .8rem;
   font-weight: 700;
 }
-.owner-step-title { font-weight: 700; font-size: 1rem; line-height: 1.4; color: var(--green-dark); }
-.owner-step-text { font-size: .95rem; line-height: 1.55; color: var(--text-muted); }
+.trust-step-title { font-weight: 700; font-size: 1rem; line-height: 1.4; color: var(--green-dark); }
+.trust-step-text { font-size: .95rem; line-height: 1.55; color: var(--text-muted); }
 
-.owner-trust-sample {
+.trust-sample {
   margin: 0;
   font-size: 1rem;
   line-height: 1.65;
   color: var(--text-muted);
 }
-.owner-trust-sample strong { color: var(--text); }
+.trust-sample strong { color: var(--text); }
 
-.owner-trust-notes p {
+.trust-notes p {
   margin: 0;
   max-width: 80ch;
   font-size: .95rem;
   line-height: 1.65;
   color: var(--text-muted);
 }
-.owner-trust-notes p + p { margin-top: .75rem; }
+.trust-notes p + p { margin-top: .75rem; }
 
 @media (max-width: 560px) {
   .owner-opening { padding: 2.25rem 0 2.5rem; }
@@ -4133,3 +4133,70 @@ html { scroll-padding-top: calc(var(--nav-height) + 1rem); }
   .disclosure-body p { font-size: 1.0625rem; }
   .owner-state-card { padding: 1.5rem 1.25rem; }
 }
+
+/* "What Makes a File Hard", short version (Companies, top of Sample Work). */
+.hard-short-band { padding: 3.5rem 0; background: var(--white); }
+.hard-short {
+  padding: 1.75rem 2rem;
+  background: var(--cream);
+  border: 1px solid var(--border);
+  border-top: 3px solid var(--green-mid);
+  border-radius: var(--radius-lg);
+}
+.hard-short-head h2 { margin: 0 0 .5rem; font-size: clamp(1.45rem, 2.4vw, 1.8rem); }
+.hard-short-head p { margin: 0; max-width: 62ch; font-size: 1.0625rem; line-height: 1.65; color: var(--text-muted); }
+.hard-short-head .section-label { display: block; margin-bottom: .35rem; }
+.hard-short-title {
+  margin: 0 0 .35rem;
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: 1.3rem;
+  color: var(--green-dark);
+}
+.hard-short-list {
+  list-style: none;
+  margin: 1.25rem 0 1.1rem;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: .55rem 1.5rem;
+}
+.hard-short-list li {
+  position: relative;
+  padding-left: 1.4rem;
+  font-weight: 600;
+  font-size: 1rem;
+  line-height: 1.45;
+  color: var(--text);
+}
+.hard-short-list li::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: .5em;
+  width: .5rem;
+  height: .5rem;
+  border-radius: 50%;
+  background: var(--green-light);
+}
+.hard-short-link {
+  display: inline-flex;
+  align-items: center;
+  gap: .35rem;
+  min-height: 44px;
+  font-weight: 600;
+  color: var(--green-dark);
+}
+.hard-short-box { margin-top: 1.75rem; padding: 1.4rem 1.5rem; }
+.hard-short-box .hard-short-list { grid-template-columns: 1fr; margin: .9rem 0 .6rem; }
+
+/* Home: the steps strip standing on its own. */
+.steps-band { padding: 3.5rem 0; }
+.steps-band .trust-heading { font-size: clamp(1.5rem, 2.6vw, 1.9rem); margin-bottom: 1.5rem; }
+
+@media (max-width: 560px) {
+  .hard-short-band { padding: 2.5rem 0; }
+  .hard-short { padding: 1.4rem 1.25rem; }
+}
+.trust-inline p { display: inline; margin: 0; }
+.trust-inline a { font-weight: 600; color: var(--green-dark); }

@@ -1,0 +1,30 @@
+---
+// Expandable rows (key terms, questions). Native details and summary: they open with a
+// click, Enter or Space, screen readers announce them as expanded or collapsed, and all
+// the text stays in the page for search engines and find-in-page. The first row is open.
+// A link straight to a row (/companies#what-will-it-cost) opens it.
+interface Props {
+  items: { id?: string; title: string; text: string }[];
+}
+const { items } = Astro.props;
+---
+
+<div class="disclosure-list">
+  {items.map((it, i) => (
+    <details class="disclosure" id={it.id} open={i === 0}>
+      <summary class="disclosure-summary"><span>{it.title}</span></summary>
+      <div class="disclosure-body"><p>{it.text}</p></div>
+    </details>
+  ))}
+</div>
+
+<script>
+  const openTarget = () => {
+    const id = decodeURIComponent(location.hash.slice(1));
+    if (!id) return;
+    const el = document.getElementById(id);
+    if (el instanceof HTMLDetailsElement) el.open = true;
+  };
+  openTarget();
+  window.addEventListener('hashchange', openTarget);
+</script>

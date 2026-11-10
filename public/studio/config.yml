@@ -1660,20 +1660,20 @@ collections:
             name: intro
             widget: markdown
             required: false
-            hint: "The opening paragraphs, written for a land department, a broker or a developer. Select text to make it bold."
+            hint: "The short opening paragraph, written for a land department, a broker or a developer. Keep it to two or three sentences; the row of facts sits right under it."
 
           - label: "At a Glance Card"
             name: glance
             widget: object
             required: false
             collapsed: true
-            hint: "The small card beside the opening paragraphs on a wide screen, under them on a phone. List only plain facts that are true today. Empty the list to hide the card."
+            hint: "On this page the facts show as a single row of short facts under the opening paragraph. List only plain facts that are true today. Empty the list to hide the row."
             fields:
               - label: "Card Heading"
                 name: heading
                 widget: string
                 required: false
-                hint: "The small heading at the top of the card. Blank shows \"At a glance\"."
+                hint: "Read aloud to screen readers as the name of the fact row; not shown on screen. Blank uses \"At a glance\"."
               - label: "Facts"
                 name: items
                 widget: list
@@ -1694,7 +1694,19 @@ collections:
                 name: call_label
                 widget: string
                 required: false
-                hint: "The word before the phone number on the button at the foot of the card. The number comes from Site Settings. Blank shows \"Call\"."
+                hint: "Not shown on the Companies page, which has call buttons at the top and in the closing band. Kept in case the card comes back."
+
+          - label: "What Makes a File Hard (short)"
+            name: hard_files_short
+            widget: object
+            required: false
+            collapsed: true
+            hint: "The short box near the top of the page listing the problems that make a file hard. The list itself comes from Sample Work Page > What Makes a File Hard, so edit the items there. Blank fields use the Sample Work wording."
+            fields:
+              - { label: "Small Label", name: label, widget: string, required: false }
+              - { label: "Headline", name: headline, widget: string, required: false, hint: "Blank shows the Sample Work headline." }
+              - { label: "Text", name: intro, widget: text, required: false, hint: "One or two sentences under the headline." }
+              - { label: "Link Text", name: link, widget: string, required: false, hint: "The link to the full explanations on the Sample Work page. Blank shows \"How we handle each one\"." }
 
           - label: "Services Section Label"
             name: services_label
@@ -1712,22 +1724,35 @@ collections:
             widget: text
             required: false
 
-          - label: "How a Project Runs"
-            name: how_it_works
-            widget: object
-            collapsed: true
+          - label: "FAQ Section Label"
+            name: faq_label
+            widget: string
             required: false
-            hint: "The steps from first contact to a finished report. Do not promise a turnaround time here."
+
+          - label: "FAQ Section Headline"
+            name: faq_headline
+            widget: string
+            required: false
+
+          - label: "Questions and Answers"
+            name: faq
+            widget: list
+            required: false
+            summary: "{{question}}"
+            hint: "Shown high on the page as rows a visitor clicks to open, with the first one open. All answers stay on the page and also tell Google what this page answers, so write the question the way a land manager would ask it. Empty this list to hide the section."
             fields:
-              - { label: "Small Label", name: label, widget: string, required: false }
-              - { label: "Headline", name: headline, widget: string }
-              - label: "Steps"
-                name: steps
-                widget: list
-                summary: "{{title}}"
-                fields:
-                  - { label: "Step Title", name: title, widget: string }
-                  - { label: "Step Text", name: text, widget: text }
+              - { label: "Question", name: question, widget: string }
+              - { label: "Answer", name: answer, widget: text }
+
+          - label: "After the Questions"
+            name: faq_cta
+            widget: object
+            required: false
+            collapsed: true
+            hint: "The short call to action right under the questions. Its button opens the project form on the Contact page. Leave the text blank to hide it."
+            fields:
+              - { label: "Text", name: text, widget: text, required: false }
+              - { label: "Button Text", name: button, widget: string, required: false, hint: "Blank shows \"Tell us about the project\"." }
 
           - label: "What You Can Count On: Label"
             name: standards_label
@@ -1749,80 +1774,81 @@ collections:
               - { label: "Title", name: title, widget: string }
               - { label: "Description", name: description, widget: text }
 
-          - label: "Where We've Worked: Label"
-            name: states_label
-            widget: string
-            required: false
-
-          - label: "Where We've Worked: Headline"
-            name: states_headline
-            widget: string
-            required: false
-
-          - label: "Where We've Worked: Text"
-            name: states_note
-            widget: text
-            required: false
-            hint: "The line above the state cards. The states themselves come from the Experience page, so add a state there and it shows here too."
-
-          - label: "Where We've Worked: Note Below"
-            name: states_aside
-            widget: markdown
-            required: false
-            hint: "A short line under the state cards, with links. Leave blank to hide it."
-
           - label: "Who Runs Your Project"
             name: team_label
             widget: string
             required: false
-            hint: "Small uppercase label above the photos of Rickey and Shannon. The photos, names and roles come from Team / People."
+            hint: "Not shown since the team moved into the compact band near the foot of the page. Kept for reuse. The photos and names come from Team / People."
 
           - label: "Who Runs Your Project: Headline"
             name: team_headline
             widget: string
             required: false
+            hint: "The small heading over the two photos in the compact band near the foot of the page."
 
           - label: "Who Runs Your Project: Text"
             name: team_intro
             widget: text
             required: false
+            hint: "One sentence beside the two photos in the compact band."
 
           - label: "Who Runs Your Project: Link"
             name: team_link
             widget: string
             required: false
-            hint: "The link under the photos that goes to the About page. Blank shows \"Read their backgrounds\"."
+            hint: "The link beside the photos in the compact band that goes to the About page. Blank shows \"Read their backgrounds\"."
+
+          - label: "How a Project Runs"
+            name: how_it_works
+            widget: object
+            collapsed: true
+            required: false
+            hint: "The steps from first contact to a finished report, shown as one compact row near the foot of the page. Keep each step to a sentence or two. Do not promise a turnaround time here."
+            fields:
+              - { label: "Small Label", name: label, widget: string, required: false, hint: "Not shown in the compact row. Kept for reuse." }
+              - { label: "Headline", name: headline, widget: string }
+              - label: "Steps"
+                name: steps
+                widget: list
+                summary: "{{title}}"
+                fields:
+                  - { label: "Step Title", name: title, widget: string }
+                  - { label: "Step Text", name: text, widget: text }
 
           - label: "Sample Work Band"
             name: sample_feature
             widget: object
             required: false
-            hint: "The band that points at the sample file. Leave the headline blank to hide the band."
+            hint: "One line in the compact band near the foot of the page: the headline in bold, the text, then a link to the sample file. Leave the headline blank to hide it."
             fields:
-              - { label: "Small Label", name: label, widget: string, required: false }
+              - { label: "Small Label", name: label, widget: string, required: false, hint: "Not shown in the compact line. Kept for reuse." }
               - { label: "Headline", name: headline, widget: string, required: false }
               - { label: "Text", name: text, widget: text }
               - { label: "Button Text", name: button, widget: string }
 
-          - label: "FAQ Section Label"
-            name: faq_label
+          - label: "Where We've Worked: Label"
+            name: states_label
             widget: string
             required: false
+            hint: "Not shown since the state cards were taken off this page. Kept for reuse."
 
-          - label: "FAQ Section Headline"
-            name: faq_headline
+          - label: "Where We've Worked: Headline"
+            name: states_headline
             widget: string
             required: false
+            hint: "The bold start of the line in the compact band that names the states you have worked in. Blank shows \"Where We've Worked\"."
 
-          - label: "Questions and Answers"
-            name: faq
-            widget: list
+          - label: "Where We've Worked: Text"
+            name: states_note
+            widget: text
             required: false
-            summary: "{{question}}"
-            hint: "These also tell Google what this page answers, so write the question the way a land manager would ask it. Empty this list to hide the section."
-            fields:
-              - { label: "Question", name: question, widget: string }
-              - { label: "Answer", name: answer, widget: text }
+            hint: "Not shown since the state cards were taken off this page; the compact band near the foot now names the states and links to the Experience page. Kept for reuse."
+
+          - label: "Where We've Worked: Note Below"
+            name: states_aside
+            widget: markdown
+            required: false
+            hint: "The end of the \"Where We've Worked\" line in the compact band near the foot of the page, after the list of states (which comes from the Experience page). Use it to link to the Experience page. Leave blank to hide it."
 
           - label: "Closing Call to Action"
             name: cta
