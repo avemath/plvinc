@@ -235,3 +235,78 @@ show on the local preview.
   address to identify you, and does not track you across other websites."
 - **To see the numbers:** Cloudflare dashboard → your account → **Analytics & Logs → Web
   Analytics** (or the Pages project → **Metrics**).
+
+## 9. After the fixes
+
+### Lighthouse
+
+Mobile scores move a few points from run to run on this machine, so both builds were run three
+times on mobile (Home five more times, alternating). The table gives median performance. Mobile
+Accessibility, Best Practices and SEO stayed at 100 on every page. Desktop is still 100 / 100 /
+100 / 100 everywhere.
+
+| Page | Mobile before | Mobile after | What changed |
+|---|---|---|---|
+| Home | 95 | 97 | Phone logo is WebP |
+| Mineral Owners | 99 | 98 | Forced reflow gone; the 1-point drop is within run-to-run noise |
+| Companies | 100 | 97 | Forced reflow gone; one slow run (83) pulled the median down; the other runs scored 100 |
+| Contact | 99 | 100 | Forced reflow gone |
+| About | 97 | 99 | LCP 2.6 s → 2.0 s; headshots 103 KB and 92 KB JPEGs → 33 KB and 39 KB WebP |
+| Sample Work | 100 | 98 | Forced reflow 220 ms → none; the score change is within run-to-run noise |
+
+- **Forced reflow** is gone on five of the six pages. Home still shows a small one (2 to 89 ms)
+  from another script.
+- **The cause was the header-shadow check**, which read the scroll position straight after the
+  card animations were set up. It now runs one frame later. The animations also read card
+  positions from the observer, so that code can't trigger the same layout work.
+
+### Fixes in this round
+
+- **Descriptions:** Home, About, Contact and Services name all five regions. All are under 160
+  characters. The Contact title is now "Contact Our Landmen".
+- **`/favicon.ico`** added (16, 32 and 48 px, from the existing droplet icon).
+- **404 page** links to Home, Mineral Owners, For Companies and Contact.
+- **Structured data:**
+  - Both landmen are listed as employees of the firm on every page, with the CPL credential
+    recognised by the AAPL.
+  - The states come from the Experience page.
+  - The business description names all five regions.
+- **Alt text:** About headshots read "Rickey Matherne, Jr., CPL" and "Shannon Matherne, CPL".
+
+### Testing the forms after the fixes
+
+**1. Short note:**
+- Fill it in with an **email address** in "Phone or email".
+- Under the button you will see "Your note goes straight to Rickey and Shannon. One of them will
+  reach out."
+- After sending, a green box reads "Thanks. Your note is on its way to us, and Rickey or Shannon
+  will get back to you."
+- The email arrives with the subject "New note from a landowner" and the sender "Petro Land
+  Ventures". **Reply now goes to the address the visitor typed.** With a phone number instead,
+  there is no reply-to.
+
+**2. Project form:**
+- Open the "I represent a company" tab. Under the heading is "Own the land or the minerals
+  yourself? Send us a short note instead →". That link switches to the short note and puts the
+  cursor in its first box.
+- The State list runs Alabama to Wyoming with Alaska, Hawaii and District of Columbia, then
+  "Other / not sure".
+- After sending you will see "Thank you. Your message has been sent, and we will be in touch."
+- The email subject is "New inquiry from website contact form", and Reply goes to the visitor.
+
+**3. Empty form:**
+- Press Send with nothing filled in. Each required box shows its own message in red, and the
+  cursor jumps to the first one.
+
+**4. Failure:**
+- Turn Wi-Fi off just before pressing Send.
+- The red box reads "Something went wrong. Please try again, or reach out directly by phone or
+  email." What the visitor typed stays in the form.
+
+**5. JavaScript off** (Chrome: Settings → Privacy and security → Site settings → JavaScript →
+add plvinc.com under "Not allowed"):
+- **Empty form:** the browser itself stops it and points at the first empty box.
+- **Filled in:** after sending, you should land on plvinc.com/message-sent ("Thanks. Your Message
+  Is on Its Way."). **This is the one part that depends on Web3Forms honouring the redirect**,
+  which their docs say works on the free plan within the same domain. If you land on a
+  web3forms.com page instead, tell me.
