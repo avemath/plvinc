@@ -3,6 +3,7 @@ import Base from '../layouts/Base.astro';
 import { text } from '../utils/labels';
 import CallToAction from '../components/CallToAction.astro';
 import GlanceCard from '../components/GlanceCard.astro';
+import HardFilesShort from '../components/HardFilesShort.astro';
 import { renderMarkdown } from '../utils/markdown';
 import page from '../data/pages/sample-work.json';
 import settings from '../data/settings.json';
@@ -68,6 +69,14 @@ const tree = supplemental.tree as TreeNode;
     <div class="container intro-split">
       <div class="intro-main">
         <div class="prose" set:html={introHtml} />
+
+        <HardFilesShort
+          variant="box"
+          headline={page.hard_files_short?.headline}
+          intro={page.hard_files_short?.intro}
+          link={page.hard_files_short?.link}
+          href="#hard-files"
+        />
 
         {page.how_to_read?.length > 0 && (
           <div class="how-to-read">

@@ -4,6 +4,11 @@
   "meta_description": "A fictional land file from first deed to signed lease and resolved heirship, with reader's notes explaining what each part of the report decides.",
   "page_subtitle": "One fictional tract, from the first deed to a signed lease and a resolved heirship.",
   "intro": "Most land work ends in a few documents. A runsheet lists every recorded document in the chain of title. An ownership report states who owns what and what stands in the way. Once a lease is signed, a lease acquisition report tells the client exactly what it bought. When the record leaves a question open, a supplemental report closes it.\n\nThe file below follows one fictional tract through all four, with reader's notes beside each document.",
+  "hard_files_short": {
+    "headline": "",
+    "intro": "This sample has one open question. Real files usually have several, and these are the ones we see most.",
+    "link": "See how we handle each one"
+  },
   "glance": {
     "heading": "At a glance",
     "items": [

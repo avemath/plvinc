@@ -4146,7 +4146,7 @@ html { scroll-padding-top: calc(var(--nav-height) + 1rem); }
 .hard-short-head h2 { margin: 0 0 .5rem; font-size: clamp(1.45rem, 2.4vw, 1.8rem); }
 .hard-short-head p { margin: 0; max-width: 62ch; font-size: 1.0625rem; line-height: 1.65; color: var(--text-muted); }
 .hard-short-head .section-label { display: block; margin-bottom: .35rem; }
-.hard-short-title {
+.hard-short-head .hard-short-title {
   margin: 0 0 .35rem;
   font-family: var(--font-display);
   font-weight: 600;

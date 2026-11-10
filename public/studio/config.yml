@@ -1941,6 +1941,17 @@ collections:
             widget: markdown
             hint: "The paragraphs above the samples, explaining what the four documents are."
 
+          - label: "What Makes a File Hard (short, near the top)"
+            name: hard_files_short
+            widget: object
+            required: false
+            collapsed: true
+            hint: "The small box under the opening paragraphs that lists the problems from What Makes a File Hard and links down to the full section. The list comes from What Makes a File Hard below, so edit the items there."
+            fields:
+              - { label: "Headline", name: headline, widget: string, required: false, hint: "Blank shows the What Makes a File Hard headline." }
+              - { label: "Text", name: intro, widget: text, required: false, hint: "One sentence under the headline." }
+              - { label: "Link Text", name: link, widget: string, required: false, hint: "The link down to the full section. Blank shows \"How we handle each one\"." }
+
           - label: "At a Glance Card"
             name: glance
             widget: object
@@ -2301,7 +2312,7 @@ collections:
             widget: object
             collapsed: true
             required: false
-            hint: "The section after the documents. Only list work the service pages already describe, and never describe a real past project."
+            hint: "The section after the documents. Its item titles also appear in the short box near the top of this page and on the Companies page. Only list work the service pages already describe, and never describe a real past project."
             fields:
               - { label: "Headline", name: headline, widget: string }
               - { label: "Introduction", name: intro, widget: text }
