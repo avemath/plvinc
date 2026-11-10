@@ -26,6 +26,7 @@ export default defineConfig({
     sitemap({
       filter: (page) =>
         !page.includes('/studio') &&
+        !page.includes('/message-sent') &&
         (hasInsights || !page.includes('/insights')),
     }),
   ],

@@ -2,7 +2,7 @@
 import { getCollection } from 'astro:content';
 import settings from '../data/settings.json';
 import contact from '../data/pages/contact.json';
-import states from '../data/us-states.json';
+import { STATE_OPTIONS } from '../utils/state-options';
 import { text } from '../utils/labels';
 
 // Web3Forms uses each field's name attribute as the label in the email it sends, so the
@@ -48,7 +48,19 @@ const t = {
   errShortContact:text(se.contact, 'Please give us a phone number or an email address.'),
   errShortCounty: text(se.county, 'Please tell us the county and state.'),
   errShortWhat:   text(se.what, 'Please tell us what showed up.'),
+  stateOther:     text(c.state_other, 'Other / not sure'),
+  ownerLink:      text(c.owner_note?.link_label, 'Send us a short note instead'),
 };
+// The line under each form saying what happens once it is sent. Blank hides it.
+const shortAfter = shortForm?.after_note?.trim();
+const projectAfter = c.form_after_note?.trim();
+
+// With JavaScript on, the forms send in the background and show their own message in the
+// page. With it off, the browser posts straight to Web3Forms, which then sends the visitor
+// to this page on our own site rather than to a Web3Forms page. It must be a full https
+// address on the same domain for the free plan. The script swaps it back to "false" before
+// sending, so the in-page path sends exactly what it always has.
+const sentUrl = new URL('/message-sent', Astro.site ?? 'https://plvinc.com').toString();
 const inquirerTypes = (contact.inquirer_types || []).map((t) => t.label).filter(Boolean);
 const timelines = (contact.timelines || []).map((t) => t.label).filter(Boolean);
 
@@ -64,8 +76,7 @@ try {
   serviceNames = [];
 }
 
-// The map data covers the contiguous states, which is the same footprint the site claims.
-const stateNames = (states as { name: string }[]).map((s) => s.name);
+const stateNames = STATE_OPTIONS;
 ---
 
 <div class="contact-form-block">
@@ -84,10 +95,11 @@ const stateNames = (states as { name: string }[]).map((s) => s.name);
         <h2>{shortForm.headline}</h2>
         <p class="form-intro">{shortForm.intro}</p>
 
-        <form id="short-form" action="https://api.web3forms.com/submit" method="POST" novalidate>
+        <form id="short-form" action="https://api.web3forms.com/submit" method="POST">
           <input type="hidden" name="access_key" value={settings.web3forms_key} />
           <input type="hidden" name="subject" value={t.shortSubject} />
-          <input type="hidden" name="redirect" value="false" />
+          <input type="hidden" name="redirect" value={sentUrl} />
+          {settings.professional_name && <input type="hidden" name="from_name" value={settings.professional_name} />}
 
           <label class="botcheck-field" aria-hidden="true">
             <input type="checkbox" name="botcheck" tabindex="-1" autocomplete="off" />
@@ -128,6 +140,7 @@ const stateNames = (states as { name: string }[]).map((s) => s.name);
           </div>
 
           <button type="submit" class="btn btn-primary" data-sending={t.sending}>{t.shortButton}</button>
+          {shortAfter && <p class="form-after">{shortAfter}</p>}
 
           <div id="short-success" tabindex="-1" class="form-success" role="status" aria-live="polite" hidden>
             <p>{shortForm.success}</p>
@@ -151,16 +164,23 @@ const stateNames = (states as { name: string }[]).map((s) => s.name);
   )}
   <h2>{contact.form_headline}</h2>
   {contact.form_intro && <p class="form-intro">{contact.form_intro}</p>}
+  {/* The project form is for companies. An owner who lands here is pointed to the short
+      note, which asks for four things instead of nine. Blank text hides the line. */}
+  {shortForm && c.owner_note?.text && (
+    <p class="form-owner-note">
+      {c.owner_note.text}{' '}
+      <a href="/contact#note" class="form-switch-link" data-path="path-short">{t.ownerLink} <span aria-hidden="true">→</span></a>
+    </p>
+  )}
 
   <form
     id="contact-form"
     action="https://api.web3forms.com/submit"
     method="POST"
-    novalidate
   >
     <input type="hidden" name="access_key"  value={settings.web3forms_key} />
     <input type="hidden" name="subject"     value={t.subject} />
-    <input type="hidden" name="redirect"    value="false" />
+    <input type="hidden" name="redirect"    value={sentUrl} />
     {settings.professional_name && <input type="hidden" name="from_name" value={settings.professional_name} />}
 
     <!-- Honeypot, hidden from people, left unchecked. Web3Forms silently
@@ -245,6 +265,7 @@ const stateNames = (states as { name: string }[]).map((s) => s.name);
         >
           <option value="">{t.choose}</option>
           {stateNames.map((s) => <option value={s}>{s}</option>)}
+          <option value={t.stateOther}>{t.stateOther}</option>
         </select>
         <p class="field-error" id="contact-state-error" hidden></p>
       </div>
@@ -310,6 +331,7 @@ const stateNames = (states as { name: string }[]).map((s) => s.name);
     </div>
 
     <button type="submit" class="btn btn-primary" data-sending={t.sending}>{t.button}</button>
+    {projectAfter && <p class="form-after">{projectAfter}</p>}
 
     <div id="form-success" tabindex="-1" class="form-success" role="status" aria-live="polite" hidden>
       <p>{contact.form_success}</p>
@@ -359,6 +381,34 @@ const stateNames = (states as { name: string }[]).map((s) => s.name);
   openFormFromHash();
   window.addEventListener('hashchange', openFormFromHash);
 
+  // "Send us a short note instead" on the project form. A hash link alone does nothing when
+  // the address already ends in #note, so the switch is made here, and focus moves to the
+  // first box of the short note so a keyboard or screen reader user lands in it.
+  document.querySelectorAll<HTMLAnchorElement>('.form-switch-link').forEach((a) => {
+    a.addEventListener('click', (e) => {
+      const radio = document.getElementById(a.dataset.path ?? '') as HTMLInputElement | null;
+      if (!radio) return;
+      e.preventDefault();
+      radio.checked = true;
+      history.replaceState(null, '', '#note');
+      document.querySelector('.contact-form-block')?.scrollIntoView({ block: 'start' });
+      (document.querySelector('#short-form input:not([type="hidden"]):not([name="botcheck"])') as HTMLElement | null)?.focus({ preventScroll: true });
+    });
+  });
+
+  // Without JavaScript the browser's own checks stop an empty form. With it, these scripts
+  // take over and show the messages written in Studio instead.
+  document.querySelectorAll<HTMLFormElement>('#short-form, #contact-form').forEach((f) => { f.noValidate = true; });
+
+  // What is sent from the page: the form as typed, with the redirect swapped back to the
+  // value the in-page path has always sent (the redirect address is only for visitors
+  // without JavaScript).
+  function payload(f: HTMLFormElement) {
+    const data = new FormData(f);
+    data.set('redirect', 'false');
+    return data;
+  }
+
   // The short path posts to the same endpoint with its own four checks.
   const shortForm    = document.getElementById('short-form') as HTMLFormElement | null;
   const shortSuccess = document.getElementById('short-success') as HTMLElement | null;
@@ -404,9 +454,14 @@ const stateNames = (states as { name: string }[]).map((s) => s.name);
     shortBtn.disabled = true;
     shortBtn.textContent = shortBtn.dataset.sending || shortLabel;
     try {
+      const data = payload(shortForm);
+      // The short note asks for "phone or email" in one box. When it holds an email address,
+      // it becomes the reply-to, so answering the notification email goes to the visitor.
+      const contactValue = (document.getElementById('short-contact') as HTMLInputElement | null)?.value.trim() ?? '';
+      if (EMAIL_RE.test(contactValue)) data.set('replyto', contactValue);
       const res  = await fetch('https://api.web3forms.com/submit', {
         method: 'POST',
-        body: new FormData(shortForm),
+        body: data,
       });
       const json = await res.json();
       if (!json.success) throw new Error('Submission failed');
@@ -530,7 +585,7 @@ const stateNames = (states as { name: string }[]).map((s) => s.name);
     try {
       const res  = await fetch('https://api.web3forms.com/submit', {
         method: 'POST',
-        body: new FormData(form),
+        body: payload(form),
       });
       const json = await res.json();
 

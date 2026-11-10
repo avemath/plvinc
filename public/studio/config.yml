@@ -1115,6 +1115,7 @@ collections:
               - { label: "What Showed Up Label", name: what_label, widget: string }
               - { label: "Name Field Label", name: name_label, widget: string, required: false }
               - { label: "Button Text", name: button, widget: string }
+              - { label: "Line Under the Button", name: after_note, widget: string, required: false, hint: "One short line under the Send button saying what happens to the note. Do not promise a response time. Leave blank to hide it." }
               - { label: "Success Message", name: success, widget: text, hint: "Shown under the button once the note has sent." }
               - { label: "Email Subject", name: subject, widget: string, required: false, hint: "The subject line of the email you receive when someone sends this form." }
               - label: "Error Messages"
@@ -1139,6 +1140,16 @@ collections:
             widget: text
             required: false
             hint: "A short line under the form heading. Leave blank to hide it."
+
+          - label: "Project Form: Line Pointing Owners to the Short Note"
+            name: owner_note
+            widget: object
+            collapsed: true
+            required: false
+            hint: "A line under the project form's heading that switches an owner over to the short landowner note. Clear the text to hide it."
+            fields:
+              - { label: "Text", name: text, widget: string, required: false }
+              - { label: "Link Text", name: link_label, widget: string, required: false, hint: "Blank shows \"Send us a short note instead\"." }
 
           - label: "Project Form: Box Labels"
             name: form_labels
@@ -1207,6 +1218,12 @@ collections:
                 name: label
                 widget: string
 
+          - label: "State Dropdown: Last Choice"
+            name: state_other
+            widget: string
+            required: false
+            hint: "The State dropdown lists all 50 states and Washington, DC, then this choice. Blank shows \"Other / not sure\"."
+
           - label: "Timeline Options"
             name: timelines
             widget: list
@@ -1234,6 +1251,12 @@ collections:
             widget: string
             required: false
             hint: "What the button says for the second or two while a message is on its way."
+
+          - label: "Project Form: Line Under the Button"
+            name: form_after_note
+            widget: string
+            required: false
+            hint: "One short line under the Send button saying what happens to the message. Do not promise a response time. Leave blank to hide it."
 
           - label: "Project Form: Success Message"
             name: form_success
@@ -2407,6 +2430,36 @@ collections:
             widget: string
             required: false
             hint: "Shown just before the phone number from Site Settings. Leave blank to leave the phone number off."
+
+      - name: message_sent
+        label: "Message Sent Page"
+        file: src/data/pages/message-sent.json
+        format: json
+        fields:
+          - label: "Page Heading"
+            name: page_heading
+            widget: string
+            required: false
+            hint: "Only seen by a visitor whose browser has JavaScript turned off: after sending either contact form they land here instead of seeing the message under the button. Hidden from Google. Blank shows \"Thanks. Your Message Is on Its Way.\""
+          - label: "Browser Tab Title"
+            name: page_title
+            widget: string
+            required: false
+          - label: "Line Under the Heading"
+            name: page_subtitle
+            widget: text
+            required: false
+            hint: "Do not promise a response time."
+          - label: "Phone Line"
+            name: phone_line
+            widget: string
+            required: false
+            hint: "Shown just before the phone number from Site Settings. Leave blank to leave the phone number off."
+          - label: "Line Above the Page Links"
+            name: body
+            widget: string
+            required: false
+            hint: "The links (Home, Mineral Owners, For Companies, Sample Work) use the Menu Wording from Site Settings."
 
       - name: services_page
         label: "Services Page"

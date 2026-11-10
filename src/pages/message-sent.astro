@@ -1,0 +1,37 @@
+---
+// Where a contact form lands when the visitor's browser has JavaScript turned off. With
+// JavaScript on, the forms show their own message in the page and nobody sees this. It is
+// kept out of search results and out of the sitemap. Copy: Studio → Message Sent Page.
+import Base from '../layouts/Base.astro';
+import settings from '../data/settings.json';
+import page from '../data/pages/message-sent.json';
+import { navLabels, NAV_PAGES, text } from '../utils/labels';
+import { telHref } from '../utils/phone';
+
+const tel = telHref(settings.phone);
+const heading = text(page.page_heading, 'Thanks. Your Message Is on Its Way.');
+const starts = NAV_PAGES.filter((p) => ['home', 'mineral_owners', 'companies', 'sample_work'].includes(p.key));
+---
+
+<Base title={text(page.page_title, 'Message Sent')} description={page.page_subtitle} noindex>
+  <div class="page-header">
+    <div class="container">
+      <h1>{heading}</h1>
+      {page.page_subtitle && <p>{page.page_subtitle}</p>}
+    </div>
+  </div>
+
+  <section>
+    <div class="container container-narrow">
+      <div class="prose">
+        {settings.phone && page.phone_line && (
+          <p>{page.phone_line} <a href={tel}>{settings.phone}</a>.</p>
+        )}
+        {page.body && <p>{page.body}</p>}
+        <ul>
+          {starts.map((p) => <li><a href={p.href}>{navLabels[p.key]}</a></li>)}
+        </ul>
+      </div>
+    </div>
+  </section>
+</Base>

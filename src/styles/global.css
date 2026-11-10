@@ -1515,6 +1515,24 @@ a.contact-detail-value:hover { color: var(--green-dark); }
 .form-success p,
 .form-error p { margin: 0; }
 
+/* One line under each Send button saying where the message goes. */
+.form-after {
+  /* The form's own gap is 1.25rem; this sits the line closer to its button. */
+  margin: -.5rem 0 0;
+  font-size: .9rem;
+  line-height: 1.5;
+  color: var(--text-muted);
+}
+
+/* On the project form, the line pointing an owner to the short note. */
+.form-owner-note {
+  margin: -.6rem 0 1.4rem;
+  font-size: .925rem;
+  line-height: 1.55;
+  color: var(--text-muted);
+}
+.form-owner-note a { color: var(--green-dark); font-weight: 600; }
+
 /* ============================================================
    Service detail page
    ============================================================ */

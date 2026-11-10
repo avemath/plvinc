@@ -99,7 +99,8 @@
       "contact": "Please give us a phone number or an email address.",
       "county": "Please tell us the county and state.",
       "what": "Please tell us what you received."
-    }
+    },
+    "after_note": "Your note goes straight to Rickey and Shannon. One of them will reach out."
   },
   "cta": {
     "headline": "Would you rather talk it through?",
@@ -135,5 +136,11 @@
     "county": "Please enter the county or parish.",
     "service": "Please choose a service.",
     "message": "Please enter a message."
-  }
+  },
+  "form_after_note": "Your message goes straight to Rickey and Shannon, the landmen who run every project. One of them will reach out.",
+  "owner_note": {
+    "text": "Own the land or the minerals yourself?",
+    "link_label": "Send us a short note instead"
+  },
+  "state_other": "Other / not sure"
 }
