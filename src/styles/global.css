@@ -432,6 +432,21 @@ section { padding: 5rem 0; }
 .nav-sub-all { margin-top: .35rem; padding-top: .35rem; border-top: 1px solid var(--border); }
 .nav-sub-all a { font-weight: 600; color: var(--green-dark); }
 
+/* A split group (Services): the word is a link to the overview page and the arrow is its
+   own button. The arrow sits where it always has, just after the word; its button runs on
+   to the right so the tap area is a full 44 by 44 pixels. */
+.nav-item.is-split { display: flex; align-items: center; }
+.nav-item > .nav-parent-link { padding-right: 0; }
+.nav-item > .nav-parent-link::after { right: 0; }
+.nav-item.is-open > .nav-parent-link { color: var(--green-dark); }
+.nav-item > .nav-chevron {
+  justify-content: flex-start;
+  width: 44px;
+  min-width: 44px;
+  padding: 0 0 0 .35rem;
+}
+.nav-item > .nav-chevron::after { display: none; }
+
 .nav-phone {
   font-size: .9375rem;
   font-weight: 500;
@@ -500,6 +515,13 @@ section { padding: 5rem 0; }
   .nav-trigger, .nav-top-link { padding-left: .6rem; padding-right: .6rem; }
   .nav-trigger::after, .nav-top-link::after { left: .6rem; right: .6rem; }
 }
+/* The narrowest desktop widths: a little less space around each item pays for the
+   Services arrow's full-size tap area, so the row still fits on one line. */
+@media (min-width: 861px) and (max-width: 940px) {
+  .nav-inner { gap: .75rem; }
+  .nav-trigger, .nav-top-link { padding-left: .45rem; padding-right: .45rem; }
+  .nav-trigger::after, .nav-top-link::after { left: .45rem; right: .45rem; }
+}
 
 @media (max-width: 860px) {
   .nav-logo-img,
@@ -549,6 +571,23 @@ section { padding: 5rem 0; }
   /* The current group is marked with a bar on the left instead of an underline. */
   .nav-item.is-current > .nav-trigger,
   .nav-item.is-current > .nav-top-link { font-weight: 600; box-shadow: inset 3px 0 0 var(--green-dark); }
+  /* A split group: the heading is a link across the row and the arrow is a separate
+     square button at its end, divided by a thin line; the list drops below both. */
+  .nav-item.is-split { flex-wrap: wrap; }
+  .nav-item > .nav-parent-link { flex: 1 1 0; width: auto; padding-right: 1rem; }
+  .nav-item > .nav-chevron {
+    flex: 0 0 auto;
+    width: 52px;
+    min-width: 52px;
+    min-height: 52px;
+    margin-right: .3rem; /* lines the arrow up with the other groups' arrows */
+    justify-content: center;
+    padding: 0;
+    border-left: 1px solid var(--border);
+    border-radius: 0;
+  }
+  .nav-item.is-current > .nav-chevron { font-weight: inherit; box-shadow: none; }
+  .nav-item.is-split > .nav-sub { flex: 0 0 100%; }
   .nav-sub { padding: 0 0 .6rem; }
   .nav-sub a { display: flex; align-items: center; gap: .35rem; min-height: 44px; padding: .55rem 1.5rem .55rem 2.25rem; font-size: 1rem; }
   .nav-sub-all { margin-top: .25rem; }

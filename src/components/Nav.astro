@@ -2,6 +2,8 @@
 // The main menu: the logo (home), four items and a contact button. The wording and the
 // grouping live in src/data/menu.json (Site Settings → Main Menu in the editor); the six
 // services fill the Services list by themselves. The footer keeps its own full link list.
+// A group with its own overview page (Services → /services) is split in two: the word is
+// a real link to that page and a small arrow button beside it opens the list.
 import { hasInsightFiles } from '../utils/insight-files';
 import { navLabels } from '../utils/labels';
 import { text } from '../utils/labels';
@@ -35,7 +37,7 @@ function current(href: string): 'page' | 'true' | undefined {
 type Link = { label: string; href: string };
 type Item =
   | { kind: 'link'; id: string; label: string; href: string }
-  | { kind: 'group'; id: string; label: string; links: Link[]; all?: Link };
+  | { kind: 'group'; id: string; label: string; href?: string; links: Link[]; all?: Link };
 
 // The six services, in their display order, then a link to the overview.
 const services = (await getCollection('services'))
@@ -48,6 +50,8 @@ if (services.length > 0) {
     kind: 'group',
     id: 'services',
     label: text(menu.services_label, 'Services'),
+    // Blank in the editor: the word only opens the list, as before.
+    href: typeof menu.services_link === 'string' ? menu.services_link.trim() || undefined : '/services',
     links: services,
     all: { label: text(menu.services_all_label, 'All services'), href: '/services' },
   });
@@ -61,14 +65,14 @@ if (services.length > 0) {
     links.push({ label: navLabels.insights, href: '/insights' });
   }
   if (!g.label?.trim()) return;
-  if (links.length > 0) items.push({ kind: 'group', id: `group-${i}`, label: g.label.trim(), links });
+  if (links.length > 0) items.push({ kind: 'group', id: `group-${i}`, label: g.label.trim(), href: g.link || undefined, links });
   else if (g.link) items.push({ kind: 'link', id: `link-${i}`, label: g.label.trim(), href: g.link });
 });
 
 // A group is current when the visitor is on any page inside it.
 const groupCurrent = (it: Item) =>
   it.kind === 'group'
-    ? [...it.links, ...(it.all ? [it.all] : [])].some((l) => current(l.href))
+    ? [...it.links, ...(it.all ? [it.all] : [])].some((l) => current(l.href)) || Boolean(it.href && current(it.href))
     : Boolean(current(it.href));
 
 // The header shows the wide PETROLAND wordmark at every width. The round badge was tried
@@ -105,15 +109,19 @@ const contactLabel = text(menu.contact_button, 'Get in touch');
         {items.map((it) => (
           it.kind === 'group'
             ? (
-              <li class:list={['nav-item', 'has-sub', groupCurrent(it) && 'is-current']}>
+              <li class:list={['nav-item', 'has-sub', it.href && 'is-split', groupCurrent(it) && 'is-current']}>
+                {it.href && (
+                  <a href={it.href} class="nav-top-link nav-parent-link" aria-current={current(it.href)}>{it.label}</a>
+                )}
                 <button
                   type="button"
-                  class="nav-trigger"
+                  class:list={['nav-trigger', it.href && 'nav-chevron']}
                   id={`nav-trigger-${it.id}`}
                   aria-expanded="false"
                   aria-controls={`nav-sub-${it.id}`}
+                  aria-label={it.href ? `Show ${it.label} menu` : undefined}
                 >
-                  <span>{it.label}</span>
+                  {!it.href && <span>{it.label}</span>}
                   <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor"
                        stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
                     <path d="m6 9 6 6 6-6" />
@@ -188,12 +196,16 @@ const contactLabel = text(menu.contact_button, 'Get in touch');
 
 <script>
   // Disclosure menus: each group is a button that shows or hides its own list. The same
-  // markup serves the desktop dropdowns and the phone menu's collapsible groups.
+  // markup serves the desktop dropdowns and the phone menu's collapsible groups. In a split
+  // group the word is a plain link to the overview page and the button is the arrow.
   const DESKTOP = window.matchMedia('(min-width: 861px)');
   const toggle = document.querySelector<HTMLButtonElement>('.nav-toggle');
   const menu = document.querySelector<HTMLElement>('#nav-menu');
   const groups = [...document.querySelectorAll<HTMLElement>('.nav-item.has-sub')];
-  const topLevel = [...document.querySelectorAll<HTMLElement>('.nav-trigger, .nav-top-link')];
+  // The first stop in each top item: the word (a link or a button). Left and right move
+  // between these; Tab still reaches a split group's arrow after its word.
+  const items = [...document.querySelectorAll<HTMLElement>('.nav-list > .nav-item')];
+  const firstStop = (it: HTMLElement) => it.querySelector<HTMLElement>('.nav-top-link, .nav-trigger')!;
 
   const triggerOf = (g: HTMLElement) => g.querySelector<HTMLButtonElement>('.nav-trigger')!;
   const linksOf = (g: HTMLElement) => [...g.querySelectorAll<HTMLAnchorElement>('.nav-sub a')];
@@ -213,6 +225,7 @@ const contactLabel = text(menu.contact_button, 'Get in touch');
 
   groups.forEach((g) => {
     const trigger = triggerOf(g);
+    const parentLink = g.querySelector<HTMLAnchorElement>('.nav-parent-link');
 
     // Click and tap. On a desktop only one list is open at a time; in the phone menu
     // several groups can be open together.
@@ -245,7 +258,7 @@ const contactLabel = text(menu.contact_button, 'Get in touch');
     g.addEventListener('keydown', (e) => {
       const links = linksOf(g);
       const i = links.indexOf(document.activeElement as HTMLAnchorElement);
-      const onTrigger = document.activeElement === trigger;
+      const onTrigger = document.activeElement === trigger || (!!parentLink && document.activeElement === parentLink);
       if (e.key === 'Escape' && g.classList.contains('is-open')) {
         e.preventDefault();
         e.stopPropagation();
@@ -276,13 +289,12 @@ const contactLabel = text(menu.contact_button, 'Get in touch');
   document.querySelector('.nav-list')?.addEventListener('keydown', (e) => {
     const ke = e as KeyboardEvent;
     if (!DESKTOP.matches || (ke.key !== 'ArrowLeft' && ke.key !== 'ArrowRight')) return;
-    const item = (ke.target as HTMLElement).closest('.nav-item');
-    const from = topLevel.findIndex((t) => t.closest('.nav-item') === item);
+    const from = items.indexOf((ke.target as HTMLElement).closest<HTMLElement>('.nav-item')!);
     if (from < 0) return;
     ke.preventDefault();
     closeAll();
-    const to = (from + (ke.key === 'ArrowRight' ? 1 : -1) + topLevel.length) % topLevel.length;
-    topLevel[to].focus();
+    const to = (from + (ke.key === 'ArrowRight' ? 1 : -1) + items.length) % items.length;
+    firstStop(items[to]).focus();
   });
 
   // A click anywhere else closes an open desktop list.

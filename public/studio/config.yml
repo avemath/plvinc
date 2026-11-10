@@ -222,6 +222,13 @@ collections:
             widget: string
             required: false
             hint: "The first menu item. Its list fills itself with your six services. Blank shows \"Services\"."
+          - label: "Services Goes To"
+            name: services_link
+            widget: select
+            required: false
+            options:
+              - { label: "Services (the overview page)", value: "/services" }
+            hint: "Where clicking the word Services goes. The small arrow beside it opens the list of services. Clear it and the word only opens the list."
           - label: "All Services Link"
             name: services_all_label
             widget: string
@@ -231,13 +238,13 @@ collections:
             name: groups
             widget: list
             summary: "{{fields.label}}"
-            hint: "The items after Services, in order. An item with links under it opens a small list; an item with no links goes straight to its own page. The footer keeps its own full list of pages."
+            hint: "The items after Services, in order. An item with links under it opens a small list (and, if Goes To is set, the word itself goes to that page); an item with no links goes straight to its own page. The footer keeps its own full list of pages."
             fields:
               - label: "Name"
                 name: label
                 widget: string
                 hint: "A word or two, for example Who we help."
-              - label: "Goes To (items without a list)"
+              - label: "Goes To"
                 name: link
                 widget: select
                 required: false
@@ -249,7 +256,7 @@ collections:
                   - { label: "Experience", value: "/experience" }
                   - { label: "Services (the overview page)", value: "/services" }
                   - { label: "Contact", value: "/contact" }
-                hint: "Only used when the item has no links under it."
+                hint: "An item with no links under it goes straight here. An item with links under it: the word goes here and a small arrow beside it opens the list. Leave blank and the word only opens the list (best when no page covers the whole group)."
               - label: "Links Under It"
                 name: items
                 widget: list

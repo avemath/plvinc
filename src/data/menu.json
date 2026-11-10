@@ -1,5 +1,6 @@
 {
   "services_label": "Services",
+  "services_link": "/services",
   "services_all_label": "All services",
   "groups": [
     {
