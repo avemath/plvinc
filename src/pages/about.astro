@@ -6,7 +6,6 @@ import { renderMarkdown } from '../utils/markdown';
 import { text } from '../utils/labels';
 import { srcsetFor } from '../utils/images';
 import about from '../data/pages/about.json';
-import settings from '../data/settings.json';
 import LinkedInIcon from '../components/LinkedInIcon.astro';
 import MemberMarks from '../components/MemberMarks.astro';
 import home from '../data/pages/home.json';
@@ -76,45 +75,13 @@ const memberMarks = [
   { src: home.membership?.cpl_mark, alt: home.membership?.cpl_mark_alt },
 ];
 
-// One Person entry per landman. Credentials come from each person's own list, so someone
-// added without a CPL is never described to search engines as holding one. Only emitted
-// when there is somebody to describe.
-const personName = (full: string) => {
-  const m = full.match(/^(.*?),\s*(CPL|RPL|RL)$/);
-  return m ? { name: m[1], honorificSuffix: m[2] } : { name: full };
-};
-
-const schema = sorted.length > 0
-  ? {
-      '@context': 'https://schema.org',
-      '@graph': sorted.map((person) => ({
-        '@type': 'Person',
-        // The credential goes in honorificSuffix, so search engines read the name as a name.
-        ...personName(person.data.name),
-        url: new URL('/about', Astro.site).toString(),
-        ...(person.data.role ? { jobTitle: person.data.role } : {}),
-        ...(person.data.credentials.length > 0
-          ? {
-              hasCredential: person.data.credentials.map((c) => ({
-                '@type': 'EducationalOccupationalCredential',
-                credentialCategory: 'professional certification',
-                name: c.name,
-                ...(c.issuer ? { recognizedBy: { '@type': 'Organization', name: c.issuer } } : {}),
-              })),
-            }
-          : {}),
-        worksFor: { '@id': new URL('/#org', Astro.site).toString(), name: settings.professional_name },
-        ...(person.data.photo ? { image: new URL(person.data.photo, Astro.site).toString() } : {}),
-        ...(person.data.linkedin_url ? { sameAs: [person.data.linkedin_url] } : {}),
-      })),
-    }
-  : undefined;
+// The Person entries for search engines are on every page now, from the site-wide
+// structured data (src/utils/people-schema.ts), so this page adds none of its own.
 ---
 
 <Base
   title={about.page_title}
   description={about.meta_description}
-  schema={schema}
 >
   <div class="page-header">
     <div class="container">

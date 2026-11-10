@@ -107,19 +107,23 @@ const { title, description, image, noindex = false, schema, preloadImage } = Ast
     // animates from the leftmost card regardless of DOM index.
     const obs = new IntersectionObserver(
       (entries) => {
+        // Positions come from the observer's own entries (e.boundingClientRect) rather than
+        // from getBoundingClientRect(), which after a class change makes the browser redo
+        // its layout for each card. The order and timing of the animation are unchanged.
+        const left = new Map<Element, number>();
         const rowMap = new Map<number, Element[]>();
-
         entries
           .filter((e) => e.isIntersecting)
           .forEach((e) => {
-            const rowKey = Math.round(e.target.getBoundingClientRect().top / 5) * 5;
+            const rowKey = Math.round(e.boundingClientRect.top / 5) * 5;
+            left.set(e.target, e.boundingClientRect.left);
             if (!rowMap.has(rowKey)) rowMap.set(rowKey, []);
             rowMap.get(rowKey)!.push(e.target);
           });
 
         rowMap.forEach((rowEls) => {
           rowEls
-            .sort((a, b) => a.getBoundingClientRect().left - b.getBoundingClientRect().left)
+            .sort((a, b) => left.get(a)! - left.get(b)!)
             .forEach((el, col) => {
               (el as HTMLElement).style.transitionDelay = `${col * 0.1}s`;
               el.classList.add('is-visible');
@@ -149,6 +153,9 @@ const { title, description, image, noindex = false, schema, preloadImage } = Ast
     const header = document.querySelector('.site-header');
     const onScroll = () => header?.classList.toggle('is-scrolled', window.scrollY > 10);
     window.addEventListener('scroll', onScroll, { passive: true });
-    onScroll();
+    // The first check waits a frame. Reading the scroll position straight after the reveal
+    // classes above are added made the browser lay out the whole page early (Lighthouse
+    // "forced reflow", up to 220 ms on Sample Work).
+    requestAnimationFrame(onScroll);
   </script>
 </html>

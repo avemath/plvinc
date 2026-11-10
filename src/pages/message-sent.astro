@@ -24,13 +24,13 @@ const starts = NAV_PAGES.filter((p) => ['home', 'mineral_owners', 'companies', '
   <section>
     <div class="container container-narrow">
       <div class="prose">
-        {settings.phone && page.phone_line && (
-          <p>{page.phone_line} <a href={tel}>{settings.phone}</a>.</p>
-        )}
         {page.body && <p>{page.body}</p>}
         <ul>
           {starts.map((p) => <li><a href={p.href}>{navLabels[p.key]}</a></li>)}
         </ul>
+        {settings.phone && page.phone_line && (
+          <p>{page.phone_line} <a href={tel}>{settings.phone}</a>.</p>
+        )}
       </div>
     </div>
   </section>

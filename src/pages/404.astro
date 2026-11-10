@@ -12,8 +12,9 @@ import { telHref } from '../utils/phone';
 const tel = telHref(settings.phone);
 const heading = text(page.page_heading, 'Page Not Found');
 
-// The same pages, and the same wording, as the menu.
-const starts = NAV_PAGES.filter((p) => ['home', 'services', 'mineral_owners', 'sample_work', 'contact'].includes(p.key));
+// The four places a lost visitor most likely meant: Home, the two audience pages, and
+// Contact. Same wording as the menu.
+const starts = NAV_PAGES.filter((p) => ['home', 'mineral_owners', 'companies', 'contact'].includes(p.key));
 ---
 
 <Base

@@ -1,6 +1,7 @@
 ---
 import settings from '../data/settings.json';
-import home from '../data/pages/home.json';
+import experience from '../data/pages/experience.json';
+import { personNodes } from '../utils/people-schema';
 import { e164 } from '../utils/phone';
 
 interface Props {
@@ -52,11 +53,17 @@ const hasAddress = Boolean(s.state);
 const siteUrl = Astro.site ?? new URL(SITE_FALLBACK);
 const orgId = new URL('/#org', siteUrl).toString();
 
-// The states on the home page coverage map, as places search engines understand. The
-// region names in the footer line ("Appalachian Basin") are kept as well.
+// The states listed on the Experience page, as places search engines understand, so the two
+// can never disagree. The region names in the footer line ("Appalachian Basin") are kept as
+// well.
 const states = [...new Set(
-  ((home as { regions?: { states?: string[] }[] }).regions ?? []).flatMap((r) => r.states ?? [])
+  ((experience as { states_served?: { state?: string }[] }).states_served ?? [])
+    .map((s) => s.state?.trim())
+    .filter((s): s is string => Boolean(s))
 )];
+
+// Rickey and Shannon, named on every page as the people who work for the firm.
+const people = await personNodes(siteUrl, siteName);
 
 // One business entity, the same on every page, with a stable @id that the people on the
 // About page and each service page point back to. Its description is the site-wide one
@@ -93,6 +100,7 @@ const business = {
       }
     : {}),
   ...(s.linkedin_url ? { sameAs: [s.linkedin_url] } : {}),
+  ...(people.length > 0 ? { employee: people } : {}),
 };
 
 // Studio text ends up inside these script tags, so "<" is escaped: a stray "</script>"

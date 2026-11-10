@@ -26,6 +26,10 @@ export function srcsetFor(path: string | undefined | null, originalWidth?: numbe
     .filter((w) => fs.existsSync(`public/images/variants/${base}-${w}.webp`))
     .map((w) => `/images/variants/${base}-${w}.webp ${w}w`);
   if (parts.length === 0) return undefined;
-  if (originalWidth) parts.push(`${path} ${originalWidth}w`);
+  // At full width, the WebP copy stands in for the original when there is one.
+  if (originalWidth) {
+    const full = `public/images/variants/${base}-${originalWidth}.webp`;
+    parts.push(fs.existsSync(full) ? `/images/variants/${base}-${originalWidth}.webp ${originalWidth}w` : `${path} ${originalWidth}w`);
+  }
   return parts.join(', ');
 }

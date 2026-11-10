@@ -38,5 +38,16 @@ for (const file of fs.readdirSync(SRC)) {
     await sharp(src).resize({ width: w }).webp({ quality: 76 }).toFile(out);
     written++;
   }
+
+  // A WebP copy at the upload's own width as well, for the sharp phone screens that ask for
+  // more than the largest copy above. The 800 px headshots were otherwise served as 100 KB
+  // JPEGs on phones; the same picture as WebP is about a third of that. Same size limit.
+  if (meta.width && meta.width <= 1200) {
+    const out = path.join(OUT, `${base}-${meta.width}.webp`);
+    if (!(fs.existsSync(out) && fs.statSync(out).mtimeMs >= fs.statSync(src).mtimeMs)) {
+      await sharp(src).webp({ quality: 76 }).toFile(out);
+      written++;
+    }
+  }
 }
 console.log(`[image-variants] ${written} file(s) written to ${OUT}`);

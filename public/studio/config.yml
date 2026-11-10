@@ -2430,7 +2430,7 @@ collections:
             name: links_intro
             widget: string
             required: false
-            hint: "The links themselves (Home, Services, Mineral Owners, Sample Work, Contact) use the Menu Wording from Site Settings."
+            hint: "The links themselves (Home, Mineral Owners, For Companies, Contact) use the Menu Wording from Site Settings."
           - label: "Phone Line"
             name: phone_line
             widget: string
