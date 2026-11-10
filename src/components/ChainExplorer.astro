@@ -408,4 +408,9 @@ const label = (s: Step, i: number) => `${stepWord} ${i + 1} ${ofWord} ${total}`;
   .chain-position { display: none; }
 }
 
+
+/* The last section before the closing band, so nothing that is linked to sits below it.
+   That makes it safe to let the browser skip its layout until it comes near view, which
+   keeps the twelve steps from adding to load time. The reserved height is a placeholder. */
+.chain-section { content-visibility: auto; contain-intrinsic-size: auto 1400px; }
 </style>

@@ -648,8 +648,6 @@ const explorer = (page as any).chain_explorer;
     </section>
   </div>
 
-  {explorer && <ChainExplorer explorer={explorer} hardFileIds={hardFileIds} />}
-
   {(page.simple_note || page.format_note) && (
     <section class="sample-after-notes">
       <div class="container container-narrow">
@@ -682,6 +680,10 @@ const explorer = (page as any).chain_explorer;
       </div>
     </section>
   )}
+
+  {/* After What Makes a File Hard: the steps link up to its points, and nothing that other
+      pages link to sits below it, so it can wait to be laid out until it comes near view. */}
+  {explorer && <ChainExplorer explorer={explorer} hardFileIds={hardFileIds} />}
 
   <CallToAction
     headline={page.cta.headline}
